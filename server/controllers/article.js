@@ -138,10 +138,8 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		content.readNextTopic = content.primaryTag;
 
 		const rhrSubHeadNumber = res.locals.flags.articleRHRSubheadAndNumber;
-		if ( rhrSubHeadNumber && rhrSubHeadNumber !== 'control') {
-			content.rhrShowSubhead = rhrSubHeadNumber.split('-')[0] === 'sub' ? true : false;
-			content.rhrShowNumber = rhrSubHeadNumber.split('-')[1] === 'num' ? true : false;
-		}
+		content.rhrShowSubhead = /^sub-/.test(rhrSubHeadNumber);
+		content.rhrShowNumber = /-num$/.test(rhrSubHeadNumber);
 	}
 
 	if (req.get('FT-Labs-Gift') === 'GRANTED') {
