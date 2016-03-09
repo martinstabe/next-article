@@ -1,3 +1,6 @@
+// Moved to https://github.com/Financial-Times/next-classification-api/blob/master/server/controllers/access.js
+// Remove this file when fully switched to Content Classification Api (contentClassificationApi flag)
+
 'use strict';
 
 var metrics = require('ft-next-express').metrics;
@@ -40,6 +43,11 @@ function suppressBadResponses(err) {
 }
 
 module.exports = function(req, res, next) {
+
+	// make sure we're not hitting this controller when the api flag is on
+	if (res.locals && res.locals.flags.contentClassificationApi) {
+		throw new Error('Hitting content classification in Article with contentClassificationApi flag on');
+	}
 
 	if (req.get('X-FT-Access-Metadata') === 'remote_headers') {
 		return api.content({
