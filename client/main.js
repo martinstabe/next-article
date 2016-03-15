@@ -19,6 +19,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const comments = require('./components/comments/main');
 	const share = require('./components/share/main');
 	const readingHistory = require('./components/reading-history');
+	const scrollDepth = require('./components/article/scroll-depth');
 
 	const labsShare = require('./components/labsshare/main');
 
@@ -72,6 +73,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 		collapsedToggleText: 'Show more',
 		expandedToggleText: 'Show less'
 	});
+	scrollDepth.init(flags);
 
 	window.addEventListener('load', () => {
 		comments.init(uuid, flags);
