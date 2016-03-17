@@ -3,7 +3,7 @@
 
     <!-- If a table has only a single column, it isn't a table it's an info box!-->
     <xsl:template match="a">
-      <xsl:if test="string-length(current()/text())> 0">
+      <xsl:if test="string-length(current()//text())> 0">
         <a href="{@href}">
           <xsl:apply-templates />
         </a>

@@ -41,4 +41,19 @@ describe('Links', function () {
 
 	});
 
+	it('preserves html within the a tag', () => {
+		return transform(
+			'<body>' +
+				'<a href="http://www.theshowstoppers.org/" title="Showstopper! The Improvised Musical - theshowstoppers.org">' +
+					'<em>Showstopper! The Improvised Musical</em>' +
+				'</a>' +
+			'<body>'
+		)
+		.then(transformedXml => {
+			transformedXml.should.equal(
+				'<a href="http://www.theshowstoppers.org/"><em>Showstopper! The Improvised Musical</em></a>\n'
+			);
+		});
+	});
+
 });
