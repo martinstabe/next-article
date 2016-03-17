@@ -1,23 +1,24 @@
 'use strict'
 
 module.exports = (tag) => {
-	let title;
 
-	switch(tag.taxonomy) {
-		case 'authors':
+	if (tag) {
+		let title;
+		switch(tag.taxonomy) {
+			case 'authors':
 			title = 'from';
 			break;
-		case 'sections':
+			case 'sections':
 			title = 'in';
 			break;
-		case 'genre':
+			case 'genre':
 			title = '';
 			break;
-		default:
+			default:
 			title = 'on';
+		}
+		tag.title = title;
 	}
-
-	tag.title = title;
 
 	return tag;
 };
