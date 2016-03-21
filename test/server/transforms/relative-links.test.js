@@ -9,7 +9,7 @@
 		it('should understand that topic pages are stream pages', function() {
 			var $ = cheerio.load('<a href="http://www.ft.com/topics/themes/Greece_Debt_Crisis" title="Greece debt crisis in depth - FT.com">Greece&#x2019;s <strong>debt</strong></a>');
 			$ = relativeLinksTransform($);
-			expect($.html()).to.equal('<a href="/stream/themes/Greece Debt Crisis" title="Greece debt crisis in depth - FT.com">Greece&#x2019;s <strong>debt</strong></a>');
+			expect($.html()).to.equal('<a href="/stream/topics/Greece Debt Crisis" title="Greece debt crisis in depth - FT.com">Greece&#x2019;s <strong>debt</strong></a>');
 		});
 
 		it('should understand that places are now regions', function() {
