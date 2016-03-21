@@ -4,7 +4,6 @@ const cheerio = require('cheerio');
 
 const replaceEllipses = require('./replace-ellipses');
 const copyrightNotice = require('./copyright-notice');
-const relativeLinks = require('./relative-links');
 const trimmedLinks = require('./trimmed-links');
 const dataTrackable = require('./data-trackable');
 const externalImages = require('./external-images');
@@ -40,7 +39,6 @@ module.exports = function (body, flags) {
 
 	let $ = transform(cheerio.load(body, { decodeEntities: false }), flags)
 		// other transforms
-		.with(relativeLinks)
 		.with(trimmedLinks)
 		.with(dataTrackable)
 		.with(videoPlaceholder)
