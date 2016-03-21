@@ -28,10 +28,7 @@ function isCapiV2(article) {
 function transformArticleBody(article, flags) {
 	let xsltParams = {
 		id: article.id,
-		webUrl: article.webUrl,
-		renderTOC: flags.articleTOC ? 1 : 0,
-		suggestedRead: flags.articleSuggestedRead ? 1 : 0,
-		useBrightcovePlayer: flags.brightcovePlayer ? 1 : 0
+		webUrl: article.webUrl
 	};
 
 	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
