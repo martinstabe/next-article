@@ -82,6 +82,19 @@
 		</div>
 	</div>
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
+
+        {{#if tldr}}
+    	<div class="o-grid-container">
+			<div class="article__main o-grid-row">
+				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
+                    <div class="article__body n-content-body">
+	                    {{tldr}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{else}}
+
 		{{#if bodyHtml}}
 		<div class="o-grid-container">
 			<div class="article__main o-grid-row">
@@ -122,7 +135,8 @@
 				</div>
 			</div>
 		</div>
-	{{/if}}
+	    {{/if}}
+        {{/if}}
 	</div>
 </article>
 <div class="o-grid-container">
