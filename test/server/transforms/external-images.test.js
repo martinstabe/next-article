@@ -15,11 +15,9 @@ describe('External Images Transform', () => {
 			);
 			const transformed$ = externalImagesTransform($);
 			transformed$.html().should.equal(
-				'<div style="max-width:100%;width:700px;margin-left: auto;margin-right: auto;">' +
 					'<div class="n-content-image__placeholder" style="padding-top:75%">' +
 						'<img src="https://next-geebee.ft.com/image/v1/images/raw/http://my-image/image.jpg?source=next&amp;fit=scale-down&amp;width=700" alt="Lorem ipsum">' +
-					'</div>' +
-				'</div>'
+					'</div>'
 			);
 		});
 

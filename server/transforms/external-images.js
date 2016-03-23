@@ -31,10 +31,9 @@ module.exports = function($) {
 		// add placeholder
 		if (width && height) {
 			const ratio = (100 / width) * height;
-			return `<div style="max-width:100%;width:${maxWidth}px;margin-left: auto;margin-right: auto;">` +
-							`<div class="n-content-image__placeholder" style="padding-top:${ratio}%">` +
-							`${$.html($el)}</div></div>`;
-
+			return `<div class="n-content-image__placeholder" style="padding-top:${ratio}%">` +
+						`${$.html($el)}` +
+					`</div>`;
 		} else {
 			return $el;
 		}
