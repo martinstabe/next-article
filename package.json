@@ -46,7 +46,9 @@
     "notify-saucelabs": "^1.0.1",
     "origami-build-tools": "^4.1.1",
     "proxyquire": "^1.7.3",
-    "sinon": "^1.15.3"
+    "sinon": "^1.15.3",
+    "whitesource": "^0.2.14",
+    "ws-bower": "^0.0.33"
   },
   "babel": {
     "optional": "es7.classProperties"

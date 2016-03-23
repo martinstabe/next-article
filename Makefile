@@ -2,11 +2,17 @@ include n.Makefile
 
 TEST_APP := "ft-article-branch-${CIRCLE_BUILD_NUM}"
 
+install: whitesource.config.json
+	$(MAKE) install-super
+
+whitesource.config.json:
+	@if $(call IS_GIT_IGNORED); then echo '{ "apiKey": "$(WHITESOURCE_API_KEY)", "productName":"Next", "projectName":"$(call APP_NAME)" }' > $@ && $(DONE); fi
+
 coverage:
 	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; istanbul cover node_modules/.bin/_mocha --report lcovonly 'test/server/**/*.test.js'
 
 unit-test:
-	$(NPM_BIN_ENV); export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; mocha 'test/server/**/*.test.js' --inline-diffs
+	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; mocha 'test/server/**/*.test.js' --inline-diffs
 
 test:
 	make verify
@@ -18,20 +24,25 @@ else
 endif
 
 run:
-	$(NPM_BIN_ENV); nbt run
+	nbt run
 
 build:
-	$(NPM_BIN_ENV); nbt build --dev
+	nbt build --dev
 
 build-production:
-	$(NPM_BIN_ENV); nbt build
+	nbt build
 
 watch:
-	$(NPM_BIN_ENV); nbt build --dev --watch
+	nbt build --dev --watch
 
-deploy:
+deploy: _deploy_whitesource
 	nbt deploy-hashed-assets
 	nbt ship -m
+
+_deploy_whitesource:
+	(whitesource run || echo "whitesource run failed, skipping") && rm -r ws* && rm npm-shrinkwrap.json
+	(ws-bower || echo "whitesource bower failed, skipping") && rm -r ws* && rm -r .ws_bower
+	@$(DONE)
 
 visual:
 	# Note: || is not OR; it executes the RH command only if LH test is truthful.
@@ -49,5 +60,4 @@ provision:
 
 smoke:
 	nbt test-urls ${TEST_APP} --throttle 1;
-	# TODO: re-enable firefox
 	export TEST_APP=${TEST_APP}; nbt nightwatch test/browser/tests/* -e ie9,edge,chrome,firefox,iphone6_plus,Android_Nexus7HD
