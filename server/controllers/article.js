@@ -75,6 +75,8 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		};
 	}
 
+	content.thisYear = new Date().getFullYear();
+
 	if (req.query.myftTopics) {
 		content.myftTopics = req.query.myftTopics.split(',');
 	}
