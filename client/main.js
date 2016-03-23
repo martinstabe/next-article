@@ -78,4 +78,15 @@ require('next-js-setup').bootstrap(({flags}) => {
 	window.addEventListener('load', () => {
 		comments.init(uuid, flags);
 	}, false);
+
+  	if (flags.get('ftlabstldr')) {
+		const tldrSelect = document.querySelector('#tldr-select');
+		if (tldrSelect) {
+			const allSentences = document.querySelector('#hidden-article').innerHTML.split('.');
+			tldrSelect.addEventListener('input', () => {
+				document.querySelector('#tldr-text').innerHTML = allSentences.slice(0, tldrSelect.value).join('.') + '.';
+				document.cookie = `ftlabstldr=${tldrSelect.value}`;
+			});
+		}
+	}
 });

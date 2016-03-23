@@ -151,22 +151,22 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		res.render('fragment', content);
 	  } else {
 		content.layout = 'wrapper';
-        const articleText = content.bodyXML.replace(/<(?:.|\n)*?>/gm, ' ');
-        const articleSentences = articleText.split('.');
 
-        const summarySize = {
-          nineNineNineChars: articleText.substr(0, 999),
-          tweet: articleText.substr(0, 140),
-          thirtyWords: articleText.split(' ').slice(0,32).join(' '),
-          fiveSentences: articleSentences.slice(0, 5).join('.\n') + '.'
-        };
-        content.tldr = req.query.size ? summarySize[req.query.size] : summarySize.fiveSentences;
-		res.render('article', content);
+        if (res.locals.flags.ftlabstldr) {
+          const tldrLevel = req.cookies.ftlabstldr || 5;
+		  const articleText = content.bodyXML.replace(/<(?:.|\n)*?>/gm, ' ');
+		  const articleSentences = articleText.split('.');
+		  content.tldr = articleSentences.slice(0, tldrLevel).join('.') + '.';
+          content.tldrWhole = articleSentences.slice(0, 10).join('.') + '.';
+          content.tldrValue = tldrLevel;
+        }
+
+	    res.render('article', content);
 
 	  }
 	})
-	.catch(error => {
+    .catch(error => {
 	  logger.error(error);
 	  next(error);
-	});
+    });
 };
