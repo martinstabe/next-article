@@ -3,7 +3,6 @@
 const logger = require('ft-next-express').logger;
 const cacheControlUtil = require('../utils/cache-control');
 const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
-const barrierHelper = require('./article-helpers/barrier');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
@@ -54,18 +53,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	let asyncWorkToDo = [];
 
-	// Required for correctly tracking page / barrier views
-	if (req.get('FT-Barrier-Type') !== '-') {
-		content.barrierType = req.get('FT-Barrier-Type');
-	}
-
-	if (req.get('FT-Corporate-Id') !== '-') {
-		content.corporateId = req.get('FT-Corporate-Id');
-	}
-
-	if (res.locals.barrier) {
-		return res.render('article', barrierHelper(content, res.locals.barrier));
-	}
+	// Required for correctly tracking page
 
 	if (res.locals.flags.analytics) {
 		content.ijentoConfig = {
