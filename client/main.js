@@ -79,7 +79,9 @@ require('next-js-setup').bootstrap(({flags}) => {
 		comments.init(uuid, flags);
 	}, false);
 
-  	if (flags.get('ftlabstldr')) {
+	flags.flags.ftlabstldr = {name: "ftlabstldr", state: "true", activeState: "true"};
+
+	if (flags.get('ftlabstldr')) {
 		const tldrSelect = document.querySelector('#tldr-select');
 		if (tldrSelect) {
 			const allSentences = document.querySelector('#hidden-article').innerHTML.split('.');

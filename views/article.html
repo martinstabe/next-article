@@ -83,14 +83,15 @@
 	</div>
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
 
-        {{#if @root.flags.tldr}}
+        {{#if tldr}}
     	<div class="o-grid-container">
 			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
                     <div class="article__body n-content-body">
-                        <p id="tldr-text">{{tldr}}</p>
+                        <input type="range" min="1" max="10" step="1" value="{{tldrValue}}" style="width:100%;" id="tldr-select"/>
                         <p>
-                            <input type="range" min="1" max="10" step="1" value="{{tldrValue}}" style="width:100%;" id="tldr-select"/>
+                        <p id="tldr-text">{{tldr}}</p>
+
                         </p>
                         <div id="hidden-article" style="display:none;">{{tldrWhole}}
                     </div>

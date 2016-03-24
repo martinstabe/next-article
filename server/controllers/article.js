@@ -14,159 +14,160 @@ const bylineTransform = require('../transforms/byline');
 const articleBranding = require('ft-n-article-branding');
 
 function isCapiV1(article) {
-  return article.provenance.find(
-	source => source.includes('http://api.ft.com/content/items/v1/')
-  );
+	return article.provenance.find(
+		source => source.includes('http://api.ft.com/content/items/v1/')
+	);
 }
 
 function isCapiV2(article) {
-  return article.provenance.find(
-	source => source.includes('http://api.ft.com/enrichedcontent/')
-  );
+	return article.provenance.find(
+		source => source.includes('http://api.ft.com/enrichedcontent/')
+	);
 }
 
 function transformArticleBody(article, flags) {
-  let xsltParams = {
-	id: article.id,
-	webUrl: article.webUrl
-  };
+	let xsltParams = {
+		id: article.id,
+		webUrl: article.webUrl
+	};
 
-  return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
-	return bodyTransform(articleBody, flags);
-  });
+	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
+		return bodyTransform(articleBody, flags);
+	});
 }
 
 function getMoreOnTags(primaryTheme, primarySection, primaryBrand) {
-  let moreOnTags = [];
+	let moreOnTags = [];
 
-  primaryTheme && moreOnTags.push(primaryTheme);
-  primarySection && moreOnTags.push(primarySection);
-  primaryBrand && moreOnTags.push(primaryBrand);
+	primaryTheme && moreOnTags.push(primaryTheme);
+	primarySection && moreOnTags.push(primarySection);
+	primaryBrand && moreOnTags.push(primaryBrand);
 
-  if (!moreOnTags.length) {
-	return;
-  }
+	if (!moreOnTags.length) {
+		return;
+	}
 
-  return moreOnTags.slice(0, 2).map(addTagTitlePrefix);
+	return moreOnTags.slice(0, 2).map(addTagTitlePrefix);
 }
 
 module.exports = function articleV3Controller(req, res, next, content) {
 
-  let asyncWorkToDo = [];
+	let asyncWorkToDo = [];
 
-  // Required for correctly tracking page / barrier views
-  if (req.get('FT-Barrier-Type') !== '-') {
-	content.barrierType = req.get('FT-Barrier-Type');
-  }
+	// Required for correctly tracking page / barrier views
+	if (req.get('FT-Barrier-Type') !== '-') {
+		content.barrierType = req.get('FT-Barrier-Type');
+	}
 
-  if (req.get('FT-Corporate-Id') !== '-') {
-	content.corporateId = req.get('FT-Corporate-Id');
-  }
+	if (req.get('FT-Corporate-Id') !== '-') {
+		content.corporateId = req.get('FT-Corporate-Id');
+	}
 
-  if (res.locals.barrier) {
-	return res.render('article', barrierHelper(content, res.locals.barrier));
-  }
+	if (res.locals.barrier) {
+		return res.render('article', barrierHelper(content, res.locals.barrier));
+	}
 
-  if (res.locals.flags.analytics) {
-	content.ijentoConfig = {
-	  uuid: content.id,
-	  code: (/cms\/s\/([0-3])\//i.exec(content.webUrl) || [, null])[1],
-	  type: 'Story'
+	if (res.locals.flags.analytics) {
+		content.ijentoConfig = {
+			uuid: content.id,
+			code: (/cms\/s\/([0-3])\//i.exec(content.webUrl) || [, null])[1],
+			type: 'Story'
+		};
+	}
+
+	if (req.query.myftTopics) {
+		content.myftTopics = req.query.myftTopics.split(',');
+	}
+
+	//When a user comes to an article from a myFT promo area, we want to push them to follow the topic they came from
+	if (req.query.tagToFollow) {
+		content.tagToFollow = req.query.tagToFollow;
+	}
+
+	// Decorate article with primary tags and tags for display
+	decorateMetadataHelper(content);
+	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
+
+	asyncWorkToDo.push(
+		transformArticleBody(content, res.locals.flags).then(fragments => {
+			content.bodyHtml = fragments.bodyHtml;
+			content.tocHtml = fragments.tocHtml;
+			content.mainImageHtml = fragments.mainImageHtml;
+		})
+	);
+	content.designGenre = articleBranding(content.metadata);
+
+	// Decorate with related stuff
+	content.moreOns = getMoreOnTags(content.primaryTheme, content.primarySection, content.primaryBrand);
+
+	content.articleV1 = isCapiV1(content);
+	content.articleV2 = isCapiV2(content);
+
+	// TODO: move this to template or re-name subheading
+	content.standFirst = content.summaries ? content.summaries[0] : '';
+
+	content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
+
+	content.dehydratedMetadata = {
+		moreOns: content.moreOns,
+		package: content.storyPackage || [],
 	};
-  }
 
-  if (req.query.myftTopics) {
-	content.myftTopics = req.query.myftTopics.split(',');
-  }
+	if (res.locals.flags.openGraph) {
+		openGraphHelper(content);
+	}
 
-  //When a user comes to an article from a myFT promo area, we want to push them to follow the topic they came from
-  if (req.query.tagToFollow) {
-	content.tagToFollow = req.query.tagToFollow;
-  }
+	if (res.locals.flags.articleSuggestedRead && content.metadata.length) {
+		let storyPackageIds = (content.storyPackage || []).map(story => story.id);
 
-  // Decorate article with primary tags and tags for display
-  decorateMetadataHelper(content);
-  content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
+		asyncWorkToDo.push(
+			suggestedHelper(content.id, storyPackageIds, content.primaryTag).then(
+				articles => content.readNextArticles = articles
+			)
+		);
 
-  asyncWorkToDo.push(
-	transformArticleBody(content, res.locals.flags).then(fragments => {
-	  content.bodyHtml = fragments.bodyHtml;
-	  content.tocHtml = fragments.tocHtml;
-	  content.mainImageHtml = fragments.mainImageHtml;
-	})
-  );
-  content.designGenre = articleBranding(content.metadata);
+		asyncWorkToDo.push(
+			readNextHelper(content.id, storyPackageIds, content.primaryTag, content.publishedDate).then(
+				article => content.readNextArticle = article
+			)
+		);
 
-  // Decorate with related stuff
-  content.moreOns = getMoreOnTags(content.primaryTheme, content.primarySection, content.primaryBrand);
+		content.readNextTopic = content.primaryTag;
 
-  content.articleV1 = isCapiV1(content);
-  content.articleV2 = isCapiV2(content);
+		const rhrSubHeadNumber = res.locals.flags.articleRHRSubheadAndNumber;
+		content.rhrShowSubhead = /^sub-/.test(rhrSubHeadNumber);
+		content.rhrShowNumber = /-num$/.test(rhrSubHeadNumber);
+	}
 
-  // TODO: move this to template or re-name subheading
-  content.standFirst = content.summaries ? content.summaries[0] : '';
+	if (req.get('FT-Labs-Gift') === 'GRANTED') {
+		content.shared = true;
+		res.vary('FT-Labs-Gift');
+	}
 
-  content.byline = bylineTransform(content.byline, content.metadata.filter(item => item.taxonomy === 'authors'));
+	return Promise.all(asyncWorkToDo)
+		.then(() => {
+			res.set(cacheControlUtil);
+			if (req.query.fragment) {
+				res.render('fragment', content);
+			} else {
+				content.layout = 'wrapper';
+				res.locals.flags.ftlabstldr = true;
+				if (res.locals.flags.ftlabstldr) {
+					if (!req.cookies.ftlabstldr) res.cookie('ftlabstldr', '5');
+					const tldrLevel = req.cookies.ftlabstldr || 5;
+					const articleText = content.bodyXML.replace(/<(?:.|\n)*?>/gm, ' ');
+					const articleSentences = articleText.split('.');
+					content.tldr = articleSentences.slice(0, tldrLevel).join('.') + '.';
+					content.tldrWhole = articleSentences.slice(0, 10).join('.') + '.';
+					content.tldrValue = tldrLevel;
+				}
 
-  content.dehydratedMetadata = {
-	moreOns: content.moreOns,
-	package: content.storyPackage || [],
-  };
+				res.render('article', content);
 
-  if (res.locals.flags.openGraph) {
-	openGraphHelper(content);
-  }
-
-  if (res.locals.flags.articleSuggestedRead && content.metadata.length) {
-	let storyPackageIds = (content.storyPackage || []).map(story => story.id);
-
-	asyncWorkToDo.push(
-	  suggestedHelper(content.id, storyPackageIds, content.primaryTag).then(
-		articles => content.readNextArticles = articles
-	  )
-	);
-
-	asyncWorkToDo.push(
-	  readNextHelper(content.id, storyPackageIds, content.primaryTag, content.publishedDate).then(
-		article => content.readNextArticle = article
-	  )
-	);
-
-	content.readNextTopic = content.primaryTag;
-
-	const rhrSubHeadNumber = res.locals.flags.articleRHRSubheadAndNumber;
-	content.rhrShowSubhead = /^sub-/.test(rhrSubHeadNumber);
-	content.rhrShowNumber = /-num$/.test(rhrSubHeadNumber);
-  }
-
-  if (req.get('FT-Labs-Gift') === 'GRANTED') {
-	content.shared = true;
-	res.vary('FT-Labs-Gift');
-  }
-
-  return Promise.all(asyncWorkToDo)
-	.then(() => {
-	  res.set(cacheControlUtil);
-	  if (req.query.fragment) {
-		res.render('fragment', content);
-	  } else {
-		content.layout = 'wrapper';
-
-        if (res.locals.flags.ftlabstldr) {
-          const tldrLevel = req.cookies.ftlabstldr || 5;
-		  const articleText = content.bodyXML.replace(/<(?:.|\n)*?>/gm, ' ');
-		  const articleSentences = articleText.split('.');
-		  content.tldr = articleSentences.slice(0, tldrLevel).join('.') + '.';
-          content.tldrWhole = articleSentences.slice(0, 10).join('.') + '.';
-          content.tldrValue = tldrLevel;
-        }
-
-	    res.render('article', content);
-
-	  }
-	})
-    .catch(error => {
-	  logger.error(error);
-	  next(error);
-    });
+			}
+		})
+		.catch(error => {
+			logger.error(error);
+			next(error);
+		});
 };

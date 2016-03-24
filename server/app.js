@@ -2,6 +2,7 @@
 
 const express = require('ft-next-express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const checks = require('./checks/main.js');
 
 // Starts polling checks
@@ -21,6 +22,7 @@ require('./lib/ig-poller').start();
 require('./lib/blogs-access-poller').start();
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.post('^/preview$', require('./controllers/preview'));
 
 const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
