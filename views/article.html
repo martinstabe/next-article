@@ -31,7 +31,7 @@
 									</div>
 								{{/if}}
 							{{/if}}
-							        <h1 class="article__title">{{title}}</h1>
+									<h1 class="article__title">{{title}}</h1>
 						</div>
 						<div class="article__header-secondary">
 							{{#if standFirst}}
@@ -83,22 +83,20 @@
 	</div>
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
 
-        {{#if tldr}}
-    	<div class="o-grid-container">
+		{{#if tldr}}
+		<div class="o-grid-container">
 			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-                    <div class="article__body n-content-body">
-                        <input type="range" min="1" max="10" step="1" value="{{tldrValue}}" style="width:100%;" id="tldr-select"/>
-                        <p>
-                        <p id="tldr-text">{{tldr}}</p>
-
-                        </p>
-                        <div id="hidden-article" style="display:none;">{{tldrWhole}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{else}}
+					<div class="article__body n-content-body">
+						<input type="range" min="1" max="10" step="1" value="{{tldrValue}}" style="width:100%;" id="tldr-select"/>
+						<p>
+						<p id="tldr-text">{{tldr}}</p>
+						<div id="hidden-article" style="display:none;">{{tldrWhole}}
+					</div>
+				</div>
+			</div>
+		</div>
+		{{else}}
 
 		{{#if bodyHtml}}
 		<div class="o-grid-container">
@@ -128,7 +126,7 @@
 					{{> body bodyHtml=bodyHtml}}
 					{{> social location='bottom'}}
 					{{#if tagToFollow}}
-						{{>follow-promo  tag=tagToFollow buttonSize="medium"}}
+						{{>follow-promo	 tag=tagToFollow buttonSize="medium"}}
 					{{/if}}
 				</div>
 				<div class="article__aside o-grid-remove-gutters--XL" data-o-grid-colspan="0 L4 XL3 XLoffset1">
@@ -140,8 +138,8 @@
 				</div>
 			</div>
 		</div>
-	    {{/if}}
-        {{/if}}
+		{{/if}}
+		{{/if}}
 	</div>
 </article>
 <div class="o-grid-container">
