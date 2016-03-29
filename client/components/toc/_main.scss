@@ -41,7 +41,6 @@
 }
 
 .table-of-contents__chapter {
-	@include oTypographySerifDisplay(m);
 	border-bottom: 1px solid getColor('warm-3');
 	color: getColor('cold-2');
 	padding-left: 24px;
@@ -50,7 +49,6 @@
 	position: relative;
 
 	&:before {
-		@include oTypographySans(m);
 		color: getColor('pink-tint4');
 		content: counter(chapters);
 		counter-increment: chapters;
