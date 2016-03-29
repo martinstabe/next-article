@@ -1,5 +1,8 @@
 .table-of-contents {
-	margin: 30px 0;
+	border: 1px solid getColor('warm-3');
+	position: relative;
+	margin: 30px 0 20px;
+	padding: 20px 20px 0;
 
 	.article__body--toc & {
 		@include oGridRespondTo(L) {
@@ -13,14 +16,21 @@
 			display: block;
 		}
 	}
+
+	h2,
+	h3,
+	h4 { margin: 0; }
 }
 
 .table-of-contents__title {
-	@include oTypographySans(m);
-	color: #f57323;
-	background-color: oColorsGetPaletteColor('warm-2');
-	margin: 0;
-	padding: 3px 10px;
+	@include oTypographySerifDisplayBold(m);
+	position: absolute;
+	top: -10px;
+	left: 10px;
+	display: inline-block;
+	padding: 0 10px;
+	background: getColor('pink');
+	font-size: 18px;
 }
 
 .table-of-contents__chapters {
@@ -31,34 +41,24 @@
 }
 
 .table-of-contents__chapter {
-	@include oTypographySans(m);
-	border-bottom: 3px solid oColorsGetPaletteColor('warm-2');
-	color: oColorsGetPaletteColor('cold-2');
+	@include oTypographySerifDisplay(m);
+	border-bottom: 1px solid getColor('warm-3');
+	color: getColor('cold-2');
+	padding-left: 24px;
 	margin-top: 10px;
-	margin-left: 20px;
 	padding-bottom: 10px;
 	position: relative;
-	@include oGridRespondTo(M) {
-		@include oTypographySerifDisplayItalicSize(l);
-	}
 
 	&:before {
-		@include oTypographySansSize(s);
+		@include oTypographySans(m);
+		color: getColor('pink-tint4');
 		content: counter(chapters);
 		counter-increment: chapters;
 		position: absolute;
-		top: 5px;
-		left: -20px;
-		margin-right: 20px;
-		color: #f57323;
-		@include oGridRespondTo(M) {
-			@include oTypographySerifDisplayItalicSize(m);
-			top: 3px;
-		}
+		left: 0;
 	}
 	&:last-child {
 		border-bottom: 0;
-		padding-bottom: 0;
 	}
 }
 
