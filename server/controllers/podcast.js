@@ -13,6 +13,8 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 	// Decorate article with primary tags and tags for display
 	decorateMetadataHelper(payload);
 
+	payload.thisYear = new Date().getFullYear();
+
 	// TODO: move this to template or re-name subheading
 	payload.standFirst = payload.summaries ? payload.summaries[0] : '';
 
