@@ -145,12 +145,9 @@ describe('Figure Variant Transform', () => {
 	});
 
 	context('Placeholding the image', () => {
-
 		it('adds a placeholder based on aspect ratio', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" width="800" height="600" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" width="800" height="600" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -161,9 +158,7 @@ describe('Figure Variant Transform', () => {
 
 		it('does not add a placeholder if the height and width is not known', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -177,9 +172,7 @@ describe('Figure Variant Transform', () => {
 
 		it('transforms the src to use the image service', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -196,9 +189,7 @@ describe('Figure Variant Transform', () => {
 
 		it('adds the srcset and sizes attributes for large images', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" width="1600" height="800" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" width="1600" height="800" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -209,9 +200,7 @@ describe('Figure Variant Transform', () => {
 
 		it('does not add the sizes or srcset attributes for small images', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" width="640" height="480" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" width="640" height="480" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -222,9 +211,7 @@ describe('Figure Variant Transform', () => {
 
 		it('specifies extra size variations for the image', () => {
 			const $ = cheerio.load(
-				'<figure class="n-content-image">' +
-					'<img src="http://my-image/image.jpg" width="1600" height="800" alt="Lorem ipsum">' +
-				'</figure>'
+				'<img src="http://my-image/image.jpg" width="1600" height="800" alt="Lorem ipsum">'
 			);
 
 			externalImagesTransform($);
@@ -237,7 +224,5 @@ describe('Figure Variant Transform', () => {
 				assert.match(item, /width=\d{3} \d{3}w/);
 			});
 		});
-
 	});
-
 });

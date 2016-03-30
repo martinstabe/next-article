@@ -2,7 +2,7 @@
 
 module.exports = function($) {
 
-	const $figures = $('figure');
+	const $images = $('img');
 	let figureEl;
 	let imageEl;
 	let width;
@@ -72,18 +72,20 @@ module.exports = function($) {
 		}
 	}
 
-	$figures.each(i => {
-		figureEl = $figures.eq(i);
-		imageEl = figureEl.find('img');
+	$images.each(i => {
+		imageEl = $images.eq(i);
+		figureEl = imageEl.parent('figure');
 		width = imageEl.attr('width');
 		height = imageEl.attr('height');
 
-		setPosition();
-		setWidth();
+		if(figureEl) {
+			setPosition();
+			setWidth();
+		}
 		replaceImgAttributes();
 		createPlaceholder();
 
-		return figureEl;
+		return figureEl ? figureEl : imageEl;
 	});
 
 	return $;
