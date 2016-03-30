@@ -5,7 +5,6 @@ const cheerio = require('cheerio');
 const replaceEllipses = require('./replace-ellipses');
 const trimmedLinks = require('./trimmed-links');
 const dataTrackable = require('./data-trackable');
-const externalImages = require('./external-images');
 const externalImagesEncoding = require('./external-images-encoding');
 const figureVariant = require('./figure-variant');
 const relatedBoxExpander = require('./related-box-expander');
@@ -42,7 +41,6 @@ module.exports = function (body, flags) {
 		.with(videoPlaceholder)
 		.with(videoBrightcove)
 		.with(figureVariant)
-		.with(externalImages)
 		.with(externalImagesEncoding)
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
