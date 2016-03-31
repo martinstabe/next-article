@@ -50,16 +50,8 @@
 
 .suggested-reads__item__headline {
 	@include oTypographySerifDisplay(m);
-}
-
-.suggested-reads__item__headline--control {
 	@include nLinksHeadline();
 	color: getColor('grey-tint4');
-
-}
-
-.suggested-reads__item__headline--variant {
-
 }
 
 .suggested-reads__item__subheading {
