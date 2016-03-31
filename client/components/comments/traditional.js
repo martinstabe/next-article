@@ -4,12 +4,15 @@ const trackEvent = require('../utils/tracking');
 
 module.exports = {};
 module.exports.init = function(uuid, flags) {
-	function filterFlags(flag) {
-		return flag.name === this.name;
-	}
+	flags = window.nextFeatureFlags;
 
-	const commentsFlag = flags.filter(filterFlags.bind({name: 'articleComments'}))[0];
-	const lazyFlag = flags.filter(filterFlags.bind({name: 'articleLazyComments'}))[0];
+	const commentsFlag = flags.filter((obj) => {
+		return obj.name === 'articleComments';
+	})[0];
+
+	const lazyFlag = flags.filter((obj) => {
+		return obj.name === 'articleLazyComments';
+	})[0];
 
 	if (!commentsFlag.state) {
 		return;
