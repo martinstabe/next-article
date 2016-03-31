@@ -28,22 +28,7 @@ function createPromise(el, url) {
 		.catch(() => {});
 }
 
-module.exports.init = flags => {
-	const moreOnNumberState = flags.get('articleMoreOnNumber');
-	let moreOnNumber;
-	switch (moreOnNumberState) {
-		case 'three':
-			moreOnNumber = 3;
-			break;
-		case 'seven':
-			moreOnNumber = 7;
-			break;
-		case 'nine':
-			moreOnNumber = 9;
-			break;
-		default:
-			moreOnNumber = 5;
-	}
+module.exports.init = () => {
 
 	var articleEl = document.querySelector('.article');
 	var dehydratedMetadata = document.getElementById('dehydrated-metadata');
@@ -86,7 +71,7 @@ module.exports.init = flags => {
 	var moreOns = $('.js-more-on');
 
 	if (moreOns.length) {
-		let url = `/article/${articleId}/more-on?count=${moreOnNumber}`;
+		let url = `/article/${articleId}/more-on?count=3`;
 
 		let tagIds = hydratedMetadata.moreOns.map((moreOn) => {
 			return encodeURI(moreOn.id);
