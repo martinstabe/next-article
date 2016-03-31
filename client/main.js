@@ -1,7 +1,6 @@
 'use strict';
 
 require('next-js-setup').bootstrap(({flags}) => {
-
 	const myFtClient = require('next-myft-client');
 	const myFtUi = require('next-myft-ui');
 
@@ -15,14 +14,19 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const lightSignup = require('n-light-signup');
 
 	const slideshow = require('./components/slideshow/main');
-	const onwardJourney = require('./components/onward-journey/main');
-	const toc = require('./components/toc/main');
-	const comments = require('./components/comments/main');
-	const share = require('./components/share/main');
 	const readingHistory = require('./components/reading-history');
 	const scrollDepth = require('./components/article/scroll-depth');
 
+	const commentsIcon = require('./components/comments/icon');
+	const commentsSkeleton = require('./components/comments/skeleton');
+	const lazyLoad = require('./components/comments/lazy-load');
+	const comments = require('./components/comments/main');
+
+	const onwardJourney = require('./components/onward-journey/main');
+	const toc = require('./components/toc/main');
+	const share = require('./components/share/main');
 	const labsShare = require('./components/labsshare/main');
+	const trackEvent = require('./components/utils/tracking');
 
 	prompts.init();
 	oViewport.listenTo('resize');
@@ -46,6 +50,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	}
 
 	slideshow(document.querySelectorAll('.article ft-slideshow'));
+
 
 	onwardJourney.init(flags);
 
@@ -79,5 +84,28 @@ require('next-js-setup').bootstrap(({flags}) => {
 		expandedToggleText: 'Show less'
 	});
 	scrollDepth.init(flags);
-	comments.init(uuid, flags);
+
+	if(flags.get('articleComments') && document.querySelector('#comments')) {
+		if(flags.get('articleLazyComments')) {
+			commentsIcon.init();
+			commentsSkeleton.init();
+
+			lazyLoad({
+				targetEl: '#comments',
+				sources: ['/article/comments.js', '/article/comments.css']
+			}).then(function() {
+				var data = {
+					action: 'view',
+					category: 'comments',
+					context: {
+						product: 'next',
+						source: 'next-article'
+					}
+				};
+				trackEvent(data);
+			});
+		} else {
+			comments.init(uuid, flags);
+		}
+	}
 });

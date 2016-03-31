@@ -1,0 +1,56 @@
+.skeleton {
+	font-family: BentonSans, sans-serif;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.skeleton:before {
+	content: 'COMMENTS';
+}
+
+.skeleton__inner {
+	width: 100%;
+	margin: 20px 0;
+	overflow: auto;
+	background: #fff1e0;
+}
+
+
+.skeleton__text {
+	width: 100%;
+	height: 100px;
+	border-bottom: 2px solid #ffffff;
+}
+
+.skeleton__edit {
+	float: left;
+	width: 30px;
+	height: 30px;
+	border-right: 2px solid #ffffff;
+}
+
+.skeleton__follow {
+	float: left;
+}
+
+.skeleton__follow:before {
+	content: '+ Follow';
+	font-size: 12px;
+	color: #666666;
+	float: left;
+	padding: 8px 10px;
+	border-right: 2px solid #ffffff;
+}
+
+.skeleton__submit {
+	float: right;
+}
+
+.skeleton__submit:before {
+	content: 'Submit Comment';
+	font-size: 12px;
+	color: #666666;
+	float: left;
+	padding: 8px 10px;
+	border-left: 2px solid #ffffff;
+}
