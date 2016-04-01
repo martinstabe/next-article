@@ -1,5 +1,9 @@
+
+// Ad breakpoint where leaderboards start working
+$ad-medium-breakpoint: 760px;
+
 .article-header-advert {
-	@include oGridRespondTo($from: L) {
+	@media (min-width:$ad-medium-breakpoint) {
 		min-height: 90px;
 		padding-top: 1em;
 		display: block;
@@ -8,6 +12,9 @@
 		white-space: pre;
 		text-align: center;
 		background: getColor('pink');
+	}
+	[data-ads-layout="hlfpage"] & {
+		padding-top: 0;
 	}
 }
 
