@@ -14,7 +14,7 @@ module.exports = [
 			// methode
 			'/content/395650fa-5b9c-11e5-a28b-50226830d644': 200,
 			// fastft
-			'/content/b002e5ee-3096-3f51-9925-32b157740c98': 200,
+			'/content/21b56034-0ec9-3fe0-8174-ee90650e0bad': 200,
 			// podcast
 			'/content/5cf687c7-ddb9-4243-8fea-69e50b6b5682': 200,
 			// slideshow
@@ -57,7 +57,7 @@ module.exports = [
 				}
 			},
 			// fastft
-			'/content/b002e5ee-3096-3f51-9925-32b157740c98': {
+			'/content/21b56034-0ec9-3fe0-8174-ee90650e0bad': {
 				status: 200,
 				headers: {
 					'X-FT-Content-Classification': 'conditional_standard'
