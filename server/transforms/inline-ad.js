@@ -1,7 +1,3 @@
-"use strict";
-
-var cheerio = require('cheerio');
-
 module.exports = function ($) {
 	const pars = $('p');
 	pars.each((index, par) => {
@@ -10,7 +6,7 @@ module.exports = function ($) {
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
-				data-o-ads-targeting=${"pos=mpu;"}
+				data-o-ads-targeting="pos=mpu;"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
 				data-o-ads-formats-medium="MediumRectangle,Responsive"
