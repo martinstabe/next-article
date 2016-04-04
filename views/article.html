@@ -103,11 +103,14 @@
 							{{{tocHtml}}}
 						</div>
 					{{/if}}
+
+					{{>n-light-signup/templates/form}}
+
 					{{> body bodyHtml=bodyHtml}}
 					{{> copyright-notice}}
 					{{> social location='bottom'}}
 					{{#if tagToFollow}}
-						{{>follow-promo  tag=tagToFollow buttonSize="medium"}}
+						{{>follow-promo	 tag=tagToFollow buttonSize="medium"}}
 					{{/if}}
 				</div>
 				<div class="article__aside o-grid-remove-gutters--XL" data-o-grid-colspan="0 L4 XL3 XLoffset1">
