@@ -104,7 +104,9 @@
 						</div>
 					{{/if}}
 
-					{{>n-light-signup/templates/form}}
+					{{#if @root.flags.lightSignUp}}
+						{{>n-light-signup/templates/form}}
+					{{/if}}
 
 					{{> body bodyHtml=bodyHtml}}
 					{{> copyright-notice}}
