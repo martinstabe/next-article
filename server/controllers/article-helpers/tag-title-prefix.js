@@ -8,6 +8,9 @@ module.exports = (tag) => {
 			case 'authors':
 			title = 'from';
 			break;
+			case 'brand':
+			title = 'from';
+			break;
 			case 'sections':
 			title = 'in';
 			break;

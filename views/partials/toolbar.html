@@ -34,9 +34,11 @@
 
 	{{/if}}
 	<div class="article__save">
-		<a class="article__share__print" href="javascript:window.print()" data-trackable="print">
-			<span class="n-util-visually-hidden">Print this page</span>
-		</a>
+		{{#ifEquals contentType 'article'}}
+			<a class="article__share__print" href="javascript:window.print()" data-trackable="print">
+				<span class="n-util-visually-hidden">Print this page</span>
+			</a>
+		{{/ifEquals}}
 		{{#if @root.flags.saveForLater}}
 			{{>next-myft-ui/templates/save-for-later contentId=id}}
 		{{/if}}
