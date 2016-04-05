@@ -12,6 +12,7 @@ const tableOfContents = require('./table-of-contents');
 const videoPlaceholder = require('./video-placeholder');
 const videoBrightcove = require('./video-brightcove');
 const extractMainImageAndToc = require('./extract-main-image-and-toc');
+const externalLinks = require('./external-links');
 
 let transform = function ($, flags) {
 	let withFn = function ($, transformFn) {
@@ -44,6 +45,7 @@ module.exports = function (body, flags) {
 		.with(externalImagesEncoding)
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
+		.with(externalLinks)
 		.get();
 
 	return extractMainImageAndToc($);
