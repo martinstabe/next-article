@@ -35,10 +35,10 @@ const WEB_URLS = [
 		webUrl: 'http://ftalphaville.ft.com/2015/08/25/2138457/why-chinas-stock-market-implosion-might-not-be-very-meaningful/'
 	},
 	{
-		id: 'b002e5ee-3096-3f51-9925-32b157740c98',
+		id: '21b56034-0ec9-3fe0-8174-ee90650e0bad',
 		name: 'FastFT',
 		header: 'conditional_standard',
-		webUrl: 'http://www.ft.com/fastft?post=305103'
+		webUrl: 'http://www.ft.com/fastft/2016/04/01/oil-adds-to-slide-after-saudi-cools-hopes-for-output-cut/'
 	},
 	{
 		id: 'a0c29efb-09a5-3ab4-a624-518d16c54c4b',

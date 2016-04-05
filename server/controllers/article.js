@@ -2,7 +2,6 @@
 
 const logger = require('ft-next-express').logger;
 const cacheControlUtil = require('../utils/cache-control');
-const addTagTitlePrefix = require('./article-helpers/tag-title-prefix');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
@@ -11,6 +10,8 @@ const articleXsltTransform = require('../transforms/article-xslt');
 const bodyTransform = require('../transforms/body');
 const bylineTransform = require('../transforms/byline');
 const articleBranding = require('ft-n-article-branding');
+const getMoreOnTags = require('./article-helpers/get-more-on-tags');
+const getAdsLayout = require('../utils/get-ads-layout');
 
 function isCapiV1(article) {
 	return article.provenance.find(
@@ -33,20 +34,6 @@ function transformArticleBody(article, flags) {
 	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
 		return bodyTransform(articleBody, flags);
 	});
-}
-
-function getMoreOnTags(primaryTheme, primarySection, primaryBrand) {
-	let moreOnTags = [];
-
-	primaryTheme && moreOnTags.push(primaryTheme);
-	primarySection && moreOnTags.push(primarySection);
-	primaryBrand && moreOnTags.push(primaryBrand);
-
-	if (!moreOnTags.length) {
-		return;
-	}
-
-	return moreOnTags.slice(0, 2).map(addTagTitlePrefix);
 }
 
 module.exports = function articleV3Controller(req, res, next, content) {
@@ -137,12 +124,13 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			res.set(cacheControlUtil);
-			content.adsLayout = req.query.adsLayout || 'default';
+			content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				res.render('article', content);
+				content.contentType = 'article';
+				res.render('content', content);
 			}
 		})
 		.catch(error => {

@@ -1,22 +1,25 @@
 'use strict';
 
-var cheerio = require('cheerio');
-var Entities = require('html-entities').XmlEntities;
+const Entities = require('html-entities').XmlEntities;
 
 module.exports = function($) {
-	var entities = new Entities();
+	const entities = new Entities();
+	const matcher = /^https:\/\/next-geebee.ft.com\/image\/v1\/images\/raw\/(.+)\?/;
 
-	$('img[src]').replaceWith(function(index, el) {
-		var $el = cheerio(el).clone();
-		var matcher = /^https:\/\/next-geebee.ft.com\/image\/v1\/images\/raw\/(.+)\?/;
-		var externalURI = $el.attr('src').match(matcher);
+	const $images = $('img[src]');
+
+	$images.each(i => {
+		const $thisImage = $images.eq(i);
+		const externalURI = $thisImage.attr('src').match(matcher);
 		if (externalURI) {
-			var imageSrc = externalURI[1];
+			const imageSrc = externalURI[1];
 			// also unescape any html entites
-			var imageSrcEncoded = encodeURIComponent(entities.decode(imageSrc));
-			$el.attr('src', $el.attr('src').replace(imageSrc, imageSrcEncoded));
+			const imageSrcEncoded = encodeURIComponent(entities.decode(imageSrc));
+			const imgSrcMatcher = new RegExp(imageSrc.replace('?', '\\?'), 'g');
+			$thisImage.attr('src', $thisImage.attr('src').replace(imageSrc, imageSrcEncoded));
+			$thisImage.attr('srcset') && $thisImage.attr('srcset', $thisImage.attr('srcset').replace(imgSrcMatcher, imageSrcEncoded));
 		}
-		return $el;
+		return $thisImage;
 	});
 	return $;
 };

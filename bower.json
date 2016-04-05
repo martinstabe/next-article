@@ -1,5 +1,5 @@
 {
-  "name": "next-article",
+  "name": "ft-next-article-bower",
   "dependencies": {
     "labs-o-share": "ftlabs/labs-o-share#^v3.1.0",
     "n-content-body": "^2.0.0",
@@ -17,13 +17,15 @@
     "o-gallery": "^1.6.1",
     "o-share": "^2.0.0",
     "superstore": "^2.0.1",
-    "next-ads-component": "#refactor-redux"
+    "next-ads-component": "^8.0.0"
   },
   "resolutions": {
     "o-expander": "^3.0.0",
     "o-fonts": "^2.0.0",
     "o-ft-icons": "next",
     "o-typography": "^3.1.0",
-    "next-ads-component": "refactor-redux"
+    "o-header": "^5.0.0",
+    "next-ads-component": "^8.0.0",
+    "o-ads": "^3.0.1"
   }
 }

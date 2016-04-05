@@ -5,7 +5,7 @@ $ad-medium-breakpoint: 760px;
 .article-header-advert {
 	@media (min-width:$ad-medium-breakpoint) {
 		min-height: 90px;
-		padding-top: 1em;
+		padding: 10px 0;
 		display: block;
 		padding-bottom: 0px;
 		line-height: 0;
@@ -13,8 +13,8 @@ $ad-medium-breakpoint: 760px;
 		text-align: center;
 		background: getColor('pink');
 	}
-	[data-ads-layout="hlfpage"] & {
-		padding-top: 0;
+	&[data-o-ads-loaded="Responsive"] {
+		padding: 0;
 	}
 }
 
@@ -35,6 +35,8 @@ $ad-medium-breakpoint: 760px;
 	@include oGridRespondTo(L) {
 		display: none;
 	}
+
+	[data-ads-layout="responsive"] &,
 	[data-ads-layout="hlfpage"] & {
 		display: block;
 	}

@@ -11,7 +11,11 @@
 		</h3>
 	</div>
 	<div class="n-content-tags__intro">
-		<p>Follow the topics mentioned in this article</p>
+		{{#ifEquals contentType 'podcast'}}
+			<p>Follow the topics related to this show</p>
+		{{else}}
+			<p>Follow the topics mentioned in this {{contentType}}</p>
+		{{/ifEquals}}
 	</div>
 	<ul class="n-content-tags__list--myft">
 		{{#each tags}}
@@ -21,7 +25,7 @@
 				data-trackable="tag"
 				class="n-content-tag n-content-tag--with-follow">{{name}}</a>
 			{{#if @root.flags.myFtApi}}
-			{{>next-myft-ui/templates/follow version='3' conceptId=id}}
+				{{>next-myft-ui/templates/follow version='3' conceptId=id}}
 			{{/if}}
 		</li>
 		{{/each}}

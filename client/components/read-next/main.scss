@@ -72,6 +72,8 @@
 	@include oTypographySans(xs);
 	text-transform: uppercase;
 	color: oColorsGetColorFor(timestamp, text);
+	display: block;
+	margin-top: 5px;
 }
 
 .next-up__timestamp__more-recent {
