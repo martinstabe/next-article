@@ -1,5 +1,5 @@
 {
-  "name": "next-article",
+  "name": "ft-next-article-bower",
   "dependencies": {
     "labs-o-share": "ftlabs/labs-o-share#^v3.1.0",
     "n-content-body": "^2.0.0",
@@ -22,6 +22,7 @@
     "o-expander": "^3.0.0",
     "o-fonts": "^2.0.0",
     "o-ft-icons": "next",
-    "o-typography": "^3.1.0"
+    "o-typography": "^3.1.0",
+    "o-header": "^5.0.0"
   }
 }
