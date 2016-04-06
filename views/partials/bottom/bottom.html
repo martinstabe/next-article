@@ -10,11 +10,7 @@
 				{{#if @root.flags.articleRelatedContent}}
 					<div class="js-story-package" data-trackable="story-package"></div>
 					{{#if moreOns}}
-						{{#if @root.flags.articleMoreOnTopicCard}}
-							{{> related/more-ons-ab-test-b}}
-						{{else}}
-							{{> related/more-ons}}
-						{{/if}}
+						{{> related/more-ons}}
 					{{/if}}
 				{{/if}}
 			</div>
