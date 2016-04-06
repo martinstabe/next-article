@@ -125,11 +125,11 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		.then(() => {
 			res.set(cacheControlUtil);
 			content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
+			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				content.contentType = 'article';
 				res.render('content', content);
 			}
 		})
