@@ -66,9 +66,14 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
-			payload.layout = 'wrapper';
+			res.set(cacheControlUtil);
 			payload.contentType = 'podcast';
-			return res.set(cacheControlUtil).render('content', payload);
+			if (req.query.fragment) {
+				res.render('fragment', payload);
+			} else {
+				payload.layout = 'wrapper';
+				res.render('content', payload);
+			}
 		})
 		.catch(error => {
 			logger.error(error);

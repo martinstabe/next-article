@@ -123,11 +123,11 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			res.set(cacheControlUtil);
+			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
 				content.layout = 'wrapper';
-				content.contentType = 'article';
 				res.render('content', content);
 			}
 		})
