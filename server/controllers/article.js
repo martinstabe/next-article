@@ -11,6 +11,7 @@ const bodyTransform = require('../transforms/body');
 const bylineTransform = require('../transforms/byline');
 const articleBranding = require('ft-n-article-branding');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
+const getAdsLayout = require('../utils/get-ads-layout');
 
 function isCapiV1(article) {
 	return article.provenance.find(
@@ -123,6 +124,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			res.set(cacheControlUtil);
+			content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);

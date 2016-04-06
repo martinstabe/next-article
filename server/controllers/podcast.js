@@ -8,6 +8,7 @@ const openGraphHelper = require('./article-helpers/open-graph');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const externalPodcastLinksUtil = require('../utils/external-podcast-links');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
+const getAdsLayout = require('../utils/get-ads-layout');
 const podcastMainImageHtml = require('./article-helpers/podcast-main-image');
 
 module.exports = function podcastLegacyController(req, res, next, payload) {
@@ -68,6 +69,7 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 		.then(() => {
 			res.set(cacheControlUtil);
 			payload.contentType = 'podcast';
+			payload.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			if (req.query.fragment) {
 				res.render('fragment', payload);
 			} else {

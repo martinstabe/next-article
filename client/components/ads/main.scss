@@ -1,0 +1,43 @@
+
+// Ad breakpoint where leaderboards start working
+$ad-medium-breakpoint: 760px;
+
+.article-header-advert {
+	@media (min-width:$ad-medium-breakpoint) {
+		min-height: 90px;
+		padding: 10px 0;
+		display: block;
+		padding-bottom: 0px;
+		line-height: 0;
+		white-space: pre;
+		text-align: center;
+		background: getColor('pink');
+	}
+	&[data-o-ads-loaded="Responsive"] {
+		padding: 0;
+	}
+}
+
+.article--brand {
+	.article-header-advert {
+		background-color: getColor('warm-1');
+	}
+}
+
+.sidebar-advert {
+	@include oGridRespondTo(L) {
+		display: block;
+	}
+}
+
+.in-article-advert {
+	display: block;
+	@include oGridRespondTo(L) {
+		display: none;
+	}
+
+	[data-ads-layout="responsive"] &,
+	[data-ads-layout="hlfpage"] & {
+		display: block;
+	}
+}
