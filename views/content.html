@@ -7,7 +7,9 @@
 	{{#ifEquals adsLayout 'default'}}
 		{{> ads/banlb}}
 	{{else}}
-		{{> ads/top}}
+		{{#defineBlock 'above-header'}}
+			{{> ads/top}}
+		{{/defineBlock}}
 	{{/ifEquals}}
 
 	{{> header/content-header}}

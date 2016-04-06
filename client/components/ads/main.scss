@@ -2,18 +2,18 @@
 // Ad breakpoint where leaderboards start working
 $ad-medium-breakpoint: 760px;
 
+.above-header-advert,
 .article-header-advert {
+	display: none;
 	@media (min-width:$ad-medium-breakpoint) {
 		min-height: 90px;
-		padding: 10px 0;
 		display: block;
-		padding-bottom: 0px;
+		padding: 10px;
 		line-height: 0;
-		white-space: pre;
-		text-align: center;
 		background: getColor('pink');
 	}
 	&[data-o-ads-loaded="Responsive"] {
+		display: block;
 		padding: 0;
 	}
 }
