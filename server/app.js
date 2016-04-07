@@ -9,6 +9,11 @@ checks.init();
 
 const app = module.exports = express({
 	name: 'article',
+	withFlags: true,
+	withHandlebars: true,
+	withNavigation: true,
+	withAnonMiddleware: true,
+	withBackendAuthentication: true,
 	healthChecks: [
 		checks.esv3,
 		checks.livefyre,
