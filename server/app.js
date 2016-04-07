@@ -1,6 +1,6 @@
 'use strict';
 
-const express = require('ft-next-express');
+const express = require('@financial-times/n-express');
 const bodyParser = require('body-parser');
 const checks = require('./checks/main.js');
 

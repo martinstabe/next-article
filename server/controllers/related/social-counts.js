@@ -2,7 +2,7 @@
 
 const fetchres = require('fetchres');
 const cacheControl = require('../../utils/cache-control');
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const services = 'facebook,gplus,twitter,stumbleupon,reddit';
 const metrics = 'comments,shares,votes,endorsements';
 
