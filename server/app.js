@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('@financial-times/n-express');
+const logger = require('@financial-times/n-logger').default;
 const bodyParser = require('body-parser');
 const checks = require('./checks/main.js');
 
@@ -47,5 +48,5 @@ app.get('/__gtg', (req, res) => {
 const port = process.env.PORT || 3001;
 
 module.exports.listen = app.listen(port, () => {
-	express.logger.info("Listening on " + port);
+	logger.info("Listening on " + port);
 });
