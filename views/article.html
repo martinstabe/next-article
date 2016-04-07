@@ -104,8 +104,10 @@
 						</div>
 					{{/if}}
 
-					{{#if @root.flags.lightSignUp}}
-						{{>n-light-signup/templates/form}}
+					{{#if anon.userIsAnonymous}}
+						{{#if @root.flags.lightSignUp}}
+							{{>n-light-signup/templates/form}}
+						{{/if}}
 					{{/if}}
 
 					{{> body bodyHtml=bodyHtml}}
