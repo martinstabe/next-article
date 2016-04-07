@@ -39,5 +39,6 @@ $ad-medium-breakpoint: 760px;
 	[data-ads-layout="responsive"] &,
 	[data-ads-layout="hlfpage"] & {
 		display: block;
+		clear: both;
 	}
 }

@@ -6,8 +6,6 @@ module.exports = (requestedLayout, flags) => {
 	if(flags.adsNewProposition && !requestedLayout) {
 		requestedLayout = 'responsive';
 	}
-	const mapping = {
-		'responsive': 'hlfpage'
-	};
-	return mapping[requestedLayout] || requestedLayout || 'default';
+
+	return requestedLayout || 'default';
 }

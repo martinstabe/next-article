@@ -32,7 +32,7 @@ function transformArticleBody(article, flags) {
 	};
 
 	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
-		return bodyTransform(articleBody, flags);
+		return bodyTransform(articleBody, flags, article.adsLayout);
 	});
 }
 
@@ -51,6 +51,8 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	}
 
 	content.thisYear = new Date().getFullYear();
+
+	content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 
 	if (req.query.myftTopics) {
 		content.myftTopics = req.query.myftTopics.split(',');
@@ -124,7 +126,6 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			res.set(cacheControlUtil);
-			content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);
