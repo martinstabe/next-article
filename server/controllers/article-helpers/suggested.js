@@ -1,7 +1,7 @@
 'use strict';
 
 const api = require('next-ft-api-client');
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 
 module.exports = function(articleId, storyPackageIds, primaryTag) {

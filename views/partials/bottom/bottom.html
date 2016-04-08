@@ -1,0 +1,29 @@
+<div class="o-grid-container">
+	<div class="o-grid-row">
+		{{#if isSpecialReport}}
+			<div
+				class="js-special-report"
+				data-trackable="special-report"
+				data-o-grid-colspan="12 XL11 XLoffset1"></div>
+		{{else}}
+			<div data-o-grid-colspan="12 L8 XL8 XLoffset1">
+				{{#if @root.flags.articleRelatedContent}}
+					<div class="js-story-package" data-trackable="story-package"></div>
+					{{#if moreOns}}
+						{{> related/more-ons}}
+					{{/if}}
+				{{/if}}
+			</div>
+			{{#if tags}}
+				<div data-o-grid-colspan="12 L4 XL3">
+					{{> related/more-ons-tags}}
+				</div>
+			{{/if}}
+		{{/if}}
+	</div>
+
+	{{#if comments.enabled}}
+		{{> bottom/comments}}
+	{{/if}}
+
+</div>

@@ -2,7 +2,27 @@
 	{{#if mainImageHtml}}
 		{{{mainImageHtml}}}
 	{{/if}}
-	{{> body}}
+	{{#ifEquals contentType 'article'}}
+		{{> body-article}}
+	{{/ifEquals}}
+	{{#ifEquals contentType 'podcast'}}
+		{{#if standFirst}}
+			<div class="article__body n-content-body">
+				<p>{{{standFirst}}}</p>
+			</div>
+		{{/if}}
+		<div class="article__media">
+			{{#with media}}
+			<audio controls>
+				<source src="{{url}}" type="{{mediaType}}" />
+				<p>
+					Your browser does not support playing this file but you can still <a href="{{url}}">download the MP3 file</a> to play locally.
+				</p>
+			</audio>
+			{{/with}}
+		</div>
+		{{> body-podcast}}
+	{{/ifEquals}}
 	{{#if tags}}
 		<div role="complementary">
 			<p>Latest stories on</p>

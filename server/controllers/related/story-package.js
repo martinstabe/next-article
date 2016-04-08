@@ -2,7 +2,7 @@
 
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 

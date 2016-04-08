@@ -2,7 +2,7 @@
 
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 
@@ -83,11 +83,7 @@ module.exports = function (req, res, next) {
 					return article;
 				});
 
-			let template = res.locals.flags.articleMoreOnTopicCard
-				? 'related/more-on-ab-test-b'
-				: 'related/more-on';
-
-			return res.render(template, {
+			return res.render('related/more-on', {
 				articles: moreOnArticlesArray[moreOnIndex]
 			});
 		})

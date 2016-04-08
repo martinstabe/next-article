@@ -3,7 +3,7 @@
 
 'use strict';
 
-var metrics = require('ft-next-express').metrics;
+var metrics = require('@financial-times/n-express').metrics;
 var api = require('next-ft-api-client');
 var fetchres = require('fetchres');
 var url	= require('url');

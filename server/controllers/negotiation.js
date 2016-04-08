@@ -1,7 +1,7 @@
 'use strict';
 
 const fetchres = require('fetchres');
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const api = require('next-ft-api-client');
 const interactivePoller = require('../lib/ig-poller');
 const shellpromise = require('shellpromise');
