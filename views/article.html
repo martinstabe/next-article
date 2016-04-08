@@ -104,12 +104,6 @@
 						</div>
 					{{/if}}
 
-					{{#if anon.userIsAnonymous}}
-						{{#if @root.flags.lightSignUp}}
-							{{>n-light-signup/templates/form}}
-						{{/if}}
-					{{/if}}
-
 					{{> body bodyHtml=bodyHtml}}
 					{{> copyright-notice}}
 					{{> social location='bottom'}}

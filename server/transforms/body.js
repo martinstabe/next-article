@@ -14,6 +14,7 @@ const videoBrightcove = require('./video-brightcove');
 const extractMainImageAndToc = require('./extract-main-image-and-toc');
 const inlineAd = require('./inline-ad');
 const externalLinks = require('./external-links');
+const lightSignup = require('./light-sign-up');
 
 let transform = function ($, flags, adsLayout) {
 	let withFn = function ($, transformFn) {
@@ -47,7 +48,8 @@ module.exports = function (body, flags, adsLayout) {
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
 		.with(inlineAd)
-		.with(externalLinks)
+		    .with(externalLinks)
+            .with(lightSignup)
 		.get();
 
 	return extractMainImageAndToc($);
