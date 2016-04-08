@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('ft-next-express').logger;
+const logger = require('@financial-times/n-logger').default;
 const cacheControlUtil = require('../utils/cache-control');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
