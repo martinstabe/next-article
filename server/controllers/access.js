@@ -44,12 +44,13 @@ function suppressBadResponses(err) {
 
 module.exports = function(req, res, next) {
 
-	// make sure we're not hitting this controller when the api flag is on
-	if (res.locals && res.locals.flags.contentClassificationApi) {
-		throw new Error('Hitting content classification in Article with contentClassificationApi flag on');
-	}
-
 	if (req.get('X-FT-Access-Metadata') === 'remote_headers') {
+
+		// make sure we're not hitting this controller when the api flag is on
+		if (res.locals && res.locals.flags.contentClassificationApi) {
+			return next(new Error('Hitting content classification in Article with contentClassificationApi flag on'));
+		}
+
 		return api.content({
 			uuid: req.params.id,
 			index: 'v3_api_v2'
