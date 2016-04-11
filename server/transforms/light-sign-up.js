@@ -1,9 +1,8 @@
-module.exports = function ($, flags, adsLayout, userIsAnonymous) {
-	if (flags.lightSignUp && userIsAnonymous) {
+module.exports = function ($, flags, adsLayout) {
+	if (flags.lightSignUp) {
 		const pars = $('p');
 		pars.each((index, par) => {
 			if(index > 3 && par.next && par.next.name === 'p') {
-				// TODO: feels wrong. Import the markup from the component?
 				$(par).after(`
 <div class="n-light-signup" data-trackable="light-signup">
 
