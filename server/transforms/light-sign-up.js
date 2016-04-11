@@ -1,6 +1,5 @@
-module.exports = function ($, flags, adsLayout) {
-	// how and where do I scope this to anon users? don't have access to the locals here?
-	if (flags.lightSignUp) {
+module.exports = function ($, flags, adsLayout, userIsAnonymous) {
+	if (flags.lightSignUp && userIsAnonymous) {
 		const pars = $('p');
 		pars.each((index, par) => {
 			if(index > 3 && par.next && par.next.name === 'p') {

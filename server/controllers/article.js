@@ -25,14 +25,15 @@ function isCapiV2(article) {
 	);
 }
 
-function transformArticleBody(article, flags) {
+function transformArticleBody(article, flags, userIsAnonymous) {
+
 	let xsltParams = {
 		id: article.id,
 		webUrl: article.webUrl
 	};
 
 	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
-		return bodyTransform(articleBody, flags, article.adsLayout);
+		return bodyTransform(articleBody, flags, article.adsLayout, userIsAnonymous);
 	});
 }
 
@@ -68,7 +69,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
 	asyncWorkToDo.push(
-		transformArticleBody(content, res.locals.flags).then(fragments => {
+		transformArticleBody(content, res.locals.flags, res.locals.anon.userIsAnonymous).then(fragments => {
 			content.bodyHtml = fragments.bodyHtml;
 			content.tocHtml = fragments.tocHtml;
 			content.mainImageHtml = fragments.mainImageHtml;

@@ -16,9 +16,9 @@ const inlineAd = require('./inline-ad');
 const externalLinks = require('./external-links');
 const lightSignup = require('./light-sign-up');
 
-let transform = function ($, flags, adsLayout) {
+let transform = function ($, flags, adsLayout, userIsAnonymous) {
 	let withFn = function ($, transformFn) {
-		let transformed$ = transformFn($, flags, adsLayout);
+		let transformed$ = transformFn($, flags, adsLayout, userIsAnonymous);
 		return {
 			'with': withFn.bind(withFn, transformed$),
 			get: function () {
@@ -31,13 +31,13 @@ let transform = function ($, flags, adsLayout) {
 	};
 };
 
-module.exports = function (body, flags, adsLayout) {
+module.exports = function (body, flags, adsLayout, userIsAnonymous) {
 	body = replaceEllipses(body);
 	body = body.replace(/<\/a>\s+([,;.:])/mg, '</a>$1');
 	body = body.replace(/http:\/\/www\.ft\.com\/ig\//g, '/ig/');
 	body = body.replace(/http:\/\/ig\.ft\.com\//g, '/ig/');
 
-	let $ = transform(cheerio.load(body, { decodeEntities: false }), flags, adsLayout)
+	let $ = transform(cheerio.load(body, { decodeEntities: false }), flags, adsLayout, userIsAnonymous)
 		// other transforms
 		.with(trimmedLinks)
 		.with(dataTrackable)
@@ -48,8 +48,8 @@ module.exports = function (body, flags, adsLayout) {
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
 		.with(inlineAd)
-		    .with(externalLinks)
-            .with(lightSignup)
+		.with(externalLinks)
+		.with(lightSignup)
 		.get();
 
 	return extractMainImageAndToc($);
