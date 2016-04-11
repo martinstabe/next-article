@@ -56,7 +56,7 @@ module.exports.init = () => {
 		);
 	}
 
-	let specialReport = hydratedMetadata.moreOns.find(tag => tag.taxonomy === 'specialReports');
+	let specialReport = hydratedMetadata.moreOns && hydratedMetadata.moreOns.find(tag => tag.taxonomy === 'specialReports');
 
 	if (specialReport) {
 		let url = `/article/${articleId}/special-report?tagId=${encodeURI(specialReport.id)}&count=5`;
