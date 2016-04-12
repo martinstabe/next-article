@@ -31,11 +31,11 @@ describe('Light Signup component inside body', function () {
 					</div>
 				</div>`;
 
-    it('should not do anything if the lightSignUp flag is off', function () {
+	it('should not do anything if the lightSignUp flag is off', function () {
 		var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 		$ = lightSignupTransform($, {});
 		expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>`);
-    });
+	});
 
 	it('should insert the component between the fifth and sixth paragraphs', function() {
 		var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
