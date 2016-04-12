@@ -59,6 +59,10 @@ require('next-js-setup').bootstrap(({flags}) => {
 
 	}
 
+	if (flags.get('lightSignUp')) {
+		lightSignup.init();
+	}
+
 	nVideo.init({
 		// For generating placeholder image
 		optimumWidth: 680,
@@ -75,8 +79,6 @@ require('next-js-setup').bootstrap(({flags}) => {
 		expandedToggleText: 'Show less'
 	});
 	scrollDepth.init(flags);
-
-	lightSignup.init(flags);
 
 	window.addEventListener('load', () => {
 		comments.init(uuid, flags);
