@@ -26,7 +26,6 @@ function isCapiV2(article) {
 }
 
 function transformArticleBody(article, flags) {
-
 	let xsltParams = {
 		id: article.id,
 		webUrl: article.webUrl
