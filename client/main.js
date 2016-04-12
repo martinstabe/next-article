@@ -76,6 +76,8 @@ require('next-js-setup').bootstrap(({flags}) => {
 	});
 	scrollDepth.init(flags);
 
+	lightSignup.init(flags);
+
 	window.addEventListener('load', () => {
 		comments.init(uuid, flags);
 	}, false);
