@@ -1,4 +1,4 @@
-module.exports = function ($, flags, adsLayout) {
+module.exports = function ($, flags) {
 	if (flags.lightSignUp) {
 		const pars = $('p');
 		pars.each((index, par) => {
