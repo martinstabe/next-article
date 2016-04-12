@@ -23,14 +23,11 @@ const app = module.exports = express({
 });
 
 require('./lib/ig-poller').start();
-require('./lib/blogs-access-poller').start();
 
 app.use(bodyParser.json());
 app.post('^/preview$', require('./controllers/preview'));
 
 const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
-
-app.use(`^/content/:id(${uuid})$`, require('./controllers/access'));
 
 app.get('^/article/:id/story-package', require('./controllers/related/story-package'));
 app.get('^/article/:id/more-on', require('./controllers/related/more-on'));
