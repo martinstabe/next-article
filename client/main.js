@@ -79,8 +79,5 @@ require('next-js-setup').bootstrap(({flags}) => {
 		expandedToggleText: 'Show less'
 	});
 	scrollDepth.init(flags);
-
-	window.addEventListener('load', () => {
-		comments.init(uuid, flags);
-	}, false);
+	comments.init(uuid, flags);
 });
