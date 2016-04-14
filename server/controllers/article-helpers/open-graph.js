@@ -5,7 +5,7 @@ module.exports = function(article) {
 		title: article.title,
 		description: article.summaries ? article.summaries[0] : '',
 		image: article.mainImage && article.mainImage.url,
-		url: `https://next.ft.com/content/${article.id}`
+		url: article.webUrl,
 	};
 
 	article.twitterCard = Object.assign({
