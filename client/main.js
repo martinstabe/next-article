@@ -12,6 +12,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 
 	const layout = require('n-layout');
 	const nVideo = require('n-video');
+	const lightSignup = require('n-light-signup');
 
 	const slideshow = require('./components/slideshow/main');
 	const onwardJourney = require('./components/onward-journey/main');
@@ -56,6 +57,10 @@ require('next-js-setup').bootstrap(({flags}) => {
 			share.init();
 		}
 
+	}
+
+	if (flags.get('lightSignUp')) {
+		lightSignup.init();
 	}
 
 	nVideo.init({
