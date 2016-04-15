@@ -40,8 +40,8 @@ deploy: _deploy_whitesource
 	nbt ship -m
 
 _deploy_whitesource:
-	(whitesource run || echo "whitesource run failed, skipping") && rm -r ws* && rm npm-shrinkwrap.json
-	(ws-bower || echo "whitesource bower failed, skipping") && rm -r ws* && rm -r .ws_bower
+	(whitesource run && rm -r ws* && rm npm-shrinkwrap.json) || echo "whitesource run failed, skipping"
+	(ws-bower && rm -r ws* && rm -r .ws_bower) || echo "whitesource bower failed, skipping"
 	@$(DONE)
 
 visual:
