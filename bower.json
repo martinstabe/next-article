@@ -24,7 +24,7 @@
     "o-expander": "^3.0.0",
     "o-fonts": "^2.0.0",
     "o-ft-icons": "next",
-    "o-typography": "^3.1.0",
+    "o-typography": "next-progressive-fonts",
     "o-header": "^5.0.0",
     "next-ads-component": "^8.0.0",
     "o-ads": "^3.0.1"
