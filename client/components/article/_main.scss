@@ -37,17 +37,22 @@
 
 //ARTICLE META ELEMENTS
 .article__title {
-	@include oTypographySerifDisplay(l);
+	@include oTypographySerifDisplay(l, $load-progressively: true);
 	margin: 0;
 	@include oGridRespondTo(L) {
-		@include oTypographySerifDisplaySize(xl);
+		@include oTypographySerifDisplaySize(xl, $with-progressive-size: true);
 	}
 }
 .article__stand-first {
-	@include oTypographySans(m);
+	@include oTypographySansData(l, $load-progressively: true);
+	@include oTypographyFallbackFontSize(sansData, 20px);
+	line-height: 24px;
+
 	margin: 0 0 $spacing-unit / 4;
 	@include oGridRespondTo(L) {
-		@include oTypographySerifDisplayItalicSize(l);
+		@include oTypographySansDataSize(xl, $with-progressive-size: true);
+		@include oTypographyFallbackFontSize(sansData, 26px);
+		line-height: 27px;
 	}
 }
 
