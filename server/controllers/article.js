@@ -38,16 +38,6 @@ function transformArticleBody(article, flags) {
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
-	// Required for correctly tracking page
-
-	if (res.locals.flags.analytics) {
-		content.ijentoConfig = {
-			uuid: content.id,
-			code: (/cms\/s\/([0-3])\//i.exec(content.webUrl) || [, null])[1],
-			type: 'Story'
-		};
-	}
-
 	content.thisYear = new Date().getFullYear();
 
 	content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
