@@ -15,6 +15,7 @@ const app = module.exports = express({
 	withNavigation: true,
 	withAnonMiddleware: true,
 	withBackendAuthentication: true,
+	withRequestTracing: true,
 	healthChecks: [
 		checks.esv3,
 		checks.livefyre,
