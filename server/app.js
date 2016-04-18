@@ -26,6 +26,10 @@ const app = module.exports = express({
 require('./lib/ig-poller').start();
 
 app.use(bodyParser.json());
+app.use((req, res) => {
+	res.set('Surrogate-Control', 'max-age=600,stale-while-revalidate=20,stale-if-error=259200');
+});
+
 app.post('^/preview$', require('./controllers/preview'));
 
 const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';

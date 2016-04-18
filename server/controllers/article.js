@@ -1,7 +1,6 @@
 'use strict';
 
 const logger = require('@financial-times/n-logger').default;
-const cacheControlUtil = require('../utils/cache-control');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
@@ -37,7 +36,6 @@ function transformArticleBody(article, flags) {
 }
 
 module.exports = function articleV3Controller(req, res, next, content) {
-
 	let asyncWorkToDo = [];
 
 	// Required for correctly tracking page
@@ -125,7 +123,6 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
-			res.set(cacheControlUtil);
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);

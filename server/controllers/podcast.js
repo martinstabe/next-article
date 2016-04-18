@@ -1,7 +1,6 @@
 'use strict';
 
 const logger = require('@financial-times/n-logger').default;
-const cacheControlUtil = require('../utils/cache-control');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
 const openGraphHelper = require('./article-helpers/open-graph');
@@ -67,7 +66,6 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
-			res.set(cacheControlUtil);
 			payload.contentType = 'podcast';
 			payload.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			if (req.query.fragment) {

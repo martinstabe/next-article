@@ -1,7 +1,6 @@
 'use strict';
 
 const fetchres = require('fetchres');
-const cacheControl = require('../../utils/cache-control');
 const logger = require('@financial-times/n-logger').default;
 const services = 'facebook,gplus,twitter,stumbleupon,reddit';
 const metrics = 'comments,shares,votes,endorsements';
@@ -21,7 +20,6 @@ module.exports = function(req, res, next) {
 	getShareCounts(url)
 		.then(function(results) {
 			let shareCounts = results[url]; //Grouped results return a key of undefined
-			res.set(cacheControl);
 			res.json({
 				shares: shareCounts
 			})
