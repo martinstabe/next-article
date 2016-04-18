@@ -25,8 +25,15 @@ const app = module.exports = express({
 
 require('./lib/ig-poller').start();
 
-app.use(bodyParser.json());
-app.post('^/preview$', require('./controllers/preview'));
+
+
+app.post('^/preview$', bodyParser.json(), require('./controllers/preview'));
+
+// Apply this after the preview controller. Previews should not be cached
+app.use((req, res, next) => {
+	res.set('Surrogate-Control', 'max-age=600,stale-while-revalidate=20,stale-if-error=259200');
+	next();
+});
 
 const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
 
@@ -36,7 +43,10 @@ app.get('^/article/:id/special-report', require('./controllers/related/special-r
 app.get('^/article/:id/social-counts', require('./controllers/related/social-counts'));
 app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow'));
 
-app.get(`^/content/:id(${uuid})$`, require('./controllers/negotiation'));
+app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
+	res.vary('country-code');
+	next();
+}, require('./controllers/negotiation'));
 
 app.get('/__gtg', (req, res) => {
 	res.status(200).end();
