@@ -1,7 +1,7 @@
 module.exports = function ($, flags, adsLayout) {
 	const pars = $('p');
 	pars.each((index, par) => {
-		if(index > 1 && par.next && par.next.name === 'p') {
+		if(index > 1 && par.next && par.next.name === 'p' && !par.parent) {
 			$(par).after(`<div class="o-ads in-article-advert"
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
