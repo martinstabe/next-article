@@ -32,4 +32,10 @@ describe('Inline ad inside body', function () {
 		expect($.html()).to.equal(`<p>1</p><img><p>2</p><p>3</p><img><p>4</p>${adHtml.replace("pos=mpu;", "pos=mid;")}<p>5</p>`);
 	});
 
+	it('should not place an ad in an aside', function() {
+		var $ = cheerio.load('<p>1</p><p>2</p><aside><p>3</p><p>4</p></aside>');
+		$ = inlineAdTransform($, {}, 'responsive');
+		expect($.html()).to.equal('<p>1</p><p>2</p><aside><p>3</p><p>4</p></aside>');
+	});
+
 });
