@@ -31,7 +31,7 @@ app.post('^/preview$', bodyParser.json(), require('./controllers/preview'));
 
 // Apply this after the preview controller. Previews should not be cached
 app.use((req, res, next) => {
-	res.set('Surrogate-Control', 'max-age=600,stale-while-revalidate=20,stale-if-error=259200');
+	res.set('Surrogate-Control', 'max-age=3600,stale-while-revalidate=20,stale-if-error=259200');
 	next();
 });
 
@@ -45,6 +45,8 @@ app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow')
 
 app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 	res.vary('country-code');
+	// cache articles for less time than all the related links
+	res.set('Surrogate-Control', 'max-age=600,stale-while-revalidate=20,stale-if-error=259200');
 	next();
 }, require('./controllers/negotiation'));
 
