@@ -27,12 +27,16 @@ run:
 	nbt run
 
 build:
+	nbt build --main-js comments.js --main-sass comments.scss --skip-about --skip-haikro --skip-hash --dev
 	nbt build --dev
 
 build-production:
+	nbt build --main-js comments.js --main-sass comments.scss --skip-about --skip-haikro --skip-hash
 	nbt build
 
+
 watch:
+	@echo " **************************************************\n WATCH IS PARTIALLY BOKEN\n Within next-article there are multiple bundles\n NBT watch will only rebuild main.js and main.scss\n **************************************************"
 	nbt build --dev --watch
 
 deploy: _deploy_whitesource

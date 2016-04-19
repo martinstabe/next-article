@@ -4,9 +4,17 @@ const trackEvent = require('../utils/tracking');
 
 module.exports = {};
 module.exports.init = function(uuid, flags) {
-	if (!flags.get('articleComments') || !document.querySelector('#comments')) {
+	function filterFlags(flag) {
+		return flag.name === this.name;
+	}
+
+	const commentsFlag = flags.filter(filterFlags.bind({name: 'articleComments'}))[0];
+	const lazyFlag = flags.filter(filterFlags.bind({name: 'articleLazyComments'}))[0];
+
+	if (!commentsFlag.state) {
 		return;
 	}
+
 	const eventData = {
 		action: 'comment',
 		category: 'page',
@@ -15,18 +23,26 @@ module.exports.init = function(uuid, flags) {
 			source: 'next-article'
 		}
 	};
+
+
 	OComments.on('widget.renderComplete', function (ev) {
-		const commentCount = ev.detail.instance.lfWidget.getCollection().attributes.numVisible;
-		const articleShareList = document.querySelectorAll('.article__share');
-		const articleShareArray = Array.prototype.slice.call(articleShareList);
-		articleShareArray.forEach(function (articleShare) {
-			let commentLink = document.createElement('a');
-			commentLink.setAttribute('href', '#comments');
-			commentLink.setAttribute('data-trackable', 'view-comments');
-			commentLink.className = 'article__share__comments';
-			commentLink.textContent = commentCount;
-			articleShare.appendChild(commentLink);
-		});
+		if(lazyFlag.state) {
+			const skeleton = document.querySelector('[data-skeleton=comments]');
+			skeleton.parentNode.removeChild(skeleton);
+		} else {
+			const commentCount = ev.detail.instance.lfWidget.getCollection().attributes.numVisible;
+			const articleShareList = document.querySelectorAll('.article__share');
+			const articleShareArray = Array.prototype.slice.call(articleShareList);
+			articleShareArray.forEach(function (articleShare) {
+				let commentLink = document.createElement('a');
+				commentLink.setAttribute('href', '#comments');
+				commentLink.setAttribute('data-trackable', 'view-comments');
+				commentLink.className = 'article__share__comments';
+				commentLink.textContent = commentCount;
+				articleShare.appendChild(commentLink);
+			});
+		}
+
 	});
 	OComments.on('tracking.postComment', function () {
 		eventData.meta = { interaction: 'posted' };
