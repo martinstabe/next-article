@@ -87,12 +87,16 @@ require('next-js-setup').bootstrap(({flags}) => {
 
 	if(flags.get('articleComments') && document.querySelector('#comments')) {
 		if(flags.get('articleLazyComments')) {
+			const commentsEl = document.getElementById('comments');
+			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
+			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
+
 			commentsIcon.init();
 			commentsSkeleton.init();
 
 			lazyLoad({
 				targetEl: '#comments',
-				sources: ['/article/comments.js', '/article/comments.css']
+				sources: [commentsJsLocation, commentsCssLocation]
 			}).then(function() {
 				var data = {
 					action: 'view',
