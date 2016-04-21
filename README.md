@@ -13,7 +13,7 @@ make build
 
 ## Dependencies
 
-Please install [`next-router`](https://github.com/Financial-Times/next-router) globally.
+Please install [`next-router`](https://github.com/Financial-Times/next-router) globally. If you can't view the [`next-router`](https://github.com/Financial-Times/next-router) project, please ask someone from Next to add you as a collaborator.
 
 Next article also requires the [libxslt](http://xmlsoft.org/libxslt/) C library - and more specifically its [processing tool](http://xmlsoft.org/XSLT/xsltproc2.html). See the [XSLT section](#xslt) below for more information.
 
