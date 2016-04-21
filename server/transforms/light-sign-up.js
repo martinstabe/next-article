@@ -1,13 +1,26 @@
+'use strict';
+
 module.exports = function ($, flags) {
-	if (!flags.lightSignUp) return $;
 
 	const pars = $('p');
-	pars.each((index, par) => {
-		if(index > 3 && par.next && par.next.name === 'p') {
-			$(par).after('<div class="n-light-signup__container"></div>');
-			return false;
-		}
-	});
+	const variant = flags.lightSignUp;
+
+	if (variant === 'top') positionComponent(1, true);
+	if (variant === 'mid') positionComponent(5, true);
+	if (variant === 'end') positionComponent(pars.length, false);
 
 	return $;
+
+	function positionComponent(position, checkNextP) {
+		pars.each((index, par) => {
+			let indexMatches = ((index + 1) >= position);
+			let isOrphan = !par.parent;
+			let hasNextP = (par.next && par.next.name === 'p');
+			if (indexMatches && isOrphan && (hasNextP || !checkNextP)) {
+				$(par).after('<div class="n-light-signup__container"></div>');
+				return false;
+			}
+		});
+	}
+
 };
