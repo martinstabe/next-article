@@ -16,7 +16,22 @@
 @mixin skeleton-line($width) {
 	width: $width;
 	height: 15px;
-	background: linear-gradient(to right, #fff1e0, #f3ede5, #fff1e0);
+	background: #fff1e0;
+	background: linear-gradient(to right, #fff1e0, #ece8e0, #fff1e0);
+	background-size: 1000px;
+	animation: pulse 2s infinite ease;
+}
+
+@keyframes pulse {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .skeleton__text {
@@ -50,10 +65,10 @@
 .skeleton__avatar:before {
 	@include skeleton-line(160px);
 	@media (min-width:280px) {
-		width: 200px
+		width: 200px;
 	}
 	@media (min-width:380px) {
-		width: 300px
+		width: 300px;
 	}
 	content: '';
 	position: absolute;
@@ -64,7 +79,7 @@
 .skeleton__avatar:after {
 	@include skeleton-line(120px);
 	@media (min-width:380px) {
-		width: 200px
+		width: 200px;
 	}
 	content: '';
 	position: absolute;
