@@ -47,12 +47,13 @@
     "proxyquire": "^1.7.3",
     "sinon": "^1.15.3",
     "whitesource": "^0.2.14",
-    "ws-bower": "^0.0.33"
+    "ws-bower": "^0.0.33",
+    "node-sass": "3.4.2"
   },
   "babel": {
     "optional": "es7.classProperties"
   },
   "engines": {
-    "node": "4.4.0"
+    "node": "4.3.1"
   }
 }
