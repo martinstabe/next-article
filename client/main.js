@@ -27,6 +27,13 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const share = require('./components/share/main');
 	const labsShare = require('./components/labsshare/main');
 	const trackEvent = require('./components/utils/tracking');
+
+	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
+
+	if(flags.get('ftlabsAdBlockerHandling') === 1){
+		ftlabsAdBlockerHandling.init();
+	}
+
 	prompts.init();
 	oViewport.listenTo('resize');
 
@@ -35,7 +42,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	flags.get('saveForLater') && clientOpts.push({relationship: 'saved', type: 'content'});
 	myFtClient.init(clientOpts);
 
-	myFtUi.init({anonymous: !(/FTSession=/.test(document.cookie))});
+	myFtUi.init({anonymous: !!(/FTSession=/.test(document.cookie))});
 
 	layout.init(flags);
 
