@@ -48,17 +48,16 @@ module.exports = function($) {
 		// responsify large images
 		if (imageWidth === 700) {
 			const sources = [
-				`${resize(imageUrl, 980)} 980w`,
 				`${resize(imageUrl, 700)} 700w`,
-				`${resize(imageUrl, 480)} 480w`,
-				`${resize(imageUrl, 320)} 320w`
+				`${resize(imageUrl, 500)} 500w`,
+				`${resize(imageUrl, 300)} 300w`
 			];
 
 			imageEl.attr('srcset', sources.join());
 
 			// Matching o-grid at L breakpoint (8 cols) and default (12 cols)
 			// http://w3c.github.io/html/semantics-embedded-content.html#viewport-based-selection
-			imageEl.attr('sizes', '(min-width: 61.25em) 700px, 100vw');
+			imageEl.attr('sizes', '(min-width: 76.25em) 680px, (min-width: 61.25em) 620px, (min-width: 46.25em) 700px, calc(100vw - 20px)');
 		}
 	}
 
