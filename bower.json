@@ -3,7 +3,6 @@
   "dependencies": {
     "labs-o-share": "ftlabs/labs-o-share#^v3.1.0",
     "n-content-body": "^2.0.0",
-    "n-image": "^2.0.0",
     "n-layout": "^6.0.0",
     "n-message-prompts": "^2.0.0",
     "n-video": "^3.2.0",

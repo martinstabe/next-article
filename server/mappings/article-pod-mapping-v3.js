@@ -1,21 +1,26 @@
 'use strict';
 
-module.exports = function articlePodMapping(article) {
-	let nImageOptions = {
-		srcset: {
-			s: 345,
-			xl: 380,
-			default: 470
-		},
-		class: ''
-	};
+const createSrcset = (url, width) =>
+	`https://next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}?source=next&fit=scale-down&compression=best&width=${width} ${width}w`;
 
+const createSize = (sizes, breakpoint) =>
+	breakpoint !== 'default' ? `(min-width: ${breakpoint}) ${sizes[breakpoint]}px` : `${sizes[breakpoint]}px`;
+
+module.exports = function articlePodMapping(article) {
 	let decoration = {
 		url: `/content/${article.id}`,
-		subheading: Array.isArray(article.summaries) ? article.summaries[0] : null,
+		subheading: Array.isArray(article.summaries) ? article.summaries[0] : null
 	};
 
 	if (article.mainImage && Object.keys(article.mainImage).length > 0) {
+		const srcset = [380, 345].map(createSrcset.bind(null, article.mainImage.url)).join(', ');
+		const sizes = { '76.25em': 380, 'default': 345 };
+		const nImageOptions = {
+			srcset: srcset,
+			sizes: Object.keys(sizes)
+				.map(createSize.bind(null, sizes))
+				.join(', ')
+		};
 		Object.assign(article.mainImage, nImageOptions, { alt: article.mainImage.description });
 	}
 
