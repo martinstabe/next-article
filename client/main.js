@@ -28,7 +28,10 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const labsShare = require('./components/labsshare/main');
 	const trackEvent = require('./components/utils/tracking');
 	
-	const detectAdBlock = require('./components/ftlabsadblockdetection');
+	const detectAdBlock = require('./components/ftlabsadblockdetection/main');
+	
+	console.log(detectAdBlock);
+	detectAdBlock.init();
 	
 	prompts.init();
 	oViewport.listenTo('resize');
