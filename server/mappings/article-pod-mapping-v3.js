@@ -13,10 +13,12 @@ module.exports = function articlePodMapping(article) {
 	};
 
 	if (article.mainImage && Object.keys(article.mainImage).length > 0) {
-		const srcset = [380, 345].map(createSrcset.bind(null, article.mainImage.url)).join(', ');
+		const srcset = [380, 345];
 		const sizes = { '76.25em': 380, 'default': 345 };
 		const nImageOptions = {
-			srcset: srcset,
+			srcset: srcset
+				.map(createSrcset.bind(null, article.mainImage.url))
+				.join(', '),
 			sizes: Object.keys(sizes)
 				.map(createSize.bind(null, sizes))
 				.join(', ')
