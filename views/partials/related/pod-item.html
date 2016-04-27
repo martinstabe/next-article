@@ -4,7 +4,7 @@
 			{{#if mainImage}}
 				<div class="pod__item__image--placeholder">
 					<a class="pod__item__image" href="{{url}}" data-trackable="link-article-image">
-						{{>n-image/templates/image image=mainImage}}
+						<img srcset="{{mainImage.srcset}}" sizes="{{mainImage.sizes}}" alt="{{mainImage.alt}}" />
 					</a>
 				</div>
 			{{/if}}

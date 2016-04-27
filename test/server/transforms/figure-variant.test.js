@@ -218,7 +218,7 @@ describe('Figure Variant Transform', () => {
 
 			const result = $('img').attr('srcset').split(',');
 
-			assert.strictEqual(result.length, 4);
+			assert.strictEqual(result.length, 3);
 
 			result.forEach((item) => {
 				assert.match(item, /width=\d{3} \d{3}w/);
