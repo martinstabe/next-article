@@ -10,3 +10,9 @@
 	data-o-ads-lazy-load="true"
 	aria-hidden="true">
 </div>
+
+{{#if @root.flags.ftlabsAdBlockerHandling}}
+	
+	{{> ads/no-ad size='300-tall' selector='.article-header-advert.o-ads' }}
+	
+{{/if}}
