@@ -5,10 +5,10 @@
 require('chai').should();
 
 const httpMocks = require('node-mocks-http');
+const sinon = require('sinon');
 const nock = require('nock');
 const subject = require('../../../../server/controllers/related/social-counts');
 const articleUrl = 'http://www.ft.com/cms/s/0/3a9f8cd6-968b-11e5-95c7-d47aa298f769.html';
-
 
 describe('Social Counts', () => {
 
@@ -19,6 +19,10 @@ describe('Social Counts', () => {
 	function createInstance(options) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
+		response.cache = sinon.stub();
+		response.vary = sinon.stub();
+		response.unvary = sinon.stub();
+		response.unvaryAll = sinon.stub();
 		return subject(request, response);
 	}
 

@@ -33,6 +33,8 @@ function getArticles (tagId, count, parentId) {
 
 module.exports = function(req, res, next) {
 
+	res.unvaryAll('wrapper');
+
 	if (!req.query.tagId) {
 		return res.status(400).end();
 	}
