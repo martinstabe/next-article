@@ -7,6 +7,7 @@ const NoRelatedResultsException = require('../../lib/no-related-results-exceptio
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 
 module.exports = function(req, res, next) {
+	res.unvaryAll('wrapper');
 
 	if (!req.query.articleIds) {
 		return res.status(400).end();
