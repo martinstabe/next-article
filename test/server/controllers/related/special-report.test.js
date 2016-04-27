@@ -33,6 +33,10 @@ describe('Special Report', () => {
 	function createInstance(options) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
+		response.cache = sinon.stub();
+		response.vary = sinon.stub();
+		response.unvary = sinon.stub();
+		response.unvaryAll = sinon.stub();
 		return subject(request, response);
 	}
 

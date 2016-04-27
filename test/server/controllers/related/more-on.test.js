@@ -65,6 +65,10 @@ describe('More Ons', () => {
 	function createInstance(options, flags) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
+		response.cache = sinon.stub();
+		response.vary = sinon.stub();
+		response.unvary = sinon.stub();
+		response.unvaryAll = sinon.stub();
 		response.locals = { flags: flags || {} };
 		return subject(request, response);
 	}
