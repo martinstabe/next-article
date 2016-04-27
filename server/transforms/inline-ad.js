@@ -6,6 +6,7 @@ module.exports = function ($, flags, adsLayout) {
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
+				data-o-ads-lazy-load="true"
 				data-o-ads-targeting="pos=${adsLayout === 'default' ? 'mpu' : 'mid'};"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"

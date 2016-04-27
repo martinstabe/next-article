@@ -6,7 +6,6 @@ $ad-medium-breakpoint: 760px;
 	@media (min-width:$ad-medium-breakpoint) {
 		min-height: 90px;
 		padding: 10px 0;
-		display: block;
 		line-height: 0;
 		white-space: pre;
 		text-align: center;
@@ -30,14 +29,19 @@ $ad-medium-breakpoint: 760px;
 }
 
 .in-article-advert {
-	display: block;
-	@include oGridRespondTo(L) {
-		display: none;
-	}
-
-	[data-ads-layout="responsive"] &,
-	[data-ads-layout="hlfpage"] & {
-		display: block;
+	visibility: hidden;
+	height: 0;
+	overflow: hidden;
+	&[data-o-ads-loaded="Responsive"][data-o-ads-master-loaded="Responsive"] {
+		visibility: visible;
+		height: auto;
 		clear: both;
 	}
+
+	@include oGridRespondTo($until: L) {
+		visibility: visible;
+		height: auto;
+		clear: both;
+	}
+
 }
