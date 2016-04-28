@@ -30,8 +30,6 @@ require('next-js-setup').bootstrap(({flags}) => {
 	
 	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 	
-	console.log('ftlabsAdBlockerHandling', flags.get('ftlabsAdBlockerHandling'));
-	
 	if(flags.get('ftlabsAdBlockerHandling') !== undefined && flags.get('ftlabsAdBlockerHandling') === 1){
 		ftlabsAdBlockerHandling.init();	
 	}

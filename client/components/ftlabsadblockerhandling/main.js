@@ -9,6 +9,10 @@ const storage = {
 	}
 };
 
+function bindUIEventListeners(){
+	
+}
+
 function initialise (){
 	
 	let storedValue = storage.get();
