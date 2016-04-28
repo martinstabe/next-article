@@ -15,6 +15,9 @@ function getShareCounts(articleUrl) {
 
 
 module.exports = function(req, res, next) {
+
+	res.unvaryAll('wrapper');
+
 	let url = req.query.url;
 
 	getShareCounts(url)

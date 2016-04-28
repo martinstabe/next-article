@@ -10,47 +10,79 @@
 
 .skeleton__inner {
 	width: 100%;
-	margin: 20px 0;
-	overflow: auto;
+	margin: 20px 0 60px;
+}
+
+@mixin skeleton-line($width) {
+	width: $width;
+	height: 15px;
+	background: #fff1e0;
+	background: linear-gradient(to right, #fff1e0, #ece8e0, #fff1e0);
+	background-size: 1000px;
+	animation: pulse 2s infinite ease;
+}
+
+@keyframes pulse {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.skeleton__text {
+	@include skeleton-line(100%);
+	position: relative;
+	margin-top: 30px;
+}
+
+.skeleton__text:before {
+	@include skeleton-line(100%);
+	content: '';
+	position: absolute;
+	top: -20px;
+}
+
+.skeleton__text:after {
+	@include skeleton-line(100%);
+	content: '';
+	position: absolute;
+	bottom: -20px;
+}
+
+.skeleton__avatar {
+	position: relative;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
 	background: #fff1e0;
 }
 
-
-.skeleton__text {
-	width: 100%;
-	height: 100px;
-	border-bottom: 2px solid #ffffff;
+.skeleton__avatar:before {
+	@include skeleton-line(160px);
+	@media (min-width:280px) {
+		width: 200px;
+	}
+	@media (min-width:380px) {
+		width: 300px;
+	}
+	content: '';
+	position: absolute;
+	left: 60px;
+	top: 5px;
 }
 
-.skeleton__edit {
-	float: left;
-	width: 30px;
-	height: 30px;
-	border-right: 2px solid #ffffff;
-}
-
-.skeleton__follow {
-	float: left;
-}
-
-.skeleton__follow:before {
-	content: '+ Follow';
-	font-size: 12px;
-	color: #666666;
-	float: left;
-	padding: 8px 10px;
-	border-right: 2px solid #ffffff;
-}
-
-.skeleton__submit {
-	float: right;
-}
-
-.skeleton__submit:before {
-	content: 'Submit Comment';
-	font-size: 12px;
-	color: #666666;
-	float: left;
-	padding: 8px 10px;
-	border-left: 2px solid #ffffff;
+.skeleton__avatar:after {
+	@include skeleton-line(120px);
+	@media (min-width:380px) {
+		width: 200px;
+	}
+	content: '';
+	position: absolute;
+	left: 60px;
+	top: 25px;
 }

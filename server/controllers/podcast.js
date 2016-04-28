@@ -69,6 +69,7 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 			payload.contentType = 'podcast';
 			payload.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			if (req.query.fragment) {
+				res.unvaryAll('wrapper');
 				res.render('fragment', payload);
 			} else {
 				payload.layout = 'wrapper';

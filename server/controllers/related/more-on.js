@@ -41,6 +41,9 @@ function allSettled(promises) {
 }
 
 module.exports = function (req, res, next) {
+
+	res.unvaryAll('wrapper');
+
 	// make sure there are tag ids and an index not greater than 4
 	if (!req.query.tagIds || !req.query.index || parseInt(req.query.index, 10) > 4) {
 		return res.status(400).end();

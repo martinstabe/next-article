@@ -1,12 +1,17 @@
 module.exports = function ($, flags, adsLayout) {
 	const pars = $('p');
 	pars.each((index, par) => {
-		if(index > 1 && par.next && par.next.name === 'p' && !par.parent) {
-			
-			var mu = `<div class="o-ads in-article-advert"
+
+		if(index > 1
+			&& par.next
+			&& par.next.name === 'p'
+			&& !par.parent
+			&& par.prev.name !== 'aside') {
+			$(par).after(`<div class="o-ads in-article-advert"
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
+				data-o-ads-lazy-load="true"
 				data-o-ads-targeting="pos=${adsLayout === 'default' ? 'mpu' : 'mid'};"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
@@ -15,17 +20,7 @@ module.exports = function ($, flags, adsLayout) {
 				data-o-ads-formats-extra="Responsive"
 				data-o-ads-size="300"
 			$(par).after(extra="Responsive"
-				aria-hidden="true"></div>`;
-			
-			if(flags.ftlabsAdBlockerHandling){
-				mu += `<script>
-						document.body.addEventListener('adsblocked', function(){
-							console.log("adsblock event recieved. Inserting replacement content...");
-							document.querySelector('.o-ads.in-article-advert').innerHTML = repContent['300'];
-						}, false);
-						
-					<\/script>`
-			}
+				aria-hidden="true"></div>`);
 			
 			$(par).after(mu);
 			return false;

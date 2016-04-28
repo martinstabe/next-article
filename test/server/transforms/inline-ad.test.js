@@ -6,7 +6,7 @@ var inlineAdTransform = require('../../../server/transforms/inline-ad');
 
 describe('Inline ad inside body', function () {
 
-	const adHtml = '<div class="o-ads in-article-advert" data-o-ads-name="mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-targeting="pos=mpu;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="MediumRectangle,Responsive" data-o-ads-formats-large="Responsive" data-o-ads-formats-extra="Responsive" aria-hidden="true"></div>';
+	const adHtml = '<div class="o-ads in-article-advert" data-o-ads-name="mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-lazy-load="true" data-o-ads-targeting="pos=mpu;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="MediumRectangle,Responsive" data-o-ads-formats-large="Responsive" data-o-ads-formats-extra="Responsive" aria-hidden="true"></div>';
 
 	it('should insert an ad between the third and fourth paragraphs', function() {
 		var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p>');
@@ -38,4 +38,9 @@ describe('Inline ad inside body', function () {
 		expect($.html()).to.equal('<p>1</p><p>2</p><aside><p>3</p><p>4</p></aside>');
 	});
 
+	it('should not place an ad directly after an aside', function() {
+		var $ = cheerio.load('<p>1</p><aside>2</aside><p>3</p><p>4</p><p>5</p>');
+		$ = inlineAdTransform($, {}, 'responsive');
+		expect($.html()).to.equal(`<p>1</p><aside>2</aside><p>3</p><p>4</p>${adHtml.replace("pos=mpu;", "pos=mid;")}<p>5</p>`);
+	});
 });
