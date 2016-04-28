@@ -10,10 +10,9 @@ const storage = {
 };
 
 let storedValue = parseInt( storage.get() );
+const UI = document.querySelector('.ftlabs-ad-block-handling-ui');
 
 function previousApproach(){
-	
-	console.log("Previous...");
 	
 	if(storedValue > 0){
 		storage.set(storedValue - 1);
@@ -26,8 +25,6 @@ function previousApproach(){
 }
 
 function nextApproach(){
-
-	console.log("Next...");
 	
 	if(storedValue < approaches.length - 1){
 		storage.set(storedValue + 1);
@@ -58,8 +55,11 @@ function initialise (){
 		storedValue = newValue
 	}
 
-	approaches[storedValue]();
+	const selectedApproach = approaches[storedValue];
 
+	selectedApproach.run();
+	UI.querySelector('h3').textContent = selectedApproach.description;
+	
 	bindUIEventListeners();
 
 }
