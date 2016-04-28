@@ -3,3 +3,34 @@
 	border: 5px solid black;
 	padding: 0px 10px;	
 }
+
+.ftlabs-ad-block-handling-ui .controls{
+	padding-top: 10px;
+	text-align: right;
+}
+
+.ftlabs-ad-block-handling-ui button{
+	padding-left: 0;
+    background-position: 50%;
+    background-size: 18px;
+    min-height: 36px;
+    min-width: 36px;
+    padding: 8px 18px 8px 18px;
+    font-size: 18px;
+    line-height: 18px;
+    border-width: 1px;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.ftlabs-ad-block-handling-ui button.button-left{
+    background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+    background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=png&width=20)\9;
+}
+
+.ftlabs-ad-block-handling-ui button.button-right{
+    background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+    background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=png&width=20)\9;
+}
