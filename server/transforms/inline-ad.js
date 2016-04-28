@@ -21,8 +21,7 @@ module.exports = function ($, flags, adsLayout) {
 				data-o-ads-size="300"
 			$(par).after(extra="Responsive"
 				aria-hidden="true"></div>`);
-			
-			$(par).after(mu);
+				
 			return false;
 		}
 	});
