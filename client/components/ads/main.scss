@@ -43,6 +43,7 @@ $ad-medium-breakpoint: 760px;
 	@include oGridRespondTo($until: L) {
 		visibility: visible;
 		height: auto;
+		width: auto;
 		clear: both;
 	}
 
