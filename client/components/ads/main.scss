@@ -31,10 +31,12 @@ $ad-medium-breakpoint: 760px;
 .in-article-advert {
 	visibility: hidden;
 	height: 0;
+	width: 0;
 	overflow: hidden;
 	&[data-o-ads-loaded="Responsive"][data-o-ads-master-loaded="Responsive"] {
 		visibility: visible;
 		height: auto;
+		width: auto;
 		clear: both;
 	}
 

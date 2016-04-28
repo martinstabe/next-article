@@ -38,4 +38,9 @@ describe('Inline ad inside body', function () {
 		expect($.html()).to.equal('<p>1</p><p>2</p><aside><p>3</p><p>4</p></aside>');
 	});
 
+	it('should not place an ad directly after an aside', function() {
+		var $ = cheerio.load('<p>1</p><aside>2</aside><p>3</p><p>4</p><p>5</p>');
+		$ = inlineAdTransform($, {}, 'responsive');
+		expect($.html()).to.equal(`<p>1</p><aside>2</aside><p>3</p><p>4</p>${adHtml.replace("pos=mpu;", "pos=mid;")}<p>5</p>`);
+	});
 });
