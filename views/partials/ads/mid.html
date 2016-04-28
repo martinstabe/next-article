@@ -1,5 +1,5 @@
 <div
-	class="sidebar-advert o-ads ad-blocked"
+	class="sidebar-advert o-ads"
 	data-o-ads-name="halfpage-desktop"
 	data-o-ads-targeting="pos=mid;"
 	data-o-ads-formats-default="false"
@@ -11,9 +11,3 @@
 	data-o-ads-size="300-tall"
 	aria-hidden="true">
 </div>
-
-{{#if @root.flags.ftlabsAdBlockerHandling}}
-	
-	{{> ads/no-ad size='300-tall' selector='.article-header-advert.o-ads' }}
-	
-{{/if}}
