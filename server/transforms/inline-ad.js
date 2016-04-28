@@ -3,7 +3,7 @@ module.exports = function ($, flags, adsLayout) {
 	pars.each((index, par) => {
 		if(index > 1 && par.next && par.next.name === 'p' && !par.parent) {
 			
-			var mu = `<div class="o-ads in-article-advert ad-blocked"
+			var mu = `<div class="o-ads in-article-advert"
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
@@ -13,10 +13,9 @@ module.exports = function ($, flags, adsLayout) {
 				data-o-ads-formats-medium="MediumRectangle,Responsive"
 				data-o-ads-formats-large="Responsive"
 				data-o-ads-formats-extra="Responsive"
+				data-o-ads-size="300"
 			$(par).after(extra="Responsive"
 				aria-hidden="true"></div>`;
-			
-			// console.log(flags);
 			
 			if(flags.ftlabsAdBlockerHandling){
 				mu += `<script>
