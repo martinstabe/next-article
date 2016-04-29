@@ -1,5 +1,9 @@
 'use strict';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { EmailArticleData, EmailArticleView } from 'n-email-article';
+
 const OShare = require('o-share');
 const fetchres = require('fetchres');
 
@@ -28,4 +32,29 @@ exports.init = function() {
 		new OShare(shareContainer);
 		loadShareCount();
 	}
+
+	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
+	[...document.querySelectorAll('[data-n-article-email-clickable]')].forEach(button => {
+		button.addEventListener('click', () => {
+			// lazily load the data
+			if (!emailArticle.data) emailArticle.data = new EmailArticleData();
+			const id = button.dataset.nArticleEmailContainer;
+			const isTop = id === 'top';
+			// lazily load the view
+			if (!emailArticle[id]) {
+				const props = {
+					isTop: isTop,
+					store: emailArticle.data.store,
+					actions: emailArticle.data.actions,
+					dispatch: emailArticle.data.dispatch
+				};
+				emailArticle[id] = React.createElement(EmailArticleView, props);
+				const container = document.querySelector(`[data-n-article-email-${id}-container]`);
+				ReactDOM.render(emailArticle[id], container);
+			}
+			// toggle showing/hiding of the view
+			emailArticle.data.dispatch(emailArticle.data.actions[isTop ? 'toggleOpenTop' : 'toggleOpenBottom']());
+		});
+	});
+
 };

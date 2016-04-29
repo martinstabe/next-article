@@ -18,7 +18,8 @@
     "o-share": "^2.0.0",
     "superstore": "^2.0.1",
     "n-light-signup": "^1.1.0",
-    "next-ads-component": "^8.0.0"
+    "next-ads-component": "^8.0.0",
+    "n-email-article": "^1.0.0"
   },
   "resolutions": {
     "o-expander": "^3.0.0",
