@@ -2,7 +2,15 @@ module.exports = {
 	name : "Bart's Punishment",
 	description : "I will not block ads.",
 	run : function () {
+		console.log('running bart')
 		const article = Array.from(document.querySelectorAll('.article__body p'));
+		const nodeCharCounts = article.map(p => {
+			let sum = 0;
+			return Array.from(p.childNodes).map(c => {
+				sum += c.textContent.length
+				return sum
+			})
+		})
 
 		const lastP = article[article.length -1];
 
@@ -40,15 +48,25 @@ module.exports = {
 					currentP = article[pIndex];
 					character = 0;
 				}
+
+				const nodes = nodeCharCounts[pIndex];
+
+				let nodeToChange = nodes.findIndex((n) => character <= n)
+				nodeToChange = nodeToChange === -1 ? nodes.length - 1 : nodeToChange;
+
 				requestAnimationFrame(() => {
-					let replacementText = currentP.textContent;
-					currentP.textContent = setCharAt(replacementText, character, getBartCharacter(character));
+
+					let replacementText = currentP.childNodes[nodeToChange].textContent;
+					if (nodeToChange > 0) {
+						currentP.childNodes[nodeToChange].textContent = setCharAt(replacementText, character - nodeCharCounts[pIndex][nodeToChange-1] - 1, getBartCharacter(character));
+					} else {
+						currentP.childNodes[nodeToChange].textContent = setCharAt(replacementText, character, getBartCharacter(character));
+					}
 					character++;
 					replacer();
 				})
 			}, 50)
 		}
-
 		replacer()
 	}
 };
