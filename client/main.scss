@@ -6,6 +6,7 @@ $o-gallery-is-silent: false;
 $o-expander-is-silent: false;
 @import "o-expander/main";
 @import "n-video/main";
+$n-layout-is-silent: false;
 @import "n-layout/main";
 
 .next-header {
