@@ -22,6 +22,8 @@
     "superstore": "^2.0.1"
   },
   "resolutions": {
-    "o-ft-icons": "next"
+    "o-ft-icons": "next",
+    "o-fonts": "^2.1.2",
+    "o-typography": "^3.2.0"
   }
 }
