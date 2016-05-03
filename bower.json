@@ -24,6 +24,7 @@
   "resolutions": {
     "o-ft-icons": "next",
     "o-fonts": "^2.1.2",
-    "o-typography": "^3.2.0"
+    "o-typography": "^3.2.0",
+		"o-hoverable": "^3.0.0"
   }
 }
