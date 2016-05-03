@@ -2,9 +2,10 @@
 // Ad breakpoint where leaderboards start working
 $ad-medium-breakpoint: 760px;
 
-.article-header-advert {
+.above-header-advert {
 	@media (min-width:$ad-medium-breakpoint) {
 		min-height: 90px;
+		height: 90px;
 		padding: 10px 0;
 		line-height: 0;
 		white-space: pre;
@@ -13,7 +14,13 @@ $ad-medium-breakpoint: 760px;
 	}
 	&[data-o-ads-loaded="Responsive"] {
 		padding: 0;
+		height: auto;
+		min-height: calc(100vw * 0.1734); //aspect ratio of responsive creatives
+		@include oGridRespondTo($until: S) {
+			min-height: calc(100vw * 0.481);
+		}
 	}
+
 }
 
 .article--brand {
@@ -47,4 +54,13 @@ $ad-medium-breakpoint: 760px;
 		clear: both;
 	}
 
+}
+.advert--background {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIW2M8d2znf2kJMQZkwPjy3vn/T1+8YkCWAAuCVCFLwAWRJVAEYRIAHZ8dptpqH2wAAAAASUVORK5CYII=) repeat;
+}
+
+.advert--transition {
+	will-change: min-height, padding, height;
+	transform: translate3d(0, 0, 0);
+	transition: height 0.35s ease-in-out, min-height 0.35s ease-in-out, padding 0.35s ease-in-out;
 }

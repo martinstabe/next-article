@@ -1,5 +1,9 @@
 <div
-	class="article-header-advert o-ads o-ads__center"
+	{{#if @root.flags.adLoadingImprovements}}
+	class="advert above-header-advert o-ads o-ads__center advert--background advert--transition"
+{{else}}
+	class="advert above-header-advert o-ads o-ads__center"
+{{/if}}
 	data-o-ads-name="entry"
 	data-o-ads-targeting="pos=top;"
 	data-o-ads-formats-default="false"
