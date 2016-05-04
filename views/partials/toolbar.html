@@ -24,6 +24,11 @@
 					<li class="o-share__action o-share__action--whatsapp">
 						<a target="_blank" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20https://next.ft.com/content/{{id}}" data-trackable="whatsapp"><i>Whatsapp</i></a>
 					</li>
+					{{#if @root.flags.giftArticle}}
+						<li class="o-share__action o-share__action--email">
+							<button data-n-article-email-clickable data-n-article-email-container="{{location}}" data-trackable="email"><i>Email</i></button>
+						</li>
+					{{/if}}
 				</ul>
 			</div>
 			{{#if @root.flags.articleShareCounts}}
@@ -43,4 +48,7 @@
 			{{>next-myft-ui/templates/save-for-later contentId=id}}
 		{{/if}}
 	</div>
+	{{#if @root.flags.giftArticle}}
+		<div data-n-article-email-{{location}}-container></div>
+	{{/if}}
 </div>

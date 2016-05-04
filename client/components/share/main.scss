@@ -1,10 +1,12 @@
 @import "o-share/main";
+@import "n-email-article/main";
 
 @include oShareBase(o-share);
 @include oShareActionIcon(facebook, o-share);
 @include oShareActionIcon(twitter, o-share);
 @include oShareActionIcon(whatsapp, o-share);
 @include oShareActionIcon(linkedin, o-share);
+@include oShareActionIcon(email, o-share);
 
 .article__share {
 	overflow: hidden;
@@ -60,6 +62,15 @@
 
 	.o-share__action a {
 		border-bottom-width: 0;
+	}
+
+	.o-share__action button {
+		border: 0;
+		background-color: transparent;
+	}
+
+	.o-share__action a,
+	.o-share__action button {
 		padding: 0 6px;
 	}
 

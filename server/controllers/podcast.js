@@ -66,6 +66,7 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
+			payload.hasIe8Stylesheet = true;
 			payload.contentType = 'podcast';
 			payload.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
 			if (req.query.fragment) {
