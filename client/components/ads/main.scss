@@ -21,7 +21,7 @@ $ad-medium-breakpoint: 760px;
 			min-height: calc(100vw * 0.481);
 		}
 	}
-	
+
 	&.o-ads__empty,
 	&[data-o-ads-loaded="false"] {
 		height: 0;
