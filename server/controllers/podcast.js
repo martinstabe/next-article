@@ -57,10 +57,6 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 			)
 		);
 
-		const rhrSubHeadNumber = res.locals.flags.articleRHRSubheadAndNumber;
-		payload.rhrShowSubhead = /^sub-/.test(rhrSubHeadNumber);
-		payload.rhrShowNumber = /-num$/.test(rhrSubHeadNumber);
-
 		payload.readNextTopic = payload.primaryTag;
 	}
 

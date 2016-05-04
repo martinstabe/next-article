@@ -100,10 +100,6 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		);
 
 		content.readNextTopic = content.primaryTag;
-
-		const rhrSubHeadNumber = res.locals.flags.articleRHRSubheadAndNumber;
-		content.rhrShowSubhead = /^sub-/.test(rhrSubHeadNumber);
-		content.rhrShowNumber = /-num$/.test(rhrSubHeadNumber);
 	}
 
 	if (req.get('FT-Labs-Gift') === 'GRANTED') {
