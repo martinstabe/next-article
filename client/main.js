@@ -30,9 +30,9 @@ require('next-js-setup').bootstrap(({flags}) => {
 
 	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 
-	if(flags.get('ftlabsAdBlockerHandling') === 1){
-		ftlabsAdBlockerHandling.init();
-	}
+	if(flags.get('ftlabsAdBlockerHandling')){
+        ftlabsAdBlockerHandling.init();
+    }
 
 	prompts.init();
 	oViewport.listenTo('resize');
@@ -42,7 +42,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	flags.get('saveForLater') && clientOpts.push({relationship: 'saved', type: 'content'});
 	myFtClient.init(clientOpts);
 
-	myFtUi.init({anonymous: !!(/FTSession=/.test(document.cookie))});
+	myFtUi.init({anonymous: !(/FTSession=/.test(document.cookie))});
 
 	layout.init(flags);
 

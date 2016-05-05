@@ -8,7 +8,7 @@ module.exports = {
 	name: 'Ad Blocking Articles',
 	description: 'What the FT has written related to ad-blocking',
 	run: () => {
-		console.log('running ad-blocking articles');
+
 		const articleEl = document.querySelector('.article');
 		const articleBody = document.querySelector('.article__body');
 		const articleParas = document.querySelectorAll('.article__body p');

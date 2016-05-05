@@ -25,11 +25,6 @@
     "o-ft-icons": "next",
     "o-fonts": "^2.1.2",
     "o-typography": "^3.2.0",
-    "o-hoverable": "^3.0.0",
-    "n-normalize": "^1.0.0",
-    "n-util": "^1.0.0",
-    "next-ads-component": "^8.0.0",
-    "next-sass-setup": "^7.0.5",
-    "n-third-party-code": "^1.11.14"
+    "o-hoverable": "^3.0.0"
   }
 }

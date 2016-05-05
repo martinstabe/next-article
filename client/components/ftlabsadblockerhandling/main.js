@@ -1,4 +1,10 @@
-const approaches = [require('./no-vowels'), require('./bart'), require('./ad-revenue'), require('./lets-talk'), require('./ad-blocking-articles')];
+const approaches = [
+	require('./no-vowels'), 
+	require('./bart'), 
+	require('./ad-revenue'), 
+	require('./lets-talk'), 
+	require('./ad-blocking-articles')
+];
 
 const storage = {
 	get : function () {

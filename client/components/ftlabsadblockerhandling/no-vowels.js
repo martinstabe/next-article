@@ -3,7 +3,7 @@ module.exports = {
 	description : "No Ads. No Vowels",
 	run : function(){
 
-		const contentPTags = document.querySelectorAll('.article__body.n-content-body p');
+		const contentPTags = document.querySelectorAll('.article__body p');
 
 		Array.from( contentPTags ).forEach(pTag => {
 
