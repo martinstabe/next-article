@@ -1,0 +1,123 @@
+.ftlabs-ad-block-handling-ui {
+	background: white;
+	border: 5px solid black;
+	padding: 10px;
+}
+
+.ftlabs-ad-block-handling-ui .controls-container {
+	display: flex;
+	float: right;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+.ftlabs-ad-block-handling-ui .controls {
+	text-align: right;
+	margin-bottom: 5px;
+}
+
+.ftlabs-ad-block-handling-ui button {
+	padding-left: 0;
+	background-position: 50%;
+	background-size: 18px;
+	min-height: 36px;
+	min-width: 36px;
+	padding: 8px 18px;
+	font-size: 18px;
+	line-height: 18px;
+	border-width: 1px;
+	background-repeat: no-repeat;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.ftlabs-ad-block-handling-ui .button-left {
+	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+}
+
+.ftlabs-ad-block-handling-ui .button-right {
+	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+}
+/* >>>>>>>>>>>>>> */
+/* QUESTION CARDS */
+/* <<<<<<<<<<<<<< */
+
+.ftlabs-ads_question-cards {
+	width: 300px;
+	height: 300px;
+	overflow: hidden;
+	box-sizing: border-box;
+	position: relative;
+	background: white;
+	border: 5px solid black;
+}
+.ftlabs-ads_question-cards .answer.correct {
+	color: green;
+}
+.ftlabs-ads_question-cards .answer.incorrect {
+	color: red;
+}
+.ftlabs-ads_question-cards .final-message-target {
+	box-sizing: border-box;
+	height: 250px;
+	padding: 1em;
+	margin: 1em;
+	margin-bottom: -250px;
+	border: 1px solid grey;
+}
+.ftlabs-ads_question-cards .o-techdocs-card {
+	overflow: hidden;
+	height: 260px;
+	width: 280px;
+	max-height: 300px;
+	padding: 1em 0.5em 0.5em;
+	margin: -250px 5px 0;
+	background: white;
+	box-sizing: border-box;
+	display: block;
+	box-shadow: 1px 1px 3px 0 rgba(100, 100, 100, 0.5);
+	border: 1px solid #f0f0f0;
+}
+.ftlabs-ads_question-cards .o-techdocs-card.hidden {
+	transition: transform 2s ease;
+	transform: translateY(-200%);
+}
+
+.ftlabs-ad-block__wrapper {
+	position: relative;
+	padding: 15px;
+	margin-top: 10px;
+	border: 1px solid getColor('warm-3');
+	h4 {
+		margin: 0;
+	}
+}
+
+.ftlabs-ad-block__title {
+	@include oTypographySerifDisplayBold(m);
+	position: absolute;
+	background-color: getColor('pink');
+	color: getColor('cold-2');
+	display: block;
+	margin: 0;
+	padding: 0 10px;
+	font-size: 18px; // FIXME: revist upon type scale revisions
+	left: 10px;
+	top: -10px;
+}
+
+.ftlabs-ad-block__headline {
+	@include nLinksHeadline;
+	@include oTypographySerifDisplay(l, $load-progressively: true);
+}
+
+.ftlabs-ad-block__timestamp {
+	@include oTypographySans(xs);
+	text-transform: uppercase;
+	color: oColorsGetColorFor(timestamp, text);
+	display: block;
+	margin-top: 5px;
+}

@@ -1,5 +1,10 @@
 <div class="article__header" data-trackable="header">
 	<div class="o-grid-container">
+
+		{{#if @root.flags.ftlabsAdBlockerHandling}}
+			{{> ftlabs-ad-blocker-handling/ui }}
+		{{/if}}
+
 		<div class="article__header-inner {{#if mainImageHtml}}article__header-inner--main-image{{/if}} o-grid-row">
 			<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 				<header class="article__header--wrapper {{#if mainImageHtml}}article__header--wrapper--main-image{{/if}}">
