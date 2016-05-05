@@ -41,6 +41,7 @@ app.get('^/article/:id/story-package', require('./controllers/related/story-pack
 app.get('^/article/:id/more-on', require('./controllers/related/more-on'));
 app.get('^/article/:id/special-report', require('./controllers/related/special-report'));
 app.get('^/article/:id/social-counts', require('./controllers/related/social-counts'));
+app.get('^/article/:id/ad-blocking-articles', require('./controllers/related/ad-blocking-articles'));
 app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow'));
 
 app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
