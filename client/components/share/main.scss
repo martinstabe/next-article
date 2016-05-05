@@ -11,7 +11,7 @@
 .article__share {
 	overflow: hidden;
 	position: relative;
-	margin: 15px 0;
+	margin-top: 15px;
 	padding: 5px 0;
 	border-top: 1px solid getColor('warm-3');
 	border-bottom: 1px solid getColor('warm-3');
@@ -50,8 +50,9 @@
 			display: block;
 		}
 		&:before {
-			@include nextIcon(printer, getColor('cold-1'), 25);
+			@include nextIcon(printer, getColor('cold-1'), 24);
 			content: '';
+			display: block; // prevent inline-block spacing issue
 		}
 	}
 
@@ -60,11 +61,16 @@
 		clear: left;
 	}
 
+	.o-share {
+		display: block; // prevent inline-block spacing issue
+	}
+
 	.o-share__action a {
 		border-bottom-width: 0;
 	}
 
 	.o-share__action button {
+		display: block;
 		border: 0;
 		background-color: transparent;
 	}
@@ -72,6 +78,10 @@
 	.o-share__action a,
 	.o-share__action button {
 		padding: 0 6px;
+	}
+
+	.o-share__action--twitter a {
+		padding-left: 0;
 	}
 
 	.o-share__action--whatsapp {
@@ -83,4 +93,14 @@
 		float: right;
 	}
 
+	.n-myft-ui__button {
+		min-height: 24px;
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+
+}
+
+.article__main .email-article {
+	border-top: 0;
 }
