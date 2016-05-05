@@ -22,7 +22,7 @@ $ad-medium-breakpoint: 760px;
 		}
 	}
 
-	&.o-ads__empty,
+	&.o-ads--empty,
 	&[data-o-ads-loaded="false"] {
 		height: 0;
 		min-height: 0;

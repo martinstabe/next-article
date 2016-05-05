@@ -19,12 +19,14 @@
     "o-expander": "^3.0.0",
     "o-gallery": "^1.6.1",
     "o-share": "^2.0.0",
+    "o-ads": "^4.0.0",
     "superstore": "^2.0.1"
   },
   "resolutions": {
     "o-ft-icons": "next",
     "o-fonts": "^2.1.2",
     "o-typography": "^3.2.0",
-    "o-hoverable": "^3.0.0"
+    "o-hoverable": "^3.0.0",
+    "o-ads": "^4.0.0"
   }
 }
