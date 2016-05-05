@@ -4,7 +4,7 @@
 	padding: 10px;
 }
 
-.ftlabs-ad-block-handling-ui .controls-container{
+.ftlabs-ad-block-handling-ui .controls-container {
 	display: flex;
 	float: right;
 	flex-direction: column;
@@ -24,7 +24,7 @@
 		background-size: 18px;
 		min-height: 36px;
 		min-width: 36px;
-		padding: 8px 18px 8px 18px;
+		padding: 8px 18px;
 		font-size: 18px;
 		line-height: 18px;
 		border-width: 1px;
@@ -34,13 +34,11 @@
 		border-radius: 3px;
 }
 
-.ftlabs-ad-block-handling-ui button.button-left {
-	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+.ftlabs-ad-block-handling-ui .button-left {
 	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=png&width=20)\9;
 }
 
-.ftlabs-ad-block-handling-ui button.button-right {
-	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+.ftlabs-ad-block-handling-ui .button-right {
 	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=png&width=20)\9;
 }
 /* >>>>>>>>>>>>>> */
@@ -75,12 +73,12 @@
 	height: 260px;
 	width: 280px;
 	max-height: 300px;
-	padding: 1em 0.5em 0.5em 0.5em;
-	margin: -250px 5px 0 5px;
+	padding: 1em 0.5em 0.5em;
+	margin: -250px 5px 0;
 	background: white;
 	box-sizing: border-box;
 	display: block;
-	box-shadow: 1px 1px 3px 0 rgba(100,100,100,.5);
+	box-shadow: 1px 1px 3px 0 rgba(100, 100, 100, 0.5);
 	border: 1px solid #f0f0f0;
 }
 .ftlabs-ads_question-cards .o-techdocs-card.hidden {
