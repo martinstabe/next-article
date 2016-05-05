@@ -1,8 +1,8 @@
 const approaches = [
-	require('./no-vowels'), 
-	require('./bart'), 
-	require('./ad-revenue'), 
-	require('./lets-talk'), 
+	require('./no-vowels'),
+	require('./bart'),
+	require('./ad-revenue'),
+	require('./lets-talk'),
 	require('./ad-blocking-articles')
 ];
 

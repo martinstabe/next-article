@@ -31,8 +31,8 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 
 	if(flags.get('ftlabsAdBlockerHandling')){
-        ftlabsAdBlockerHandling.init();
-    }
+		ftlabsAdBlockerHandling.init();
+	}
 
 	prompts.init();
 	oViewport.listenTo('resize');
