@@ -1,4 +1,4 @@
-function count (string, options) {
+function count (string) {
 	string = string.replace(/<\/?[a-z][^>]*>/gi, '')
 	string = string.replace(/[\u200B]+/, '')
 

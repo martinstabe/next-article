@@ -25,3 +25,5 @@ npm-debug.log
 .editorconfig
 .scss-lint.yml
 whitesource.config.json
+webpack.config.js
+.eslintrc.js

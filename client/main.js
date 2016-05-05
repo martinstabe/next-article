@@ -25,7 +25,6 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
-	const labsShare = require('./components/labsshare/main');
 	const trackEvent = require('./components/utils/tracking');
 
 	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
@@ -61,13 +60,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	onwardJourney.init(flags);
 
 	if (flags.get('articleShareButtons')) {
-
-		if(flags.get('ftlabsurlsharing')){
-			labsShare.init();
-		} else {
-			share.init();
-		}
-
+		share.init();
 	}
 
 	if (flags.get('lightSignUp')) {

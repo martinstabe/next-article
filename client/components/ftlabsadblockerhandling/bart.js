@@ -21,8 +21,6 @@ module.exports = {
 			return pos === phrase.length - 1;
 		}
 
-		let finished = false;
-
 		function setCharAt(str,index,chr) {
 			if (index > str.length-1) return str + chr;
 			return str.substr(0,index) + chr + str.substr(index+1);
@@ -31,7 +29,6 @@ module.exports = {
 		function replacer () {
 			setTimeout(() => {
 				if (currentP === lastP && character === currentP.textContent.length && isLastBartCharacter(character)) {
-					finished = true;
 					return;
 				}
 

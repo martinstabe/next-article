@@ -5,38 +5,30 @@
 		</div>
 	{{/if}}
 	{{#if @root.flags.articleShareButtons}}
-
-		{{#if @root.flags.ftlabsurlsharing}}
-			{{>labs-share this}}
-		{{else}}
-
-			<div data-o-component="o-share" class="o-share">
-				<ul>
-					<li class="o-share__action o-share__action--twitter">
-						<a target="_blank" href="https://twitter.com/intent/tweet?url=https://next.ft.com/content/{{id}}&amp;text={{encode title mode='uriComponent'}}&amp;via=FT" data-trackable="twitter"><i>Twitter</i></a>
+		<div data-o-component="o-share" class="o-share">
+			<ul>
+				<li class="o-share__action o-share__action--twitter">
+					<a target="_blank" href="https://twitter.com/intent/tweet?url=https://next.ft.com/content/{{id}}&amp;text={{encode title mode='uriComponent'}}&amp;via=FT" data-trackable="twitter"><i>Twitter</i></a>
+				</li>
+				<li class="o-share__action o-share__action--facebook">
+					<a target="_blank" href="http://www.facebook.com/sharer.php?u=https://next.ft.com/content/{{id}}&amp;t={{encode title mode='uriComponent'}}" data-trackable="facebook"><i>Facebook</i></a>
+				</li>
+				<li class="o-share__action o-share__action--linkedin">
+					<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://next.ft.com/content/{{id}}&amp;title={{encode title mode='uriComponent'}}&amp;source=Financial+Times" data-trackable="linkedin"><i>LinkedIn</i></a>
+				</li>
+				<li class="o-share__action o-share__action--whatsapp">
+					<a target="_blank" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20https://next.ft.com/content/{{id}}" data-trackable="whatsapp"><i>Whatsapp</i></a>
+				</li>
+				{{#if @root.flags.giftArticle}}
+					<li class="o-share__action o-share__action--email">
+						<button data-n-article-email-clickable data-n-article-email-container="{{location}}" data-trackable="email"><i>Email</i></button>
 					</li>
-					<li class="o-share__action o-share__action--facebook">
-						<a target="_blank" href="http://www.facebook.com/sharer.php?u=https://next.ft.com/content/{{id}}&amp;t={{encode title mode='uriComponent'}}" data-trackable="facebook"><i>Facebook</i></a>
-					</li>
-					<li class="o-share__action o-share__action--linkedin">
-						<a target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://next.ft.com/content/{{id}}&amp;title={{encode title mode='uriComponent'}}&amp;source=Financial+Times" data-trackable="linkedin"><i>LinkedIn</i></a>
-					</li>
-					<li class="o-share__action o-share__action--whatsapp">
-						<a target="_blank" href="whatsapp://send?text={{encode title mode='uriComponent'}}%20-%20https://next.ft.com/content/{{id}}" data-trackable="whatsapp"><i>Whatsapp</i></a>
-					</li>
-					{{#if @root.flags.giftArticle}}
-						<li class="o-share__action o-share__action--email">
-							<button data-n-article-email-clickable data-n-article-email-container="{{location}}" data-trackable="email"><i>Email</i></button>
-						</li>
-					{{/if}}
-				</ul>
-			</div>
-			{{#if @root.flags.articleShareCounts}}
-			<span class="article__share__count js-share-count" data-shared-url="{{webUrl}}"></span>
-			{{/if}}
-
+				{{/if}}
+			</ul>
+		</div>
+		{{#if @root.flags.articleShareCounts}}
+		<span class="article__share__count js-share-count" data-shared-url="{{webUrl}}"></span>
 		{{/if}}
-
 	{{/if}}
 	<div class="article__save">
 		{{#ifEquals contentType 'article'}}

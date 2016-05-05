@@ -6,7 +6,7 @@ const logger = require('@financial-times/n-logger').default;
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 const adBlockingArticlesTemplate = require('../../mappings/ad-blocking-articles-template');
 
-module.exports = function(req, res, next) {
+module.exports = function(req, res) {
 
 	const count = parseInt(req.query.count, 10);
 

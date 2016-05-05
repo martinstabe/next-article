@@ -2,7 +2,6 @@
 $o-gallery-is-silent: false;
 @import "o-gallery/main";
 @import "o-fonts/main";
-@import "labs-o-share/main";
 $o-expander-is-silent: false;
 @import "o-expander/main";
 @import "n-video/main";
@@ -30,7 +29,6 @@ $n-layout-is-silent: false;
 @import "components/suggested-reads/main";
 @import "components/read-next/main";
 @import "components/follow-promo/main";
-@import "components/labsshare/main";
 @import "components/ftlabsadblockerhandling/main";
 @import "components/ads/main";
 @import "components/comments/skeleton";
