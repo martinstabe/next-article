@@ -7,7 +7,7 @@ module.exports = {
 			.filter(p => p.parentNode.className.match(/article__body/));
 
 		articleParas.forEach(p => {
-			Array.from( p.childNodes ).forEach(child => {
+			Array.from(p.childNodes).forEach(child => {
 				child.textContent = child.textContent.replace(/[aeiou]/gi, '');
 			})
 		});

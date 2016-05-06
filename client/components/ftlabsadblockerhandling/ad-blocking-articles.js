@@ -14,7 +14,7 @@ module.exports = {
 		// Select the paras before which links will go
 		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
 			.filter((p, index) => {
-				if (p.parentNode.className.match(/article__body/) &&
+				if (p.parentNode === articleBody &&
 						index % 2 === 0 &&
 						p.previousSibling.tagName === 'P') {
 					return true;
