@@ -35,6 +35,11 @@ function transformArticleBody(article, flags) {
 	});
 }
 
+const signedInUrls = ['/cms/s/[01]', '/cms/s/2', '/cms/s/3', '/fastft', 'ftalphaville\.ft\.com'];
+function isUserSignedIn(webUrl) {
+	return !!signedInUrls.find(url => webUrl.search(url) !== -1)
+}
+
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
@@ -106,6 +111,8 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		content.shared = true;
 		res.vary('FT-Labs-Gift');
 	}
+
+	content.signedIn = isUserSignedIn(content.webUrl);
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
