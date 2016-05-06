@@ -23,7 +23,7 @@
 }
 
 .table-of-contents__title {
-	@include oTypographySerifDisplayBold(m);
+	@include oTypographySerifDisplay(m);
 	position: absolute;
 	top: -10px;
 	left: 10px;

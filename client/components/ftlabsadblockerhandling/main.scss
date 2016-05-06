@@ -97,7 +97,7 @@
 }
 
 .ftlabs-ad-block__title {
-	@include oTypographySerifDisplayBold(m);
+	@include oTypographySerifDisplay(m);
 	position: absolute;
 	background-color: getColor('pink');
 	color: getColor('cold-2');
