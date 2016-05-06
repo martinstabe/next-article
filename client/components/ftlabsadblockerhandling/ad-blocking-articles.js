@@ -6,7 +6,7 @@ var oDate = require('o-date');
 module.exports = {
 
 	name: 'Ad Blocking Articles',
-	description: 'What the FT has written related to ad-blocking',
+	description: 'Encourage the reader to read about the topic of ad-blocking.',
 	run: () => {
 
 		const articleEl = document.querySelector('.article');

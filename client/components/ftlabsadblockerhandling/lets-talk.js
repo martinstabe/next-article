@@ -81,8 +81,8 @@ function bindEvents(){
 }
 
 module.exports = {
-	name : "Let's Talk",
-	description : "We try to educate our users",
+	name : "Questions",
+	description : "Educate our readers on the contribution of ad revenue to our business",
 	run : function (){
 
 		const adSpace = document.querySelector('.sidebar-advert.o-ads');
