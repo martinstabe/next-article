@@ -68,7 +68,8 @@ function initialise (){
 	const selectedApproach = approaches[parseInt(storedValue)];
 
 	selectedApproach.run();
-	UI.querySelector('h3').textContent = selectedApproach.description;
+	UI.querySelector('h3').textContent = `Idea ${parseInt(storedValue) + 1} of ${approaches.length}: ${selectedApproach.name}`;
+	UI.querySelector('p').textContent = `${selectedApproach.description}`;
 
 	bindUIEventListeners();
 

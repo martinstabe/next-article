@@ -7,18 +7,12 @@ function count (string) {
 
 module.exports = {
 	name : `Ad-Revenue`,
-	description : `We remove the percentage of words equivalent to the amount we've lost from ad-blocking`,
+	description : `Remove the percentage of words equivalent to the proportion of revenue we've lost from ad-blocking`,
 	run : function () {
-		console.log('running ad-revenue')
 		const article = Array.from(document.querySelectorAll('.article__body p'));
-
 		const totalTextLength = article.reduce((p, n) => p + count(n.textContent).length, 0);
-
 		const percentOfRevenueGatheredFromAds = 0.5;
-
 		const newTextLength = Math.floor(totalTextLength * percentOfRevenueGatheredFromAds);
-
-		console.log(newTextLength, totalTextLength)
 
 		for (var i = 0; i < newTextLength; i++) {
 			const p = article[Math.random() * article.length | 0];

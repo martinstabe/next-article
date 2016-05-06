@@ -1,6 +1,6 @@
 module.exports = {
 	name : "Bart's Punishment",
-	description : "I will not block ads.",
+	description : "I will not block ads. I will not block ads.",
 	run : function () {
 		const article = Array.from(document.querySelectorAll('.article__body p'));
 

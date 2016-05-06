@@ -1,10 +1,20 @@
 .ftlabs-ad-block-handling-ui {
+	margin-top: 10px;
+	margin-left: 0;
 	background: white;
 	border: 5px solid black;
 	padding: 10px;
+
+	h2,
+	h3,
+	p {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
 }
 
 .ftlabs-ad-block-handling-ui .controls-container {
+	margin-top: 5px;
 	display: flex;
 	float: right;
 	flex-direction: column;
@@ -34,12 +44,20 @@
 	border-radius: 3px;
 }
 
-.ftlabs-ad-block-handling-ui .button-left {
-	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-left?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+.ftlabs-ad-block-handling-ui .button-left:before {
+	@include nextIcon(arrow-left, getColorFor('link', 'text'), 15);
+	content: '';
+	position: relative;
+	top: 3px;
+	margin-right: 5px;
 }
 
-.ftlabs-ad-block-handling-ui .button-right {
-	background-image: url(https://image.webservices.ft.com/v1/images/raw/fticon:arrow-right?source=ofticons&tint=%2327757B,%2327757B&format=svg);
+.ftlabs-ad-block-handling-ui .button-right:after {
+	@include nextIcon(arrow-right, getColorFor('link', 'text'), 15);
+	content: '';
+	position: relative;
+	top: 3px;
+	margin-left: 5px;
 }
 /* >>>>>>>>>>>>>> */
 /* QUESTION CARDS */
