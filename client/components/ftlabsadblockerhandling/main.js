@@ -3,7 +3,9 @@ const approaches = [
 	require('./bart'),
 	require('./ad-revenue'),
 	require('./lets-talk'),
-	require('./ad-blocking-articles')
+	require('./ad-blocking-articles'),
+	require('./delay-content'),
+	require('./guidelines')
 ];
 
 const storage = {
