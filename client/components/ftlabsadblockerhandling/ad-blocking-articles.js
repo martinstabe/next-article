@@ -11,9 +11,18 @@ module.exports = {
 
 		const articleEl = document.querySelector('.article');
 		const articleBody = document.querySelector('.article__body');
+		// Select the paras before which links will go
 		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
-			.filter(p => p.parentNode.className.match(/article__body/));
-		const articlesToFetch = Math.floor(articleParas.length / 2);
+			.filter((p, index) => {
+				if (p.parentNode.className.match(/article__body/) &&
+						index % 2 === 0 &&
+						p.previousSibling.tagName === 'P') {
+					return true;
+				} else {
+					return false;
+				}
+		});
+		const articlesToFetch = articleParas.length;
 
 		if (!articleEl) {
 			return;
@@ -38,7 +47,7 @@ module.exports = {
 				const adBlockArticleLink = document.createElement('aside');
 				adBlockArticleLink.setAttribute("class", "ftlabs-ad-block__wrapper");
 				adBlockArticleLink.innerHTML = el.template;
-				const childNode = articleParas[((index + 1) * 2 )];
+				const childNode = articleParas[index];
 				articleBody.insertBefore(adBlockArticleLink, childNode);
 			});
 			oDate.init();
