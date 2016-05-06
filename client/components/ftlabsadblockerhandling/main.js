@@ -5,7 +5,8 @@ const approaches = [
 	require('./lets-talk'),
 	require('./ad-blocking-articles'),
 	require('./delay-content'),
-	require('./guidelines')
+	require('./guidelines'),
+	require('./intra-word-shuffle')
 ];
 
 const storage = {
