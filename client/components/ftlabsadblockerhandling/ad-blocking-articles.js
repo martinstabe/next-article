@@ -11,7 +11,8 @@ module.exports = {
 
 		const articleEl = document.querySelector('.article');
 		const articleBody = document.querySelector('.article__body');
-		const articleParas = document.querySelectorAll('.article__body p');
+		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
+			.filter(p => p.parentNode.className.match(/article__body/));
 		const articlesToFetch = Math.floor(articleParas.length / 2);
 
 		if (!articleEl) {
