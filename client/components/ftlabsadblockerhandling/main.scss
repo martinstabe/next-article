@@ -105,9 +105,11 @@
 }
 
 .ftlabs-ad-block__wrapper {
+	clear: both;
 	position: relative;
 	padding: 15px;
-	margin-top: 10px;
+	margin-top: 20px;
+	margin-bottom: 15px;
 	border: 1px solid getColor('warm-3');
 	h4 {
 		margin: 0;
