@@ -35,10 +35,6 @@ _deploy_whitesource:
 	(ws-bower && rm -r ws* && rm -r .ws_bower) || echo "whitesource bower failed, skipping"
 	@$(DONE)
 
-visual:
-	# Note: || is not OR; it executes the RH command only if LH test is truthful.
-	test -d ${CIRCLE_BUILD_NUM} || (export TEST_APP=${TEST_APP}; myrtlejs)
-
 clean-deploy: clean install deploy
 
 tidy:
