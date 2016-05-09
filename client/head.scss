@@ -1,23 +1,23 @@
 $o-gallery-is-silent: false;
-@import "o-gallery/main";
+@import 'o-gallery/main';
 $o-expander-is-silent: false;
-@import "o-expander/main";
+@import 'o-expander/main';
 
 // Turn off IE8 rules here and output them in an IE specific css file
 $o-grid-ie8-rules: false !default;
 $n-layout-is-silent: false;
-@import "n-layout/critical";
-@import "n-video/main";
-@import "n-content-body/main";
-@import "next-buttons/main";
-@import "next-myft-ui/main";
+@import 'n-layout/critical';
+@import 'n-video/main';
+@import 'n-content-body/main';
+@import 'next-buttons/main';
+@import 'next-myft-ui/main';
 
-@import "helpers";
-@import "components/article/main";
-@import "components/share/main";
-@import "components/read-next/main";
-@import "components/suggested-reads/main";
-@import "components/ads/main";
+@import 'helpers';
+@import 'components/article/main';
+@import 'components/share/main';
+@import 'components/read-next/main';
+@import 'components/suggested-reads/main';
+@import 'components/ads/main';
 
 .next-header {
 	margin-bottom: 0;

@@ -2,19 +2,19 @@ $next-sass-setup-is-silent: true;
 $n-layout-is-silent: false;
 @import 'n-layout/non-critical';
 
-@import "n-message-prompts/main";
-@import "n-light-signup/main";
-@import "n-content-body/scss/mixins";
+@import 'n-message-prompts/main';
+@import 'n-light-signup/main';
+@import 'n-content-body/scss/mixins';
 
-@import "components/toc/main";
-@import "components/onward-journey/main";
-@import "components/story-package";
-@import "components/comments/skeleton";
-@import "components/first-click-free/main";
-@import "components/special-report/main";
-@import "components/follow-promo/main";
-@import "components/ftlabsadblockerhandling/main";
-@import "comments";
+@import 'components/toc/main';
+@import 'components/onward-journey/main';
+@import 'components/story-package';
+@import 'components/comments/skeleton';
+@import 'components/first-click-free/main';
+@import 'components/special-report/main';
+@import 'components/follow-promo/main';
+@import 'components/ftlabsadblockerhandling/main';
+@import 'comments';
 
 // Print Styling
 @media print {
