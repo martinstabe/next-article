@@ -6,13 +6,23 @@ var oDate = require('o-date');
 module.exports = {
 
 	name: 'Ad Blocking Articles',
-	description: 'Encourage the reader to read about the topic of ad-blocking.',
+	description: 'Try to make the reader more aware of the consequences of blocking ads by encouraging them to read FT articles that have been written about ad-blocking.',
 	run: () => {
 
 		const articleEl = document.querySelector('.article');
 		const articleBody = document.querySelector('.article__body');
-		const articleParas = document.querySelectorAll('.article__body p');
-		const articlesToFetch = Math.floor(articleParas.length / 2);
+		// Select the paras before which links will go
+		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
+			.filter((p, index) => {
+				if (p.parentNode === articleBody &&
+						index % 2 === 0 &&
+						p.previousSibling.tagName === 'P') {
+					return true;
+				} else {
+					return false;
+				}
+		});
+		const articlesToFetch = articleParas.length;
 
 		if (!articleEl) {
 			return;
@@ -37,7 +47,7 @@ module.exports = {
 				const adBlockArticleLink = document.createElement('aside');
 				adBlockArticleLink.setAttribute("class", "ftlabs-ad-block__wrapper");
 				adBlockArticleLink.innerHTML = el.template;
-				const childNode = articleParas[((index + 1) * 2 )];
+				const childNode = articleParas[index];
 				articleBody.insertBefore(adBlockArticleLink, childNode);
 			});
 			oDate.init();

@@ -2,13 +2,14 @@ module.exports = {
 	name : "Bart's Punishment",
 	description : "I will not block ads. I will not block ads.",
 	run : function () {
-		const article = Array.from(document.querySelectorAll('.article__body p'));
+		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
+			.filter(p => p.parentNode.className.match(/article__body/));
 
-		const lastP = article[article.length -1];
+		const lastP = articleParas[articleParas.length -1];
 
 		let character = 0;
 		let pIndex = 0;
-		let currentP = article[pIndex];
+		let currentP = articleParas[pIndex];
 		const phrase = 'I will not block ads. ';
 
 		function getBartCharacter(position) {
@@ -34,7 +35,7 @@ module.exports = {
 
 				if (character >= currentP.textContent.length && isLastBartCharacter(character)) {
 					pIndex++;
-					currentP = article[pIndex];
+					currentP = articleParas[pIndex];
 					character = 0;
 				}
 				requestAnimationFrame(() => {

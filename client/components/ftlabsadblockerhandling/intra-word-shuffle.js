@@ -27,26 +27,28 @@ module.exports = {
 			.filter(el => el.parentNode === articleParent);
 
 		articleParas.forEach(para => {
-			const words = para.textContent.split(' ');
-			let newWords = words.map(word => {
-				const specialChars = ["“", "”", ".", ";", ":", "!", "£", "$", "€", "-"];
-				if (word.length > 3) {
+			Array.from(para.childNodes).forEach(child => {
+				const words = child.textContent.split(' ');
+				let newWords = words.map(word => {
 					const letters = word.split('');
-					let firstChars = letters.shift();
-					if (specialChars.includes(firstChars)) {
-						firstChars = firstChars + letters.shift();
+					if (letters.length > 3 && letters.every(l => isNaN(parseInt(l, 10)))) {
+						const specialChars = ["“", "”", ".", ";", ":", "!", "£", "$", "€", "-"];
+						let firstChars = letters.shift();
+						if (specialChars.includes(firstChars)) {
+							firstChars = firstChars + letters.shift();
+						}
+						let lastChars = letters.pop();
+						if (specialChars.includes(lastChars)) {
+							lastChars = letters.pop() + lastChars;
+						}
+						const shuffledChars = letters.length > 1 ? shuffle(letters) : letters;
+						word = firstChars + shuffledChars + lastChars;
 					}
-					let lastChars = letters.pop();
-					if (specialChars.includes(lastChars)) {
-						lastChars = letters.pop() + lastChars;
-					}
-					const shuffledChars = letters.length > 1 ? shuffle(letters) : letters;
-					word = firstChars + shuffledChars + lastChars;
-				}
-				return word;
+					return word;
+				});
+				newWords = newWords.join(' ');
+				child.textContent = newWords;
 			});
-			newWords = newWords.join(' ');
-			para.textContent = newWords;
 		});
 	}
 };
