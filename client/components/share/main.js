@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { EmailArticleData, EmailArticleView } from 'n-email-article';
+import { EmailArticleData, emailArticleModes, EmailArticleView } from 'n-email-article';
 
 const OShare = require('o-share');
 const fetchres = require('fetchres');
@@ -39,10 +39,13 @@ exports.init = function() {
 			// lazily load the data
 			if (!emailArticle.data) emailArticle.data = new EmailArticleData();
 			const id = button.dataset.nArticleEmailContainer;
+			const isFreeArticle = button.dataset.nArticleEmailFreeArticle === true || button.dataset.nArticleEmailFreeArticle === "true";
+			const mode = isFreeArticle ? emailArticleModes.FREE : emailArticleModes.GIFT_OR_SUB;
 			const isTop = id === 'top';
 			// lazily load the view
 			if (!emailArticle[id]) {
 				const props = {
+					mode: mode,
 					isTop: isTop,
 					store: emailArticle.data.store,
 					actions: emailArticle.data.actions,

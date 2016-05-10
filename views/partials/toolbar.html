@@ -22,7 +22,11 @@
 					</li>
 					{{#ifAll signedIn @root.flags.giftArticle}}
 						<li class="o-share__action o-share__action--email">
-							<button data-n-article-email-clickable data-n-article-email-container="{{location}}" data-trackable="email"><i>Email</i></button>
+							<button
+								data-n-article-email-clickable
+								data-n-article-email-container="{{location}}"
+								data-n-article-email-free-article="{{freeArticle}}"
+								data-trackable="email"><i>Email</i></button>
 						</li>
 					{{/ifAll}}
 				</ul>

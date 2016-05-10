@@ -29,9 +29,14 @@ function transformArticleBody(body, flags, options) {
 	return applicationContentTransform(articleBody, flags, options);
 }
 
-const signedInUrls = ['/cms/s/[01]', '/cms/s/2', '/cms/s/3', '/fastft', 'ftalphaville\.ft\.com'];
+const signedInUrls = ['/cms/s/[0123]', '/fastft', 'ftalphaville\.ft\.com'];
 function isUserSignedIn(webUrl) {
 	return !!signedInUrls.find(url => webUrl.search(url) !== -1)
+}
+
+function isFreeArticle(webUrl) {
+	console.log(webUrl, webUrl.search('/cms/s/2') !== -1);
+	return webUrl.search('/cms/s/2') !== -1
 }
 
 module.exports = function articleV3Controller(req, res, next, content) {
@@ -112,6 +117,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	}
 
 	content.signedIn = isUserSignedIn(content.webUrl);
+	content.freeArticle = isFreeArticle(content.webUrl);
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
