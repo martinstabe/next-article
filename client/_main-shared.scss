@@ -1,9 +1,8 @@
 $n-layout-is-silent: false;
-@import 'n-layout/non-critical';
+@import 'n-ui/non-critical';
 
-@import 'n-message-prompts/main';
+@import 'n-ui/message-prompts/main';
 @import 'n-light-signup/main';
-@import 'n-content-body/scss/mixins';
 
 @import 'comments';
 @import 'components/comments/skeleton';

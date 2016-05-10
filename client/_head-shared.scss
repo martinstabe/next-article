@@ -6,11 +6,11 @@ $o-expander-is-silent: false;
 // Turn off IE8 rules here and output them in an IE specific css file
 $o-grid-ie8-rules: false !default;
 $n-layout-is-silent: false;
-@import 'n-layout/critical';
+@import 'n-ui/critical';
 @import 'n-video/main';
 @import 'n-content-body/main';
-@import 'next-buttons/main';
-@import 'next-myft-ui/main';
+@import "n-ui/myft/main";
+@import "n-ui/buttons/main";
 
 @import 'helpers';
 @import 'components/ads/main';
