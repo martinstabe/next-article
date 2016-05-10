@@ -44,6 +44,7 @@
     "bower-webpack-plugin": "^0.1.9",
     "chai": "^2.0.0",
     "coveralls": "^2.11.6",
+    "css-extract-block-webpack-plugin": "i-like-robots/css-extract-block-webpack-plugin",
     "css-loader": "^0.23.1",
     "eslint": "^2.9.0",
     "eslint-plugin-react": "^5.0.1",

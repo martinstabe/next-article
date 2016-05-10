@@ -22,3 +22,51 @@ $n-layout-is-silent: false;
 .next-header {
 	margin-bottom: 0;
 }
+
+/*! start:main.css */
+$n-layout-is-silent: false;
+@import 'n-layout/non-critical';
+
+@import 'n-message-prompts/main';
+@import 'n-light-signup/main';
+@import 'n-content-body/scss/mixins';
+
+@import 'components/toc/main';
+@import 'components/onward-journey/main';
+@import 'components/story-package';
+@import 'components/comments/skeleton';
+@import 'components/first-click-free/main';
+@import 'components/special-report/main';
+@import 'components/follow-promo/main';
+@import 'components/ftlabsadblockerhandling/main';
+@import 'comments';
+
+// Print Styling
+@media print {
+	body > section,
+	.n-myft-ui,
+	.o-header,
+	.article__tags,
+	.article__myft-tags-list,
+	.article__body > div,
+	.n-content-copyright,
+	.article__more-on,
+	.more-on--abtest_b--wrapper,
+	.more-ons-tags,
+	.article__comments,
+	.article__share,
+	.story-package,
+	.follow-promo,
+	.article__actions,
+	.js-special-report,
+	.next-up__bottom__wrapper,
+	.more-on__topic--link,
+	.table-of-contents,
+	.pod {
+		display: none;
+	}
+	.o-grid-row {
+		display: inherit;
+	}
+}
+/*! end:main.css */

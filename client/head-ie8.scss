@@ -1,2 +1,7 @@
 $o-grid-ie8-rules: 'only';
-@import 'head';
+@import 'head-shared';
+
+/*! start:main-ie8.css */
+@import 'main-shared';
+@import 'n-header-footer/footer/footer-ie8';
+/*! end:main-ie8.css */
