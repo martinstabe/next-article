@@ -1,20 +1,15 @@
-@import "next-sass-setup/main";
+@import "n-ui/bootstrap";
 $o-gallery-is-silent: false;
 @import "o-gallery/main";
-@import "o-fonts/main";
-$o-expander-is-silent: false;
-@import "o-expander/main";
 @import "n-video/main";
-$n-layout-is-silent: false;
-@import "n-layout/main";
 
 .next-header {
 	margin-bottom: 0;
 }
 
-@import "next-myft-ui/main";
-@import "next-buttons/main";
-@import "n-message-prompts/main";
+@import "n-ui/myft/main";
+@import "n-ui/buttons/main";
+@import "n-ui/message-prompts/main";
 @import "n-content-body/main";
 @import "n-light-signup/main";
 

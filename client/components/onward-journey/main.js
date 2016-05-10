@@ -1,7 +1,7 @@
 'use strict';
 
 var fetchres = require('fetchres');
-var oDate = require('o-date');
+var oDate = require('n-ui/date');
 
 // Sort of like Promise.all but will be called whether they fail or succeed
 function allSettled(promises) {

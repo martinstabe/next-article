@@ -1,31 +1,24 @@
 {
-  "name": "ft-next-article-bower",
+  "name": "next-article",
   "dependencies": {
-    "n-content-body": "^2.0.0",
-    "n-email-article": "^1.0.0",
-    "n-layout": "^7.0.1",
-    "n-light-signup": "^1.1.0",
-    "n-message-prompts": "^2.0.0",
-    "n-video": "^4.0.4",
-    "next-ads-component": "^9.0.0",
-    "next-buttons": "^2.0.0",
-    "next-myft-ui": "^6.0.0",
     "o-comment-api": "^2.1.0",
     "o-comment-count": "bjfletcher/o-comment-count#^0.1.0",
     "o-comment-ui": "bjfletcher/o-comment-ui#^3.0.0",
     "o-comments": "bjfletcher/o-comments#^3.0.0",
-    "o-date": "^2.0.0",
-    "o-expander": "^3.0.0",
-    "o-gallery": "^1.6.1",
-    "o-share": "^2.0.0",
-    "o-ads": "^4.0.0",
-    "superstore": "^2.0.1"
+    "o-share": "^2.1.2",
+    "o-gallery": "^1.7.4",
+    "n-light-signup": "^1.1.7",
+    "n-video": "^4.0.4",
+    "n-content-body": "^2.0.5",
+    "n-email-article": "^1.0.1",
+    "n-ui": "^1.0.0-beta.3",
+    "superstore": "^2.1.0"
   },
   "resolutions": {
     "o-ft-icons": "next",
-    "o-fonts": "^2.1.2",
-    "o-typography": "^3.2.0",
+    "o-viewport": "^2.0.0",
     "o-hoverable": "^3.0.0",
-    "o-ads": "^4.0.0"
+    "o-typography": "^3.2.0",
+    "o-fonts": "^2.1.2"
   }
 }

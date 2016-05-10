@@ -1,17 +1,15 @@
 'use strict';
 
-require('next-js-setup').bootstrap(({flags}) => {
-	const myFtClient = require('next-myft-client');
-	const myFtUi = require('next-myft-ui');
+const oViewport = require('n-ui/viewport');
+const nVideo = require('n-video');
+const lightSignup = require('n-light-signup');
 
-	const prompts = require('n-message-prompts');
-	const oViewport = require('o-viewport');
-	const oDate = require('o-date');
-	const oExpander = require('o-expander');
+require('n-ui').bootstrap(({flags}) => {
+	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 
-	const layout = require('n-layout');
-	const nVideo = require('n-video');
-	const lightSignup = require('n-light-signup');
+	if(flags.get('ftlabsAdBlockerHandling')){
+		ftlabsAdBlockerHandling.init();
+	}
 
 	const slideshow = require('./components/slideshow/main');
 	const readingHistory = require('./components/reading-history');
@@ -27,23 +25,7 @@ require('next-js-setup').bootstrap(({flags}) => {
 	const share = require('./components/share/main');
 	const trackEvent = require('./components/utils/tracking');
 
-	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
-
-	if(flags.get('ftlabsAdBlockerHandling')){
-		ftlabsAdBlockerHandling.init();
-	}
-
-	prompts.init();
 	oViewport.listenTo('resize');
-
-	const clientOpts = [];
-	flags.get('follow') && clientOpts.push({relationship: 'followed', type: 'concept'});
-	flags.get('saveForLater') && clientOpts.push({relationship: 'saved', type: 'content'});
-	myFtClient.init(clientOpts);
-
-	myFtUi.init({anonymous: !(/FTSession=/.test(document.cookie))});
-
-	layout.init(flags);
 
 	if (document.querySelector('*[data-article-status="error"]')) {
 		return;
@@ -55,7 +37,6 @@ require('next-js-setup').bootstrap(({flags}) => {
 	}
 
 	slideshow(document.querySelectorAll('.article ft-slideshow'));
-
 
 	onwardJourney.init(flags);
 
@@ -75,13 +56,6 @@ require('next-js-setup').bootstrap(({flags}) => {
 	});
 
 	toc.init(flags);
-	oDate.init(document.querySelector('.article'));
-	oExpander.init(document.querySelector('.article'), {
-		toggleSelector: 'button.o-expander__toggle',
-		toggleState: 'all',
-		collapsedToggleText: 'Show more',
-		expandedToggleText: 'Show less'
-	});
 	scrollDepth.init(flags);
 
 	if(flags.get('articleComments') && document.querySelector('#comments')) {

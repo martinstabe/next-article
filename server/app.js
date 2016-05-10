@@ -4,7 +4,7 @@ const express = require('@financial-times/n-express');
 const logger = require('@financial-times/n-logger').default;
 const bodyParser = require('body-parser');
 const checks = require('./checks/main.js');
-
+const path = require('path');
 // Starts polling checks
 checks.init();
 
@@ -16,6 +16,7 @@ const app = module.exports = express({
 	withAnonMiddleware: true,
 	withBackendAuthentication: true,
 	withRequestTracing: true,
+	layoutsDir: path.join(process.cwd(), '/bower_components/n-ui/layout'),
 	healthChecks: [
 		checks.esv3,
 		checks.livefyre,
