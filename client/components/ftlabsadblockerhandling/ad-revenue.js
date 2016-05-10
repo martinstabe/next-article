@@ -7,7 +7,7 @@ function count (string) {
 
 module.exports = {
 	name : `Ad-Revenue`,
-	description : `Remove the percentage of words equivalent to the proportion of revenue we've lost from ad-blocking`,
+	description : `Ads allow us to reduce the cost of a subscription by a percentage. In this demo, we remove the amount of content equivalent to the percentage subsidised by advertising`,
 	run : function () {
 
 		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
