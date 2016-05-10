@@ -1,8 +1,8 @@
 /*global describe, it*/
 "use strict";
-var cheerio = require('cheerio');
-var expect = require('chai').expect;
-var lightSignupTransform = require('../../../server/transforms/light-sign-up');
+const cheerio = require('cheerio');
+const expect = require('chai').expect;
+const lightSignupTransform = require('../../../server/transforms/light-sign-up');
 
 describe('Light Signup component inside body', function () {
 
@@ -10,10 +10,10 @@ describe('Light Signup component inside body', function () {
 
 	describe('CONTROL variant', function () {
 
-		let flags = {lightSignUp: 'control'};
+		const flags = {lightSignUp: 'control'};
 
-		it('should not do anything', function () {
-			var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
+		it('should not do anything', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 		});
@@ -24,27 +24,27 @@ describe('Light Signup component inside body', function () {
 
 		let flags = {lightSignUp: 'top'};
 
-		it('should insert the component after the first paragraph', function() {
-			var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
+		it('should insert the component after the first paragraph', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>`);
 		});
 
 
-		it('should not insert the component if there is only one paragraph', function() {
-			var $ = cheerio.load('<p>1</p><img>');
+		it('should not insert the component if there is only one paragraph', () => {
+			const $ = cheerio.load('<p>1</p><img>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal('<p>1</p><img>');
 		});
 
-		it('should move the component later if there is any other element after the first paragraph', function() {
-			var $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p>');
+		it('should move the component later if there is any other element after the first paragraph', () => {
+			const $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p><img><p>2</p>${lightSignupHtml}<p>3</p>`);
 		});
 
-		it('should not add into an aside', function() {
-			var $ = cheerio.load('<blockquote><p>1</p></blockquote><p>2</p><p>3</p>');
+		it('should not add into an aside', () => {
+			const $ = cheerio.load('<blockquote><p>1</p></blockquote><p>2</p><p>3</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<blockquote><p>1</p></blockquote><p>2</p>${lightSignupHtml}<p>3</p>`);
 		});
@@ -54,28 +54,28 @@ describe('Light Signup component inside body', function () {
 
 	describe('MID variant', function () {
 
-		let flags = {lightSignUp: 'mid'};
+		const flags = {lightSignUp: 'mid'};
 
-		it('should insert the component between the fifth and sixth paragraphs', function() {
-			var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
+		it('should insert the component between the fifth and sixth paragraphs', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>${lightSignupHtml}<p>6</p>`);
 		});
 
-		it('should not insert the component if there are only five paragraphs', function() {
-			var $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p>');
+		it('should not insert the component if there are only five paragraphs', () => {
+			const $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal('<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p>');
 		});
 
-		it('should move the component later if there is any other element after the fifth paragraph', function() {
-			var $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p><img><p>6</p><p>7</p>');
+		it('should move the component later if there is any other element after the fifth paragraph', () => {
+			const $ = cheerio.load('<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p><img><p>6</p><p>7</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p><img><p>2</p><p>3</p><p>4</p><p>5</p><img><p>6</p>${lightSignupHtml}<p>7</p>`);
 		});
 
-		it('should not add into an aside', function() {
-			var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><blockquote><p>5</p></blockquote><p>6</p><p>7</p>');
+		it('should not add into an aside', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><blockquote><p>5</p></blockquote><p>6</p><p>7</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><blockquote><p>5</p></blockquote><p>6</p>${lightSignupHtml}<p>7</p>`);
 		});
@@ -85,14 +85,25 @@ describe('Light Signup component inside body', function () {
 
 	describe('END variant', function () {
 
-		let flags = {lightSignUp: 'end'};
+		const flags = {lightSignUp: 'end'};
 
-		it('should insert the component after the final paragraph', function() {
-			var $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>');
+		it('should insert the component after the final paragraph', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>');
 			lightSignupTransform($, flags);
 			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>${lightSignupHtml}`);
 		});
 
+	});
+
+	describe('Fragment view', () => {
+		const flags = {lightSignUp: 'mid'};
+		const options = {fragment: true};
+
+		it('should not insert anything on a fragment view', () => {
+			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>');
+			lightSignupTransform($, flags, options);
+			expect($.html()).to.equal(`<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p>`);
+		});
 	});
 
 });

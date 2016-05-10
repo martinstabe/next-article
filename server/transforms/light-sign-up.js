@@ -1,6 +1,7 @@
 'use strict';
 
-module.exports = function ($, flags) {
+module.exports = function ($, flags, options) {
+	if (!flags || !flags.lightSignUp || (options && options.fragment)) return $;
 
 	const pars = $('p');
 	const variant = flags.lightSignUp;

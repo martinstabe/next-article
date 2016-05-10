@@ -1,8 +1,6 @@
 'use strict';
 
-const figureVariant = require('../../transforms/figure-variant');
-const externalImagesEncoding = require('../../transforms/external-images-encoding');
-const cheerio = require('cheerio');
+const transformImages = require('ft-n-content-transform').transformImages;
 
 module.exports = (mainImage) => {
 	// HACK to stop square / portrait images being too big
@@ -13,12 +11,10 @@ module.exports = (mainImage) => {
 		mainImage.width = maxImageHeight * ratio;
 	}
 
-	const mainImageHtml =
+	const mainImageHTML =
 	'<figure class="n-content-image">' +
 	`<img src="${mainImage.url}" alt="${mainImage.title}" width="${mainImage.width}" height="${mainImage.height}">` +
 	'</figure>';
 
-	let $mainImageHtml = cheerio.load(mainImageHtml);
-	$mainImageHtml = figureVariant($mainImageHtml);
-	return externalImagesEncoding($mainImageHtml).html();
+	return transformImages(mainImageHTML);
 }

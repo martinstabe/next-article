@@ -17,7 +17,7 @@ describe('Podcast Main Image', () => {
 	const validImageHtml =
 		'<figure class="n-content-image n-content-image--center" style="width: 394px; max-width: 100%;">' +
 			'<div class="n-content-image__placeholder" style="padding-top:100%">' +
-				'<img src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fimage.jpg?source=next&amp;fit=scale-down&amp;width=394" alt="This is the title">' +
+				'<img src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fimage.jpg?source=next&fit=scale-down&width=394" alt="This is the title">' +
 			'</div>' +
 		'</figure>';
 

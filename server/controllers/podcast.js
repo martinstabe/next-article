@@ -8,7 +8,7 @@ const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const externalPodcastLinksUtil = require('../utils/external-podcast-links');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
-const podcastMainImageHtml = require('./article-helpers/podcast-main-image');
+const podcastMainImageHTML = require('./article-helpers/podcast-main-image');
 
 module.exports = function podcastLegacyController(req, res, next, payload) {
 	let asyncWorkToDo = [];
@@ -39,7 +39,7 @@ module.exports = function podcastLegacyController(req, res, next, payload) {
 	};
 
 	if (payload.mainImage) {
-			payload.mainImageHtml = podcastMainImageHtml(payload.mainImage);
+			payload.mainImageHTML = podcastMainImageHTML(payload.mainImage);
 	}
 
 	if (res.locals.flags.articleSuggestedRead && payload.metadata.length) {

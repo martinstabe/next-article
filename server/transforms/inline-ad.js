@@ -1,4 +1,4 @@
-module.exports = function ($, flags, adsLayout) {
+module.exports = function ($, flags, options) {
 	const pars = $('p');
 	pars.each((index, par) => {
 		if(index > 1
@@ -11,7 +11,7 @@ module.exports = function ($, flags, adsLayout) {
 				data-o-ads-center="true"
 				data-o-ads-label="true"
 				data-o-ads-lazy-load="true"
-				data-o-ads-targeting="pos=${adsLayout === 'default' ? 'mpu' : 'mid'};"
+				data-o-ads-targeting="pos=${options.adsLayout === 'default' ? 'mpu' : 'mid'};"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
 				data-o-ads-formats-medium="MediumRectangle,Responsive"

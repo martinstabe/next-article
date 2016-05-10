@@ -1,14 +1,14 @@
 'use strict';
 
 const logger = require('@financial-times/n-logger').default;
+const genericContentTransform = require('ft-n-content-transform').transformAll;
+const applicationContentTransform = require('../transforms/body');
+const articleBranding = require('ft-n-article-branding');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
-const articleXsltTransform = require('../transforms/article-xslt');
-const bodyTransform = require('../transforms/body');
 const bylineTransform = require('../transforms/byline');
-const articleBranding = require('ft-n-article-branding');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
 
@@ -24,15 +24,9 @@ function isCapiV2(article) {
 	);
 }
 
-function transformArticleBody(article, flags) {
-	let xsltParams = {
-		id: article.id,
-		webUrl: article.webUrl
-	};
-
-	return articleXsltTransform(article.bodyXML, 'main', xsltParams).then(articleBody => {
-		return bodyTransform(articleBody, flags, article.adsLayout);
-	});
+function transformArticleBody(body, flags, options) {
+	const articleBody = genericContentTransform(body, flags);
+	return applicationContentTransform(articleBody, flags, options);
 }
 
 const signedInUrls = ['/cms/s/[01]', '/cms/s/2', '/cms/s/3', '/fastft', 'ftalphaville\.ft\.com'];
@@ -60,13 +54,18 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
-	asyncWorkToDo.push(
-		transformArticleBody(content, res.locals.flags).then(fragments => {
-			content.bodyHtml = fragments.bodyHtml;
-			content.tocHtml = fragments.tocHtml;
-			content.mainImageHtml = fragments.mainImageHtml;
-		})
-	);
+	// If no bodyHTML, revert to using bodyXML
+	const contentToTransform = content.bodyHTML || content.bodyXML;
+
+	// Apply content and article specific transforms to bodyHTML
+	if (contentToTransform) {
+		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
+				fragment: req.query.fragment,
+				adsLayout: content.adsLayout
+			}
+		));
+	}
+
 	content.designGenre = articleBranding(content.metadata);
 
 	// Decorate with related stuff

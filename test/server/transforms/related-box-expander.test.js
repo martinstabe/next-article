@@ -1,8 +1,8 @@
 /*global describe, it, context*/
 'use strict';
 
-var cheerio = require('cheerio');
-var relatedBoxExpanderTransform = require('../../../server/transforms/related-box-expander');
+const cheerio = require('cheerio');
+const relatedBoxExpanderTransform = require('../../../server/transforms/related-box-expander');
 require('chai').should();
 
 describe('Related Box Expander Transform', () => {

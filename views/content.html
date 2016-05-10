@@ -14,12 +14,12 @@
 
 	{{> header/content-header}}
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
-		{{#ifSome bodyHtml media}}
+		{{#ifSome bodyHTML media}}
 		<div class="o-grid-container">
 			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
-					{{#if mainImageHtml}}
-						{{{mainImageHtml}}}
+					{{#if mainImageHTML}}
+						{{{mainImageHTML}}}
 					{{/if}}
 					{{> toolbar location='top'}}
 					<div class="article__time-byline">
@@ -33,12 +33,12 @@
 						{{/if}}
 					</div>
 					{{#ifEquals contentType 'article'}}
-						{{#if tocHtml}}
+						{{#if tocHTML}}
 							<div class="article__body--toc">
-								{{{tocHtml}}}
+								{{{tocHTML}}}
 							</div>
 						{{/if}}
-						{{> body-article bodyHtml=bodyHtml}}
+						{{> body-article bodyHTML=bodyHTML}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
 						{{#if standFirst}}

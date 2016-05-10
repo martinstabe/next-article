@@ -1,13 +1,13 @@
 /*global describe, it*/
 'use strict';
 
-var cheerio = require('cheerio');
-var tableOfContentsTransform = require('../../../server/transforms/table-of-contents');
+const cheerio = require('cheerio');
+const tableOfContentsTransform = require('../../../server/transforms/table-of-contents');
 require('chai').should();
 
 describe('Table Of Contents Transform', () => {
 
-	it('should create a table of contents', () => {
+	it('should create a table of contents when the flag is on', () => {
 		const $ = cheerio.load(
 			'<h2 id="crosshead-1" class="subhead subhead--crosshead">First heading</h2>' +
 				'<p>First paragraph</p>' +
@@ -32,6 +32,26 @@ describe('Table Of Contents Transform', () => {
 					'</li>' +
 				'</ol>' +
 			'</div>' +
+			'<h2 id="crosshead-1" class="subhead subhead--crosshead">First heading</h2>' +
+				'<p>First paragraph</p>' +
+			'<h2 id="crosshead-2" class="subhead subhead--crosshead">Second heading</h2>' +
+				'<p>Second paragraph</p>' +
+			'<h2 id="crosshead-3" class="subhead subhead--crosshead">Third heading</h2>' +
+				'<p>Third paragraph</p>'
+		);
+	});
+
+	it('should not create a table of contents when the flag is off', () => {
+		const $ = cheerio.load(
+			'<h2 id="crosshead-1" class="subhead subhead--crosshead">First heading</h2>' +
+				'<p>First paragraph</p>' +
+			'<h2 id="crosshead-2" class="subhead subhead--crosshead">Second heading</h2>' +
+				'<p>Second paragraph</p>' +
+			'<h2 id="crosshead-3" class="subhead subhead--crosshead">Third heading</h2>' +
+				'<p>Third paragraph</p>'
+		);
+		const transformed$ = tableOfContentsTransform($, {});
+		transformed$.html().should.equal(
 			'<h2 id="crosshead-1" class="subhead subhead--crosshead">First heading</h2>' +
 				'<p>First paragraph</p>' +
 			'<h2 id="crosshead-2" class="subhead subhead--crosshead">Second heading</h2>' +
