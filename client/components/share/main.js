@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { EmailArticleData, emailArticleModes, EmailArticleView } from 'n-email-article';
@@ -7,7 +5,7 @@ import { EmailArticleData, emailArticleModes, EmailArticleView } from 'n-email-a
 const OShare = require('o-share');
 const fetchres = require('fetchres');
 
-function loadShareCount() {
+function loadShareCount () {
 	let shareCountList = document.querySelectorAll('.js-share-count');
 	let shareCountArray = Array.prototype.slice.call(shareCountList);
 	let article = document.querySelector('.article');
@@ -17,7 +15,7 @@ function loadShareCount() {
 		if(url && url.length) {
 			fetch(`/article/${articleId}/social-counts?url=${url}`, { credentials: 'same-origin' })
 			.then(fetchres.json)
-			.then(function(counts) {
+			.then(function (counts) {
 				if (counts.shares !==undefined) {
 					shareCountArray.forEach(shareCount => shareCount.textContent = `${counts.shares} shares`);
 				}
@@ -26,8 +24,8 @@ function loadShareCount() {
 	}
 }
 
-exports.init = function() {
-	var shareContainer = document.querySelector('[data-o-component=o-share]');
+exports.init = function () {
+	const shareContainer = document.querySelector('[data-o-component=o-share]');
 	if (shareContainer && !shareContainer.classList.contains('data-o-share--js')) {
 		new OShare(shareContainer);
 		loadShareCount();
@@ -39,7 +37,7 @@ exports.init = function() {
 			// lazily load the data
 			if (!emailArticle.data) emailArticle.data = new EmailArticleData();
 			const id = button.dataset.nArticleEmailContainer;
-			const isFreeArticle = button.dataset.nArticleEmailFreeArticle === true || button.dataset.nArticleEmailFreeArticle === "true";
+			const isFreeArticle = button.dataset.nArticleEmailFreeArticle === true || button.dataset.nArticleEmailFreeArticle === 'true';
 			const mode = isFreeArticle ? emailArticleModes.FREE : emailArticleModes.GIFT_OR_SUB;
 			const isTop = id === 'top';
 			// lazily load the view
