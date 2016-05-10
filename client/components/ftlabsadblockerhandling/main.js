@@ -10,10 +10,10 @@ const approaches = [
 ];
 
 const storage = {
-	get : function () {
-		return localStorage.getItem('ftlabsAdBlockerHandling');
+	get : () => {
+		return parseInt(localStorage.getItem('ftlabsAdBlockerHandling'));
 	},
-	set : function (val) {
+	set : val => {
 		localStorage.setItem('ftlabsAdBlockerHandling', val);
 	}
 };
@@ -21,28 +21,24 @@ const storage = {
 let storedValue = storage.get();
 const UI = document.querySelector('.ftlabs-ad-block-handling-ui');
 
-function previousApproach(){
+function previousApproach () {
 
-	if(storedValue > 0){
-		storage.set(parseInt(storedValue) - 1);
+	if (storedValue > 0) {
+		storage.set(storedValue - 1);
 	} else {
 		storage.set(approaches.length - 1);
 	}
-
 	document.location.reload();
-
 }
 
 function nextApproach(){
 
-	if(storedValue < approaches.length - 1){
-		storage.set(parseInt(storedValue) + 1);
+	if (storedValue < approaches.length - 1) {
+		storage.set(storedValue + 1);
 	} else {
 		storage.set(0);
 	}
-
 	document.location.reload();
-
 }
 
 function bindUIEventListeners(){
@@ -51,23 +47,22 @@ function bindUIEventListeners(){
 
 	controls[0].addEventListener('click', previousApproach, false);
 	controls[1].addEventListener('click', nextApproach, false);
-
 }
 
-function initialise (){
+function initialise () {
 
-	if(storedValue === null){
-		const newValue = Math.random() * approaches.length | 0;
-		storage.set( newValue );
-		storedValue = newValue
+	if (typeof storedValue !== 'number') {
+		const newValue = Math.floor(Math.random() * approaches.length) | 0;
+		storage.set(newValue);
+		storedValue = storage.get();
 	}
 
-	if(storedValue > approaches.length - 1){
-		storedValue = approaches.length - 1;
+	if (storedValue > approaches.length - 1) {
+		storage.set(approaches.length - 1)
+		storedValue = storage.get();
 	}
 
 	const selectedApproach = approaches[parseInt(storedValue)];
-
 	selectedApproach.run();
 	UI.querySelector('h3').textContent = `Idea ${parseInt(storedValue) + 1} of ${approaches.length}: ${selectedApproach.name}`;
 	UI.querySelector('p').textContent = `${selectedApproach.description}`;

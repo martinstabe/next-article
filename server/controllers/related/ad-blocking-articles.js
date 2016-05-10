@@ -11,7 +11,7 @@ module.exports = function(req, res) {
 	const count = parseInt(req.query.count, 10);
 
 	const url = 'http://api.ft.com/content/search/v1';
-	const searchTerm = 'ad+blocking';
+	const searchTerm = '"ad+blocking"';
 	// HACK - Going directly to capi as Elastic search filtering API does not support free text search and there are case-sensitivity issues when using it for section pages.
 	const body = {
 		queryString: searchTerm,
