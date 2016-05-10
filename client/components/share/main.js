@@ -34,11 +34,11 @@ exports.init = function () {
 	const emailArticle = {}; // we will lazily load the email article stuff when they're needed
 	[...document.querySelectorAll('[data-n-article-email-clickable]')].forEach(button => {
 		button.addEventListener('click', () => {
-			// lazily load the data
-			if (!emailArticle.data) emailArticle.data = new EmailArticleData();
-			const id = button.dataset.nArticleEmailContainer;
 			const isFreeArticle = button.dataset.nArticleEmailFreeArticle === true || button.dataset.nArticleEmailFreeArticle === 'true';
 			const mode = isFreeArticle ? emailArticleModes.FREE : emailArticleModes.GIFT_OR_SUB;
+			// lazily load the data
+			if (!emailArticle.data) emailArticle.data = new EmailArticleData(mode);
+			const id = button.dataset.nArticleEmailContainer;
 			const isTop = id === 'top';
 			// lazily load the view
 			if (!emailArticle[id]) {
