@@ -29,9 +29,8 @@ function transformArticleBody(body, flags, options) {
 	return applicationContentTransform(articleBody, flags, options);
 }
 
-const signedInUrls = ['/cms/s/[0123]', '/fastft', 'ftalphaville\.ft\.com'];
-function isUserSignedIn(webUrl) {
-	return !!signedInUrls.find(url => webUrl.search(url) !== -1)
+function isUserSignedIn(req) {
+	return !!req.header('ft-session-token')
 }
 
 function isFreeArticle(webUrl) {
@@ -119,7 +118,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		res.vary('FT-Labs-Gift');
 	}
 
-	content.signedIn = isUserSignedIn(content.webUrl);
+	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 
 	return Promise.all(asyncWorkToDo)
