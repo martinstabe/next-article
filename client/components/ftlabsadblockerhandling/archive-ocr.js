@@ -37,7 +37,7 @@ module.exports = {
 
 		ocrForm.innerHTML =
 		`<div class='o-forms-group ftlabs-ad-block__form'>
-			<p>'To view this article, please type the text you see in the image into the form.'</p>
+			<p>To view this article, please type the text you see in the image into the form.</p>
 			<input type='text' class='o-forms-text' name='ocr-input' autocomplete='off'></input>
 			<button class="o-buttons o-buttons--standout o-buttons--big" data-o-grid-colspan="full-width" type="submit" id="submit-btn">Submit</button>
 		</div>`;
