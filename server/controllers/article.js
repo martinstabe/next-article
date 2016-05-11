@@ -66,7 +66,10 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	if (contentToTransform) {
 		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
 				fragment: req.query.fragment,
-				adsLayout: content.adsLayout
+				adsLayout: content.adsLayout,
+				metadata: {
+					primarySection: content.primarySection || null
+				}
 			}
 		));
 	}
@@ -121,7 +124,6 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
-			content.hasIe8Stylesheet = true;
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);

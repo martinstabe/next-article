@@ -51,7 +51,7 @@ function bindUIEventListeners(){
 
 function initialise () {
 
-	if (typeof storedValue !== 'number') {
+	if ( isNaN(storedValue) ) {
 		const newValue = Math.floor(Math.random() * approaches.length) | 0;
 		storage.set(newValue);
 		storedValue = storage.get();
