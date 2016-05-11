@@ -6,7 +6,7 @@ module.exports = function ($, flags, options) {
 	const pars = $('p');
 	const variant = flags.lightSignUp;
 	const sectionData = options.metadata.primarySection || null;
-	let section = {
+	const section = {
 		id: 'default',
 		prefLabel: 'default'
 	}
