@@ -124,7 +124,6 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
-			content.hasIe8Stylesheet = true;
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);
