@@ -39,6 +39,7 @@ module.exports = {
 		`<div class='o-forms-group ftlabs-ad-block__form'>
 			<p>To view this article, please type the text you see in the image into the form.</p>
 			<input type='text' class='o-forms-text' name='ocr-input' autocomplete='off'></input>
+			<div class="o-forms-errortext">Please enter the correct text</div>
 			<button class="o-buttons o-buttons--standout o-buttons--big" data-o-grid-colspan="full-width" type="submit" id="submit-btn">Submit</button>
 		</div>`;
 

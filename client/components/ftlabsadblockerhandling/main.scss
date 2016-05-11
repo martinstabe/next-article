@@ -172,3 +172,11 @@
 	display: block;
     margin: 0 auto;
 }
+
+.o-forms-errortext {
+	display: none;
+}
+
+.o-forms--error .o-forms-errortext {
+	display: block;
+}
