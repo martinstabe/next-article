@@ -6,13 +6,14 @@ module.exports = function ($, flags, options) {
 	const pars = $('p');
 	const variant = flags.lightSignUp;
 	const sectionData = options.metadata.primarySection || null;
-	let mailingList = {
-		name: 'default',
+	const section = {
+		id: 'default',
 		prefLabel: 'default'
 	}
 
-	if (sectionData && sectionData.name && sectionData.prefLabel) {
-		mailingList = Object.assign(mailingList, sectionData);
+	if (sectionData && sectionData.idV1 && sectionData.prefLabel) {
+		section.id = sectionData.idV1;
+		section.prefLabel = sectionData.prefLabel;
 	}
 
 	if (variant === 'top') positionComponent(1, true);
@@ -27,7 +28,7 @@ module.exports = function ($, flags, options) {
 			let isOrphan = !par.parent;
 			let hasNextP = (par.next && par.next.name === 'p');
 			if (indexMatches && isOrphan && (hasNextP || !checkNextP)) {
-				$(par).after(`<div class="n-light-signup__container" data-n-light-signup-list-name="${mailingList.name}" data-n-light-signup-list-pref-label="${mailingList.prefLabel}"></div>`);
+				$(par).after(`<div class="n-light-signup__container" data-n-light-signup-section-id="${section.id}" data-n-light-signup-section-pref-label="${section.prefLabel}"></div>`);
 				return false;
 			}
 		});
