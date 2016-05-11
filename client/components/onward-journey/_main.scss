@@ -57,7 +57,7 @@
 	}
 
 	.header__type {
-		@include oTypographySerifDisplayBold(m);
+		@include oTypographySerifDisplay(m);
 		position: absolute;
 		top: -15px;
 		left: 10px;
@@ -242,7 +242,7 @@
 	overflow: hidden;
 }
 .header__name {
-	@include oTypographySerifDisplayBold(m);
+	@include oTypographySerifDisplay(m);
 	display: inline;
 	margin: 0 10px 0 0;
 	padding: 10px 0 0;
