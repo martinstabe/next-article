@@ -9,39 +9,33 @@ const approaches = [
 	require('./intra-word-shuffle')
 ];
 
-const storage = {
-	get : () => {
-		return parseInt(localStorage.getItem('ftlabsAdBlockerHandling'));
-	},
-	set : val => {
-		localStorage.setItem('ftlabsAdBlockerHandling', val);
-	}
-};
+const SuperStore = require('superstore');
+const store = new SuperStore('local', 'ftlabs');
 
-let storedValue = storage.get();
+let storedValue = NaN;
 const UI = document.querySelector('.ftlabs-ad-block-handling-ui');
 
 function previousApproach () {
 
 	if (storedValue > 0) {
-		storage.set(storedValue - 1);
+		store.set('AdBlockerHandling', storedValue - 1);
 	} else {
-		storage.set(approaches.length - 1);
+		store.set('AdBlockerHandling', approaches.length - 1);
 	}
 	document.location.reload();
 }
 
-function nextApproach(){
+function nextApproach (){
 
 	if (storedValue < approaches.length - 1) {
-		storage.set(storedValue + 1);
+		store.set('AdBlockerHandling', storedValue + 1);
 	} else {
-		storage.set(0);
+		store.set('AdBlockerHandling', 0);
 	}
 	document.location.reload();
 }
 
-function bindUIEventListeners(){
+function bindUIEventListeners (){
 
 	const controls = document.querySelectorAll('.ftlabs-ad-block-handling-ui .controls button');
 
@@ -51,23 +45,33 @@ function bindUIEventListeners(){
 
 function initialise () {
 
-	if ( isNaN(storedValue) ) {
-		const newValue = Math.floor(Math.random() * approaches.length) | 0;
-		storage.set(newValue);
-		storedValue = storage.get();
-	}
+	store.get('AdBlockerHandling')
+		.then(val => {
 
-	if (storedValue > approaches.length - 1) {
-		storage.set(approaches.length - 1)
-		storedValue = storage.get();
-	}
+			val = parseInt(val);
 
-	const selectedApproach = approaches[parseInt(storedValue)];
-	selectedApproach.run();
-	UI.querySelector('h3').textContent = `Idea ${parseInt(storedValue) + 1} of ${approaches.length}: ${selectedApproach.name}`;
-	UI.querySelector('p').textContent = `${selectedApproach.description}`;
+			if ( isNaN(val) ) {
+				const newValue = Math.random() * approaches.length | 0;
+				store.set('AdBlockerHandling', newValue);
+				storedValue = newValue;
+			} else {
+				storedValue = val;
+			}
 
-	bindUIEventListeners();
+			if (storedValue > approaches.length - 1) {
+				store.set('AdBlockerHandling', approaches.length - 1)
+				storedValue = approaches.length - 1;
+			}
+
+			const selectedApproach = approaches[storedValue];
+			selectedApproach.run();
+			UI.querySelector('h3').textContent = `Idea ${storedValue + 1} of ${approaches.length}: ${selectedApproach.name}`;
+			UI.querySelector('p').textContent = `${selectedApproach.description}`;
+
+			bindUIEventListeners();
+
+		})
+	;
 
 }
 
