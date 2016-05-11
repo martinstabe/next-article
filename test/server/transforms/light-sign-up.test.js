@@ -7,7 +7,7 @@ const lightSignupTransform = require('../../../server/transforms/light-sign-up')
 describe('Light Signup component inside body', function () {
 
 	const defaultOptions = {metadata: { primarySection: null}};
-	const lightSignupHtml = '<div class="n-light-signup__container" data-n-light-signup-list-name="default" data-n-light-signup-list-pref-label="default"></div>';
+	const lightSignupHtml = '<div class="n-light-signup__container" data-n-light-signup-section-id="default" data-n-light-signup-section-pref-label="default"></div>';
 
 	describe('CONTROL variant', function () {
 
@@ -112,15 +112,15 @@ describe('Light Signup component inside body', function () {
 
 		it('should add data attribute values to the component', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
-			const options = {metadata: { primarySection: {name: 'foo', prefLabel: 'bar'}}};
-			const lightSignupHtml = '<div class="n-light-signup__container" data-n-light-signup-list-name="foo" data-n-light-signup-list-pref-label="bar"></div>';
+			const options = {metadata: { primarySection: {idV1: 'foo', prefLabel: 'bar'}}};
+			const lightSignupHtml = '<div class="n-light-signup__container" data-n-light-signup-section-id="foo" data-n-light-signup-section-pref-label="bar"></div>';
 			lightSignupTransform($, flags, options);
 			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>`);
 		});
 
 		it('should only add data attribute values if name and prefLabel are present', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
-			const options = {metadata: { primarySection: {name: 'foo', prefLabel: null}}};
+			const options = {metadata: { primarySection: {idV1: 'foo', prefLabel: null}}};
 			lightSignupTransform($, flags, options);
 			expect($.html()).to.equal(`<p>1</p>${lightSignupHtml}<p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>`);
 		});
