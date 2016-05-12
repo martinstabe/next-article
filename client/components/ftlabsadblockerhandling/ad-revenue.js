@@ -2,7 +2,7 @@ function count (string) {
 	string = string.replace(/<\/?[a-z][^>]*>/gi, '')
 	string = string.replace(/[\u200B]+/, '')
 
-	return string.replace(/['";:,.?¿\-!¡]+/g, '').split(' ')
+	return string.replace(/['";:,.?¿\-!¡]+()/g, '').split(' ')
 }
 
 module.exports = {
