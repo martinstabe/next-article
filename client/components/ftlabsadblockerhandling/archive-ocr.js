@@ -31,7 +31,7 @@ module.exports = {
 
 		ocrForm.innerHTML =
 		`<div class='o-forms-group ftlabs-ad-block__form'>
-			<p>Hello, we think you're blocking ads. We don't mind, but advertising helps fund our content. Instead of viewing ads, you can help us make sense of our archives by telling us what you think the following words are saying.</p>
+			<p>Hello, we think you're blocking ads. This is problematic, because advertising helps fund our content. Instead of viewing ads, you can help us make sense of our archives by telling us what you think the following words are saying.</p>
 			<img src='http://i.imgur.com/nenXmte.png'>
 			<p>Once you've typed the words you can see, the article will be shown.</p>
 			<input type='text' class='o-forms-text' name='ocr-input' autocomplete='off' placeholder='Enter text here'></input>
