@@ -154,3 +154,25 @@
 	padding: 0 10px;
 	margin-bottom: 15px;
 }
+
+.ftlabs-ad-block__archive-ocr {
+	border: 4px solid getColor('warm-3');
+}
+
+.ftlabs-ad-block__form button {
+	margin-top: 10px;
+	float: none;
+}
+
+.ftlabs-ad-block__archive-ocr img {
+	display: block;
+	margin: 0 auto;
+}
+
+.o-forms-errortext {
+	display: none;
+}
+
+.o-forms--error .o-forms-errortext {
+	display: block;
+}

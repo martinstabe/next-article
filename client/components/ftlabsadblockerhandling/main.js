@@ -6,7 +6,8 @@ const approaches = [
 	require('./ad-blocking-articles'),
 	require('./delay-content'),
 	require('./guidelines'),
-	require('./intra-word-shuffle')
+	require('./intra-word-shuffle'),
+	require('./archive-ocr')
 ];
 
 const SuperStore = require('superstore');
