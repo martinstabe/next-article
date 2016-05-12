@@ -49,7 +49,7 @@ module.exports.init = () => {
 
 	if (hydratedMetadata.package && hydratedMetadata.package.length) {
 		let storyIds = hydratedMetadata.package.map(article => article.id);
-		let url = `/article/${articleId}/story-package?articleIds=${storyIds.join()}&count=5`;
+		let url = `/article/story-package?articleIds=${storyIds.join()}&count=5`;
 
 		fetchPromises = fetchPromises.concat(
 			$('.js-story-package').map(el => createPromise(el, `${url}`))

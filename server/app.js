@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 
 const uuid = '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}';
 
-app.get('^/article/:id/story-package', require('./controllers/related/story-package'));
+app.get('^/article/story-package', require('./controllers/related/story-package'));
 app.get('^/article/:id/more-on', require('./controllers/related/more-on'));
 app.get('^/article/:id/special-report', require('./controllers/related/special-report'));
 app.get('^/article/:id/social-counts', require('./controllers/related/social-counts'));
