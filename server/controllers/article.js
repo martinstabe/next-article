@@ -30,7 +30,7 @@ function transformArticleBody(body, flags, options) {
 }
 
 function isUserSignedIn(req) {
-	return !!req.header('ft-session-token')
+	return req.header('ft-session-token') && req.header('ft-session-token') !== '-'
 }
 
 function isFreeArticle(webUrl) {
