@@ -4,18 +4,12 @@ module.exports = {
 	run : () => {
 
 		const articleParent = document.querySelector('.article__body');
-		const articleParas = Array.from(document.querySelectorAll('.article__body p'))
-			.filter(el => el.parentNode === articleParent);
-
-		articleParas.map(el => el.style.visibility = 'hidden');
+		articleParent.style.display = 'none';
+		articleParent.style.visibility = 'hidden';
 
 		const ocr = document.createElement('div');
 
 		ocr.className = 'ftlabs-ad-block__archive-ocr';
-
-		const ocrImage = document.createElement('img');
-		ocrImage.setAttribute('src', 'http://i.imgur.com/nenXmte.png')
-		ocr.appendChild(ocrImage);
 
 		const ocrForm = document.createElement('form');
 		ocrForm.addEventListener('submit', (event) => {
@@ -37,17 +31,20 @@ module.exports = {
 
 		ocrForm.innerHTML =
 		`<div class='o-forms-group ftlabs-ad-block__form'>
-			<p>To view this article, please type the text you see in the image into the form.</p>
-			<input type='text' class='o-forms-text' name='ocr-input' autocomplete='off'></input>
+			<p>Hello, we think you're blocking ads. We don't mind, but advertising helps fund our content. Instead of viewing ads, you can help us make sense of our archives by telling us what you think the following words are saying.</p>
+			<img src='http://i.imgur.com/nenXmte.png'>
+			<p>Once you've typed the words you can see, the article will be shown.</p>
+			<input type='text' class='o-forms-text' name='ocr-input' autocomplete='off' placeholder='Enter text here'></input>
 			<div class="o-forms-errortext">Please enter the correct text</div>
 			<button class="o-buttons o-buttons--standout o-buttons--big" data-o-grid-colspan="full-width" type="submit" id="submit-btn">Submit</button>
 		</div>`;
 
-		articleParent.insertBefore(ocr, articleParent.firstChild);
+		articleParent.parentNode.insertBefore(ocr, articleParent);
 
 		function showContent() {
-			articleParent.removeChild(ocr)
-			articleParas.map(el => el.style.visibility = '');
+			articleParent.parentNode.removeChild(ocr)
+			articleParent.style.display = '';
+			articleParent.style.visibility = '';
 		}
 	}
 };
