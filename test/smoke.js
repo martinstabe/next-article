@@ -22,7 +22,7 @@ module.exports = [
 			// fragment view
 			'/content/a85bf481-457c-3bd4-bd49-3801d175d583?fragment=true': 200,
 			// related fragments - story package
-			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/story-package?articleIds=b56232bc-adec-11e4-919e-00144feab7de,8a5c2c02-a47e-11e4-b943-00144feab7de,6bfcdc6e-a0b6-11e4-8ad8-00144feab7de,c0dbd6d6-8072-11e4-9907-00144feabdc0': 200,
+			'/article/story-package?articleIds=b56232bc-adec-11e4-919e-00144feab7de,8a5c2c02-a47e-11e4-b943-00144feab7de,6bfcdc6e-a0b6-11e4-8ad8-00144feab7de,c0dbd6d6-8072-11e4-9907-00144feabdc0': 200,
 			// related fragments - more-ons
 			'/article/02cad03a-844f-11e4-bae9-00144feabdc0/more-on?tagIds=TnN0ZWluX1BOX1BvbGl0aWNpYW5fMTY4OA==-UE4=,NDdiMzAyNzctMTRlMy00Zjk1LWEyZjYtYmYwZWIwYWU2NzAy-VG9waWNz&index=1': 200,
 			// related fragments - special-reports
