@@ -12,6 +12,8 @@ const approaches = [
 
 const SuperStore = require('superstore');
 const store = new SuperStore('local', 'ftlabs');
+const trackEvent = require('../utils/tracking');
+
 
 let storedValue = NaN;
 const UI = document.querySelector('.ftlabs-ad-block-handling-ui');
@@ -71,6 +73,22 @@ function initialise () {
 
 			bindUIEventListeners();
 
+			trackEvent({
+				action: 'poisonLoaded',
+				category: 'page',
+				meta: {
+					id: storedValue + 1,
+					slug : selectedApproach.name
+				},
+				context: {
+					product: 'next',
+					source: 'next-article'
+				}
+			});
+
+		})
+		.catch(err => {
+			console.error("An error has occured with ftLabsAdBlockerHandling", err);
 		})
 	;
 
