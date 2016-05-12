@@ -104,6 +104,10 @@
 	border-top: 0;
 }
 
+html.core .article__main .article__share-action--email {
+	display: none;
+}
+
 .article__main .article__share-bottom-gutter--top {
 	margin-bottom: 15px;
 }
