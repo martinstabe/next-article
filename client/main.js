@@ -2,7 +2,7 @@
 
 const oViewport = require('n-ui/viewport');
 const nVideo = require('n-video');
-const lightSignup = require('n-light-signup');
+const lightSignup = require('o-email-only-signup');
 
 require('n-ui').bootstrap(({flags}) => {
 	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');

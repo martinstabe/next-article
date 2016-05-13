@@ -65,10 +65,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	if (contentToTransform) {
 		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
 				fragment: req.query.fragment,
-				adsLayout: content.adsLayout,
-				metadata: {
-					primarySection: content.primarySection || null
-				}
+				adsLayout: content.adsLayout
 			}
 		));
 	}
