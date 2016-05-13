@@ -1,5 +1,5 @@
 <li class="pod__item-wrapper {{#ifEquals @index 0}}pod__item-wrapper--lead{{/ifEquals}} {{#if mainImage}}pod__item-wrapper--image{{/if}}">
-	<div class="pod__item" data-trackable="pod-{{@index}}">
+	<article class="pod__item" data-trackable="pod-{{@index}}">
 		{{#ifEquals @index 0}}
 			{{#if mainImage}}
 				<div class="pod__item__image--placeholder">
@@ -15,9 +15,9 @@
 					{{primaryTag.prefLabel}}
 				</a>
 			{{/if}}
-			<h3 class="pod__item__headline">
+			<h4 class="pod__item__headline">
 				<a class="pod__item__headline-link" href="{{url}}" data-trackable="link-article-headline">{{title}}</a>
-			</h3>
+			</h4>
 			{{#if subheading}}
 				<p class="pod__item__subheading">{{subheading}}</p>
 			{{/if}}
@@ -27,5 +27,5 @@
 				{{#dateformat "dddd, d mmmm, yyyy"}}{{publishedDate}}{{/dateformat}}
 			</time>
 		</div>
-	</div>
+	</article>
 </li>
