@@ -18,7 +18,6 @@ require('n-ui').bootstrap(({flags}) => {
 	const commentsIcon = require('./components/comments/icon');
 	const commentsSkeleton = require('./components/comments/skeleton');
 	const lazyLoad = require('./components/comments/lazy-load');
-	const comments = require('./components/comments/main');
 
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
@@ -59,30 +58,26 @@ require('n-ui').bootstrap(({flags}) => {
 	scrollDepth.init(flags);
 
 	if(flags.get('articleComments') && document.querySelector('#comments')) {
-		if(flags.get('articleLazyComments')) {
-			const commentsEl = document.getElementById('comments');
-			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
-			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
+		const commentsEl = document.getElementById('comments');
+		const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
+		const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
 
-			commentsIcon.init();
-			commentsSkeleton.init();
+		commentsIcon.init();
+		commentsSkeleton.init();
 
-			lazyLoad({
-				targetEl: '#comments',
-				sources: [commentsJsLocation, commentsCssLocation]
-			}).then(function() {
-				var data = {
-					action: 'view',
-					category: 'comments',
-					context: {
-						product: 'next',
-						source: 'next-article'
-					}
-				};
-				trackEvent(data);
-			});
-		} else {
-			comments.init(uuid, flags);
-		}
+		lazyLoad({
+			targetEl: '#comments',
+			sources: [commentsJsLocation, commentsCssLocation]
+		}).then(function() {
+			var data = {
+				action: 'view',
+				category: 'comments',
+				context: {
+					product: 'next',
+					source: 'next-article'
+				}
+			};
+			trackEvent(data);
+		});
 	}
 });

@@ -10,10 +10,6 @@ module.exports.init = function(uuid, flags) {
 		return obj.name === 'articleComments';
 	})[0];
 
-	const lazyFlag = flags.filter((obj) => {
-		return obj.name === 'articleLazyComments';
-	})[0];
-
 	if (!commentsFlag.state) {
 		return;
 	}
@@ -28,24 +24,9 @@ module.exports.init = function(uuid, flags) {
 	};
 
 
-	OComments.on('widget.renderComplete', function (ev) {
-		if(lazyFlag.state) {
-			const skeleton = document.querySelector('[data-skeleton=comments]');
-			skeleton.parentNode.removeChild(skeleton);
-		} else {
-			const commentCount = ev.detail.instance.lfWidget.getCollection().attributes.numVisible;
-			const articleShareList = document.querySelectorAll('.article__share');
-			const articleShareArray = Array.prototype.slice.call(articleShareList);
-			articleShareArray.forEach(function (articleShare) {
-				let commentLink = document.createElement('a');
-				commentLink.setAttribute('href', '#comments');
-				commentLink.setAttribute('data-trackable', 'view-comments');
-				commentLink.className = 'article__share__comments';
-				commentLink.textContent = commentCount;
-				articleShare.appendChild(commentLink);
-			});
-		}
-
+	OComments.on('widget.renderComplete', function () {
+		const skeleton = document.querySelector('[data-skeleton=comments]');
+		skeleton.parentNode.removeChild(skeleton);
 	});
 	OComments.on('tracking.postComment', function () {
 		eventData.meta = { interaction: 'posted' };
