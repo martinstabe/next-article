@@ -4,12 +4,12 @@ const oViewport = require('n-ui/viewport');
 const nVideo = require('n-video');
 const lightSignup = require('o-email-only-signup');
 
-require('n-ui').bootstrap(({flags}) => {
-	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
+import {configure, bootstrap} from 'n-ui';
 
-	if(flags.get('ftlabsAdBlockerHandling')){
-		ftlabsAdBlockerHandling.init();
-	}
+configure({preset: 'complete'});
+
+bootstrap(({flags, mainCss}) => {
+	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 
 	const slideshow = require('./components/slideshow/main');
 	const readingHistory = require('./components/reading-history');
@@ -31,53 +31,56 @@ require('n-ui').bootstrap(({flags}) => {
 	}
 
 	const uuid = document.querySelector('article[data-content-id]').getAttribute('data-content-id');
+
 	if (uuid) {
 		readingHistory.add(uuid);
 	}
-
-	slideshow(document.querySelectorAll('.article ft-slideshow'));
-
-	onwardJourney.init(flags);
 
 	if (flags.get('articleShareButtons')) {
 		share.init();
 	}
 
-	if (flags.get('lightSignUp')) {
-		lightSignup.init();
-	}
-
-	nVideo.init({
-		// For generating placeholder image
-		optimumWidth: 680,
-		placeholder: true,
-		placeholderTitle: true
-	});
-
 	toc.init(flags);
 	scrollDepth.init(flags);
 
-	if(flags.get('articleComments') && document.querySelector('#comments')) {
-		const commentsEl = document.getElementById('comments');
-		const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
-		const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
 
-		commentsIcon.init();
-		commentsSkeleton.init();
-
-		lazyLoad({
-			targetEl: '#comments',
-			sources: [commentsJsLocation, commentsCssLocation]
-		}).then(function() {
-			var data = {
-				action: 'view',
-				category: 'comments',
-				context: {
-					product: 'next',
-					source: 'next-article'
-				}
-			};
-			trackEvent(data);
+	mainCss.then(() => {
+		ftlabsAdBlockerHandling.init()
+		slideshow(document.querySelectorAll('.article ft-slideshow'));
+		onwardJourney.init(flags);
+		lightSignup.init();
+		nVideo.init({
+			// For generating placeholder image
+			optimumWidth: 680,
+			placeholder: true,
+			placeholderTitle: true
 		});
-	}
+
+		if(flags.get('articleComments') && document.querySelector('#comments')) {
+
+			const commentsEl = document.getElementById('comments');
+			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
+			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
+
+			commentsIcon.init();
+			commentsSkeleton.init();
+
+			lazyLoad({
+				targetEl: '#comments',
+				sources: [commentsJsLocation, commentsCssLocation]
+			}).then(function() {
+				var data = {
+					action: 'view',
+					category: 'comments',
+					context: {
+						product: 'next',
+						source: 'next-article'
+					}
+				};
+				trackEvent(data);
+			});
+		}
+	});
+
+
 });
