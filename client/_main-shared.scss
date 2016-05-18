@@ -1,45 +1,9 @@
-@import 'n-ui/configure';
+$n-layout-is-silent: false;
+@import 'n-ui/non-critical';
 
-@include nUiConfigure((
-	preset: complete,
-	critical: true
-));
-
-@import 'n-ui/bootstrap';
-
-
-/*! start:head.css */
-[data-o-grid-colspan~=Loffset1] {
-	@include oGridRespondTo(L) {
-		@include oGridOffset(1);
-	}
-}
-
-[data-o-grid-colspan~=XLoffset1] {
-	@include oGridRespondTo(XL) {
-		@include oGridOffset(1);
-	}
-}
-
-@import 'n-content-body/main';
-@import 'helpers';
-@import 'components/ads/main';
-@import 'components/article/main';
-@import 'components/read-next/main';
-@import 'components/share/main';
-@import 'components/suggested-reads/main';
-
-.next-header {
-	margin-bottom: 0;
-}
-/*! end:head.css */
-
-$o-expander-is-silent: false;
-@import 'o-expander/main';
-$o-gallery-is-silent: false;
-@import 'o-gallery/main';
-@import 'n-video/main';
+@import 'n-ui/message-prompts/main';
 @import 'o-email-only-signup/main';
+
 @import 'components/comments/skeleton';
 @import 'components/first-click-free/main';
 @import 'components/ftlabsadblockerhandling/main';
