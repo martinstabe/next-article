@@ -45,7 +45,9 @@ bootstrap(({flags, mainCss}) => {
 
 
 	mainCss.then(() => {
-		ftlabsAdBlockerHandling.init()
+		if (flags.get('ftlabsAdBlockerHandling')) {
+			ftlabsAdBlockerHandling.init()
+		}
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
 		onwardJourney.init(flags);
 		lightSignup.init();
