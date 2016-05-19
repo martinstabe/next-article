@@ -1,7 +1,7 @@
 
 // Ad breakpoint where leaderboards start working
 $ad-medium-breakpoint: 760px;
-
+/*! start:head.css */
 .above-header-advert {
 	@media (min-width:$ad-medium-breakpoint) {
 		display: block;
@@ -36,6 +36,17 @@ $ad-medium-breakpoint: 760px;
 	}
 }
 
+.advert--background {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIW2M8d2znf2kJMQZkwPjy3vn/T1+8YkCWAAuCVCFLwAWRJVAEYRIAHZ8dptpqH2wAAAAASUVORK5CYII=) repeat;
+}
+
+.advert--transition {
+	will-change: min-height, padding, height;
+	transform: translate3d(0, 0, 0);
+	transition: height 0.35s ease-in-out, min-height 0.35s ease-in-out, padding 0.35s ease-in-out;
+}
+
+/*! end:head.css */
 .sidebar-advert {
 	@include oGridRespondTo(L) {
 		display: block;
@@ -61,13 +72,4 @@ $ad-medium-breakpoint: 760px;
 		clear: both;
 	}
 
-}
-.advert--background {
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIW2M8d2znf2kJMQZkwPjy3vn/T1+8YkCWAAuCVCFLwAWRJVAEYRIAHZ8dptpqH2wAAAAASUVORK5CYII=) repeat;
-}
-
-.advert--transition {
-	will-change: min-height, padding, height;
-	transform: translate3d(0, 0, 0);
-	transition: height 0.35s ease-in-out, min-height 0.35s ease-in-out, padding 0.35s ease-in-out;
 }
