@@ -45,6 +45,11 @@ provision:
 	nbt float -md --testapp ${TEST_APP}
 	make smoke
 
+deploy-gathercole:
+	nbt configure ft-next-article ft-next-article-gathercole --overrides "NODE_ENV=branch"
+	nht deploy-hashed-assets
+	nbt deploy ft-next-article-gathercole
+
 smoke:
 	nbt test-urls ${TEST_APP} --throttle 1;
 	export TEST_APP=${TEST_APP}; nbt nightwatch test/browser/tests/* -e ie9,edge,chrome,firefox,iphone6_plus

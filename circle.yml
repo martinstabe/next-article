@@ -8,6 +8,12 @@ deployment:
     commands:
       - make deploy
 
+deployment:
+  gathercole:
+    branch: gathercole
+    commands:
+      - make deploy-gathercole
+
 notify:
   webhooks:
     - url: https://ft-next-webhooks.herokuapp.com/circleci
