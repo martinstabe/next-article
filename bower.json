@@ -5,21 +5,21 @@
     "o-comment-count": "bjfletcher/o-comment-count#^0.1.0",
     "o-comment-ui": "bjfletcher/o-comment-ui#^3.0.0",
     "o-comments": "bjfletcher/o-comments#^3.0.0",
-    "o-share": "^2.1.2",
-    "o-gallery": "^1.7.4",
     "o-email-only-signup": "^2.2.0",
-    "n-video": "^4.0.4",
+    "o-gallery": "^1.7.4",
+    "o-share": "^2.1.2",
     "n-content-body": "^2.0.5",
     "n-email-article": "^1.0.1",
-    "n-ui": "1.0.0-rc.1",
+    "n-ui": "1.0.1",
+    "n-video": "^4.0.4",
     "superstore": "^2.1.0"
   },
   "resolutions": {
+    "o-fonts": "^2.1.2",
     "o-ft-icons": "next",
-    "o-viewport": "^2.0.0",
+    "o-grid": "rhys/push-off",
     "o-hoverable": "^3.0.0",
     "o-typography": "^3.2.0",
-    "o-fonts": "^2.1.2",
-    "o-grid": "rhys/push-off"
+    "o-viewport": "^2.0.0"
   }
 }

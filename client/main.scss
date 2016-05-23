@@ -8,7 +8,7 @@
 @import 'n-ui/bootstrap';
 
 
-/*! start:head.css */
+@include nUiCriticalStart();
 [data-o-grid-colspan~=Loffset1] {
 	@include oGridRespondTo(L) {
 		@include oGridOffset(1);
@@ -31,7 +31,7 @@
 .next-header {
 	margin-bottom: 0;
 }
-/*! end:head.css */
+@include nUiCriticalEnd();
 
 @import 'components/ads/main';
 $o-expander-is-silent: false;
