@@ -10,7 +10,7 @@
     "o-share": "^2.1.2",
     "n-content-body": "^2.0.5",
     "n-email-article": "^1.0.1",
-    "n-ui": "1.0.1",
+    "n-ui": "^1.0.1",
     "n-video": "^4.0.4",
     "superstore": "^2.1.0"
   },

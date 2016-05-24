@@ -14,7 +14,8 @@ module.exports = function (bodyHTML) {
 	if (
 		$firstMainImage.length &&
 		$firstMainImage.prev().length === 0 &&
-		(!$firstMainImage.parent() || $firstMainImage.parent().prev().length === 0)
+		(!$firstMainImage.parent() || $firstMainImage.parent().prev().length === 0) &&
+		$firstMainImage.next().length > 0
 	) {
 		mainImageHTML = $.html($firstMainImage.remove());
 	}

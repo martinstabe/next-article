@@ -143,7 +143,7 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 		);
 	});
 
-	it('should not extract the image from the first child position of an elemwnt with previous siblings', () => {
+	it('should not extract the image from the first child position of an element with previous siblings', () => {
 		const bodyHTML = (
 			'<body>' +
 				'<p>The co-founding Zoman, Deepinder Goyal, that is took time for a chat with us last week about the change going on in Indias start-up world.</p>' +
@@ -170,5 +170,26 @@ describe('Extracting Main Image and Table of Contents from Body', () => {
 			'</body>'
 		);
 	});
+
+	it('should not extract the image if the image is the only thing in the body', () => {
+		const bodyHTML = (
+			'<body>' +
+				'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
+					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+					'</div>' +
+				'</figure>' +
+			'</body>'
+		);
+		const resultObject = mainImage(bodyHTML);
+		resultObject.bodyHTML.should.equal(
+			'<body>' +
+				'<figure class="article-image article-image--center" style="width:354px;"><div class="article-image__placeholder" style="padding-top:75.9887005649718%;">' +
+					'<img alt="" src="https://next-geebee.ft.com/image/v1/images/raw/http%3A%2F%2Fftalphaville.ft.com%2Ffiles%2F2016%2F02%2FScreen-Shot-2016-02-08-at-16.08.47-590x448.png?source=next&amp;fit=scale-down&amp;width=354">' +
+					'</div>' +
+				'</figure>' +
+			'</body>'
+		);
+	});
+
 
 });
