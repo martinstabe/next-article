@@ -24,11 +24,11 @@ else
 endif
 
 run:
-	nbt run
+	nht run
 
 deploy: _deploy_whitesource
-	nbt deploy-hashed-assets
-	nbt ship -m
+	nht deploy-hashed-assets --monitor-assets
+	nht ship -m
 
 _deploy_whitesource:
 	(whitesource run && rm -r ws* && rm npm-shrinkwrap.json) || echo "whitesource run failed, skipping"
@@ -38,13 +38,13 @@ _deploy_whitesource:
 clean-deploy: clean install deploy
 
 tidy:
-	nbt destroy ${TEST_APP}
+	nht destroy ${TEST_APP}
 
 provision:
-	nbt deploy-hashed-assets
-	nbt float -md --testapp ${TEST_APP}
+	nht deploy-hashed-assets
+	nht float -md --testapp ${TEST_APP}
 	make smoke
 
 smoke:
-	nbt test-urls ${TEST_APP} --throttle 1;
-	export TEST_APP=${TEST_APP}; nbt nightwatch test/browser/tests/* -e ie9,edge,chrome,firefox
+	nht test-urls ${TEST_APP} --throttle 1;
+	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/* -e ie9,edge,chrome,firefox
