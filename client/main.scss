@@ -31,6 +31,9 @@
 .next-header {
 	margin-bottom: 0;
 }
+.myft-ui__qr-code {
+	display: none;
+}
 @include nUiCriticalEnd();
 
 @import 'components/ads/main';
@@ -50,9 +53,7 @@ $o-gallery-is-silent: false;
 @import 'components/toc/main';
 
 
-.myft-ui__qr-code {
-	display: none;
-}
+
 
 // Print Styling
 @media print {
