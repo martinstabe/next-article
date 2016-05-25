@@ -2,6 +2,8 @@
 // Ad breakpoint where leaderboards start working
 $ad-medium-breakpoint: 760px;
 /*! start:head.css */
+
+
 .above-header-advert {
 	@media (min-width:$ad-medium-breakpoint) {
 		display: block;
@@ -22,6 +24,10 @@ $ad-medium-breakpoint: 760px;
 		}
 	}
 
+	&[data-o-ads-loaded="Billboard"] {
+		height: 250px;
+	}
+
 	&.o-ads--empty,
 	&[data-o-ads-loaded="false"] {
 		height: 0;
@@ -37,7 +43,7 @@ $ad-medium-breakpoint: 760px;
 }
 
 .advert--background {
-	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAALElEQVQIW2M8d2znf2kJMQZkwPjy3vn/T1+8YkCWAAuCVCFLwAWRJVAEYRIAHZ8dptpqH2wAAAAASUVORK5CYII=) repeat;
+	@include nCrosshatchBG(getColor('pink-tint2'));
 }
 
 .advert--transition {
