@@ -272,7 +272,7 @@
 	@include oTypographySansDataBold(m);
 	font-size: 16px;
 	position: relative;
-	background-color: getColor('warm-5');
+	background-color: getColorFor('page', 'background');
 	border-bottom: 0;
 	float: right;
 	margin-left: 10px;

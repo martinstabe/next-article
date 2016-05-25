@@ -15,7 +15,7 @@
 .next-up__intro {
 	@include oTypographySerifDisplay(m);
 	position: absolute;
-	background-color: getColor('warm-5');
+	background-color: getColorFor('page', 'background');
 	color: getColor('cold-2');
 	display: block;
 	margin: 0;
