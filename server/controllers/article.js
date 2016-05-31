@@ -85,7 +85,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	content.dehydratedMetadata = {
 		moreOns: content.moreOns,
-		package: content.storyPackage || [],
+		package: content.storyPackage || []
 	};
 
 	if (res.locals.flags.openGraph) {
