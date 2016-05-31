@@ -9,7 +9,6 @@ import {configure, bootstrap} from 'n-ui';
 configure({preset: 'complete'});
 
 bootstrap(({flags, mainCss}) => {
-	const ftlabsAdBlockerHandling = require('./components/ftlabsadblockerhandling/main');
 
 	const slideshow = require('./components/slideshow/main');
 	const readingHistory = require('./components/reading-history');
@@ -45,9 +44,6 @@ bootstrap(({flags, mainCss}) => {
 
 
 	mainCss.then(() => {
-		if (flags.get('ftlabsAdBlockerHandling')) {
-			ftlabsAdBlockerHandling.init()
-		}
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
 		onwardJourney.init(flags);
 		lightSignup.init();
