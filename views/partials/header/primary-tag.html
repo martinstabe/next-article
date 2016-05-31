@@ -2,7 +2,7 @@
 	<a href="/stream/{{primaryTag.taxonomy}}Id/{{primaryTag.id}}" class="n-content-tag n-content-tag--medium n-content-tag--with-follow" data-trackable="section-link" aria-label="posted in category {{primaryTag.name}}" data-concept-id="{{primaryTag.id}}">{{primaryTag.name}}</a>
 	{{#ifAll @root.flags.myFtApi @root.flags.articleFollowPrimayTag}}
 		<span{{#if tagToFollow}} class="tag-to-follow"{{/if}}>
-			{{>next-myft-ui/templates/follow version='3' conceptId=primaryTag.id name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
+			{{>n-ui/myft/templates/follow version='3' conceptId=primaryTag.id name=primaryTag.prefLabel taxonomy=primaryTag.taxonomy}}
 		</span>
 	{{/ifAll}}
 </div>
