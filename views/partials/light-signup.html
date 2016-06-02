@@ -5,19 +5,52 @@
 		</div>
 		<div data-o-grid-colspan="12 S7">
 			<button class="o-email-only-signup__close" data-trackable="close" data-o-email-only-signup-close><span class="o-email-only-signup__visually-hidden">Close</span></button>
-			<h3 class="o-email-only-signup__heading">Sample the FT, with the top stories sent <span class="light-signup__highlight">free</span> to your inbox every morning</h3>
-			<p class="o-email-only-signup__text">For 1 week, you’ll get an email with free access to the 3 most read FT stories.</p>
+			<h3 class="o-email-only-signup__heading">Sample the FT's top stories for a week</h3>
+
+			{{#if @root.flags.lightSignupTopics}}
+				<p class="o-email-only-signup__text">Receive a free daily email briefing containing the 3 top stories from one of our top news themes.</p>
+			{{else}}
+				<p class="o-email-only-signup__text">For 1 week, you’ll get an email with free access to the 3 most read FT stories.</p>
+			{{/if}}
+
 			<div class="o-email-only-signup__secondary" data-o-email-only-signup-completion-message>
+
 				<form class="o-email-only-signup__form" data-o-email-only-signup-form>
-					<label for="email" class="o-email-only-signup__visually-hidden">Email address:</label>
-					<input data-o-grid-colspan="7" type="text" id="email" name="email" class="o-email-only-signup__email o-forms-text" data-trackable="email">
+
+					{{#if @root.flags.lightSignupTopics}}
+					<div class="o-email-only-signup__form-group">
+						<label for="topics" class="o-email-only-signup__visually-hidden">Select the topic you are interested in:</label>
+						<select id="topics" name="topics" class="o-email-only-signup__select o-email-only-signup__select--inactive" data-o-email-only-signup-dropdown>
+							<option value="default" disabled selected hidden placeholder>Select the topic you're interested in</option>
+								<option value="default">Top Stories</option>
+								<option value="UK'S EU Referendum">Brexit</option>
+								<option value="US Election 2016">US Election 2016</option>
+								<option value="China Economic Slowdown">China slowdown</option>
+								<option value="Millennials">Millennial Economy</option>
+								<option value="Artificial Intelligence and Robotics">March of the Robot</option>
+								<option value="Oil">Plunging oil price</option>
+								<option value="Global Terror">Global Terror</option>
+								<option value="Technology">Tech disruption</option>
+								<option value="Advertising">Advertising</option>
+								<option value="Connected Car">Connected Cars</option>
+						</select>
+					</div>
+					{{/if}}
+
+					<div class="o-email-only-signup__form-group">
+						<label for="email" class="o-email-only-signup__visually-hidden">Email address:</label>
+						<input type="text" id="email" name="email" class="o-email-only-signup__email" data-trackable="email" placeholder="Enter your email address">
+						<p class="o-forms-errortext o-email-only-signup__email-error-msg o-email-only-signup__visually-hidden" data-o-email-only-signup-email-error>Invalid email</p>
+					</div>
+
 					<input type="hidden" name="source" value="next">
 					<input type="hidden" name="mailingList" value="next-article">
-					<input type="hidden" name="topic" value="default">
-					<button data-o-grid-colspan="4" type="submit" class="o-email-only-signup__submit" data-trackable="submit">Sign up</button>
-					<p class="o-forms-errortext o-email-only-signup__email-error-msg o-email-only-signup__visually-hidden" data-o-email-only-signup-email-error>Invalid email</p>
-					<p class="o-email-only-signup__no-spam">By clicking Sign up you confirm that you have read and agree to the <a target="_blank" href="http://help.ft.com/tools-services/ft-com-terms-and-conditions">terms and conditions</a>, <a target="_blank" href="http://help.ft.com/tools-services/how-the-ft-manages-cookies-on-its-websites">cookie policy</a> and <a target="_blank" href="http://help.ft.com/tools-services/financial-times-privacy-policy">privacy policy</a>.<br /><strong>Unsubscribe at any time.</strong></p>
+
+					<button type="submit" class="o-email-only-signup__submit" data-trackable="submit">Get briefing</button>
+
+					<p class="o-email-only-signup__no-spam">By clicking Sign up you confirm that you have read and agree to the <a target="_blank" href="http://help.ft.com/tools-services/ft-com-terms-and-conditions">terms and conditions</a>, <a target="_blank" href="http://help.ft.com/tools-services/how-the-ft-manages-cookies-on-its-websites">cookie policy</a> and <a target="_blank" href="http://help.ft.com/tools-services/financial-times-privacy-policy">privacy policy</a>.<br /><strong>Unsubscribe at any time. Free stories only last for 1 week.</strong></p>
 				</form>
+
 			</div>
 		</div>
 	</div>

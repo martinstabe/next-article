@@ -39,9 +39,9 @@
 							</div>
 						{{/if}}
 						{{> body-article bodyHTML=bodyHTML}}
-						{{#if @root.anon.userIsAnonymous}}
+						{{#ifAll @root.anon.userIsAnonymous @root.flags.lightSignupInArticle}}
 							{{> light-signup}}
-						{{/if}}
+						{{/ifAll}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
 						{{#if standFirst}}

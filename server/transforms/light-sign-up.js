@@ -1,24 +1,21 @@
 'use strict';
 
 module.exports = function ($, flags, options) {
-	if (!flags || !flags.lightSignUp || (options && options.fragment)) return $;
+	if (!flags || !flags.lightSignupInArticle || (options && options.fragment)) return $;
 
 	const pars = $('p');
-	const variant = flags.lightSignUp;
 
-	if (variant === 'top') positionComponent(1, true);
-	if (variant === 'mid') positionComponent(5, true);
-	if (variant === 'end') positionComponent(pars.length, false);
+	positionComponent(1);
 
 	return $;
 
-	function positionComponent (position, checkNextP) {
+	function positionComponent (position) {
 		pars.each((index, par) => {
 			let indexMatches = ((index + 1) >= position);
 			let isOrphan = !par.parent;
 			let hasNextP = (par.next && par.next.name === 'p');
-			if (indexMatches && isOrphan && (hasNextP || !checkNextP)) {
-				$(par).after(`<div data-o-email-only-signup-position-mvt="${variant}"></div>`);
+			if (indexMatches && isOrphan && hasNextP) {
+				$(par).after(`<div data-o-email-only-signup-position-mvt></div>`);
 				return false;
 			}
 		});
