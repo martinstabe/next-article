@@ -15,6 +15,7 @@
     "superstore": "^2.1.0"
   },
   "resolutions": {
+    "o-buttons": "^4.0.1",
     "o-fonts": "^2.1.2",
     "o-ft-icons": "next",
     "o-grid": "rhys/push-off",
