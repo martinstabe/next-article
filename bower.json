@@ -17,7 +17,6 @@
   },
   "resolutions": {
     "o-fonts": "^2.1.2",
-    "o-ft-icons": "next",
     "o-grid": "rhys/push-off",
     "o-hoverable": "^3.0.0",
     "o-typography": "^3.2.0",
