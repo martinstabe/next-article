@@ -8,6 +8,7 @@ const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const fixtureEsFound = require('../../fixtures/v3-elastic-article-found').docs[0]._source;
+const fixtureEsFoundPremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 
 const subject = proxyquire('../../../server/controllers/article', {
 	'./article-helpers/suggested': () => Promise.resolve(),
@@ -22,12 +23,12 @@ describe('Article Controller', () => {
 	let next;
 	let result;
 
-	function createInstance(params, flags) {
+	function createInstance(params, flags, fixture) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
 		response.locals = { flags: flags || {} };
-		return subject(request, response, next, fixtureEsFound);
+		return subject(request, response, next, fixture || fixtureEsFound);
 	}
 
 	beforeEach(() => {
@@ -69,5 +70,18 @@ describe('Article Controller', () => {
 		expect(result.dehydratedMetadata.moreOns[0].id).to.equal('M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz');
 		expect(result.dehydratedMetadata.moreOns[1].id).to.equal('NTg=-U2VjdGlvbnM=');
 		expect(result.dehydratedMetadata.package).to.be.an.instanceOf(Array);
+	});
+
+
+
+	it('adds premiumArticle===true if article is premium', () => {
+		return createInstance(null, { openGraph: true }, fixtureEsFoundPremium).then(() => {
+			let result = response._getRenderData()
+			expect(result.premiumArticle).to.equal(true);
+		});
+	});
+
+	it('adds premiumArticle===false if article is not premium', () => {
+		expect(result.premiumArticle).to.equal(false);
 	});
 });

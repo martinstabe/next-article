@@ -33,9 +33,12 @@ function isUserSignedIn(req) {
 	return req.header('ft-session-token') && req.header('ft-session-token') !== '-'
 }
 
-function isFreeArticle(webUrl) {
-	console.log(webUrl, webUrl.search('/cms/s/2') !== -1);
+function isFreeArticle (webUrl) {
 	return webUrl.search('/cms/s/2') !== -1
+}
+
+function isPremiumArticle (webUrl) {
+	return webUrl.search('/cms/s/3') !== -1
 }
 
 module.exports = function articleV3Controller(req, res, next, content) {
@@ -117,6 +120,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
+	content.premiumArticle = isPremiumArticle(content.webUrl);
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
