@@ -13,12 +13,14 @@
     "n-email-article": "^1.0.1",
     "n-ui": "^1.0.1",
     "n-video": "^4.0.4",
-    "superstore": "^2.1.0"
+    "superstore": "^2.1.0",
+    "o-ft-icons": "Financial-Times/o-ft-icons#https-icon-fonts-hack"
   },
   "resolutions": {
     "o-fonts": "^2.1.2",
     "o-hoverable": "^3.0.0",
     "o-typography": "^3.2.0",
-    "o-viewport": "^2.0.0"
+    "o-viewport": "^2.0.0",
+    "o-ft-icons": "https-icon-fonts-hack"
   }
 }
