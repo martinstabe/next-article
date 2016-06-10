@@ -1,10 +1,14 @@
 <div class="o-email-only-signup o-grid-container o-email-only-signup__visually-hidden" data-o-component="o-email-only-signup" data-trackable="light-signup" aria-hidden="true">
-	<div class="o-grid-row o-email-only-signup__inner">
+	<div class="o-email-only-signup__discreet o-email-only-signup__visually-hidden" aria-hidden="true" data-o-email-only-signup-discreet-content>
+		<button class="o-email-only-signup__open" aria-controls="o-email-only-signup-content" data-trackable="open" data-o-email-only-signup-open>show more</button>
+		<h3 class="o-email-only-signup__heading">Sample the FT's top stories for a week</h3>
+	</div>
+	<div class="o-grid-row o-email-only-signup__inner" id="o-email-only-signup-content" aria-hidden="false" data-o-email-only-signup-content>
 		<div data-o-grid-colspan="hide S5" class="o-email-only-signup__promo">
 			<img src="https://next-geebee.ft.com/image/v1/images/raw/https%3A%2F%2Fnext-geebee.ft.com%2Fassets%2Fproduct%2Ftop-three-newsletter-2.png?source=o-email-only-signup" class="o-email-only-signup__promo-image" alt="Sample newsletter email"/>
 		</div>
 		<div data-o-grid-colspan="12 S7">
-			<button class="o-email-only-signup__close" data-trackable="close" data-o-email-only-signup-close><span class="o-email-only-signup__visually-hidden">Close</span></button>
+			<button class="o-email-only-signup__close o-email-only-signup__visually-hidden" aria-controls="o-email-only-signup-content" data-trackable="close" data-o-email-only-signup-close><span class="o-email-only-signup__visually-hidden">Close</span></button>
 			<h3 class="o-email-only-signup__heading">Sample the FT's top stories for a week</h3>
 
 			{{#if @root.flags.lightSignupTopics}}
