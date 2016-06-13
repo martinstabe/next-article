@@ -7,35 +7,34 @@
 
 @import 'n-ui/bootstrap';
 
-
 @include nUiCriticalStart();
-[data-o-grid-colspan~=Loffset1] {
-	@include oGridRespondTo(L) {
-		@include oGridOffset(1);
+	[data-o-grid-colspan~=Loffset1] {
+		@include oGridRespondTo(L) {
+			@include oGridOffset(1);
+		}
 	}
-}
 
-[data-o-grid-colspan~=XLoffset1] {
-	@include oGridRespondTo(XL) {
-		@include oGridOffset(1);
+	[data-o-grid-colspan~=XLoffset1] {
+		@include oGridRespondTo(XL) {
+			@include oGridOffset(1);
+		}
 	}
-}
-@import 'helpers';
-@import 'n-content-body/main';
+	@import 'helpers';
+	@import 'n-content-body/main';
 
-@import 'components/article/main';
-@import 'components/read-next/main';
-@import 'components/share/main';
-@import 'components/suggested-reads/main';
+	@import 'components/article/main';
+	@import 'components/read-next/main';
+	@import 'components/suggested-reads/main';
 
-.next-header {
-	margin-bottom: 0;
-}
-.myft-ui__qr-code {
-	display: none;
-}
+	.next-header {
+		margin-bottom: 0;
+	}
+	.myft-ui__qr-code {
+		display: none;
+	}
 @include nUiCriticalEnd();
 
+@import 'components/share/main';
 @import 'components/ads/main';
 $o-expander-is-silent: false;
 @import 'o-expander/main';

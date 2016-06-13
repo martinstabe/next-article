@@ -1,38 +1,121 @@
-$o-icons-image-service-base-url: 'https://next-geebee.ft.com/image';
 @import "o-share/main";
 @import "n-email-article/main";
 
-@include oShareBase(o-share);
-@include oShareActionIcon(facebook, o-share);
-@include oShareActionIcon(twitter, o-share);
-@include oShareActionIcon(whatsapp, o-share);
-@include oShareActionIcon(linkedin, o-share);
-@include oShareActionIcon(email, o-share);
+@include nUiCriticalStart();
 
-.article__share {
-	overflow: hidden;
-	position: relative;
-	margin-top: 15px;
-	padding: 5px 0;
-	border-top: 1px solid getColor('warm-3');
-	border-bottom: 1px solid getColor('warm-3');
+	@include oShareBase(o-share);
 
-	&__count {
-		@include oTypographySansSize(s);
+	.article__share {
 		overflow: hidden;
 		position: relative;
-		top: -5px;
-		display: none;
-		@include oGridRespondTo(S) {
-			display: inline;
+		margin-top: 15px;
+		padding: 5px 0;
+		border-top: 1px solid getColor('warm-3');
+		border-bottom: 1px solid getColor('warm-3');
+
+		> * {
+			visibility: hidden;
 		}
+
+		&__count {
+			@include oTypographySansSize(s);
+			overflow: hidden;
+			position: relative;
+			top: -5px;
+			display: none;
+			@include oGridRespondTo(S) {
+				display: inline;
+			}
+		}
+
+		&__comments {
+			@include oTypographySansSize(s);
+			border-bottom-width: 0;
+			float: right;
+			margin-right: 16px;
+		}
+
+		&__print {
+			display: none;
+			border-bottom-width: 0;
+			float: left;
+			margin-right: 16px;
+			@include oGridRespondTo(M) {
+				display: block;
+			}
+		}
+
+		&--bottom {
+			clear: left;
+		}
+
+		.o-share {
+			display: block; // prevent inline-block spacing issue
+		}
+
+		.o-share__action a {
+			border-bottom-width: 0;
+		}
+
+		.o-share__action button {
+			display: block;
+			border: 0;
+			background-color: transparent;
+		}
+
+		.o-share__action a,
+		.o-share__action button {
+			padding: 0 6px;
+		}
+
+		.o-share__action--twitter a {
+			padding-left: 0;
+		}
+
+		.o-share__action--whatsapp {
+			@include oGridColspan((S: hide));
+			padding: 0;
+		}
+
+		.article__save {
+			float: right;
+		}
+
+		.n-myft-ui__button {
+			min-height: 24px;
+			padding-top: 4px;
+			padding-bottom: 4px;
+		}
+
+	}
+
+	.article__main .email-article .email-article__border {
+		border-top: 0;
+	}
+
+	.core .article__main .article__share-action--email {
+		display: none;
+	}
+
+	.article__main .article__share-bottom-gutter--top {
+		margin-bottom: 15px;
+	}
+
+	.article__main .article__share-bottom-gutter--bottom {
+		margin-bottom: 30px;
+	}
+
+@include nUiCriticalEnd();
+
+
+
+// Lazy load all the icons
+.article__share {
+	> * {
+		visibility: visible;
 	}
 
 	&__comments {
-		@include oTypographySansSize(s);
-		border-bottom-width: 0;
-		float: right;
-		margin-right: 16px;
 		&:before {
 			@include oIconsGetIcon('comment', getColorFor('link', 'text'), 17);
 			content: '';
@@ -43,76 +126,16 @@ $o-icons-image-service-base-url: 'https://next-geebee.ft.com/image';
 	}
 
 	&__print {
-		display: none;
-		border-bottom-width: 0;
-		float: left;
-		margin-right: 16px;
-		@include oGridRespondTo(M) {
-			display: block;
-		}
 		&:before {
 			@include oIconsGetIcon('printer', getColor('cold-1'), 24);
 			content: '';
 			display: block; // prevent inline-block spacing issue
 		}
 	}
-
-	&--bottom {
-		clear: left;
-	}
-
-	.o-share {
-		display: block; // prevent inline-block spacing issue
-	}
-
-	.o-share__action a {
-		border-bottom-width: 0;
-	}
-
-	.o-share__action button {
-		display: block;
-		border: 0;
-		background-color: transparent;
-	}
-
-	.o-share__action a,
-	.o-share__action button {
-		padding: 0 6px;
-	}
-
-	.o-share__action--twitter a {
-		padding-left: 0;
-	}
-
-	.o-share__action--whatsapp {
-		@include oGridColspan((S: hide));
-		padding: 0;
-	}
-
-	.article__save {
-		float: right;
-	}
-
-	.n-myft-ui__button {
-		min-height: 24px;
-		padding-top: 4px;
-		padding-bottom: 4px;
-	}
-
 }
 
-.article__main .email-article .email-article__border {
-	border-top: 0;
-}
-
-.core .article__main .article__share-action--email {
-	display: none;
-}
-
-.article__main .article__share-bottom-gutter--top {
-	margin-bottom: 15px;
-}
-
-.article__main .article__share-bottom-gutter--bottom {
-	margin-bottom: 30px;
-}
+@include oShareActionIcon(facebook, o-share);
+@include oShareActionIcon(twitter, o-share);
+@include oShareActionIcon(whatsapp, o-share);
+@include oShareActionIcon(linkedin, o-share);
+@include oShareActionIcon(email, o-share);
