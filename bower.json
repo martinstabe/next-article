@@ -2,9 +2,6 @@
   "name": "next-article",
   "dependencies": {
     "o-comment-api": "^2.1.0",
-    "o-comment-count": "bjfletcher/o-comment-count#^0.1.0",
-    "o-comment-ui": "bjfletcher/o-comment-ui#^3.0.0",
-    "o-comments": "bjfletcher/o-comments#^3.0.0",
     "o-email-only-signup": "^3.1.0",
     "o-gallery": "^1.7.4",
     "o-icons": "^4.1.2",
@@ -13,7 +10,10 @@
     "n-email-article": "^1.0.1",
     "n-ui": "^1.0.1",
     "n-video": "^4.0.4",
-    "superstore": "^2.1.0"
+    "superstore": "^2.1.0",
+    "o-comments": "^3.2.0",
+    "o-comment-ui": "^3.1.1",
+    "o-comment-count": "^0.2.1"
   },
   "resolutions": {
     "o-fonts": "^2.1.2",
