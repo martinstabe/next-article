@@ -6,7 +6,7 @@ module.exports = function ($, flags, options) {
 			&& par.next.name === 'p'
 			&& !par.parent
 			&& par.prev.name !== 'aside') {
-			$(par).after(`<div class="o-ads in-article-advert"
+			$(par).after(`<div class="o-ads in-article-advert advert"
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
