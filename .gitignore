@@ -11,7 +11,6 @@ npm-debug.log
 /public/
 /node-v*
 /tmp/
-.env
 .idea/
 .editorconfig
 /test/browser/reports
@@ -21,9 +20,8 @@ npm-debug.log
 /libxslt/include
 /libxslt/share
 /libxslt/lib
-.env
 .editorconfig
 .scss-lint.yml
 whitesource.config.json
-webpack.config.js
 .eslintrc.js
+*.env*
