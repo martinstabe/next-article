@@ -3,7 +3,9 @@
 @include nUiConfigure((
 	preset: complete,
 	critical: true,
-	myft: 'critical'
+	// overrides
+	myft: 'critical',
+	buttons: true
 ));
 
 @import 'n-ui/bootstrap';
