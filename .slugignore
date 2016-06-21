@@ -2,7 +2,6 @@
 ./tmp
 ./client
 ./tests
-./.gitignore
 ./.slugignore
 ./Makefile
 .DS_Store
