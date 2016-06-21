@@ -151,19 +151,30 @@
 	box-sizing: border-box;
 }
 
-.pod__item__image--placeholder {
-	display: none;
+.pod__item__image-link {
 	float: right;
 	border-bottom: 0;
+	width: 345px;
+
+	@include oGridRespondTo(XL) {
+		width: 380px;
+	}
+}
+
+.pod__item__image-placeholder {
+	display: none;
+	position: relative;
+	padding-bottom: 56.25%;
+
 	@include oGridRespondTo(M) {
 		display: block;
 	}
 }
+
 .pod__item__image {
-	border-bottom: 0;
-	img {
-		display: block;
-	}
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .pod__item__content {

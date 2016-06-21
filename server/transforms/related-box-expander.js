@@ -19,7 +19,20 @@ module.exports = function ($) {
 
 		const wordCount = contentEl.text().split(' ').length + 1;
 		const contentParas = contentParasEl.length;
-		const hasImage = $el.find('img').length > 0 ? true : false;
+
+		const $img = $el.find('img');
+		const hasImage = $img.length;
+		if (hasImage) {
+			// lazy load the image
+			$img.addClass('n-image n-image--lazy-loading');
+			['src', 'srcset'].forEach(attr => {
+				const attrValue = $img.attr(attr);
+				if (attrValue) {
+					$img.attr(`data-${attr}`, attrValue)
+						.removeAttr(attr);
+				}
+			});
+		}
 
 		if ((contentParas > expanderParaBreak &&
 			((hasImage && wordCount > expanderWordImage) ||

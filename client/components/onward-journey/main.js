@@ -2,6 +2,7 @@
 
 var fetchres = require('fetchres');
 var oDate = require('n-ui/date');
+const lazyLoadImages = require('n-image').lazyLoad;
 
 // Sort of like Promise.all but will be called whether they fail or succeed
 function allSettled(promises) {
@@ -83,5 +84,8 @@ module.exports.init = () => {
 		);
 	}
 
-	return allSettled(fetchPromises);
+	return allSettled(fetchPromises)
+		.then(() => {
+			lazyLoadImages();
+		});
 };

@@ -42,7 +42,6 @@ bootstrap(({flags, mainCss}) => {
 	toc.init(flags);
 	scrollDepth.init(flags);
 
-
 	mainCss.then(() => {
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
 		onwardJourney.init(flags);

@@ -2,11 +2,11 @@
 	<article class="pod__item" data-trackable="pod-{{@index}}">
 		{{#ifEquals @index 0}}
 			{{#if mainImage}}
-				<div class="pod__item__image--placeholder">
-					<a class="pod__item__image" href="{{url}}" data-trackable="link-article-image">
-						<img srcset="{{mainImage.srcset}}" sizes="{{mainImage.sizes}}" alt="{{mainImage.alt}}" />
-					</a>
-				</div>
+				<a class="pod__item__image-link n-utils-hide-core" href="{{url}}" data-trackable="link-article-image">
+					<div class="pod__item__image-placeholder">
+						<img class="pod__item__image n-image n-image--lazy-loading" data-srcset="{{mainImage.srcset}}" sizes="{{mainImage.sizes}}" alt="{{mainImage.alt}}" />
+					</div>
+				</a>
 			{{/if}}
 		{{/ifEquals}}
 		<div class="pod__item__content">
