@@ -17,7 +17,6 @@ const app = module.exports = express({
 	withBackendAuthentication: true,
 	withRequestTracing: true,
 	hasHeadCss: true,
-	hasNUiBundle: true,
 	layoutsDir: path.join(process.cwd(), '/bower_components/n-ui/layout'),
 	healthChecks: [
 		checks.esv3,
