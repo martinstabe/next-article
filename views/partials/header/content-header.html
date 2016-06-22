@@ -25,7 +25,7 @@
 						{{/ifEquals}}
 						{{#if designGenre}}
 							<div class="article__brand--wrapper">
-								<a class="article__brand--title	n-content-tag" href={{designGenre.url}} data-trackable="brand">{{designGenre.name}}</a>
+								<a class="article__brand--title	n-content-tag" href={{designGenre.url}} data-trackable="brand" aria-label="part of the {{designGenre.name}} column">{{designGenre.name}}</a>
 							</div>
 						{{/if}}
 					</div>
@@ -34,7 +34,8 @@
 				<div class="article__header-headshot">
 					<img
 						class="article__header-headshot--image"
-						src="{{designGenre.headshot}}?source=next&amp;fit=scale-down&amp;width=150&amp;compression=best&amp;format=png&amp;quality=highest&amp;dpr=2">
+						src="{{designGenre.headshot}}?source=next&amp;fit=scale-down&amp;width=150&amp;compression=best&amp;format=png&amp;quality=highest&amp;dpr=2"
+						alt="Image of {{designGenre.name}}">
 				</div>
 				{{/if}}
 			</div>
