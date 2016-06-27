@@ -1,13 +1,14 @@
 $output-critical: true !default;
 
 @import 'n-ui/configure';
-@include nUiConfigure((
-	preset: complete,
-	critical: $output-critical,
-	// overrides
-	myft: 'critical',
-	buttons: true
-));
+@include nUiConfigure(
+	$features: (
+		buttons: true,
+		myft: 'critical'
+	),
+	$preset: 'complete',
+	$output-critical: $output-critical
+);
 @import 'n-ui/bootstrap';
 
 @include nUiCriticalStart();
