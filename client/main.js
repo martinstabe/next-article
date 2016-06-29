@@ -58,13 +58,16 @@ bootstrap(({flags, mainCss}) => {
 			const commentsEl = document.getElementById('comments');
 			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
 			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
+			const commentsLazyLoad = commentsEl.getAttribute('data-comments-lazy-load') === 'true';
 
 			commentsIcon.init();
 			commentsSkeleton.init();
 
 			lazyLoad({
 				targetEl: '#comments',
-				sources: [commentsJsLocation, commentsCssLocation]
+				sources: [commentsJsLocation, commentsCssLocation],
+				threshold: 600,
+				commentsLazyLoad
 			}).then(function() {
 				var data = {
 					action: 'view',
@@ -76,6 +79,7 @@ bootstrap(({flags, mainCss}) => {
 				};
 				trackEvent(data);
 			});
+
 		}
 	});
 

@@ -35,7 +35,7 @@ function lazyLoad(opts) {
 			let loaded = false;
 			const threshold = opts.threshold || 250;
 			const loadContent = () => {
-				if(!loaded && elementInView(target, threshold)) {
+				if(!loaded && (!opts.commentsLazyLoad || elementInView(target, threshold))) {
 					const appendElements = opts.sources.map(createElements);
 					Promise.all(appendElements).then(function() {
 						loaded = true;
@@ -44,7 +44,11 @@ function lazyLoad(opts) {
 				}
 			}
 
-			window.addEventListener('scroll', throttle(loadContent, 250));
+			if (opts.commentsLazyLoad) {
+				window.addEventListener('scroll', throttle(loadContent, 250));
+			} else {
+				loadContent();
+			}
 		}
 	});
 }

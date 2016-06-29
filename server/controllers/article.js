@@ -44,6 +44,8 @@ function isPremiumArticle (webUrl) {
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
+	content.lazyLoadComments = (req.query['lf-content'] && req.query.hubRefSrc) ? false : true;
+
 	content.thisYear = new Date().getFullYear();
 
 	content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
