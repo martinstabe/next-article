@@ -41,6 +41,7 @@ $output-critical: true !default;
 @include nUiCriticalEnd();
 
 @import 'components/share/main';
+@import 'components/gift-banner/main';
 @import 'components/ads/main';
 $o-expander-is-silent: false;
 @import 'o-expander/main';

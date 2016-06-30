@@ -1,0 +1,68 @@
+@include nUiCriticalStart();
+
+.gift-banner--below {
+
+	margin: 0;
+	width: 352px;
+	text-align: center;
+
+	@include oGridRespondTo($from: S) {
+		width: 270px;
+	}
+
+	@include oGridRespondTo($from: M) {
+		display: none;
+	}
+
+	.gift-banner__pointer {
+		display: block;
+
+		&:before {
+			@include oIconsGetIcon('arrow-up', oColorsGetPaletteColor('teal-1'), 16);
+
+			content: '';
+			position: relative;
+			top: 6px;
+		}
+	}
+}
+
+.gift-banner--right {
+
+	float: left;
+	margin: 0;
+
+	@include oGridRespondTo($until: M) {
+		display: none;
+	}
+
+
+	.gift-banner__pointer {
+		@include oIconsGetIcon('arrow-left', oColorsGetPaletteColor('teal-1'), 16);
+
+		content: '';
+		position: relative;
+		top: 4px;
+		margin-right: -5px;
+	}
+}
+
+.gift-banner__label {
+	@include oFontsInclude(MetricWeb);
+
+	font-weight: bold;
+	font-size: 14px;
+	color: oColorsGetPaletteColor('teal-1');
+
+	&:before {
+		@include oIconsGetIcon('gift', oColorsGetPaletteColor('teal-1'), 16);
+
+		content: '';
+		position: relative;
+		top: 3px;
+		margin-right: 2px;
+	}
+
+}
+
+@include nUiCriticalEnd();

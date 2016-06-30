@@ -28,6 +28,13 @@
 								data-n-article-email-free-article="{{freeArticle}}"
 								data-trackable="email"><i>Email</i></button>
 						</li>
+						{{#if @root.flags.articleGiftBanner}}
+							{{#unless freeArticle}}
+								<p class="gift-banner--right">
+									{{> gift-banner}}
+								</p>
+							{{/unless}}
+						{{/if}}
 					{{/ifAll}}
 				</ul>
 			</div>
@@ -48,6 +55,13 @@
 	</div>
 	{{#ifAll signedIn @root.flags.giftArticle}}
 		<div data-n-article-email-{{location}}-container></div>
+		{{#if @root.flags.articleGiftBanner}}
+			{{#unless freeArticle}}
+				<p class="gift-banner--below">
+					{{> gift-banner}}
+				</p>
+			{{/unless}}
+		{{/if}}
 	{{/ifAll}}
 	<div class="article__share-bottom-gutter--{{location}}"></div>
 </div>
