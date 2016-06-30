@@ -25,6 +25,9 @@ whitesource.config.json
 /public/main.css.map
 /public/main.js
 /public/main.js.map
+/public/main-without-n-ui.js
+/public/main-without-n-ui.js.map
+
 /test/browser/reports
 /test/browser/screenshots
 /test/visual/screenshots
