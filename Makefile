@@ -47,4 +47,4 @@ provision:
 
 smoke:
 	nht test-urls ${TEST_APP} --throttle 1;
-	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/* -e ie9,edge,chrome,firefox
+	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/*
