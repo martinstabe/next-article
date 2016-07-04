@@ -3,12 +3,10 @@
 const oViewport = require('n-ui/viewport');
 const nVideo = require('n-video');
 const lightSignup = require('o-email-only-signup');
+const nUiConfig = require('./n-ui-config');
+import {bootstrap} from 'n-ui';
 
-import {configure, bootstrap} from 'n-ui';
-
-configure({preset: 'complete'});
-
-bootstrap(({flags, mainCss}) => {
+bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 	const slideshow = require('./components/slideshow/main');
 	const readingHistory = require('./components/reading-history');
