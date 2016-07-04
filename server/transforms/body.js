@@ -32,7 +32,12 @@ module.exports = function (body, flags, options) {
 	const resultObject = {bodyHTML: $bodyHTML.html()};
 
 	Object.assign(resultObject, extractToc(resultObject.bodyHTML));
-	Object.assign(resultObject, extractMainImage(resultObject.bodyHTML));
+
+	// Don't extract the main image from fragment requests because that will mean
+	// the mainImage disappears when you open article with a mainImage in stream.
+	if (!options.fragment) {
+		Object.assign(resultObject, extractMainImage(resultObject.bodyHTML));
+	}
 
 	return resultObject;
 };
