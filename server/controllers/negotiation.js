@@ -48,6 +48,14 @@ module.exports = function negotiationController(req, res, next) {
 		.then(article => {
 			const webUrl = article && article.webUrl || '';
 
+			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
+			// and therefore we shouldn't replicate content from FTAlphaville on Next for SEO reasons.
+			if (webUrl.includes('ftalphville.ft.com')) {
+				return res.redirect(301, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
+			}
+
+			// Redirect liveblogs to old FT.com because they don't yet work in Next
+			// TODO: Remove once liveblogs are supported on Next
 			if (webUrl.includes('/liveblogs/') || webUrl.includes('/marketslive/')) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
