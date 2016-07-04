@@ -50,7 +50,7 @@ module.exports = function negotiationController(req, res, next) {
 
 			// Redirect ftalphaville to old FT.com.  Next is not currently planning to absorb FTAlphaville
 			// and therefore we shouldn't replicate content from FTAlphaville on Next for SEO reasons.
-			if (webUrl.includes('ftalphville.ft.com')) {
+			if (webUrl.includes('ftalphaville.ft.com')) {
 				return res.redirect(301, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 

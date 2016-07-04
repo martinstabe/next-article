@@ -175,8 +175,29 @@ describe('Negotiation Controller', function() {
 	});
 
 
-	describe('for live blogs', () => {
-		it('should redirect back to FT.com', () => {
+	describe('for unsupported Next pages', () => {
+
+		it('ftalphaville should redirect back to FT.com', () => {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							webUrl: 'http://ftalphaville.ft.com/2016/07/04/2168234/ft-opening-quote-86/'
+						}
+					}]
+				});
+
+			return createInstance({
+				params: { id: 'uuid' }
+			})
+				.then(() => {
+					expect(response.statusCode).to.equal(301);
+				});
+		});
+
+		it('markets live should redirect back to FT.com', () => {
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
 				.reply(200, {
@@ -192,9 +213,30 @@ describe('Negotiation Controller', function() {
 				params: { id: 'uuid' }
 			})
 				.then(() => {
+					expect(response.statusCode).to.equal(301);
+				});
+		});
+
+		it('live blogs should redirect back to FT.com', () => {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							webUrl: 'http://blogs.ft.com/westminster/liveblogs/2016-06-28-2/'
+						}
+					}]
+				});
+
+			return createInstance({
+				params: { id: 'uuid' }
+			})
+				.then(() => {
 					expect(response.statusCode).to.equal(302);
 				});
 		});
+
 	})
 
 });
