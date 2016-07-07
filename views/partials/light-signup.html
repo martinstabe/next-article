@@ -11,17 +11,12 @@
 			<button class="o-email-only-signup__close o-email-only-signup__visually-hidden" aria-controls="o-email-only-signup-content" data-trackable="close" data-o-email-only-signup-close><span class="o-email-only-signup__visually-hidden">Close</span></button>
 			<h3 class="o-email-only-signup__heading">Sample the FT's top stories for a week</h3>
 
-			{{#if @root.flags.lightSignupTopics}}
-				<p class="o-email-only-signup__text">Receive a free daily email briefing containing the 3 top stories from one of our top news themes.</p>
-			{{else}}
-				<p class="o-email-only-signup__text">For 1 week, you’ll get an email with free access to the 3 most read FT stories.</p>
-			{{/if}}
+			<p class="o-email-only-signup__text">Receive a free daily email briefing containing the 3 top stories from one of our top news themes.</p>
 
 			<div class="o-email-only-signup__secondary" data-o-email-only-signup-completion-message>
 
 				<form class="o-email-only-signup__form" data-o-email-only-signup-form>
 
-					{{#if @root.flags.lightSignupTopics}}
 					<div class="o-email-only-signup__form-group">
 						<label for="topics" class="o-email-only-signup__visually-hidden">Select the topic you are interested in:</label>
 						<select id="topics" name="topics" class="o-email-only-signup__select o-email-only-signup__select--inactive" data-o-email-only-signup-dropdown>
@@ -39,7 +34,6 @@
 								<option value="Connected Car">Connected Cars</option>
 						</select>
 					</div>
-					{{/if}}
 
 					<div class="o-email-only-signup__form-group">
 						<label for="email" class="o-email-only-signup__visually-hidden">Email address:</label>
