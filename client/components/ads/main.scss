@@ -26,6 +26,9 @@ $ad-medium-breakpoint: 760px;
 	@include oGridRespondTo(L) {
 		display: block;
 	}
+	&[data-o-ads-master-loaded="Responsive"] {
+		display: none;
+	}
 }
 
 .in-article-advert {
