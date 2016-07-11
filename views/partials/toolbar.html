@@ -22,19 +22,19 @@
 					</li>
 					{{#ifAll signedIn @root.flags.giftArticle}}
 						<li class="article__share-action--email o-share__action o-share__action--email">
+							{{#if @root.flags.articleGiftBanner}}
+								{{#unless freeArticle}}
+									<p class="gift-banner gift-banner--right">
+										{{> gift-banner}}
+									</p>
+								{{/unless}}
+							{{/if}}
 							<button
 								data-n-article-email-clickable
 								data-n-article-email-container="{{location}}"
 								data-n-article-email-free-article="{{freeArticle}}"
 								data-trackable="email"><i>Email</i></button>
 						</li>
-						{{#if @root.flags.articleGiftBanner}}
-							{{#unless freeArticle}}
-								<p class="gift-banner--right">
-									{{> gift-banner}}
-								</p>
-							{{/unless}}
-						{{/if}}
 					{{/ifAll}}
 				</ul>
 			</div>
@@ -57,7 +57,7 @@
 		<div data-n-article-email-{{location}}-container></div>
 		{{#if @root.flags.articleGiftBanner}}
 			{{#unless freeArticle}}
-				<p class="gift-banner--below">
+				<p class="gift-banner gift-banner--below">
 					{{> gift-banner}}
 				</p>
 			{{/unless}}

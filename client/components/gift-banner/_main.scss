@@ -1,16 +1,13 @@
 @include nUiCriticalStart();
 
-.gift-banner--below {
-
+.gift-banner {
 	margin: 0;
-	width: 352px;
+}
+
+.gift-banner--below {
 	text-align: center;
 
-	@include oGridRespondTo($from: S) {
-		width: 270px;
-	}
-
-	@include oGridRespondTo($from: M) {
+	@include oGridRespondTo(S) {
 		display: none;
 	}
 
@@ -28,14 +25,11 @@
 }
 
 .gift-banner--right {
+	float: right;
 
-	float: left;
-	margin: 0;
-
-	@include oGridRespondTo($until: M) {
+	@include oGridRespondTo($until: S) {
 		display: none;
 	}
-
 
 	.gift-banner__pointer {
 		@include oIconsGetIcon('arrow-left', oColorsGetPaletteColor('teal-1'), 16);

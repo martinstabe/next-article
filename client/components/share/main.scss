@@ -32,7 +32,7 @@
 			@include oTypographySansSize(s);
 			border-bottom-width: 0;
 			float: right;
-			margin-right: 16px;
+			margin-right: 0.5em;
 		}
 
 		&__print {
@@ -51,6 +51,10 @@
 
 		.o-share {
 			display: block; // prevent inline-block spacing issue
+		}
+
+		.o-share__action {
+			margin: 0;
 		}
 
 		.o-share__action a {
