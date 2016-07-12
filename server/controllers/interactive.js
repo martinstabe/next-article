@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function interactiveController(req, res, next, payload) {
+module.exports = function (req, res, next, payload) {
 	if (payload.displaytype === 'embed') {
 		res.render('interactive', {
 			layout: 'wrapper',
