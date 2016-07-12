@@ -8,7 +8,7 @@ install: whitesource.config.json
 whitesource.config.json:
 	@if $(call IS_GIT_IGNORED); then echo '{ "apiKey": "$(WHITESOURCE_API_KEY)", "productName":"Next", "projectName":"$(call APP_NAME)" }' > $@ && $(DONE); fi
 
-coverage:
+coverage-report:
 	export apikey=12345; export api2key=67890; export AWS_SIGNED_FETCH_DISABLE_DNS_RESOLUTION=true; export NODE_ENV=test; istanbul cover node_modules/.bin/_mocha --report lcovonly 'test/server/**/*.test.js'
 
 unit-test:
@@ -18,7 +18,7 @@ test:
 	make verify
 
 ifeq ($(CIRCLE_BRANCH),master)
-	make coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+	make coverage-report && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 else
 	make unit-test
 endif
