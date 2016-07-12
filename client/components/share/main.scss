@@ -1,12 +1,12 @@
 @import "o-share/main";
 @import "n-email-article/main";
 
+// todo: this module is pretty grim and needs refactoring or deleting in favour of sticky header
 @include nUiCriticalStart();
 
 	@include oShareBase(o-share);
 
 	.article__share {
-		overflow: hidden;
 		position: relative;
 		margin-top: 15px;
 		padding: 5px 0;
@@ -54,6 +54,7 @@
 		}
 
 		.o-share__action {
+			position: relative;
 			margin: 0;
 		}
 
@@ -91,6 +92,15 @@
 			padding-bottom: 4px;
 		}
 
+	}
+
+	// flags.articleGiftBanner
+	.article__share--banner {
+		margin-bottom: 40px;
+
+		@include oGridRespondTo('M') {
+			margin-bottom: 0;
+		}
 	}
 
 	.article__main .email-article .email-article__border {

@@ -1,41 +1,36 @@
 @include nUiCriticalStart();
 
 .gift-banner {
+	position: absolute;
 	margin: 0;
-}
 
-.gift-banner--below {
-	text-align: center;
-
-	@include oGridRespondTo(S) {
-		display: none;
+	@include oGridRespondTo($until: 'S') {
+		top: 100%;
+		left: 50%;
+		width: 240px;
+		margin-left: -120px;
+		text-align: center;
 	}
 
-	.gift-banner__pointer {
+	@include oGridRespondTo($from: 'S') {
+		top: 0;
+		left: 100%;
+		white-space: nowrap;
+	}
+}
+
+.gift-banner__pointer {
+	position: relative;
+
+	@include oGridRespondTo($until: 'S') {
+		@include oIconsGetIcon('arrow-up', oColorsGetPaletteColor('teal-1'), 16);
+		top: 6px;
 		display: block;
-
-		&:before {
-			@include oIconsGetIcon('arrow-up', oColorsGetPaletteColor('teal-1'), 16);
-
-			content: '';
-			position: relative;
-			top: 6px;
-		}
-	}
-}
-
-.gift-banner--right {
-	float: right;
-
-	@include oGridRespondTo($until: S) {
-		display: none;
+		width: 100%;
 	}
 
-	.gift-banner__pointer {
+	@include oGridRespondTo($from: 'S') {
 		@include oIconsGetIcon('arrow-left', oColorsGetPaletteColor('teal-1'), 16);
-
-		content: '';
-		position: relative;
 		top: 4px;
 		margin-right: -5px;
 	}
