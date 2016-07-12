@@ -30,6 +30,10 @@ describe('Podcast Controller', () => {
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
 		response.locals = { flags: flags || {} };
+
+		// node-mocks-http doesn't support this method
+		response.unvaryAll = sinon.stub();
+
 		return subject(request, response, next, fixtureEsFound);
 	}
 
@@ -68,8 +72,8 @@ describe('Podcast Controller', () => {
 			});
 		});
 
-		it('renders supports returning with fragment layout', () => {
-			console.log(response)
+		it('renders supports rendering with fragment layout', () => {
+			expect(response._getRenderView()).to.equal('fragment');
 		});
 	});
 

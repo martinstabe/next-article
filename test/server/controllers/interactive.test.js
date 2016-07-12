@@ -11,7 +11,6 @@ describe('Interactive Controller', () => {
 	let request;
 	let response;
 	let next;
-	let result;
 
 	function createInstance(payload) {
 		next = sinon.stub();
