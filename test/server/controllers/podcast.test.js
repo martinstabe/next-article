@@ -7,7 +7,7 @@ const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const fixtureEsFound = require('../../fixtures/v3-elastic-podcast-found').docs[0]._source;
+const fixture = require('../../fixtures/v3-elastic-podcast-found').docs[0]._source;
 
 const stubs = {
 	suggested: sinon.stub(),
@@ -34,7 +34,7 @@ describe('Podcast Controller', () => {
 		// node-mocks-http doesn't support this method
 		response.unvaryAll = sinon.stub();
 
-		return subject(request, response, next, fixtureEsFound);
+		return subject(request, response, next, fixture);
 	}
 
 	context('success', () => {
