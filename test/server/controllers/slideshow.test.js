@@ -11,7 +11,6 @@ const fixture = require('../../fixtures/capi-v1-slideshow');
 const subject = require('../../../server/controllers/slideshow');
 
 describe('Slideshow Controller', () => {
-
 	let request;
 	let response;
 	let next;
@@ -25,7 +24,6 @@ describe('Slideshow Controller', () => {
 	}
 
 	context('when content is found', () => {
-
 		beforeEach(() => {
 			result = null;
 
@@ -53,11 +51,26 @@ describe('Slideshow Controller', () => {
 		it('extracts slideshow title', () => {
 			expect(result.title).to.equal('Bethlehem mosaic angels restored to glory');
 		});
+	});
 
+	context('when content is invalid', () => {
+		beforeEach(() => {
+			result = null;
+
+			nock('https://api.ft.com')
+				.get('/content/items/v1/12345')
+				.query(true)
+				.reply(200, { item: { assets: null } });
+
+			return createInstance({ params: { id: 12345 } });
+		});
+
+		it('responds with a 404', () => {
+			expect(response.statusCode).to.equal(404);
+		});
 	});
 
 	context('when content is not found', () => {
-
 		beforeEach(() => {
 			nock('https://api.ft.com')
 				.get('/content/items/v1/12345')
@@ -70,7 +83,20 @@ describe('Slideshow Controller', () => {
 		it('responds with a 404', () => {
 			expect(response.statusCode).to.equal(404);
 		});
-
 	});
 
+	context('when there is an error', () => {
+		beforeEach(() => {
+			nock('https://api.ft.com')
+				.get('/content/items/v1/12345')
+				.query(true)
+				.reply(200, '{i am "not" json}');
+
+			return createInstance({ params: { id: 12345 } });
+		});
+
+		it('responds with a 50x', () => {
+			expect(next.callCount).to.equal(1);
+		});
+	});
 });
