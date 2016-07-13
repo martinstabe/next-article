@@ -1,12 +1,19 @@
 'use strict';
 
-const fetchres = require('fetchres');
-
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
+	const err = new Error();
 
 	// E.g. 4eb77dd4-9b35-11e4-be20-002128161462
 	return fetch(`https://api.ft.com/content/items/v1/${req.params.id}?apiKey=${process.env.apikey}`)
-		.then(fetchres.json)
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				err.status = response.status;
+				err.message = response.statusText;
+				throw err;
+			}
+		})
 		.then(data => {
 			if (data
 				&& data.item
@@ -19,11 +26,12 @@ module.exports = function(req, res, next) {
 					slides: data.item.assets[0].fields.slides
 				});
 			} else {
-				res.status(404).end();
+				err.status = 404;
+				throw err;
 			}
 		})
 		.catch(err => {
-			if (fetchres.originatedError(err)) {
+			if (err.status === 404) {
 				res.status(404).end();
 			} else {
 				next(err);
