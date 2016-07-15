@@ -1,8 +1,13 @@
-@include nUiCriticalStart();
+@include nUiCritical {
+	.gift-banner {
+		display: none;
+	}
+}
 
 .gift-banner {
 	position: absolute;
 	margin: 0;
+	display: block;
 
 	@include oGridRespondTo($until: 'S') {
 		top: 100%;
@@ -53,5 +58,3 @@
 	}
 
 }
-
-@include nUiCriticalEnd();

@@ -3,8 +3,7 @@ $output-critical: true !default;
 @import 'n-ui/configure';
 @include nUiConfigure(
 	$features: (
-		buttons: true,
-		myft: 'critical'
+		buttons: true
 	),
 	$preset: 'complete',
 	$output-critical: $output-critical
