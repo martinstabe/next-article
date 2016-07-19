@@ -38,7 +38,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	}
 
 	toc.init(flags);
-	scrollDepth.init(flags);
+	scrollDepth(flags);
 
 	mainCss.then(() => {
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
