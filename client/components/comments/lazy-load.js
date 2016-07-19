@@ -1,13 +1,8 @@
-'use strict';
-
-const throttle = require('../../libs/throttle');
-
-function createElements(source) {
-	return new Promise((resolve) => {
-		let fileType = source.substr((source.lastIndexOf('.') + 1));
+const loadSources = (sources, resolve) => {
+	sources.forEach(source => {
+		const fileType = source.split('.').pop();
 		let element;
-
-		if(fileType === 'js') {
+		if (fileType === 'js') {
 			element = document.createElement('script');
 			element.src = source;
 		} else {
@@ -15,42 +10,35 @@ function createElements(source) {
 			element.setAttribute('rel', 'stylesheet');
 			element.href = source;
 		}
-
 		document.head.appendChild(element);
-		resolve();
 	});
-}
 
-function elementInView(target, threshold) {
-	let targetPos = target.getBoundingClientRect().top;
-	let loadPos = window.innerHeight + threshold;
+	resolve();
+};
 
-	return targetPos <= loadPos ? true : false;
-}
+const intersectionCallback = (observer, changes, sources, resolve) => {
+	changes.forEach(change => {
+		loadSources(sources, resolve);
+		observer.unobserve(change.target);
+	});
+};
 
-function lazyLoad(opts) {
-	return new Promise((resolve) => {
+export default opts =>
+	new Promise((resolve, reject) => {
 		const target = document.querySelector(opts.targetEl);
-		if(target) {
-			let loaded = false;
-			const threshold = opts.threshold || 250;
-			const loadContent = () => {
-				if(!loaded && (!opts.commentsLazyLoad || elementInView(target, threshold))) {
-					const appendElements = opts.sources.map(createElements);
-					Promise.all(appendElements).then(function() {
-						loaded = true;
-						resolve();
-					});
-				}
-			}
-
-			if (opts.commentsLazyLoad) {
-				window.addEventListener('scroll', throttle(loadContent, 250));
+		if (target) {
+			if (opts.commentsLazyLoad && window.IntersectionObserver) {
+				const observer = new IntersectionObserver(
+					function (changes) {
+						intersectionCallback(this, changes, opts.sources, resolve);
+					},
+					{ rootMargin: `${opts.threshold}px` }
+				);
+				observer.observe(target);
 			} else {
-				loadContent();
+				loadSources(opts.sources, resolve);
 			}
+		} else {
+			reject('targetEl does not exist');
 		}
 	});
-}
-
-module.exports = lazyLoad;
