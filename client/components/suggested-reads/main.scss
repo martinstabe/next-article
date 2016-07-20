@@ -8,7 +8,7 @@
 }
 
 .suggested-reads__title {
-	@include oTypographySerifDisplay(m);
+	@include oTypographySerifDisplay('m', $load-progressively: true);
 	position: absolute;
 	top: -10px;
 	left: 10px;
@@ -19,7 +19,7 @@
 }
 
 .suggested-reads__subheading {
-	@include oTypographySans(s);
+	@include oTypographySans(s, $load-progressively: true);
 	margin: 0 0 10px;
 	color: getColor('grey-tint5');
 	border-bottom: 1px solid getColor('warm-3');
@@ -38,7 +38,7 @@
 }
 
 .suggested-reads__list-item__headline {
-	@include oTypographySerifDisplay('m');
+	@include oTypographySerifDisplay('m', $load-progressively: true);
 	margin: 0 0 4px;
 
 	a {
@@ -47,7 +47,7 @@
 }
 
 .suggested-reads__list-item__subheading {
-	@include oTypographySans('s');
+	@include oTypographySans('s', $load-progressively: true);
 	margin: 0;
 	color: getColor('grey-tint4');
 }

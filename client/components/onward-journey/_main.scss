@@ -34,7 +34,7 @@
 	}
 
 	.header__name {
-		@include oTypographySansBold(m);
+		@include oTypographySansBold('m', $load-progressively: true);
 		color: getColor('claret-1');
 		margin-right: 0;
 	}
@@ -280,7 +280,7 @@
 }
 
 .header__link {
-	@include oTypographySansDataBold(m);
+	@include oTypographySansDataBold('m', $load-progressively: true);
 	font-size: 16px;
 	position: relative;
 	background-color: getColorFor('page', 'background');
