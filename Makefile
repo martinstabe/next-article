@@ -24,7 +24,7 @@ else
 endif
 
 run:
-	nht run
+	nht run --https
 
 deploy: _deploy_whitesource
 	nht deploy-hashed-assets --monitor-assets
