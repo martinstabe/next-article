@@ -26,7 +26,7 @@ const intersectionCallback = (observer, changes) => {
 
 export default (flags, { percentages = [25, 50, 75, 100], articleBodySelector = '.article__body'} = { }) => {
 	const articleBody = document.querySelector(articleBodySelector);
-	if (flags.get('articleScrollDepthTracking') && articleBody) {
+	if (flags.get('articleScrollDepthTracking') && articleBody && window.IntersectionObserver) {
 		const observer = new IntersectionObserver(
 			function (changes) {
 				intersectionCallback(this, changes);
