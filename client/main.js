@@ -5,6 +5,7 @@ const nVideo = require('n-video');
 const lightSignup = require('o-email-only-signup');
 const nUiConfig = require('./n-ui-config');
 import {bootstrap} from 'n-ui';
+import cacheJourney from './components/cache-journey/cache-journey';
 
 bootstrap(nUiConfig, ({flags, mainCss}) => {
 
@@ -20,6 +21,8 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 	const trackEvent = require('./components/utils/tracking');
+
+	cacheJourney();
 
 	oViewport.listenTo('resize');
 
