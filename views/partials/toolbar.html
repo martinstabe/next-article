@@ -1,5 +1,5 @@
 <div>
-	<div class="article__share article__share--{{location}} article__share--{{#ifAll signedIn @root.flags.giftArticle @root.flags.articleGiftBanner}}{{#unless freeArticle}}banner{{/unless}}{{/ifAll}} n-util-clearfix" data-trackable="share-{{location}}">
+	<div class="article__share article__share--{{location}} article__share--{{#ifAll signedIn @root.flags.giftArticle @root.flags.articleGiftBanner}}{{#unless freeArticle}}banner{{/unless}}{{/ifAll}} n-util-clearfix" data-trackable="share | {{location}}">
 		{{#if shared}}
 			<div class="article__share-share-message">
 				This article has been gifted to you by an FT Subscriber.
