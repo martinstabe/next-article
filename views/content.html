@@ -16,7 +16,7 @@
 	<div class="article__wrapper {{#if mainImageHtml}}article__wrapper--main-image{{/if}}">
 		{{#ifSome bodyHTML media}}
 		<div class="o-grid-container">
-			<div class="article__main o-grid-row" data-trackable="article-body">
+			<div class="article__main o-grid-row">
 				<div data-o-grid-colspan="12 L8 XL7 XLoffset1">
 					{{#if mainImageHTML}}
 						{{{mainImageHTML}}}
@@ -45,7 +45,7 @@
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
 						{{#if standFirst}}
-							<div class="article__body n-content-body">
+							<div class="article__body n-content-body" data-trackable="article-body">
 								<p>{{{standFirst}}}</p>
 							</div>
 						{{/if}}
