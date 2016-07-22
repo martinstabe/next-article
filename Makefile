@@ -26,6 +26,9 @@ endif
 run:
 	nht run --https
 
+run-sw:
+	nht run --https --local-apps service-worker=3010
+
 deploy: _deploy_whitesource
 	nht deploy-hashed-assets --monitor-assets
 	nht ship -m

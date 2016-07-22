@@ -1,3 +1,4 @@
+import {broadcast} from 'n-ui/utils';
 const loadSources = (sources, resolve) => {
 	sources.forEach(source => {
 		const fileType = source.split('.').pop();
@@ -25,16 +26,37 @@ const intersectionCallback = (observer, changes, sources, resolve) => {
 
 export default opts =>
 	new Promise((resolve, reject) => {
+		const RUM = true;
 		const target = document.querySelector(opts.targetEl);
 		if (target) {
 			if (opts.commentsLazyLoad && window.IntersectionObserver) {
 				const observer = new IntersectionObserver(
 					function (changes) {
 						intersectionCallback(this, changes, opts.sources, resolve);
+						if (RUM) {
+							broadcast('oTracking.event', {
+								category: 'comments',
+								action: 'lazy-load'
+							});
+						}
 					},
 					{ rootMargin: `${opts.threshold}px` }
 				);
 				observer.observe(target);
+				const rumObserver = new IntersectionObserver(
+					function () {
+						if (RUM) {
+							broadcast('oTracking.event', {
+								category: 'comments',
+								action: 'in-view'
+							});
+							rumObserver.unobserve(target);
+						}
+					},
+					{ rootMargin: `0px` }
+				);
+				rumObserver.observe(target);
+
 			} else {
 				loadSources(opts.sources, resolve);
 			}
