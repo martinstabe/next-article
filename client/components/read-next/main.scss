@@ -13,7 +13,7 @@
 }
 
 .next-up__intro {
-	@include oTypographySerifDisplay(m);
+	@include oTypographySerifDisplay('m', $load-progressively: true);
 	position: absolute;
 	background-color: getColorFor('page', 'background');
 	color: getColor('cold-2');
@@ -68,7 +68,7 @@
 }
 
 .next-up__timestamp {
-	@include oTypographySans(xs);
+	@include oTypographySans('xs', $load-progressively: true);
 	text-transform: uppercase;
 	color: oColorsGetColorFor(timestamp, text);
 	display: block;

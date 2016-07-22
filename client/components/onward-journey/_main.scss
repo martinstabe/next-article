@@ -253,14 +253,14 @@
 	overflow: hidden;
 }
 .header__name {
-	@include oTypographySerifDisplay(m);
+	@include oTypographySerifDisplay('m', $load-progressively: true);
 	display: inline;
 	margin: 0 10px 0 0;
 	padding: 10px 0 0;
 	color: getColor('cold-3');
 	&--sans-serif {
-		@include oTypographySansData(l);
-		font-size: 20px;
+		@include oTypographySansData('l', $load-progressively: true);
+		@include oTypographyFallbackFontSize('sansData', 20px);
 	}
 }
 .header__title {
