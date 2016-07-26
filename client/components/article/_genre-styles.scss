@@ -55,7 +55,7 @@ $brand-color: getColor('warm-1');
 }
 
 .article__brand--title {
-	@include oTypographySerifDisplay(l);
+	@include oTypographySerifDisplay(l, $load-progressively: true);
 	margin-left: 30px;
 }
 
