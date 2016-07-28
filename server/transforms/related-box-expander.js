@@ -23,8 +23,12 @@ module.exports = function ($) {
 		const $img = $el.find('img');
 		const hasImage = $img.length;
 		if (hasImage) {
-			// lazy load the image
-			$img.addClass('n-image n-image--lazy-loading');
+			$img
+				// lazy load the image
+				.addClass('n-image--lazy-loading')
+				// and the wrapper
+				.parent('.n-image-wrapper')
+					.addClass('n-image-wrapper--lazy-loading');
 			['src', 'srcset'].forEach(attr => {
 				const attrValue = $img.attr(attr);
 				if (attrValue) {

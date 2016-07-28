@@ -3,8 +3,8 @@
 		{{#ifEquals @index 0}}
 			{{#if mainImage}}
 				<a class="pod__item__image-link n-utils-hide-core" href="{{url}}" data-trackable="image">
-					<div class="pod__item__image-placeholder">
-						<img class="pod__item__image n-image n-image--lazy-loading" data-srcset="{{mainImage.srcset}}" sizes="{{mainImage.sizes}}" alt="{{mainImage.alt}}" />
+					<div class="pod__item__image-placeholder n-image-wrapper n-image-wrapper--placeholder n-image-wrapper--lazy-loading">
+						<img class="n-image n-image--lazy-loading" data-srcset="{{mainImage.srcset}}" sizes="{{mainImage.sizes}}" alt="{{mainImage.alt}}" />
 					</div>
 				</a>
 			{{/if}}

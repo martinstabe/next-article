@@ -93,12 +93,6 @@
 		height: auto;
 	}
 
-	.pod__item__image--placeholder {
-		display: block;
-		float: none;
-		margin-top: 10px;
-	}
-
 	.pod__item {
 		background-color: inherit;
 	}
@@ -163,18 +157,10 @@
 
 .pod__item__image-placeholder {
 	display: none;
-	position: relative;
-	padding-bottom: 56.25%;
 
 	@include oGridRespondTo(M) {
 		display: block;
 	}
-}
-
-.pod__item__image {
-	position: absolute;
-	top: 0;
-	left: 0;
 }
 
 .pod__item__content {
