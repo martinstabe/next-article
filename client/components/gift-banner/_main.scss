@@ -8,6 +8,7 @@
 	position: absolute;
 	margin: 0;
 	display: block;
+	cursor: auto;
 
 	@include oGridRespondTo($until: 'S') {
 		top: 100%;
