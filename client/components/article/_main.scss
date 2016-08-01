@@ -167,11 +167,11 @@
 	display: block;
 	margin: 0.3em 0 0.8em;
 	> p {
-		@include oTypographySans('m');
+		@include oTypographySans('m', $load-progressively: true);
 		margin: 0;
 	}
 	&__link {
-		@include oTypographySansBold('m');
+		@include oTypographySansBold('m', $load-progressively: true);
 	}
 }
 
