@@ -3,6 +3,7 @@
 var fetchres = require('fetchres');
 var oDate = require('n-ui/date');
 const lazyLoadImages = require('n-image').lazyLoad;
+import * as serviceWorker from 'n-service-worker';
 
 // Sort of like Promise.all but will be called whether they fail or succeed
 function allSettled(promises) {
@@ -87,5 +88,12 @@ module.exports.init = () => {
 	return allSettled(fetchPromises)
 		.then(() => {
 			lazyLoadImages();
+			serviceWorker
+				.message({
+					type: 'cacheContent',
+					content: [...document.querySelectorAll('.more-on .pod__item-wrapper--lead .pod__item__headline-link')]
+						.map(linkEl => ({ url: linkEl.getAttribute('href') }))
+				})
+				.catch(() => { });
 		});
 };
