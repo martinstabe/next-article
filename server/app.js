@@ -34,7 +34,10 @@ app.post('^/preview$', bodyParser.json(), require('./controllers/preview'));
 
 // Apply this after the preview controller. Previews should not be cached
 app.use((req, res, next) => {
+	// sets surrogate control
 	res.cache('hour');
+	// set a 2 minute public cache so that user can hit the back button without having to refetch the page
+	res.set('Cache-Control', 'max-age=120')
 	next();
 });
 
