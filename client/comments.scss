@@ -1,3 +1,4 @@
+
 @import 'n-ui/configure';
 
 // Fix o-comments at 2.2.0 and o-comment-ui at 2.1.0 so we can use the build service for images
@@ -9,6 +10,8 @@
 	o-comment-ui: "//next-geebee.ft.com/build/v2/files/o-comment-ui@3.1.1"
 ));
 
+$o-comments-include-fonts: false;
+$o-comment-ui-include-fonts: false;
 $o-comments-is-silent: false;
 @import "o-comments/main";
 @import "components/comments/main";
