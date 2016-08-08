@@ -3,6 +3,7 @@
 const oViewport = require('n-ui/viewport');
 const nVideo = require('n-video');
 const lightSignup = require('o-email-only-signup');
+const expander = require('n-ui/expander');
 const nUiConfig = require('./n-ui-config');
 import {bootstrap} from 'n-ui';
 import cacheJourney from './components/cache-journey/cache-journey';
@@ -47,6 +48,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		slideshow(document.querySelectorAll('.article ft-slideshow'));
 		onwardJourney.init(flags);
 		lightSignup.init();
+		expander.init();
 		nVideo.init({
 			// For generating placeholder image
 			optimumWidth: 680,
@@ -69,16 +71,15 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				sources: [commentsJsLocation, commentsCssLocation],
 				threshold: 600,
 				commentsLazyLoad
-			}).then(function() {
-				var data = {
+			}).then(function () {
+				trackEvent({
 					action: 'view',
 					category: 'comments',
 					context: {
 						product: 'next',
 						source: 'next-article'
 					}
-				};
-				trackEvent(data);
+				});
 			});
 
 		}

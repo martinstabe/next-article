@@ -1,0 +1,56 @@
+<div class="sample-articles">
+{{#with sampleArticles.mainTopic}}
+	<div data-o-component="o-expander" class="o-expander items sample-articles__wrapper__lead"
+		data-o-expander-shrink-to="2"
+		data-o-expander-count-selector="li"
+		data-o-expander-expanded-toggle-text="Less on this topic"
+		data-o-expander-collapsed-toggle-text="More on this topic"
+	>
+		<h3 class="sample-articles__header__lead">
+			Other sample articles from
+			<span class="sample-articles__title">{{ title }}</span>
+		</h3>
+		<ul class="o-expander__content sample-articles__items">
+			{{#each articles}}
+				<li class="sample-articles__item__wrapper__lead">
+					<article class="sample-articles__item">
+						<h4 class="sample-articles__item__headline">
+							<a class="sample-articles__item__headline-link" href="{{url}}" data-trackable="headline">
+								{{title}}
+							</a>
+						</h4>
+					</article>
+				</li>
+			{{/each}}
+		</ul>
+		<button class="o-expander__toggle o--if-js sample-articles__more-button"></button>
+	</div>
+{{/with}}
+	<div class="sample-articles__wrapper__other">
+	<h3 class="sample-articles__header__lead">Or sample other topics</h3>
+	{{#each sampleArticles.otherTopics}}
+		<div data-o-component="o-expander" class="o-expander items sample-articles__wrapper"
+			data-o-expander-shrink-to="1"
+			data-o-expander-count-selector="li"
+			data-o-expander-expanded-toggle-text="Less on this topic"
+			data-o-expander-collapsed-toggle-text="More on this topic"
+		>
+			<h3 class="sample-articles__header">{{ title }}</h3>
+			<ul class="o-expander__content sample-articles__items">
+				{{#each articles}}
+					<li class="sample-articles__item__wrapper">
+						<article class="sample-articles__item">
+							<h4 class="sample-articles__item__headline">
+								<a class="sample-articles__item__headline-link" href="{{url}}" data-trackable="headline">
+									{{title}}
+								</a>
+							</h4>
+						</article>
+					</li>
+				{{/each}}
+			</ul>
+			<button class="o-expander__toggle o--if-js sample-articles__more-button"></button>
+		</div>
+	{{/each}}
+	</div>
+</div>

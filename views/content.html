@@ -80,6 +80,12 @@
 	{{>read-next-bottom article=readNextArticle}}
 {{/ifAll}}
 
+{{#ifAll @root.anon.userIsAnonymous @root.flags.anonSampleArticles}}
+	{{#if sampleArticles}}
+		{{> related/sample-articles}}
+	{{/if}}
+{{/ifAll}}
+
 {{> bottom/bottom}}
 
 <script type="text/json" id="dehydrated-metadata">{{{json dehydratedMetadata}}}</script>
