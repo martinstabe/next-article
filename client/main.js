@@ -1,7 +1,7 @@
 'use strict';
 
 const oViewport = require('n-ui/viewport');
-const nVideo = require('n-video');
+const OVideo = require('o-video');
 const lightSignup = require('o-email-only-signup');
 const expander = require('n-ui/expander');
 const nUiConfig = require('./n-ui-config');
@@ -49,11 +49,16 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		onwardJourney.init(flags);
 		lightSignup.init();
 		expander.init();
-		nVideo.init({
-			// For generating placeholder image
-			optimumWidth: 680,
-			placeholder: true,
-			placeholderTitle: true
+
+		const videos = document.querySelectorAll('[data-o-component="o-video"]');
+		Array.from(videos).forEach(video => {
+			new OVideo(video, {
+				id: video.getAttribute('data-o-video-id'),
+				placeholder: true,
+				classes: ['video'],
+				advertising: flags.get('videoPlayerAdvertising'),
+				source: 'brightcove'
+			});
 		});
 
 		if(flags.get('articleComments') && document.querySelector('#comments')) {
