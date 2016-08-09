@@ -50,7 +50,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 
 	content.thisYear = new Date().getFullYear();
 
-	content.adsLayout = getAdsLayout(req.query.adsLayout, res.locals.flags);
+	content.adsLayout = getAdsLayout(req.query.adsLayout);
 
 	if (req.query.myftTopics) {
 		content.myftTopics = req.query.myftTopics.split(',');
