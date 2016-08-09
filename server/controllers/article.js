@@ -133,7 +133,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
-	content.withGcs = true;
+	content.withGcs = res.locals.flags.googleConsumerSurvey || content.id === '1bd2b5ec-9fbb-11e5-8613-08e211ea5317';
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
