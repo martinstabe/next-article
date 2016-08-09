@@ -1,3 +1,10 @@
-<div class="article__body n-content-body" data-trackable="article-body">
+<div class="article__body n-content-body{{#if @root.flags.googleConsumerSurvey}} p402_premium{{/if}}" data-trackable="article-body">
 	{{{bodyHTML}}}
 </div>
+{{#if @root.flags.googleConsumerSurvey}}
+	<script type="text/javascript">
+		try {
+			_402_Show();
+		} catch(e) { }
+	</script>
+{{/if}}

@@ -133,6 +133,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
+	content.withGcs = true;
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
