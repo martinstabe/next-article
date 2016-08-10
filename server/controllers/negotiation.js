@@ -61,7 +61,7 @@ module.exports = function negotiationController(req, res, next) {
 			}
 
 			if (webUrl.includes('video.ft.com')) {
-				return res.redirect(302, webUrl + 'ft_site=falcon&desktop=true');
+				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
 			if (article) {

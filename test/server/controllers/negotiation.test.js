@@ -214,6 +214,8 @@ describe('Negotiation Controller', function() {
 			})
 				.then(() => {
 					expect(response.statusCode).to.equal(301);
+					expect(response._getRedirectUrl()).to.include('http://ftalphaville.ft.com/marketslive/2015-10-27/');
+					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
 				});
 		});
 
@@ -234,6 +236,8 @@ describe('Negotiation Controller', function() {
 			})
 				.then(() => {
 					expect(response.statusCode).to.equal(302);
+					expect(response._getRedirectUrl()).to.include('http://blogs.ft.com/westminster/liveblogs/2016-06-28-2/');
+					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
 				});
 		});
 
@@ -244,7 +248,7 @@ describe('Negotiation Controller', function() {
 					docs: [{
 						found: true,
 						_source: {
-							webUrl: 'http://video.ft.com/5030468875001"'
+							webUrl: 'http://video.ft.com/5030468875001'
 						}
 					}]
 				});
@@ -254,6 +258,8 @@ describe('Negotiation Controller', function() {
 			})
 				.then(() => {
 					expect(response.statusCode).to.equal(302);
+					expect(response._getRedirectUrl()).to.include('http://video.ft.com/5030468875001');
+					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
 				});
 		});
 
