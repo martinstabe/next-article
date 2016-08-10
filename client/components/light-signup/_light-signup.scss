@@ -1,0 +1,19 @@
+.article__light-signup {
+	float: left;
+	box-sizing: border-box;
+	margin-top: 0;
+	padding-left: 15px;
+	padding-right: 15px;
+	border: 1px solid getColor('pink-tint3');
+	background-color: getColor('warm-5');
+
+	@include oGridRespondTo(S) {
+		max-width: 300px;
+		margin-right: 24px;
+	}
+}
+
+.o-email-only-signup__heading {
+	background: url('https://next-geebee.ft.com/image/v1/images/raw/https%3a%2f%2fnext-geebee.ft.com%2fassets%2fmyft-alerts-prefs%2fenvelope.svg?source=next&fit=scale-down&compression=best&width=40') 100% 0 no-repeat;
+	padding-right: 45px;
+}
