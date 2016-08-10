@@ -237,6 +237,26 @@ describe('Negotiation Controller', function() {
 				});
 		});
 
+		it('redirects videos to video.ft.com', () => {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							webUrl: 'http://video.ft.com/5030468875001"'
+						}
+					}]
+				});
+
+			return createInstance({
+				params: { id: 'uuid' }
+			})
+				.then(() => {
+					expect(response.statusCode).to.equal(302);
+				});
+		});
+
 	})
 
 });
