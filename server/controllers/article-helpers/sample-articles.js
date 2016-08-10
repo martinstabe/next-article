@@ -58,17 +58,22 @@ const sampleArticles = [
 ];
 
 function topicIndexOf (contentId) {
-	return indexOf(true)(
-		map((topic) => indexOf(contentId)(topic.articles) !== -1)(sampleArticles)
+	return (array) => indexOf(true)(
+		map((topic) => indexOf(contentId)(topic.articles) !== -1)(array)
 	);
 }
 
+function withoutIndex(index) {
+	return (array) => array.slice(0, index).concat(array.slice(index + 1));
+}
+
 module.exports = function getCuratedArticles (contentId) {
-	const currentTopicIndex = topicIndexOf(contentId);
-	const articlesWithoutCurrent = map((topic) => ({
+	const currentTopicIndex = topicIndexOf(contentId)(sampleArticles);
+	const articlesWithoutCurrent = map((topic) => {
+		return ({
 		title: topic.title,
-		articles: without(contentId)(topic.articles)
-	}))(sampleArticles);
+		articles: without([contentId])(topic.articles)
+	})})(sampleArticles);
 	const articlesToFetch = flatten(map(get('articles'))(articlesWithoutCurrent));
 	return api.content({ uuid: articlesToFetch })
 		.then((articles) => {
@@ -76,11 +81,11 @@ module.exports = function getCuratedArticles (contentId) {
 			articles = map((topic) => ({
 				title: topic.title,
 				articles: map((id) => mappedArticles[id])(topic.articles)
-			}))(sampleArticles);
+			}))(articlesWithoutCurrent);
 			const mainTopic = articles[currentTopicIndex];
 			return {
 				mainTopic,
-				otherTopics: without(mainTopic)(articles),
+				otherTopics: withoutIndex(currentTopicIndex)(articles),
 			};
 		});
 }
