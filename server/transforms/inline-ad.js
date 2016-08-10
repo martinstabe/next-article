@@ -10,7 +10,6 @@ module.exports = function ($) {
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
-				data-o-ads-lazy-load="true"
 				data-o-ads-targeting="pos=mid;"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
