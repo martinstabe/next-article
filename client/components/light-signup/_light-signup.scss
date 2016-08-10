@@ -13,6 +13,11 @@
 	}
 }
 
+.article__light-signup__topic {
+	font-family: $o-typography-serif-display;
+	font-style: italic;
+}
+
 .o-email-only-signup__heading {
 	background: url('https://next-geebee.ft.com/image/v1/images/raw/https%3a%2f%2fnext-geebee.ft.com%2fassets%2fmyft-alerts-prefs%2fenvelope.svg?source=next&fit=scale-down&compression=best&width=40') 100% 0 no-repeat;
 	padding-right: 45px;

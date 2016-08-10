@@ -1,33 +1,37 @@
 <div class="article__light-signup o-email-only-signup o-email-only-signup__visually-hidden" data-o-component="o-email-only-signup" data-trackable="light-signup" aria-hidden="true">
 	<div class="o-email-only-signup__inner" id="o-email-only-signup-content" aria-hidden="false" data-o-email-only-signup-content>
-		<h3 class="o-email-only-signup__heading">Sample the FT’s top stories for a week</h3>
-		<p class="o-email-only-signup__text">You select the topic, we deliver the news</p>
+		<h3 class="o-email-only-signup__heading">{{#if @root.flags.lsuInferredTopic}}Sign up to <span class="article__light-signup__topic">{{primarySection.name}}</span> newsletter{{else}}Sample the FT’s top stories for a week{{/if}}</h3>
+		<p class="o-email-only-signup__text">{{#if @root.flags.lsuInferredTopic}}Get the FT’s daily newsletter containing the top stories from {{primarySection.name}} delivered to your inbox.{{else}}You select the topic, we deliver the news.{{/if}}</p>
 		<div class="o-email-only-signup__secondary" data-o-email-only-signup-completion-message>
 			<form class="o-email-only-signup__form" data-o-email-only-signup-form>
-				<div class="o-email-only-signup__form-group">
-					<label for="topics" class="o-email-only-signup__visually-hidden">Select topic</label>
-					<select id="topics" name="topics" class="o-email-only-signup__select o-email-only-signup__select--inactive" data-o-email-only-signup-dropdown>
-						<option value="default" disabled selected hidden placeholder>Select topic</option>
-						<option value="default">Top Stories</option>
-						<option value="UK'S EU Referendum">Brexit</option>
-						<option value="US Election 2016">US Election 2016</option>
-						<option value="China Economic Slowdown">China slowdown</option>
-						<option value="Millennials">Millennial Economy</option>
-						<option value="Artificial Intelligence and Robotics">March of the Robot</option>
-						<option value="Oil">Plunging oil price</option>
-						<option value="Global Terror">Global Terror</option>
-						<option value="Technology">Tech disruption</option>
-						<option value="Advertising">Advertising</option>
-						<option value="Connected Car">Connected Cars</option>
-					</select>
-				</div>
+				{{#if @root.flags.lsuInferredTopic}}
+					<input type="hidden" name="following" value="{{primarySection.id}}" />
+				{{else}}
+					<div class="o-email-only-signup__form-group">
+						<label for="topics" class="o-email-only-signup__visually-hidden">Select topic</label>
+						<select id="topics" name="topics" class="o-email-only-signup__select o-email-only-signup__select--inactive" data-o-email-only-signup-dropdown>
+							<option value="default" disabled selected hidden placeholder>Select topic</option>
+							<option value="default">Top Stories</option>
+							<option value="UK'S EU Referendum">Brexit</option>
+							<option value="US Election 2016">US Election 2016</option>
+							<option value="China Economic Slowdown">China slowdown</option>
+							<option value="Millennials">Millennial Economy</option>
+							<option value="Artificial Intelligence and Robotics">March of the Robot</option>
+							<option value="Oil">Plunging oil price</option>
+							<option value="Global Terror">Global Terror</option>
+							<option value="Technology">Tech disruption</option>
+							<option value="Advertising">Advertising</option>
+							<option value="Connected Car">Connected Cars</option>
+						</select>
+					</div>
+				{{/if}}
 				<div class="o-email-only-signup__form-group">
 					<label for="email" class="o-email-only-signup__visually-hidden">Enter email address</label>
-					<input type="text" id="email" name="email" class="o-email-only-signup__email" data-trackable="email" placeholder="Enter email address">
+					<input type="text" id="email" name="email" class="o-email-only-signup__email" data-trackable="email" placeholder="Enter email address" />
 					<p class="o-forms-errortext o-email-only-signup__email-error-msg o-email-only-signup__visually-hidden" data-o-email-only-signup-email-error>Invalid email</p>
 				</div>
-				<input type="hidden" name="source" value="next">
-				<input type="hidden" name="mailingList" value="next-article">
+				<input type="hidden" name="source" value="next" />
+				<input type="hidden" name="mailingList" value="next-article" />
 				<button type="submit" class="o-email-only-signup__submit" data-trackable="submit">Sign up</button>
 				<p class="o-email-only-signup__no-spam">By signing up you confirm that you have read and agree to the <a target="_blank" rel="noopener" href="http://help.ft.com/tools-services/ft-com-terms-and-conditions" data-trackable="terms-and-conditions">terms and conditions</a>, <a target="_blank" rel="noopener" href="http://help.ft.com/tools-services/how-the-ft-manages-cookies-on-its-websites" data-trackable="cookie-policy">cookie policy</a> and <a target="_blank" rel="noopener" href="http://help.ft.com/tools-services/financial-times-privacy-policy" data-trackable="privacy-policy">privacy policy</a>.</p>
 			</form>
