@@ -8,7 +8,7 @@ describe('Light Signup component inside body', function () {
 
 	describe('Position component', function () {
 		const flags = {lightSignupInArticle: true};
-		const lightSignupHtml = '<div data-o-email-only-signup-position-mvt=""></div>';
+		const lightSignupHtml = '<div class="p402_hide" data-o-email-only-signup-position-mvt=""></div>';
 
 		it('should insert the component after the first paragraph', () => {
 			const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p>');
