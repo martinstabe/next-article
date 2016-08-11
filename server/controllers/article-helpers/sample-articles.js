@@ -10,49 +10,53 @@ const sampleArticles = [
 	{
 		title: 'US Election and economy',
 		articles: [
-			'3c0cabbc-114c-11e6-91da-096d89bd2173',
-			'7e40b256-42d1-11e6-b22f-79eb4891c97d',
-			'955e9bbc-2e70-11e6-a18d-a96ab29e3c95',
-			'b84e97f4-13c6-11e6-91da-096d89bd2173',
-			'44088ede-5027-11e6-8172-e39ecd3b86fc',
-			'a8e9f23c-1695-11e6-9d98-00386a18e39d',
 			'c5c01bee-22c4-11e6-aa98-db1e01fabc0c',
+			'8e8ea132-49b5-11e6-8d68-72e9211e86ab',
+			'ab2b473e-2c99-11e6-a18d-a96ab29e3c95',
+			'b84e97f4-13c6-11e6-91da-096d89bd2173',
+			'79b6c91a-5298-11e6-9664-e0bdc13c3bef',
+			'955e9bbc-2e70-11e6-a18d-a96ab29e3c95',
+			'add048e4-4e32-11e6-88c5-db83e98a590a',
+			'7e40b256-42d1-11e6-b22f-79eb4891c97d',
 		],
 	},
 	{
 		title: 'Xi\'s China',
 		articles: [
-			'2cb93908-2c65-11e6-bf8d-26294ad519fc',
-			'1dbd8c60-0cc6-11e6-ad80-67655613c2d6',
-			'42eca2b6-3d4d-11e6-8716-a4a71e8140b0',
-			'57371736-4b69-11e6-88c5-db83e98a590a',
-			'103712f6-4979-11e6-8d68-72e9211e86ab',
 			'f5bc9fac-27dd-11e6-8ba3-cdd781d02d89',
-			'0c567656-5494-11e6-befd-2fc0c26b3c60',
+			'1dbd8c60-0cc6-11e6-ad80-67655613c2d6',
+			'103712f6-4979-11e6-8d68-72e9211e86ab',
+			'2cb93908-2c65-11e6-bf8d-26294ad519fc',
+			'42eca2b6-3d4d-11e6-8716-a4a71e8140b0',
+			'9831cf8e-4906-11e6-8d68-72e9211e86ab',
+			'324d82c4-2d60-11e6-a18d-a96ab29e3c95',
+			'f059fb22-3787-11e6-a780-b48ed7b6126f',
 		],
 	},
 	{
 		title: 'APAC economy and politics',
 		articles: [
-			'a9878bea-2eec-11e6-bf8d-26294ad519fc',
 			'e9baebee-0bd8-11e6-9456-444ab5211a2f',
-			'eb0e795a-3d17-11e6-9f2c-36b487ebd80a',
-			'7bd05b02-4344-11e6-9b66-0712b3873ae1',
-			'4fd7dd18-5523-11e6-befd-2fc0c26b3c60',
 			'52072080-4a6f-11e6-8d68-72e9211e86ab',
-			'2e4c61f2-4ec8-11e6-8172-e39ecd3b86fc',
+			'eb0e795a-3d17-11e6-9f2c-36b487ebd80a',
+			'3aa363f6-382f-11e6-a780-b48ed7b6126f',
+			'a9878bea-2eec-11e6-bf8d-26294ad519fc',
+			'df027048-4a42-11e6-8d68-72e9211e86ab',
+			'831ace74-3471-11e6-bda0-04585c31b153',
+			'7bd05b02-4344-11e6-9b66-0712b3873ae1',
 		],
 	},
 	{
 		title: 'Emerging Markets',
 		articles: [
+			'd1e89e0a-37c8-11e6-a780-b48ed7b6126f',
 			'1c067b52-1829-11e6-bb7d-ee563a5a1cc1',
+			'1d454bb8-435a-11e6-9b66-0712b3873ae1',
 			'b9594ce8-2e15-11e6-a18d-a96ab29e3c95',
 			'1ae8dade-0245-11e6-99cb-83242733f755',
 			'd7c6fa2a-0630-11e6-9b51-0fb5e65703ce',
-			'5e07c48c-526e-11e6-9664-e0bdc13c3bef',
-			'd1e89e0a-37c8-11e6-a780-b48ed7b6126f',
-			'87ac0208-4e54-11e6-8172-e39ecd3b86fc',
+			'03e8e16c-474b-11e6-8d68-72e9211e86ab',
+			'6868a6c8-27b0-11e6-83e4-abc22d5d108c',
 		],
 	},
 ];
@@ -91,5 +95,5 @@ module.exports = function getCuratedArticles (contentId) {
 }
 
 module.exports.isSampleArticle = function isSampleArticle (contentId) {
-	return topicIndexOf(contentId) !== -1;
+	return topicIndexOf(contentId)(sampleArticles) !== -1;
 }

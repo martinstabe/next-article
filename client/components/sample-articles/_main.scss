@@ -68,7 +68,7 @@
 		margin: 14px;
 		display: inline-block;
 		max-width: 440px;
-		padding: 24px 16px 16px;
+		padding: 24px 16px;
 		position: relative;
 		text-align: center;
 		display: flex;
@@ -99,11 +99,10 @@
 	}
 
 	&__more-button {
-		@include oTypographySans(xs, $load-progressively: true);
+		@include oTypographySans(m, $load-progressively: true);
 		color: inherit;
-		padding: 4px 8px;
+		padding: 8px;
 		margin: 0;
-		text-transform: uppercase;
 		border: 1px solid getColor('white');
 		border-radius: 4px;
 
