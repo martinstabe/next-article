@@ -9,13 +9,18 @@ const httpMocks = require('node-mocks-http');
 
 const fixture = require('../../fixtures/v3-elastic-article-found').docs[0]._source;
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
+const fixtureSampleExcluded = require('../../fixtures/sample-article-excluded').docs[0]._source;
+const fixtureSampleIncluded = require('../../fixtures/sample-article-included').docs[0]._source;
 
 const stubs = {
 	suggested: sinon.stub(),
-	readNext: sinon.stub()
+	readNext: sinon.stub(),
+	sampleArticles: sinon.stub(),
 };
+stubs.sampleArticles.isSampleArticle = sinon.stub();
 
 const subject = proxyquire('../../../server/controllers/article', {
+	'./article-helpers/sample-articles': stubs.sampleArticles,
 	'./article-helpers/suggested': stubs.suggested,
 	'./article-helpers/read-next': stubs.readNext,
 	'../transforms/body': (articleHtml) => { return { html: () => articleHtml } },
@@ -92,6 +97,83 @@ describe('Article Controller', () => {
 		it('adds premiumArticle=false if article is not premium', () => {
 			expect(result.premiumArticle).to.equal(false);
 		});
+	});
+
+	context('sample articles', () => {
+
+		context('without anonSampleArticles flag', () => {
+
+			context('on non-sample article', () => {
+				beforeEach(() => {
+					result = null;
+					stubs.sampleArticles.isSampleArticle.reset().returns(false);
+
+					return createInstance({}, {}, fixtureSampleExcluded).then(() => {
+						result = response._getRenderData()
+					});
+				});
+
+				it('does not render sample articles', () => {
+					expect(result).to.not.have.property('sampleArticles');
+				});
+
+			});
+
+			context('on sample article', () => {
+				beforeEach(() => {
+					result = null;
+					stubs.sampleArticles.isSampleArticle.reset().returns(true);
+
+					return createInstance({}, {}, fixtureSampleIncluded).then(() => {
+						result = response._getRenderData()
+					});
+				});
+
+				it('does not render sample articles', () => {
+					expect(result).to.not.have.property('sampleArticles');
+				});
+
+			});
+
+		});
+
+		context('with anonSampleArticles flag', () => {
+
+			context('on non-sample article', () => {
+				beforeEach(() => {
+					result = null;
+					stubs.sampleArticles.isSampleArticle.reset().returns(false);
+
+					return createInstance({}, { anonSampleArticles: true }, fixtureSampleExcluded).then(() => {
+						result = response._getRenderData()
+					});
+				});
+
+				it('does not render sample articles', () => {
+					expect(result).to.not.have.property('sampleArticles');
+				});
+
+			});
+
+			context('on sample article', () => {
+				beforeEach(() => {
+					result = null;
+					stubs.sampleArticles.isSampleArticle.reset().returns(true);
+					stubs.sampleArticles.returns(Promise.resolve());
+
+					return createInstance({}, { anonSampleArticles: true }, fixtureSampleIncluded).then(() => {
+						result = response._getRenderData()
+					});
+				});
+
+				it('does not render sample articles', () => {
+					expect(result).to.have.property('sampleArticles');
+				});
+
+			});
+
+		});
+
 	});
 
 	context('fragment layout', () => {
