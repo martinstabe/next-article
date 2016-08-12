@@ -68,7 +68,7 @@
 }
 .article__byline {
 	@include oTypographySans('s', $load-progressively: true);
-	display: inline-block;
+	display: inline;
 	margin: 0;
 }
 .article__timestamp {
