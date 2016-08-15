@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { EmailArticleData, emailArticleModes, EmailArticleView } from 'n-email-article';
-
-const OShare = require('o-share');
+import OShare from 'o-share';
 
 exports.init = function () {
 	const shareContainer = document.querySelector('[data-o-component=o-share]');
