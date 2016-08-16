@@ -40,7 +40,7 @@
 						{{/if}}
 						{{> body-article bodyHTML=bodyHTML}}
 						{{#ifAll @root.anon.userIsAnonymous @root.flags.lightSignupInArticle}}
-							{{> light-signup}}
+							{{> light-signup tag=primarySection}}
 						{{/ifAll}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
