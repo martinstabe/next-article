@@ -1,12 +1,12 @@
 $output-critical: true !default;
 
 @import 'n-ui/configure';
+$n-ui-output-critical: $output-critical;
 @include nUiConfigure(
 	$features: (
 		buttons: true
 	),
-	$preset: 'complete',
-	$output-critical: $output-critical
+	$preset: 'complete'
 );
 @import 'n-ui/bootstrap';
 
