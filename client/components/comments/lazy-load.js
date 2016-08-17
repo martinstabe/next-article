@@ -27,7 +27,8 @@ export default opts =>
 	new Promise((resolve, reject) => {
 		const target = document.querySelector(opts.targetEl);
 		if (target) {
-			if (opts.commentsLazyLoad && window.IntersectionObserver) {
+			const commentsFragmentIndicator = window.location.hash.indexOf('#lf-content') > -1;
+			if (opts.commentsLazyLoad && window.IntersectionObserver && !commentsFragmentIndicator) {
 				const observer = new IntersectionObserver(
 					function (changes) {
 						intersectionCallback(this, changes, opts.sources, resolve);
