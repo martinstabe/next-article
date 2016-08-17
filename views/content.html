@@ -39,9 +39,9 @@
 							</div>
 						{{/if}}
 						{{> body-article bodyHTML=bodyHTML}}
-						{{#ifAll @root.anon.userIsAnonymous @root.flags.lightSignupInArticle}}
-							{{> light-signup tag=primarySection articleUuid=id}}
-						{{/ifAll}}
+						{{#if lightSignup.show}}
+							{{> light-signup tag=primarySection articleUuid=id isInferred=lightSignup.isInferred}}
+						{{/if}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}
 						{{#if standFirst}}

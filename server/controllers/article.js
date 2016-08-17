@@ -43,6 +43,8 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
+const isAudDev = req => req.query.exe === '16q3beacon';
+
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
@@ -134,6 +136,10 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
 	content.withGcs = res.locals.flags.googleConsumerSurvey && res.locals.anon.userIsAnonymous;
+	content.lightSignup = {
+		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
+		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req)
+	};
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
