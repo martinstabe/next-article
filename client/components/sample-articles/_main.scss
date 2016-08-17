@@ -34,6 +34,13 @@
 			}
 		}
 
+		&__subheading {
+			display: none;
+			@include oGridRespondTo(M) {
+				display: inline;
+			}
+		}
+
 		&__link {
 
 			&__wrapper {

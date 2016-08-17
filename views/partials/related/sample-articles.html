@@ -1,7 +1,12 @@
 <section class="sample-articles">
 	<header class="sample-articles__ribbon">
 		<div class="sample-articles__ribbon__wrapper">
-			<h3 class="sample-articles__ribbon__heading">You're sampling the Financial Times</h3>
+			<h3 class="sample-articles__ribbon__heading">
+				More sample articles
+				<span class="sample-articles__ribbon__subheading">
+					from the Financial Times
+				</span>
+			</h3>
 			<div class="sample-articles__ribbon__link__wrapper">
 				<a class="sample-articles__ribbon__link o-header__nav-button">Sign up Today</a>
 			</div>
@@ -15,7 +20,7 @@
 			data-o-expander-expanded-toggle-text="Show less"
 			data-o-expander-collapsed-toggle-text="Show more"
 		>
-			<h3 class="sample-articles__header__lead">More free articles</h3>
+			<h3 class="sample-articles__header__lead">Related Articles</h3>
 			<ul class="o-expander__content sample-articles__items">
 				{{#each articles}}
 					<li class="sample-articles__item__wrapper__lead">
@@ -33,12 +38,12 @@
 		</div>
 	{{/with}}
 		<div class="sample-articles__wrapper">
-			<h3 class="sample-articles__header__lead">More free topics</h3>
+			<h3 class="sample-articles__header__lead">Recommended Reads</h3>
 			<ul class="sample-articles__items">
 				{{#each sampleArticles.otherTopics}}
 					<li class="sample-articles__item__wrapper">
 						<article class="sample-articles__item">
-							<h3 class="sample-articles__header">{{ articles.0.title }}</h3>
+							<h3 class="sample-articles__header">{{ title }}</h3>
 							<h4 class="sample-articles__item__headline">
 								<a class="sample-articles__item__headline-link" href="{{ articles.0.url }}" data-trackable="headline">
 									{{ articles.0.title }}

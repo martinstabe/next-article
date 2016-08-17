@@ -76,14 +76,12 @@
 
 {{>propensity-messaging-promo-unit}}
 
-{{#ifAll readNextArticle readNextArticle.moreRecent}}
-	{{>read-next-bottom article=readNextArticle}}
+{{#ifAll @root.anon.userIsAnonymous @root.flags.anonSampleArticles sampleArticles}}
+	{{> related/sample-articles}}
 {{/ifAll}}
 
-{{#ifAll @root.anon.userIsAnonymous @root.flags.anonSampleArticles}}
-	{{#if sampleArticles}}
-		{{> related/sample-articles}}
-	{{/if}}
+{{#ifAll readNextArticle readNextArticle.moreRecent}}
+	{{>read-next-bottom article=readNextArticle}}
 {{/ifAll}}
 
 {{> bottom/bottom}}

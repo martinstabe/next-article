@@ -63,7 +63,7 @@ describe('Sample Articles', () => {
 
 		it('returns object with `mainTopic` matching article id', () =>
 			sampleArticles('c5c01bee-22c4-11e6-aa98-db1e01fabc0c').then((response) => {
-				expect(response).to.have.property('mainTopic').that.is.an('object').with.property('title', 'US Election and economy')
+				expect(response).to.have.property('mainTopic').that.is.an('object').with.property('title', 'US Election and Economy')
 			})
 		);
 
@@ -71,7 +71,7 @@ describe('Sample Articles', () => {
 			sampleArticles('c5c01bee-22c4-11e6-aa98-db1e01fabc0c').then((response) => {
 				expect(response).to.have.property('otherTopics').that.is.an('array');
 				expect(response).to.have.deep.property('otherTopics[0].title', 'Xi\'s China');
-				expect(response).to.have.deep.property('otherTopics[1].title', 'APAC economy and politics');
+				expect(response).to.have.deep.property('otherTopics[1].title', 'Asia Pacific Economy and Politics');
 				expect(response).to.have.deep.property('otherTopics[2].title', 'Emerging Markets');
 			})
 		);

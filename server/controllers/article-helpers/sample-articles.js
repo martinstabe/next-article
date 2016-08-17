@@ -8,7 +8,7 @@ const indexOf = require('lodash/fp/indexOf');
 const keyBy = require('lodash/fp/keyBy');
 const sampleArticles = [
 	{
-		title: 'US Election and economy',
+		title: 'US Election and Economy',
 		articles: [
 			'c5c01bee-22c4-11e6-aa98-db1e01fabc0c',
 			'8e8ea132-49b5-11e6-8d68-72e9211e86ab',
@@ -34,7 +34,7 @@ const sampleArticles = [
 		],
 	},
 	{
-		title: 'APAC economy and politics',
+		title: 'Asia Pacific Economy and Politics',
 		articles: [
 			'e9baebee-0bd8-11e6-9456-444ab5211a2f',
 			'52072080-4a6f-11e6-8d68-72e9211e86ab',
