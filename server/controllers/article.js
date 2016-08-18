@@ -43,7 +43,19 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-const isAudDev = req => req.query.exe === '16q3beacon';
+function isAudDev (req, res) {
+	if (/[; ]exe=16q3beacon[; ]/.test(req.headers.cookie)) {
+		return true;
+	} else if (req.query.exe === '16q3beacon') {
+		res && res.cookie('exe', '16q3beacon', {
+			domain: 'ft.com',
+			path: '/',
+			expires: new Date('2016-09-16T09:00:00Z'),
+		});
+		return true;
+	}
+	return false;
+}
 
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
@@ -119,7 +131,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		content.readNextTopic = content.primaryTag;
 	}
 
-	if (!isUserSignedIn(req) && res.locals.flags.anonSampleArticles && isSampleArticle(content.id)) {
+	if (!isUserSignedIn(req) && isAudDev(req, res) && res.locals.flags.anonSampleArticles && isSampleArticle(content.id)) {
 		asyncWorkToDo.push(
 			sampleArticlesHelper(content.id)
 			.then((sampleArticles) => content.sampleArticles = sampleArticles)
@@ -138,7 +150,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.withGcs = res.locals.flags.googleConsumerSurvey && res.locals.anon.userIsAnonymous;
 	content.lightSignup = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
-		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req)
+		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req, res)
 	};
 
 	return Promise.all(asyncWorkToDo)
