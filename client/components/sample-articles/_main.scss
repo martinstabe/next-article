@@ -13,7 +13,8 @@
 			@include oGridContainer();
 		}
 
-		&__heading {
+		&__heading,
+		&__banner__heading {
 			@include oTypographySans(m, $load-progressively: true);
 			@include oGridColspan(12);
 			display: inline-block;
@@ -34,6 +35,17 @@
 			}
 		}
 
+		&__banner__heading {
+			@include oTypographySans(m, $load-progressively: true);
+			padding-left: 0;
+
+			html &[class] { /* stupid specificity */
+				@include oGridRespondTo(M) {
+					font-size: 24px;
+				}
+			}
+		}
+
 		&__subheading {
 			display: none;
 			@include oGridRespondTo(M) {
@@ -43,7 +55,8 @@
 
 		&__link {
 
-			&__wrapper {
+			&__wrapper,
+			&__banner__wrapper {
 				@include oGridColspan(12);
 				margin: 14px 0;
 				text-align: left;
@@ -57,6 +70,16 @@
 				@include oGridRespondTo(XL) {
 					@include oGridPull(1);
 				}
+			}
+
+			&__banner__wrapper {
+				padding-left: 0;
+				margin: 0 0 20px;
+
+				@include oGridRespondTo(M) {
+					margin: 24px 0;
+				}
+
 			}
 		}
 
