@@ -76,9 +76,9 @@
 
 {{>propensity-messaging-promo-unit}}
 
-{{#ifAll @root.anon.userIsAnonymous @root.flags.anonSampleArticles sampleArticles}}
+{{#if sampleArticles}}
 	{{> related/sample-articles}}
-{{/ifAll}}
+{{/if}}
 
 {{#ifAll readNextArticle readNextArticle.moreRecent}}
 	{{>read-next-bottom article=readNextArticle}}
