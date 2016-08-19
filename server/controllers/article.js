@@ -147,7 +147,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
-	content.withGcs = res.locals.flags.googleConsumerSurvey && res.locals.anon.userIsAnonymous;
+	content.withGcs = (res.locals.flags.googleConsumerSurvey || content.id === '618e0bb4-42a9-11e0-8b34-00144feabdc0') && res.locals.anon.userIsAnonymous;
 	content.lightSignup = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req, res)
