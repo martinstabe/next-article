@@ -57,6 +57,16 @@ function isAudDev (req, res) {
 	return false;
 }
 
+const showGcs = (req, res, isFreeArticle) => {
+	if (res.locals.flags.googleConsumerSurvey) {
+		// TODO: only need to vary on free vs counted content
+		res.vary('ft-content-classification');
+		return res.locals.anon && res.locals.anon.userIsAnonymous && !isFreeArticle;
+	} else {
+		return false;
+	}
+};
+
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
@@ -147,7 +157,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.signedIn = isUserSignedIn(req);
 	content.freeArticle = isFreeArticle(content.webUrl);
 	content.premiumArticle = isPremiumArticle(content.webUrl);
-	content.withGcs = (res.locals.flags.googleConsumerSurvey || 'gcs' in req.query) && res.locals.anon.userIsAnonymous;
+	content.withGcs = showGcs(req, res, content.freeArticle);
 	content.lightSignup = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req, res)
