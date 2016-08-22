@@ -160,7 +160,7 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	content.withGcs = showGcs(req, res, content.freeArticle);
 	content.lightSignup = {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
-		isInferred: res.locals.flags.lsuInferredTopic || isAudDev(req, res)
+		isInferred: isAudDev(req, res) && res.locals.flags.lsuInferredTopic
 	};
 
 	return Promise.all(asyncWorkToDo)
