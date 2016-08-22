@@ -43,19 +43,7 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-function isAudDev (req, res) {
-	if (/[; ]exe=16q3beacon[; ]/.test(req.headers.cookie)) {
-		return true;
-	} else if (req.query.exe === '16q3beacon') {
-		res && res.cookie('exe', '16q3beacon', {
-			domain: 'ft.com',
-			path: '/',
-			expires: new Date('2016-09-16T09:00:00Z'),
-		});
-		return true;
-	}
-	return false;
-}
+const isAudDev = req => req.header('ft-is-aud-dev') === 'true';
 
 const showGcs = (req, res, isFreeArticle) => {
 	if (res.locals.flags.googleConsumerSurvey && res.locals.anon && res.locals.anon.userIsAnonymous) {
@@ -69,6 +57,8 @@ const showGcs = (req, res, isFreeArticle) => {
 
 module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
+
+	res.vary('ft-is-aud-dev');
 
 	content.lazyLoadComments = (req.query['lf-content'] && req.query.hubRefSrc) ? false : true;
 
