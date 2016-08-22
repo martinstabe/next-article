@@ -58,10 +58,10 @@ function isAudDev (req, res) {
 }
 
 const showGcs = (req, res, isFreeArticle) => {
-	if (res.locals.flags.googleConsumerSurvey) {
+	if (res.locals.flags.googleConsumerSurvey && res.locals.anon && res.locals.anon.userIsAnonymous) {
 		// TODO: only need to vary on free vs counted content
 		res.vary('ft-content-classification');
-		return res.locals.anon && res.locals.anon.userIsAnonymous && !isFreeArticle;
+		return !isFreeArticle;
 	} else {
 		return false;
 	}
