@@ -35,11 +35,5 @@ module.exports = function articlePodMapping(article) {
 		decoration.primaryTag = primarySection;
 	}
 
-	if (decoration.primaryTag) {
-		Object.assign(decoration.primaryTag, {
-			url: `/stream/${decoration.primaryTag.taxonomy}Id/${decoration.primaryTag.idV1}`
-		});
-	}
-
 	return Object.assign(article, decoration);
 };

@@ -43,7 +43,8 @@
 						"primary":"section",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/sectionsId/NzA0NWQ2OTUtNDdhZC00ZGMxLWI4MGEtODZkYTY5MjQ0ZTk1-QnJhbmRz"
 					},
 					{
 						"idV1":"MTQ5-U2VjdGlvbnM=",
@@ -52,7 +53,8 @@
 						"primary":null,
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/arts"
 					},
 					{
 						"idV1":"MTQ4-U2VjdGlvbnM=",
@@ -64,7 +66,8 @@
 								"key":"dfpSite",
 								"value":"life.and.arts"
 							}
-						]
+						],
+						"url":"https://www.ft.com/life-arts"
 					},
 					{
 						"idV1":"NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM=",
@@ -73,7 +76,8 @@
 						"primary":null,
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/sectionsId/NjI2MWZlMTEtMTE2NS00ZmI0LWFkMzMtNDhiYjA3YjcxYzIy-U2VjdGlvbnM="
 					}
 				],
 				"_lastUpdatedDateTime":"2015-11-09T12:51:27.835Z"

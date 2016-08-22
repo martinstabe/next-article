@@ -40,7 +40,8 @@
 						"primary":"theme",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/topicsId/M2Y3OGJkYjQtMzQ5OC00NTM2LTg0YzUtY2JmNzZiY2JhZDQz-VG9waWNz"
 					},
 					{
 						"idV1":"NTg=-U2VjdGlvbnM=",
@@ -49,7 +50,8 @@
 						"primary":"section",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/companies/banks"
 					},
 					{
 						"idV1":"Nw==-R2VucmVz",
@@ -57,7 +59,8 @@
 						"taxonomy":"genre",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/genreId/Nw==-R2VucmVz"
 					},
 					{
 						"idV1": "YzhlNzZkYTctMDJiNy00NTViLTk3NmYtNmJjYTE5NDEyM2Yw-QnJhbmRz",
@@ -69,15 +72,8 @@
 							"key": "dfpSite",
 							"value": "lex"
 							}
-						]
-					},
-					{
-						"idV1":"ZjMwY2E2NjctMDA1Ni00ZTk4LWI0MWUtZjk5MTk2ZTMyNGVm-TWVkaWFUeXBlcw==",
-						"prefLabel":"Text",
-						"taxonomy":"mediaType",
-						"attributes":[
-
-						]
+						],
+						"url":"https://www.ft.com/lex"
 					},
 					{
 						"idV1":"Q0ItMDAwMDcyMw==-QXV0aG9ycw==",
@@ -85,47 +81,8 @@
 						"taxonomy":"authors",
 						"attributes":[
 
-						]
-					},
-					{
-						"idV1":"MTQy-SUNC",
-						"prefLabel":"8355 Banks",
-						"taxonomy":"icb",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV1":"MDQwMDMwMDA=-SVBUQw==",
-						"prefLabel":"04003000 - computing and information technology",
-						"taxonomy":"iptc",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV1":"MDQwMDMwMDg=-SVBUQw==",
-						"prefLabel":"04003008 - security",
-						"taxonomy":"iptc",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV1":"MDQwMDYwMDI=-SVBUQw==",
-						"prefLabel":"04006002 - banking",
-						"taxonomy":"iptc",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV1":"MTMwMTAwMDA=-SVBUQw==",
-						"prefLabel":"13010000 - technology (general)",
-						"taxonomy":"iptc",
-						"attributes":[
-
-						]
+						],
+						"url":"https://www.ft.com/stream/authorsId/Q0ItMDAwMDcyMw==-QXV0aG9ycw=="
 					},
 					{
 						"idV1":"TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0FDQ0VOVFVSRQ==-T04=",
@@ -140,7 +97,8 @@
 								"key":"is_company",
 								"value":"true"
 							}
-						]
+						],
+						"url":"https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0FDQ0VOVFVSRQ==-T04="
 					},
 					{
 						"idV1":"TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0JBUkM=-T04=",
@@ -155,7 +113,8 @@
 								"key":"is_company",
 								"value":"true"
 							}
-						]
+						],
+						"url":"https://www.ft.com/stream/organisationsId/TnN0ZWluX09OX0ZvcnR1bmVDb21wYW55X0JBUkM=-T04="
 					},
 					{
 						"idV1":"TnN0ZWluX0dMX0dC-R0w=",
@@ -163,7 +122,8 @@
 						"taxonomy":"regions",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX0dC-R0w="
 					},
 					{
 						"idV1":"TnN0ZWluX0dMX1VT-R0w=",
@@ -171,7 +131,8 @@
 						"taxonomy":"regions",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/stream/regionsId/TnN0ZWluX0dMX1VT-R0w"
 					},
 					{
 						"idV1":"Mjk=-U2VjdGlvbnM=",
@@ -182,7 +143,8 @@
 								"key":"dfpSite",
 								"value":"companies"
 							}
-						]
+						],
+						"url":"https://www.ft.com/companies"
 					},
 					{
 						"idV1":"NTQ=-U2VjdGlvbnM=",
@@ -197,7 +159,8 @@
 								"key":"dfpZone",
 								"value":"science.and.environment"
 							}
-						]
+						],
+						"url":"https://www.ft.com/science-environment"
 					},
 					{
 						"idV1":"NTc=-U2VjdGlvbnM=",
@@ -212,7 +175,8 @@
 								"key":"dfpZone",
 								"value":"financials"
 							}
-						]
+						],
+						"url":"https://www.ft.com/companies/financials"
 					},
 					{
 						"idV1":"NjM=-U2VjdGlvbnM=",
@@ -220,7 +184,8 @@
 						"taxonomy":"sections",
 						"attributes":[
 
-						]
+						],
+						"url":"https://www.ft.com/companies/uk"
 					},
 					{
 						"idV1":"NjU=-U2VjdGlvbnM=",
@@ -228,23 +193,8 @@
 						"taxonomy":"sections",
 						"attributes":[
 
-						]
-					},
-					{
-						"idV1":"MTE4-U3ViamVjdHM=",
-						"prefLabel":"General News",
-						"taxonomy":"subjects",
-						"attributes":[
-
-						]
-					},
-					{
-						"idV1":"MTM2-U3ViamVjdHM=",
-						"prefLabel":"Science & Technology",
-						"taxonomy":"subjects",
-						"attributes":[
-
-						]
+						],
+						"url":"https://www.ft.com/companies/us"
 					}
 				],
 				"annotations":[

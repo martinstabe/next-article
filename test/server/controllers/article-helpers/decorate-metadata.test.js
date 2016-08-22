@@ -54,7 +54,8 @@ describe('Metadata', () => {
 				prefLabel: 'My super important tag',
 				taxonomy: 'specialReports',
 				primary: 'section',
-				id: '123'
+				id: '123',
+				url: 'https://www.ft.com/stream/specialReportsId/123'
 			});
 
 			result = subject(fixtureData);

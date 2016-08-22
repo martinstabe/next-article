@@ -7,10 +7,10 @@ function fillProperties(article) {
 		let v1 = {
 			id: tag.idV1,
 			name: tag.prefLabel,
-			url: `/stream/${tag.taxonomy}Id/${tag.idV1}`
+			url: tag.url.replace('https://www.ft.com', '')
 		};
 
-		return Object.assign(v1, tag);
+		return Object.assign(tag, v1);
 	});
 }
 

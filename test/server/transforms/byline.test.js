@@ -8,7 +8,7 @@ describe('Byline', () => {
 
 	it('should wrap author in link',() => {
 		const byline = 'George Parker';
-		const authors = [ { id: "ABCD-efhsdf", name: "George Parker" } ];
+		const authors = [ { id: "ABCD-efhsdf", name: "George Parker", url: "/stream/authorsId/ABCD-efhsdf" } ];
 
 		bylineTransform(byline, authors).should.equal('<a class="n-content-tag" href="/stream/authorsId/ABCD-efhsdf" data-trackable="author">George Parker</a>');
 	});
@@ -16,8 +16,8 @@ describe('Byline', () => {
 	it('should wrap multiple authors in links',() => {
 		const byline = 'George Parker and Chris Giles';
 		const authors = [
-			{ id: "ABCD-efhsdf", name: "George Parker" },
-			{ id: "OBCD-efhsdf", name: "Chris Giles" }
+			{ id: "ABCD-efhsdf", name: "George Parker", url: "/stream/authorsId/ABCD-efhsdf" },
+			{ id: "OBCD-efhsdf", name: "Chris Giles", url: "/stream/authorsId/OBCD-efhsdf" }
 		];
 
 		bylineTransform(byline, authors).should.equal(
