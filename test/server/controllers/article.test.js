@@ -100,6 +100,7 @@ describe('Article Controller', () => {
 	});
 
 	context('sample articles', () => {
+		const instanceParams = { headers: { 'ft-is-aud-dev': 'true' } };
 
 		context('without anonSampleArticles flag', () => {
 
@@ -108,7 +109,7 @@ describe('Article Controller', () => {
 					result = null;
 					stubs.sampleArticles.isSampleArticle.reset().returns(false);
 
-					return createInstance({}, {}, fixtureSampleExcluded).then(() => {
+					return createInstance(instanceParams, {}, fixtureSampleExcluded).then(() => {
 						result = response._getRenderData()
 					});
 				});
@@ -124,7 +125,7 @@ describe('Article Controller', () => {
 					result = null;
 					stubs.sampleArticles.isSampleArticle.reset().returns(true);
 
-					return createInstance({}, {}, fixtureSampleIncluded).then(() => {
+					return createInstance(instanceParams, {}, fixtureSampleIncluded).then(() => {
 						result = response._getRenderData()
 					});
 				});
@@ -144,7 +145,7 @@ describe('Article Controller', () => {
 					result = null;
 					stubs.sampleArticles.isSampleArticle.reset().returns(false);
 
-					return createInstance({}, { anonSampleArticles: true }, fixtureSampleExcluded).then(() => {
+					return createInstance(instanceParams, { anonSampleArticles: true }, fixtureSampleExcluded).then(() => {
 						result = response._getRenderData()
 					});
 				});
@@ -161,7 +162,7 @@ describe('Article Controller', () => {
 					stubs.sampleArticles.isSampleArticle.reset().returns(true);
 					stubs.sampleArticles.returns(Promise.resolve());
 
-					return createInstance({}, { anonSampleArticles: true }, fixtureSampleIncluded).then(() => {
+					return createInstance(instanceParams, { anonSampleArticles: true }, fixtureSampleIncluded).then(() => {
 						result = response._getRenderData()
 					});
 				});

@@ -7,7 +7,7 @@ function fillProperties(article) {
 		let v1 = {
 			id: tag.idV1,
 			name: tag.prefLabel,
-			url: tag.url.replace('https://www.ft.com', '')
+			url: String(tag.url || '').replace('https://www.ft.com', '')
 		};
 
 		return Object.assign(tag, v1);
