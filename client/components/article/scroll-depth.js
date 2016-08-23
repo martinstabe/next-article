@@ -19,8 +19,8 @@ const intersectionCallback = (observer, changes) => {
 	changes.forEach(change => {
 		const scrollDepthMarkerEl = change.target;
 		fireBeacon(scrollDepthMarkerEl.getAttribute('data-percentage'));
-		observer.unobserve(scrollDepthMarkerEl);
 		scrollDepthMarkerEl.parentNode.removeChild(scrollDepthMarkerEl);
+		observer.unobserve(scrollDepthMarkerEl);
 	});
 };
 
