@@ -24,7 +24,7 @@
 			text-align: left;
 
 			@include oGridRespondTo(M) {
-				@include oGridColspan(9);
+				@include oGridColspan(7);
 				padding: 0;
 				margin: 24px 0;
 				text-align: left;
@@ -32,6 +32,7 @@
 
 			@include oGridRespondTo(XL) {
 				@include oGridPush(1);
+				padding-left: 5px;
 			}
 		}
 
@@ -55,6 +56,12 @@
 
 		&__link {
 
+			&.n-header__marketing-promo__link {
+				@include oTypographySansBold(s, $load-progressively: true);
+				padding: 5px 8px;
+				margin-right: 7px;
+			}
+
 			&__wrapper,
 			&__banner__wrapper {
 				@include oGridColspan(12);
@@ -62,11 +69,14 @@
 				text-align: left;
 
 				@include oGridRespondTo(M) {
-					@include oGridColspan(3);
+					@include oGridColspan(5);
 					margin: 20px 0;
 					text-align: right;
 				}
 
+			}
+
+			&__wrapper {
 				@include oGridRespondTo(XL) {
 					@include oGridPull(1);
 				}
@@ -85,6 +95,19 @@
 
 		&__text_link {
 			color: getColor('teal-2');
+
+			&:hover {
+				color: #a4a4a4;
+			}
+
+			&__icon {
+				background: url("#{$o-icons-image-service-base-url}/v1/images/raw/fticon:arrow-down?source=o-icons&tint=%232bbbbf,%232bbbbf&format=svg");
+				padding: 0px 9px;
+				background-size: 20px;
+				background-repeat: no-repeat;
+				margin: 0px 0 0 8px;
+				background-position: 0 3px;
+			}
 		}
 	}
 
@@ -113,7 +136,7 @@
 	&__header {
 		@include oTypographySans(s, $load-progressively: true);
 		margin: 0;
-		color: getColor('grey-tint2');
+		color: #a4a4a4;
 
 		&__lead {
 			@include oTypographySerif(m, $load-progressively: true);
@@ -135,7 +158,7 @@
 		@include oTypographySans(s, $load-progressively: true);
 		color: inherit;
 		padding: 5px;
-		margin: 0;
+		margin: 0 0 0 6px;
 		border: 1px solid getColor('white');
 		border-radius: 4px;
 		width: 82px;
@@ -148,7 +171,7 @@
 
 	&__items {
 		padding: 0;
-		margin: 0;
+		margin: 0 0 0 6px;
 		max-width: 321px;
 		text-align: left;
 		flex: 2;
@@ -157,6 +180,7 @@
 
 	&__item {
 		@include oTypographySerifDisplay(m, $load-progressively: true);
+		margin-top: 1px;
 
 		&__headline {
 			margin: 0;
@@ -165,6 +189,10 @@
 				color: inherit;
 				font-weight: normal;
 				border-bottom: 0;
+
+				&:hover {
+						color: #a4a4a4;
+				}
 			}
 
 		}
@@ -181,6 +209,10 @@
 				list-style: none;
 				margin: 8px 16px;
 				padding-bottom: 8px;
+
+				&:first-child {
+					margin-top: 0;
+				}
 
 				&:before {
 					content: '>';
