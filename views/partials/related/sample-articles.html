@@ -1,4 +1,4 @@
-<section class="sample-articles">
+<section class="sample-articles" data-tracking="sample-articles">
 	<header class="sample-articles__ribbon">
 		<div class="sample-articles__ribbon__wrapper jump-to-block" id="more-sample-articles">
 			<h3 class="sample-articles__ribbon__heading">
@@ -22,6 +22,7 @@
 			data-o-expander-count-selector="li"
 			data-o-expander-expanded-toggle-text="Show less"
 			data-o-expander-collapsed-toggle-text="Show more"
+			data-tracking="sample-articles-main-topic"
 		>
 			<h3 class="sample-articles__header__lead">Related Articles</h3>
 			<ul class="o-expander__content sample-articles__items">
@@ -42,7 +43,7 @@
 	{{/with}}
 		<div class="sample-articles__wrapper">
 			<h3 class="sample-articles__header__lead">Recommended Reads</h3>
-			<ul class="sample-articles__items">
+			<ul class="sample-articles__items" data-tracking="sample-articles-other-topics">
 				{{#each sampleArticles.otherTopics}}
 					<li class="sample-articles__item__wrapper">
 						<article class="sample-articles__item">
