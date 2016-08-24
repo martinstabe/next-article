@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { EmailArticleData, emailArticleModes, EmailArticleView } from 'n-email-article';
+import { EmailArticleData, emailArticleModes, EmailArticleView } from '@financial-times/n-email-article';
 import OShare from 'o-share';
 
 exports.init = function () {

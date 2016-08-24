@@ -10,4 +10,4 @@ module.exports = function (bodyHTML) {
 		tocHTML: $.html($('.table-of-contents').remove()),
 		bodyHTML: $.html()
 	};
-}
+};

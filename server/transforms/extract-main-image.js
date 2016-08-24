@@ -24,4 +24,4 @@ module.exports = function (bodyHTML) {
 		mainImageHTML,
 		bodyHTML: $.html()
 	}
-}
+};

@@ -23,15 +23,14 @@ function transform($, flags, options) {
 
 module.exports = function (body, flags, options) {
 
-	const $bodyHTML = cheerio.load(body, { decodeEntities: false })
+	const $bodyHTML = cheerio.load(body, { decodeEntities: false });
 	transform($bodyHTML, flags, options)
 		.with(relatedBoxExpander)
 		.with(tableOfContents)
 		.with(inlineAd)
-		.with(lightSignup)
-		.with(gcsConflicts);
+		.with(lightSignup);
 
-	const resultObject = {bodyHTML: $bodyHTML.html()};
+	const resultObject = { bodyHTML: $bodyHTML.html() };
 
 	Object.assign(resultObject, extractToc(resultObject.bodyHTML));
 
@@ -40,6 +39,8 @@ module.exports = function (body, flags, options) {
 	if (!options.fragment) {
 		Object.assign(resultObject, extractMainImage(resultObject.bodyHTML));
 	}
+
+	Object.assign(resultObject, gcsConflicts(resultObject.bodyHTML));
 
 	return resultObject;
 };
