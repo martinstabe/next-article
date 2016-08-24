@@ -2,7 +2,7 @@
 
 var fetchres = require('fetchres');
 var Gallery = require('o-gallery');
-var trackEvent = require('../utils/tracking');
+import {broadcast} from 'n-ui/utils';
 
 module.exports = function(els) {
 	[].slice.call(els).forEach(function(el) {
@@ -29,7 +29,7 @@ module.exports = function(els) {
 						source: 'next-article'
 					}
 				};
-				trackEvent(data);
+				broadcast('oTracking.event', data);
 			};
 			fetch('/embedded-components/slideshow/' + uuid + '?syncid=' + syncid, { credentials: 'same-origin' })
 				.then(fetchres.text)

@@ -7,6 +7,7 @@ const expander = require('n-ui/expander');
 const nUiConfig = require('./n-ui-config');
 import {bootstrap} from 'n-ui';
 import cacheJourney from './components/cache-journey/cache-journey';
+import {broadcast} from 'n-ui/utils';
 
 bootstrap(nUiConfig, ({flags, mainCss}) => {
 
@@ -21,7 +22,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
-	const trackEvent = require('./components/utils/tracking');
+
 
 	cacheJourney();
 
@@ -62,7 +63,14 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		});
 
 		if(flags.get('articleComments') && document.querySelector('#comments')) {
-
+			window.FT = window.FT || {};
+			window.FT.commentsRUM = !!Math.random() > 0.9;
+			if (window.FT.commentsRUM) {
+				broadcast('oTracking.event', {
+					action: 'rum-view',
+					category: 'comments'
+				});
+			}
 			const commentsEl = document.getElementById('comments');
 			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
 			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
@@ -77,7 +85,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				threshold: 600,
 				commentsLazyLoad
 			}).then(function () {
-				trackEvent({
+				broadcast('oTracking.event', {
 					action: 'view',
 					category: 'comments',
 					context: {

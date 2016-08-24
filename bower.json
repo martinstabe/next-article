@@ -6,7 +6,6 @@
     "n-image": "^4.1.4",
     "n-service-worker": "^1.1.0",
     "n-ui": "^2.11.0",
-    "o-video": "^1.0.0",
     "o-comment-api": "^2.1.0",
     "o-comment-count": "^0.2.1",
     "o-comment-ui": "^3.2.0",
@@ -17,8 +16,7 @@
     "superstore": "^2.1.0"
   },
   "resolutions": {
-    "o-viewport": "^2.0.0",
-    "o-typography": "^4.2.0",
-    "o-video": "^1.0.0"
+    "o-typography": "^4.1.0",
+    "o-viewport": "^2.0.0"
   }
 }

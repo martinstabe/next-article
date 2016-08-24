@@ -1,3 +1,4 @@
+import {broadcast} from 'n-ui/utils';
 const loadSources = (sources, resolve) => {
 	sources.forEach(source => {
 		const fileType = source.split('.').pop();
@@ -32,10 +33,29 @@ export default opts =>
 				const observer = new IntersectionObserver(
 					function (changes) {
 						intersectionCallback(this, changes, opts.sources, resolve);
+						if (window.FT.commentsRUM) {
+							broadcast('oTracking.event', {
+								category: 'comments',
+								action: 'start-lazy-load'
+							});
+						}
 					},
 					{ rootMargin: `${opts.threshold}px` }
 				);
 				observer.observe(target);
+				if (window.FT.commentsRUM) {
+					const rumObserver = new IntersectionObserver(
+						function () {
+							broadcast('oTracking.event', {
+								category: 'comments',
+								action: 'in-view'
+							});
+							rumObserver.unobserve(document.querySelector('.comments__RUM-indicator'));
+						},
+						{ rootMargin: `0px` }
+					);
+					rumObserver.observe(document.querySelector('.comments__RUM-indicator'));
+				}
 			} else {
 				loadSources(opts.sources, resolve);
 			}

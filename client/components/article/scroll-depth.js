@@ -1,4 +1,4 @@
-import trackEvent from '../utils/tracking';
+import {broadcast} from 'n-ui/utils';
 
 const fireBeacon = percentage => {
 	var data = {
@@ -12,7 +12,7 @@ const fireBeacon = percentage => {
 			source: 'next-article'
 		}
 	};
-	trackEvent(data);
+	broadcast('oTracking.event', data);
 };
 
 const intersectionCallback = (observer, changes) => {
