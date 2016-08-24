@@ -11,7 +11,7 @@ if (window.FT.commentsRUM) {
 		category: 'comments',
 		action: 'init',
 		context: {
-			timing: Date.now() - window.FT.commentsRUM
+			timing: Date.now() - window.FT.commentsRUMLazyStart
 		}
 	});
 
@@ -20,7 +20,7 @@ if (window.FT.commentsRUM) {
 			category: 'comments',
 			action: 'timeout',
 			context: {
-				timing: Date.now() - window.FT.commentsRUM
+				timing: Date.now() - window.FT.commentsRUMLazyStart
 			}
 		});
 	})
@@ -30,7 +30,7 @@ if (window.FT.commentsRUM) {
 			category: 'comments',
 			action: 'init-error',
 			context: {
-				timing: Date.now() - window.FT.commentsRUM
+				timing: Date.now() - window.FT.commentsRUMLazyStart
 			}
 		});
 	})
@@ -40,7 +40,7 @@ if (window.FT.commentsRUM) {
 			category: 'comments',
 			action: 'ui-ready',
 			context: {
-				timing: Date.now() - window.FT.commentsRUM
+				timing: Date.now() - window.FT.commentsRUMLazyStart
 			}
 		});
 	})
@@ -50,7 +50,7 @@ if (window.FT.commentsRUM) {
 			category: 'comments',
 			action: 'data-ready',
 			context: {
-				timing: Date.now() - window.FT.commentsRUM
+				timing: Date.now() - window.FT.commentsRUMLazyStart
 			}
 		});
 	})
@@ -60,7 +60,7 @@ if (window.FT.commentsRUM) {
 			category: 'comments',
 			action: 'ready',
 			context: {
-				timing: Date.now() - window.FT.commentsRUM
+				timing: Date.now() - window.FT.commentsRUMLazyStart
 			}
 		});
 	})

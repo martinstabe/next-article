@@ -38,7 +38,7 @@ export default opts =>
 								category: 'comments',
 								action: 'start-lazy-load',
 								context: {
-									timing: Date.now() - window.FT.commentsRUM
+									timing: Date.now() - window.FT.commentsRUMLazyStart
 								}
 							});
 						}
@@ -47,13 +47,14 @@ export default opts =>
 				);
 				observer.observe(target);
 				if (window.FT.commentsRUM) {
+					window.FT.commentsRUMLazyStart;
 					const rumObserver = new IntersectionObserver(
 						function () {
 							broadcast('oTracking.event', {
 								category: 'comments',
 								action: 'in-view',
 								context: {
-									timing: Date.now() - window.FT.commentsRUM
+									timing: Date.now() - window.FT.commentsRUMLazyStart
 								}
 							});
 							rumObserver.unobserve(document.querySelector('.comments__RUM-indicator'));
