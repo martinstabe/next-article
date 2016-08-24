@@ -36,7 +36,10 @@ export default opts =>
 						if (window.FT.commentsRUM) {
 							broadcast('oTracking.event', {
 								category: 'comments',
-								action: 'start-lazy-load'
+								action: 'start-lazy-load',
+								context: {
+									timing: Date.now() - window.FT.commentsRUM
+								}
 							});
 						}
 					},
@@ -48,7 +51,10 @@ export default opts =>
 						function () {
 							broadcast('oTracking.event', {
 								category: 'comments',
-								action: 'in-view'
+								action: 'in-view',
+								context: {
+									timing: Date.now() - window.FT.commentsRUM
+								}
 							});
 							rumObserver.unobserve(document.querySelector('.comments__RUM-indicator'));
 						},

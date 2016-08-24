@@ -64,7 +64,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 
 		if(flags.get('articleComments') && document.querySelector('#comments')) {
 			window.FT = window.FT || {};
-			window.FT.commentsRUM = !!Math.random() > 0.9;
+			window.FT.commentsRUM = Math.random() > 0.9 ? Date.now() : false;
 			if (window.FT.commentsRUM) {
 				broadcast('oTracking.event', {
 					action: 'rum-view',
