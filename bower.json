@@ -18,6 +18,7 @@
   },
   "resolutions": {
     "o-viewport": "^2.0.0",
-    "o-typography": "^4.2.0"
+    "o-typography": "^4.2.0",
+    "o-video": "^1.0.0"
   }
 }
