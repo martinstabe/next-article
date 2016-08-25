@@ -59,6 +59,13 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
+	res.vary('ft-blocked-url');
+	res.vary('ft-barrier-type');
+	res.vary('x-ft-auth-gate-result');
+
+	res.set('x-ft-auth-gate-result', req.get('x-ft-auth-gate-result') || '-');
+	res.set('x-ft-barrier-type', req.get('ft-barrier-type') || '-');
+	res.set('ft-blocked-url', req.get('ft-blocked-url') || '-');
 
 	content.lazyLoadComments = (req.query['lf-content'] && req.query.hubRefSrc) ? false : true;
 
