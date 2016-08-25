@@ -57,11 +57,11 @@ export default opts =>
 									timing: Date.now() - window.FT.commentsRUMLazyStart
 								}
 							});
-							rumObserver.unobserve(document.querySelector('.comments__RUM-indicator'));
+							rumObserver.unobserve(document.querySelector('.comments__rum-indicator'));
 						},
 						{ rootMargin: `0px` }
 					);
-					rumObserver.observe(document.querySelector('.comments__RUM-indicator'));
+					rumObserver.observe(document.querySelector('.comments__rum-indicator'));
 				}
 			} else {
 				loadSources(opts.sources, resolve);
