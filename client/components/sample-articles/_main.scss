@@ -118,6 +118,10 @@
 		justify-content: center;
 		align-items: stretch;
 		padding: 18px 4px;
+
+		.core & {
+			overflow: hidden;
+		}
 	}
 
 	&__wrapper {
@@ -131,6 +135,10 @@
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
+
+		.core & {
+			@include oGridColspan(5.5);
+		}
 	}
 
 	&__header {
@@ -239,6 +247,7 @@
 
 
 .jump-to-block {
+	overflow: hidden;
 	/* This is a kind of "hack" to push the block down when visited via href hash */
 	&::before {
 		display: block;
