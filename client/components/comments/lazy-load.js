@@ -47,7 +47,7 @@ export default opts =>
 				);
 				observer.observe(target);
 				if (window.FT.commentsRUM) {
-					window.FT.commentsRUMLazyStart;
+					window.FT.commentsRUMLazyStart = Date.now();
 					const rumObserver = new IntersectionObserver(
 						function () {
 							broadcast('oTracking.event', {
