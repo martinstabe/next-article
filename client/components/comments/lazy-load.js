@@ -34,6 +34,7 @@ export default opts =>
 					function (changes) {
 						intersectionCallback(this, changes, opts.sources, resolve);
 						if (window.FT.commentsRUM) {
+							window.FT.commentsRUMLazyStart = Date.now();
 							broadcast('oTracking.event', {
 								category: 'comments',
 								action: 'start-lazy-load',
@@ -47,7 +48,6 @@ export default opts =>
 				);
 				observer.observe(target);
 				if (window.FT.commentsRUM) {
-					window.FT.commentsRUMLazyStart = Date.now();
 					const rumObserver = new IntersectionObserver(
 						function () {
 							broadcast('oTracking.event', {
