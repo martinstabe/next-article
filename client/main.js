@@ -6,8 +6,8 @@ const lightSignup = require('o-email-only-signup');
 const expander = require('n-ui/expander');
 const nUiConfig = require('./n-ui-config');
 import {bootstrap} from 'n-ui';
-import cacheJourney from './components/cache-journey/cache-journey';
-import {broadcast} from 'n-ui/utils';
+// import cacheJourney from './components/cache-journey/cache-journey';
+import {init as commentsInit} from './components/comments';
 
 bootstrap(nUiConfig, ({flags, mainCss}) => {
 
@@ -15,16 +15,13 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const readingHistory = require('./components/reading-history');
 	const scrollDepth = require('./components/article/scroll-depth');
 
-	const commentsIcon = require('./components/comments/icon');
-	const commentsSkeleton = require('./components/comments/skeleton');
-	const lazyLoad = require('./components/comments/lazy-load');
 
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
 
 
-	cacheJourney();
+	// cacheJourney();
 
 	oViewport.listenTo('resize');
 
@@ -62,41 +59,9 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 			});
 		});
 
-		if(flags.get('articleComments') && document.querySelector('#comments')) {
-			window.FT = window.FT || {};
-			window.FT.commentsRUM = Math.random() > 0.9 ? Date.now() : false;
-			if (window.FT.commentsRUM) {
-				broadcast('oTracking.event', {
-					action: 'rum-view',
-					category: 'comments'
-				});
-			}
-			const commentsEl = document.getElementById('comments');
-			const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
-			const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
-			const commentsLazyLoad = commentsEl.getAttribute('data-comments-lazy-load') === 'true';
-
-			commentsIcon.init();
-			commentsSkeleton.init();
-
-			lazyLoad({
-				targetEl: '#comments',
-				sources: [commentsJsLocation, commentsCssLocation],
-				threshold: 600,
-				commentsLazyLoad
-			}).then(function () {
-				broadcast('oTracking.event', {
-					action: 'view',
-					category: 'comments',
-					context: {
-						product: 'next',
-						source: 'next-article'
-					}
-				});
-			});
-
+		if (flags.get('articleComments') && document.querySelector('#comments')) {
+			commentsInit();
 		}
 	});
-
 
 });
