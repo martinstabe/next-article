@@ -83,4 +83,26 @@ describe('Metadata', () => {
 		});
 	});
 
+	context('for an article that has author(s) in its metadata', () => {
+
+		beforeEach(() => {
+			// Subject modifies the data given to it so always start fresh
+			fixtureData = JSON.parse(JSON.stringify(fixtureEsFound));
+			result = subject(fixtureData);
+		});
+
+		it('selects authors for display', () => {
+			expect(result.authors).to.be.an('array');
+			expect(result.authors.length).to.equal(1);
+			// Martin Arnold’s concept uuid
+			expect(result.authors[0].id).to.equal('Q0ItMDAwMDcyMw==-QXV0aG9ycw==');
+		});
+
+		it('excludes authors from the tags array', () => {
+			result.tags.forEach(tag => {
+				expect(tag.id).not.to.equal('Q0ItMDAwMDcyMw==-QXV0aG9ycw==');
+			});
+		});
+	});
+
 });

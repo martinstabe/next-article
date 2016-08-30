@@ -48,11 +48,12 @@ function selectTagsMyftTagsForDisplay(article) {
 
 	return article.metadata
 		.filter(isPrimaryTag(article))
-		.filter(tag => myftTopics.some(id => id === tag.id));
+		.filter(tag => myftTopics.some(id => id === tag.id))
+		.filter(tag => tag.taxonomy !== 'authors');
 }
 
 function selectTagsForDisplay(article) {
-	let ignore = [ 'genre', 'mediaType', 'iptc', 'icb' ];
+	let ignore = [ 'genre', 'mediaType', 'iptc', 'icb', 'authors' ];
 	let myftTopics = selectTagsMyftTagsForDisplay(article);
 	let defaultTopics = article.metadata
 		.filter(tag => !myftTopics.some(myftTag => myftTag.id === tag.id))
@@ -60,6 +61,10 @@ function selectTagsForDisplay(article) {
 		.filter(isPrimaryTag(article));
 
 	article.tags = myftTopics.concat(defaultTopics).slice(0,5);
+}
+
+function selectAuthorsForDisplay(article) {
+	article.authors = article.metadata.filter(tag => tag.taxonomy === 'authors');
 }
 
 function selectTagToFollow(article) {
@@ -81,5 +86,6 @@ module.exports = function(article) {
 	selectPrimaryTag(article);
 	selectTagsForDisplay(article);
 	selectTagToFollow(article);
+	selectAuthorsForDisplay(article);
 	return article;
 };
