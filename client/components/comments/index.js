@@ -1,6 +1,7 @@
 'use strict';
 
 import {broadcast} from 'n-ui/utils';
+import oGrid from 'n-ui/grid';
 
 const commentsIcon = require('./icon');
 const commentsSkeleton = require('./skeleton');
@@ -83,12 +84,21 @@ module.exports = {
 		commentsIcon.init();
 		commentsSkeleton.init();
 
-		lazyLoad({
-			targetEl: '#comments',
-			sources: [commentsJsLocation, commentsCssLocation],
-			threshold: 600,
-			commentsLazyLoad
-		});
+		if (['default', 'S'].indexOf(oGrid.getCurrentLayout()) > -1) {
+			lazyLoad({
+				targetEl: '.n-content-copyright',
+				sources: [commentsJsLocation, commentsCssLocation],
+				threshold: 0,
+				commentsLazyLoad
+			});
+		} else {
+			lazyLoad({
+				targetEl: '#comments',
+				sources: [commentsJsLocation, commentsCssLocation],
+				threshold: 600,
+				commentsLazyLoad
+			});
+		}
 
 		document.body.addEventListener('oComments.widget.renderComplete', () => {
 			window.FT.commentsRumLoaded = Date.now();
