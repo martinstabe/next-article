@@ -97,7 +97,7 @@ module.exports = {
 				action: 'ready',
 				context: {
 					timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLazyStart,
-					timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : null
+					timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : 0
 				}
 			});
 		})
