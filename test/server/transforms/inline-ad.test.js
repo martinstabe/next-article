@@ -9,7 +9,7 @@ describe('Inline ad inside body', function () {
 
 	const adHtml = '<div class="o-ads in-article-advert advert" data-o-ads-name="mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-targeting="pos=mid;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="MediumRectangle,Responsive" data-o-ads-formats-large="Responsive" data-o-ads-formats-extra="Responsive" aria-hidden="true"></div>';
 
-	const secondAdHtml = '<div class="o-ads in-article-advert advert" data-o-ads-name="second-mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-targeting="pos=mid;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="false" data-o-ads-formats-large="false" data-o-ads-formats-extra="false" aria-hidden="true"></div>';
+	const secondAdHtml = '<div class="o-ads in-article-advert advert" data-o-ads-name="second-mpu" data-o-ads-center="true" data-o-ads-label="true" data-o-ads-targeting="pos=mid;" data-o-ads-formats-default="MediumRectangle,Responsive" data-o-ads-formats-small="MediumRectangle,Responsive" data-o-ads-formats-medium="MediumRectangle,Responsive" data-o-ads-formats-large="false" data-o-ads-formats-extra="false" aria-hidden="true"></div>';
 
 	it('should insert an ad between the third and fourth paragraphs', function() {
 		const $ = cheerio.load('<p>1</p><p>2</p><p>3</p><p>4</p>', { decodeEntities: false });
