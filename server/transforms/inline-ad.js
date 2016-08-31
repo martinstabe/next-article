@@ -1,12 +1,10 @@
-module.exports = function ($) {
+'use strict';
+
+module.exports = function ($, flags) {
 	const pars = $('p');
-	pars.each((index, par) => {
-		if(index > 1
-			&& par.next
-			&& par.next.name === 'p'
-			&& !par.parent
-			&& par.prev.name !== 'aside') {
-			$(par).after(`<div class="o-ads in-article-advert advert"
+	const midAd = (adIndex) =>
+		adIndex === 0 ?
+			`<div class="o-ads in-article-advert advert"
 				data-o-ads-name="mpu"
 				data-o-ads-center="true"
 				data-o-ads-label="true"
@@ -16,10 +14,45 @@ module.exports = function ($) {
 				data-o-ads-formats-medium="MediumRectangle,Responsive"
 				data-o-ads-formats-large="Responsive"
 				data-o-ads-formats-extra="Responsive"
-				aria-hidden="true"></div>`);
-			return false;
+				aria-hidden="true"></div>` :
+		`<div class="o-ads in-article-advert advert"
+				data-o-ads-name="second-mpu"
+				data-o-ads-center="true"
+				data-o-ads-label="true"
+				data-o-ads-targeting="pos=mid;"
+				data-o-ads-formats-default="MediumRectangle,Responsive"
+				data-o-ads-formats-small="MediumRectangle,Responsive"
+				data-o-ads-formats-medium="MediumRectangle,Responsive"
+				data-o-ads-formats-large="false"
+				data-o-ads-formats-extra="false"
+				aria-hidden="true"></div>`;
+	;
+
+
+	if(flags.adsMoreArticleMPUs && pars.length <= 3) {
+		//If article shorter than three pars, insert an ad right at the end
+		$('*').last().after(midAd);
+	} else {
+
+		const maxAdsToRender = 2;
+		let nextAvailableIndex = 1;
+		let adsRendered = 0;
+
+		for(let index = 0; index < pars.length; index++) {
+			const par = pars[index];
+			const isBetweenParagraphs = par.next && par.next.name === 'p' && !par.parent && par.prev && par.prev.name !== 'aside';
+
+			if(index > nextAvailableIndex && isBetweenParagraphs && adsRendered < maxAdsToRender) {
+				$(par).after(midAd(adsRendered++));
+
+				if(flags.adsMoreArticleMPUs) {
+					nextAvailableIndex = index + 5; //insert an Ad after another 6 paragraphs
+				} else {
+					break; // no more ads to render
+				}
+			}
 		}
-	});
+	}
 
 	return $;
 };
