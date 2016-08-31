@@ -15,7 +15,12 @@
 								{{> header/primary-tag}}
 							{{/if}}
 						{{/if}}
-						<h1 class="article__title">{{title}}</h1>
+						<h1 class="article-headline">
+							<span class="article-headline__title">{{title}}</span>
+							{{#ifAll @root.flags.articlePremiumLabel premiumArticle}}
+								<span class="article-headline__premium-label">Premium</span>
+							{{/ifAll}}
+						</h1>
 					</div>
 					<div class="article__header-secondary">
 						{{#ifEquals contentType 'article'}}

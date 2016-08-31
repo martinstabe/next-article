@@ -1,0 +1,25 @@
+.article-headline {
+	@include oTypographySerifDisplay('l', $load-progressively: true);
+
+	margin: 0;
+
+	@include oGridRespondTo(L) {
+		@include oTypographySerifDisplaySize('xl', $with-progressive-size: true);
+	}
+}
+.article-headline__title:after {
+	content: ' ';
+	margin-right: 2px;
+}
+.article-headline__premium-label {
+	@include oTypographySansBold('xs', $load-progressively: true);
+
+	vertical-align: middle;
+	background-color: oColorsGetPaletteColor(grey-tint4);
+	color: #ffffff;
+	padding: 1.5px 6px 3.3px;
+
+	@include oGridRespondTo(L) {
+		@include oTypographySansBoldSize('s', $with-progressive-size: true);
+	}
+}
