@@ -263,6 +263,29 @@ describe('Negotiation Controller', function() {
 				});
 		});
 
+		it('redirects syndicated / wires content to ft.com', () => {
+			nock('https://next-elastic.ft.com')
+				.post('/v3_api_v2/item/_mget')
+				.reply(200, {
+					docs: [{
+						found: true,
+						_source: {
+							originatingParty: 'Reuters',
+							webUrl: 'http://www.ft.com/cms/s/0/bd729e4c-644d-11e6-8310-ecf0bddad227.html'
+						}
+					}]
+				});
+
+			return createInstance({
+				params: { id: 'uuid' }
+			})
+				.then(() => {
+					expect(response.statusCode).to.equal(302);
+					expect(response._getRedirectUrl()).to.include('http://www.ft.com/cms/s/0/bd729e4c-644d-11e6-8310-ecf0bddad227.html');
+					expect(response._getRedirectUrl()).to.include('?ft_site=falcon&desktop=true');
+				});
+		});
+
 	})
 
 });

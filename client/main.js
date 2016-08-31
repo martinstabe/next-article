@@ -55,7 +55,8 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 				placeholder: true,
 				classes: ['video'],
 				advertising: flags.get('videoPlayerAdvertising'),
-				source: 'brightcove'
+				source: 'brightcove',
+				placeholdertitle: true
 			});
 		});
 
