@@ -22,7 +22,7 @@ module.exports = function ($, flags) {
 				data-o-ads-targeting="pos=mid;"
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
-				data-o-ads-formats-medium="MediumRectangle,Responsive"
+				data-o-ads-formats-medium="false"
 				data-o-ads-formats-large="false"
 				data-o-ads-formats-extra="false"
 				aria-hidden="true"></div>`;
