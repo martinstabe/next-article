@@ -4,7 +4,7 @@ const api = require('next-ft-api-client');
 const nHealth = require('n-health');
 
 const ARTICLE_ID = 'd0377096-f290-11e4-b914-00144feab7de';
-const INTERVAL = 60 * 1000;
+const INTERVAL = 60* 1000;
 
 const statuses = {
 	elastic: {
@@ -16,10 +16,10 @@ const statuses = {
 };
 
 /**
- * Calls Elasticsearch for V1, V2 and V3 and updates [statuses]
- * in the parent scope.
- * @method pingServices
- */
+* Calls Elasticsearch for V1, V2 and V3 and updates [statuses]
+* in the parent scope.
+* @method pingServices
+*/
 function pingServices() {
 
 	api.content({
@@ -34,11 +34,11 @@ function pingServices() {
 }
 
 /**
- * Creates a object to be passed to healthchecks. Fetching the latest status from [statuses]
- * @method buildStatus
- * @param  {String}    version The CAPI version; ['v1', 'v2']
- * @return {Object}
- */
+* Creates a object to be passed to healthchecks. Fetching the latest status from [statuses]
+* @method buildStatus
+* @param  {String}    version The CAPI version; ['v1', 'v2']
+* @return {Object}
+*/
 function buildStatus(version) {
 	return {
 		getStatus: () => ({
