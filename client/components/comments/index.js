@@ -1,7 +1,7 @@
 'use strict';
 
-import {broadcast} from 'n-ui/utils';
 import oGrid from 'n-ui/grid';
+import tracking from './tracking';
 
 const commentsIcon = require('./icon');
 const commentsSkeleton = require('./skeleton');
@@ -32,7 +32,7 @@ const intersectionCallback = (observer, changes, sources, resolve) => {
 };
 
 function lazyLoad (opts) {
-	const rumIndicatorEl = document.querySelector('.comments__rum-indicator');
+
 	return new Promise((resolve, reject) => {
 		const target = document.querySelector(opts.targetEl);
 		if (target) {
@@ -46,23 +46,6 @@ function lazyLoad (opts) {
 					{ rootMargin: `${opts.threshold}px` }
 				);
 				observer.observe(target);
-				const rumObserver = new IntersectionObserver(
-					() => {
-						window.FT.commentsRumInView = Date.now();
-						broadcast('oTracking.event', {
-							action: 'view',
-							category: 'comments',
-							context: {
-								product: 'next',
-								source: 'next-article',
-								uiIsDelayed: !window.FT.commentsRumLoaded
-							}
-						});
-						rumObserver.unobserve(rumIndicatorEl);
-					},
-					{ rootMargin: `0px` }
-				);
-				rumObserver.observe(rumIndicatorEl);
 			} else {
 				loadSources(opts.sources, resolve);
 			}
@@ -72,9 +55,9 @@ function lazyLoad (opts) {
 	});
 }
 
-
 module.exports = {
 	init: () => {
+
 		window.FT = window.FT || {};
 		const commentsEl = document.getElementById('comments');
 		const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
@@ -100,18 +83,6 @@ module.exports = {
 			});
 		}
 
-		document.body.addEventListener('oComments.widget.renderComplete', () => {
-			window.FT.commentsRumLoaded = Date.now();
-			broadcast('oTracking.event', {
-				category: 'comments',
-				action: 'ready',
-				context: {
-					timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLazyStart,
-					userIsViewing: !!window.FT.commentsRumInView,
-					timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : 0
-				}
-			});
-		})
-
+		tracking.init();
 	}
 };

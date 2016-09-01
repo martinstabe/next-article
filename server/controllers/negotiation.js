@@ -64,6 +64,11 @@ module.exports = function negotiationController(req, res, next) {
 				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
 			}
 
+			// Redirect syndicated / wires content to old FT.com as no treatment on Next yet
+			if (article && article.originatingParty && article.originatingParty !== 'FT') {
+				return res.redirect(302, `${webUrl}${webUrl.includes('?') ? '&' : '?'}ft_site=falcon&desktop=true`);
+			}
+
 			if (article) {
 				if (isArticlePodcast(article)) {
 					return controllerPodcast(req, res, next, article);
