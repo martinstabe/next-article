@@ -1,5 +1,6 @@
 'use strict';
 
+import oGrid from 'n-ui/grid';
 import tracking from './tracking';
 
 const commentsIcon = require('./icon');
@@ -66,12 +67,21 @@ module.exports = {
 		commentsIcon.init();
 		commentsSkeleton.init();
 
-		lazyLoad({
-			targetEl: '#comments',
-			sources: [commentsJsLocation, commentsCssLocation],
-			threshold: 600,
-			commentsLazyLoad
-		});
+		if (['default', 'S'].indexOf(oGrid.getCurrentLayout()) > -1) {
+			lazyLoad({
+				targetEl: '.n-content-copyright',
+				sources: [commentsJsLocation, commentsCssLocation],
+				threshold: 0,
+				commentsLazyLoad
+			});
+		} else {
+			lazyLoad({
+				targetEl: '#comments',
+				sources: [commentsJsLocation, commentsCssLocation],
+				threshold: 600,
+				commentsLazyLoad
+			});
+		}
 
 		tracking.init();
 	}
