@@ -4,6 +4,7 @@
     "n-content-body": "^2.0.5",
     "n-email-article": "^1.2.9",
     "n-image": "^4.1.4",
+    "n-section": "^6.1.2",
     "n-service-worker": "^1.1.0",
     "n-ui": "^2.11.0",
     "o-comment-api": "^2.1.0",
@@ -17,6 +18,7 @@
   },
   "resolutions": {
     "o-typography": "^4.1.0",
-    "o-viewport": "^2.0.0"
+    "o-viewport": "^2.0.0",
+    "o-hoverable": "^3.0.0"
   }
 }

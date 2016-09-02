@@ -4,21 +4,18 @@ const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
+const articleModel = require('ft-n-content-model');
+const ReactServer = require('react-dom/server');
+const React = require('react');
+const getSection = require('../../../config/sections');
+const Section = require('@financial-times/n-section').Section;
 
-function getArticles (tagId, count, parentId) {
+
+const getArticles = (tagId, count, parentId) => {
 	return api.search({
 		filter: [ 'metadata.idV1', tagId ],
 		// Get +1 for de-duping parent article
-		count: count + 1,
-		fields: [
-			'id',
-			'title',
-			'metadata',
-			'summaries',
-			'mainImage',
-			'publishedDate'
-		]
+		count: count + 1
 	})
 		.then(articles => {
 			if (!articles.length) {
@@ -27,18 +24,17 @@ function getArticles (tagId, count, parentId) {
 			return articles
 				.filter(article => article.id !== parentId)
 				.slice(0, count)
-				.map(articlePodMapping);
 		});
-}
+};
 
-function allSettled(promises) {
+const allSettled = (promises) => {
 	let resolveWhenSettled = function(promise) {
 		return new Promise(res => {
 			promise.then(res, () => res());
 		});
 	};
 	return Promise.all(promises.map(resolveWhenSettled));
-}
+};
 
 module.exports = function (req, res, next) {
 
@@ -69,7 +65,7 @@ module.exports = function (req, res, next) {
 
 	// get predecessor more-on tag articles for deduping
 	tagIdArray.slice(0,(moreOnIndex + 1)).forEach((tagId, i) => {
-		getArticlesPromises.push(getArticles(tagId, count * (i + 1),parentId));
+		getArticlesPromises.push(getArticles(tagId, count * (i + 1), parentId));
 	});
 
 	return allSettled(getArticlesPromises)
@@ -79,16 +75,18 @@ module.exports = function (req, res, next) {
 				.concat(dedupe(moreOnArticlesArray[i]).map(article => article.id));
 			}
 			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex])
-				.map((article, i) => {
-					if (article.mainImage && i > 0) {
-						article.mainImage = null;
-					}
-					return article;
-				});
+				.map(article => articleModel(article, {useCase: 'article-card'}));
 
-			return res.render('related/more-on', {
-				articles: moreOnArticlesArray[moreOnIndex]
-			});
+				const sectionProps = getSection(
+					'pyramid-trio',
+					{content: moreOnArticlesArray[moreOnIndex]},
+					res.locals.flags,
+					{trackScrollEvent: `more-on-${moreOnIndex}`}
+				);
+				const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
+
+			return res.send(sectionHtml);
+
 		})
 		.catch(function(err) {
 			logger.error(err);
