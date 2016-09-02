@@ -18,6 +18,8 @@ const sampleArticles = [
 			'955e9bbc-2e70-11e6-a18d-a96ab29e3c95',
 			'add048e4-4e32-11e6-88c5-db83e98a590a',
 			'7e40b256-42d1-11e6-b22f-79eb4891c97d',
+			'3c0cabbc-114c-11e6-91da-096d89bd2173',
+			'a8e9f23c-1695-11e6-9d98-00386a18e39d',
 		],
 	},
 	{
