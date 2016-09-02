@@ -20,6 +20,9 @@ const sampleArticles = [
 			'7e40b256-42d1-11e6-b22f-79eb4891c97d',
 			'3c0cabbc-114c-11e6-91da-096d89bd2173',
 			'a8e9f23c-1695-11e6-9d98-00386a18e39d',
+			'a04bcc50-238c-11e6-aa98-db1e01fabc0c',
+			'44088ede-5027-11e6-8172-e39ecd3b86fc',
+			'847c6b08-3a28-11e6-a780-b48ed7b6126f',
 		],
 	},
 	{
@@ -33,6 +36,10 @@ const sampleArticles = [
 			'9831cf8e-4906-11e6-8d68-72e9211e86ab',
 			'324d82c4-2d60-11e6-a18d-a96ab29e3c95',
 			'f059fb22-3787-11e6-a780-b48ed7b6126f',
+			'6700d5cc-3209-11e6-ad39-3fee5ffe5b5b',
+			'ccd94b46-4db5-11e6-88c5-db83e98a590a',
+			'dde0af68-4db2-11e6-88c5-db83e98a590a',
+			'57371736-4b69-11e6-88c5-db83e98a590a',
 		],
 	},
 	{
@@ -46,6 +53,7 @@ const sampleArticles = [
 			'df027048-4a42-11e6-8d68-72e9211e86ab',
 			'831ace74-3471-11e6-bda0-04585c31b153',
 			'7bd05b02-4344-11e6-9b66-0712b3873ae1',
+			'4fd7dd18-5523-11e6-befd-2fc0c26b3c60',
 		],
 	},
 	{
