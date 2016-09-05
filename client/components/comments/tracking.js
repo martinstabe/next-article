@@ -44,10 +44,17 @@ function logCommentEngagement (type) {
 	superstore.local.set(engagementKey, value)
 }
 
+function getInitialEngagement () {
+	if (!initialCommentEngagement) {
+		initialCommentEngagement = getCommentEngagement();
+	}
+	return initialCommentEngagement;
+}
+
 
 module.exports = {
 	init: () => {
-		initialCommentEngagement = getCommentEngagement();
+		getInitialEngagement();
 
 		const rumIndicatorEl = document.querySelector('.comments__rum-indicator');
 		const rumObserver = new IntersectionObserver(
@@ -78,7 +85,7 @@ module.exports = {
 				category: 'comments',
 				action: 'ready',
 				context: {
-					timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLazyStart,
+					timeToLoad: window.FT.commentsRumLoaded - window.FT.commentsRumLoadStart,
 					userIsViewing: !!window.FT.commentsRumInView,
 					timeUserWaitedToView: window.FT.commentsRumInView ? window.FT.commentsRumLoaded - window.FT.commentsRumInView : 0,
 					userEngagement: initialCommentEngagement
@@ -96,5 +103,7 @@ module.exports = {
 
 		document.body.addEventListener('oComments.tracking.shareComment', () => logCommentEngagement('active'));
 
-	}
+	},
+	getInitialEngagement: getInitialEngagement
+
 };

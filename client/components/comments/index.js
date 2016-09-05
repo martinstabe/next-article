@@ -31,27 +31,37 @@ const intersectionCallback = (observer, changes, sources, resolve) => {
 	});
 };
 
-function lazyLoad (opts) {
+function loadComments (commentsEl, opts) {
 
 	return new Promise((resolve, reject) => {
-		const target = document.querySelector(opts.targetEl);
-		if (target) {
-			const commentsFragmentIndicator = window.location.hash.indexOf('#lf-content') > -1;
-			if (opts.commentsLazyLoad && window.IntersectionObserver && !commentsFragmentIndicator) {
+		const sources = [commentsEl.getAttribute('data-comments-js'), commentsEl.getAttribute('data-comments-css')];
+
+		if (!opts.lazy) {
+			window.FT.commentsRumLoadStart = Date.now();
+			loadSources(sources, resolve);
+		}
+
+		const intersectionTarget = document.querySelector(opts.targetSelector);
+
+		if (intersectionTarget) {
+
+			if (window.IntersectionObserver) {
 				const observer = new IntersectionObserver(
 					function (changes) {
-						intersectionCallback(this, changes, opts.sources, resolve);
-						window.FT.commentsRumLazyStart = Date.now();
+						intersectionCallback(this, changes, sources, resolve);
+						window.FT.commentsRumLoadStart = Date.now();
 					},
 					{ rootMargin: `${opts.threshold}px` }
 				);
-				observer.observe(target);
+				observer.observe(intersectionTarget);
 			} else {
-				loadSources(opts.sources, resolve);
+				window.FT.commentsRumLoadStart = Date.now();
+				loadSources(sources, resolve);
 			}
 		} else {
-			reject('targetEl does not exist');
+			reject('no element found to attach intersection observer to');
 		}
+
 	});
 }
 
@@ -59,29 +69,37 @@ module.exports = {
 	init: () => {
 
 		window.FT = window.FT || {};
+
 		const commentsEl = document.getElementById('comments');
-		const commentsJsLocation = commentsEl.getAttribute('data-comments-js');
-		const commentsCssLocation = commentsEl.getAttribute('data-comments-css');
-		const commentsLazyLoad = commentsEl.getAttribute('data-comments-lazy-load') === 'true';
 
 		commentsIcon.init();
 		commentsSkeleton.init();
 
-		if (['default', 'S'].indexOf(oGrid.getCurrentLayout()) > -1) {
-			lazyLoad({
-				targetEl: '.n-content-copyright',
-				sources: [commentsJsLocation, commentsCssLocation],
-				threshold: 0,
-				commentsLazyLoad
-			});
-		} else {
-			lazyLoad({
-				targetEl: '#comments',
-				sources: [commentsJsLocation, commentsCssLocation],
-				threshold: 600,
-				commentsLazyLoad
-			});
+		let loadOpts = {lazy: false};
+		// before turning on lazy loading check first that lazy loading is enabled
+		// and the user has not followed a link to the comments section
+		if (commentsEl.getAttribute('data-comments-lazy-load') === 'true' && !/#lf-content|#comments|#lf-comments/.test(window.location.hash)) {
+			const initialEngagement = tracking.getInitialEngagement();
+			if (['default', 'S'].indexOf(oGrid.getCurrentLayout()) > -1) {
+				if (initialEngagement !== 'active') {
+					loadOpts = {
+						targetSelector: '.n-content-copyright',
+						threshold: initialEngagement === 'passive' ? 600 : 0,
+						lazy: true
+					};
+				}
+			} else {
+				if (initialEngagement !== 'active') {
+					loadOpts = {
+						targetSelector: '#comments',
+						threshold: 600,
+						lazy: true
+					};
+				}
+			}
 		}
+
+		loadComments(commentsEl, loadOpts);
 
 		tracking.init();
 	}
