@@ -28,13 +28,16 @@ const app = module.exports = express({
 
 require('./lib/ig-poller').start();
 
-
+app.use((req, res, next) => {
+	res.set('Cache-Control', res.FT_NO_CACHE);
+	next();
+});
 
 app.post('^/preview$', bodyParser.json(), require('./controllers/preview'));
 
 // Apply this after the preview controller. Previews should not be cached
 app.use((req, res, next) => {
-	res.cache('hour');
+	res.set('Surrogate-Control', res.FT_HOUR_CACHE);
 	next();
 });
 
@@ -48,8 +51,8 @@ app.get('/embedded-components/slideshow/:id', require('./controllers/slideshow')
 
 app.get(`^/content/:id(${uuid})$`, (req, res, next) => {
 	res.vary('country-code');
-	// cache articles for less time than all the related links
-	res.cache('short');
+	// cache articles for less time than all the related content
+	res.set('Surrogate-Control', res.FT_SHORT_CACHE);
 	next();
 }, require('./controllers/negotiation'));
 
