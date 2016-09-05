@@ -1,1 +1,1 @@
-web: forever -c 'node --harmony' server/app.js
+web: forever -c 'node --harmony' server/init.js

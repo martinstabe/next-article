@@ -3,16 +3,38 @@
 'use strict';
 
 require('chai').should();
-
+const expect = require('chai').expect;
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const stubs = {search: null};
+const stubs = {
+	api: {
+		search: sinon.stub()
+	},
+	ReactServer: {
+		renderToStaticMarkup: sinon.stub()
+	},
+	articleModel: sinon.stub(),
+	getSection: sinon.stub()
+};
 const subject = proxyquire('../../../../server/controllers/related/more-on', {
-	'next-ft-api-client': stubs,
-	'../../mappings/article-pod-mapping-v3': (article) => article
+	'next-ft-api-client': stubs.api,
+	'ft-n-content-model': stubs.articleModel,
+	'react-dom/server': stubs.ReactServer,
+	'../../../config/sections': stubs.getSection
 });
+
+stubs.articleModel.returnsArg(0);
+stubs.ReactServer.renderToStaticMarkup.returns('section');
+stubs.getSection.returns('sectionProps');
+
+const resetStubs = () => {
+	stubs.api.search.reset();
+	stubs.ReactServer.renderToStaticMarkup.reset();
+	stubs.articleModel.reset();
+	stubs.getSection.reset();
+};
 
 const articlesMoreOnOne = [
 	{id: '117bbe2c-9417-11e5-b190-291e94b77c8f', mainImage: true},
@@ -59,10 +81,9 @@ describe('More Ons', () => {
 
 	let request;
 	let response;
-	let result;
 	let options;
 
-	function createInstance(options, flags) {
+	function createInstance (options, flags) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
 		response.cache = sinon.stub();
@@ -77,7 +98,9 @@ describe('More Ons', () => {
 
 		before(() => {
 
-			stubs.search = sinon.stub().returns(
+			resetStubs();
+
+			stubs.api.search.returns(
 				Promise.resolve(articlesMoreOnOne)
 			);
 			options = {
@@ -89,27 +112,31 @@ describe('More Ons', () => {
 				}
 			};
 
-			return createInstance(options).then(() => {
-				result = response._getRenderData()
-			});
+			return createInstance(options);
 
 		});
 
 		it('call makes one call to ES', () => {
-			stubs.search.callCount.should.eql(1);
+			expect(stubs.api.search.callCount).to.eql(1);
 		});
 
 		it('return 5 articles per more-on', () => {
-			result.articles.length.should.equal(5);
+			expect(stubs.articleModel.callCount).to.equal(5);
 		});
 
 		it('should not contain the parent article', () => {
-			result.articles.filter(article => article.parent).should.have.length(0);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.parent).to.not.exist;
+			}
 		});
 
-		it('removes main image from all except the first article', () => {
-			result.articles[0].mainImage.should.be.true;
-			result.articles.filter(article => article.mainImage).should.have.length(1);
+		it('should get the section setup', () => {
+			expect(stubs.getSection.calledOnce).to.be.true;
+		});
+
+		it('should use react to render the section to static html', () => {
+			expect(stubs.ReactServer.renderToStaticMarkup.calledOnce).to.be.true;
 		});
 
 	});
@@ -118,11 +145,12 @@ describe('More Ons', () => {
 
 		before(() => {
 
+			resetStubs();
+
 			let options;
 
-			stubs.search = sinon.stub();
-			stubs.search.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
-			stubs.search.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
+			stubs.api.search.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
+			stubs.api.search.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
 
 			options = {
 				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
@@ -133,30 +161,37 @@ describe('More Ons', () => {
 				}
 			};
 
-			return createInstance(options).then(() => {
-				result = response._getRenderData()
-			});
+			return createInstance(options);
 
 		});
 
 		it('call makes two calls to ES', () => {
-			stubs.search.callCount.should.eql(2);
+			expect(stubs.api.search.callCount).to.equal(2);
 		});
 
 		it('return 5 articles per more-on', () => {
-			result.articles.should.have.length(5);
+			expect(stubs.articleModel.callCount).to.equal(5);
 		});
 
 		it('it should not contain the parent article', () => {
-			result.articles.filter(article => article.parent).should.have.length(0);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.parent).to.not.exist;
+			}
 		});
 
 		it('it should dedupe articles between more-ons', () => {
-			result.articles.filter(article => article.dupe).should.have.length(0);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.dupe).to.not.exist;
+			}
 		});
 
 		it('it should only return articles appropriate to the tag ID', () => {
-			result.articles.filter(article => article.moreOnTwo).should.have.length(5);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.moreOnTwo).to.be.true;
+			}
 		});
 
 	});
@@ -165,12 +200,13 @@ describe('More Ons', () => {
 
 		before(() => {
 
+			resetStubs();
+
 			let options;
 
-			stubs.search = sinon.stub();
-			stubs.search.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
-			stubs.search.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
-			stubs.search.onCall(2).returns(Promise.resolve(articlesMoreOnThree));
+			stubs.api.search.onCall(0).returns(Promise.resolve(articlesMoreOnOne));
+			stubs.api.search.onCall(1).returns(Promise.resolve(articlesMoreOnTwo));
+			stubs.api.search.onCall(2).returns(Promise.resolve(articlesMoreOnThree));
 
 			options = {
 				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
@@ -181,30 +217,41 @@ describe('More Ons', () => {
 				}
 			};
 
-			return createInstance(options).then(() => {
-				result = response._getRenderData()
-			});
+			return createInstance(options);
 
 		});
 
 		it('call makes three calls to ES', () => {
-			stubs.search.callCount.should.eql(3);
+			expect(stubs.api.search.callCount).to.equal(3);
 		});
 
 		it('return 5 articles per more-on', () => {
-			result.articles.should.have.length(5);
+			expect(stubs.articleModel.callCount).to.equal(5);
 		});
 
 		it('should not contain the parent article', () => {
-			result.articles.filter(article => article.parent).should.have.length(0);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.parent).to.not.exist;
+			}
 		});
 
 		it('should dedupe articles between more-ons', () => {
-			result.articles.filter(article => article.dupe).should.have.length(0);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.dupe).to.not.exist;
+			}
 		});
 
 		it('should only return articles appropriate to the tag ID', () => {
-			result.articles.filter(article => article.moreOnThree).should.have.length(5);
+			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
+				const article = stubs.articleModel.getCall(articleCount).args[0];
+				expect(article.moreOnThree).to.be.true;
+			}
+		});
+
+		it('should get the section setup', () => {
+			expect()
 		});
 
 	});
@@ -229,7 +276,7 @@ describe('More Ons', () => {
 		});
 
 		it('should return an error if an index higher than 4 is requested', () => {
-			response.statusCode.should.equal(400);
+			expect(response.statusCode).to.equal(400);
 		});
 
 	});
@@ -238,13 +285,14 @@ describe('More Ons', () => {
 
 		let expectedSearchArgs = {
 			filter: [ 'metadata.idV1', 'TnN0ZWluX0dMX0FS-R0w=' ],
-			count: 11,
-			fields: ['id','title','metadata','summaries','mainImage','publishedDate']
+			count: 11
 		};
 
 		before(() => {
 
-			stubs.search = sinon.stub().returns(Promise.resolve(articlesMoreOnOne));
+			resetStubs();
+
+			stubs.api.search.returns(Promise.resolve(articlesMoreOnOne));
 
 			options = {
 				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
@@ -259,10 +307,9 @@ describe('More Ons', () => {
 		});
 
 		it('should limit the request if more than 10 articles per more on are requested', () => {
-			stubs.search.calledWithExactly(expectedSearchArgs).should.be.true;
+			expect(stubs.api.search.calledWithExactly(expectedSearchArgs)).to.be.true;
 		});
 
 	});
-
 
 });
