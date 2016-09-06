@@ -3,93 +3,62 @@
 	background: getColor('cold-3');
 
 	&__ribbon {
-		@include oTypographySans(m, $load-progressively: true);
-		display: block;
-		background: getColor('cold-2');
 		color: getColor('white');
-		overflow: hidden;
+		background: getColor('cold-2');
 
 		&__wrapper {
-			@include oGridContainer();
+			@include oTypographySans(m, $load-progressively: true);
+			padding-top: 20px;
+			padding-bottom: 20px;
 		}
 
 		&__heading,
 		&__banner__heading {
-			@include oTypographySans(m, $load-progressively: true);
-			@include oGridColspan(12);
-			display: inline-block;
-			font-weight: normal;
-			padding: 0 10px;
-			margin: 14px 0 0;
-			text-align: left;
-
-			@include oGridRespondTo(M) {
-				@include oGridColspan(7);
-				padding: 0;
-				margin: 24px 0;
-				text-align: left;
-			}
-
-			@include oGridRespondTo(XL) {
-				@include oGridPush(1);
-				padding-left: 5px;
-			}
+			font-size: inherit;
+			font-weight: inherit;
+			margin-top: 0;
+			margin-bottom: 0;
 		}
 
 		&__banner__heading {
-			@include oTypographySans(m, $load-progressively: true);
-			padding-left: 0;
-
-			html &[class] { /* stupid specificity */
-				@include oGridRespondTo(M) {
-					font-size: 24px;
-				}
+			@include oGridRespondTo(M) {
+				font-size: 24px;
 			}
 		}
 
 		&__subheading {
 			display: none;
+
 			@include oGridRespondTo(M) {
 				display: inline;
 			}
 		}
 
 		&__link {
-
 			&.n-header__marketing-promo__link {
-				@include oTypographySansBold(s, $load-progressively: true);
+				@include oTypographySansBoldSize(s);
 				padding: 5px 8px;
-				margin-right: 7px;
 			}
 
 			&__wrapper,
 			&__banner__wrapper {
-				@include oGridColspan(12);
-				margin: 14px 0;
-				text-align: left;
-
 				@include oGridRespondTo(M) {
-					@include oGridColspan(5);
-					margin: 20px 0;
 					text-align: right;
 				}
-
 			}
 
 			&__wrapper {
-				@include oGridRespondTo(XL) {
-					@include oGridPull(1);
+				margin-top: 14px;
+
+				@include oGridRespondTo(M) {
+					margin-top: 0;
 				}
 			}
 
-			&__banner__wrapper {
-				padding-left: 0;
-				margin: 0 0 20px;
-
-				@include oGridRespondTo(M) {
-					margin: 24px 0;
-				}
-
+			&__banner__wrapper:after {
+				@include nGetImage('icon', 'arrow-down', getColor('teal-2'), 20);
+				content: '';
+				vertical-align: bottom;
 			}
 		}
 
@@ -99,46 +68,28 @@
 			&:hover {
 				color: #a4a4a4;
 			}
-
-			&__icon {
-				background: url("#{$o-icons-image-service-base-url}/v1/images/raw/fticon:arrow-down?source=o-icons&tint=%232bbbbf,%232bbbbf&format=svg");
-				padding: 0px 9px;
-				background-size: 20px;
-				background-repeat: no-repeat;
-				margin: 0px 0 0 8px;
-				background-position: 0 3px;
-			}
 		}
 	}
 
 	&__body {
-		@include oGridContainer();
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		align-items: stretch;
-		padding: 18px 4px;
+		padding-top: 18px;
+		padding-bottom: 18px;
 
 		.core & {
 			overflow: hidden;
 		}
 	}
 
-	&__wrapper {
-		flex: 1 1 250px;
-		border: 1px solid getColor('cold-1');
-		margin: 14px;
-		display: inline-block;
-		max-width: 440px;
-		padding: 24px 16px;
-		position: relative;
+	&__col {
 		display: flex;
-		justify-content: center;
-		flex-direction: column;
+	}
 
-		.core & {
-			@include oGridColspan(5.5);
-		}
+	&__wrapper {
+		flex: 1;
+		position: relative;
+		border: 1px solid getColor('cold-1');
+		margin: 14px 0;
+		padding: 24px 16px;
 	}
 
 	&__header {
@@ -147,13 +98,13 @@
 		color: #a4a4a4;
 
 		&__lead {
-			@include oTypographySerif(m, $load-progressively: true);
+			@include oTypographySerifDisplay(m, $load-progressively: true);
 			background: getColor('cold-3');
 			color: getColor('teal-2');
-			padding: 8px;
+			margin: 0;
+			padding: 0 8px;
 			position: absolute;
-			top: -38px;
-			left: 12px;
+			top: -0.5em;
 
 			.sample-articles__wrapper__lead & {
 				margin: 0 -24px 8px;
@@ -163,13 +114,12 @@
 	}
 
 	&__more-button {
-		@include oTypographySans(s, $load-progressively: true);
+		@include oTypographySansSize(s, $with-progressive-size: true);
 		color: inherit;
-		padding: 5px;
+		padding: 5px 10px;
 		margin: 0 0 0 6px;
 		border: 1px solid getColor('white');
 		border-radius: 4px;
-		width: 82px;
 
 		i {
 			display: none;
