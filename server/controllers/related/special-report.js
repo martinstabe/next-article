@@ -21,7 +21,7 @@ function getArticles (tagId, count, parentId) {
 		]
 	})
 		.then(function(articles) {
-			if (!articles.length) {
+			if (!articles.length || articles.length <= 1) {
 				throw new NoRelatedResultsException();
 			}
 			return articles
