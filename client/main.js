@@ -19,6 +19,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
 	const share = require('./components/share/main');
+	const promotedContent = require('./components/ads/promoted-content');
 
 
 	// cacheJourney();
@@ -47,6 +48,7 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 		onwardJourney.init(flags);
 		lightSignup.init();
 		expander.init();
+		promotedContent(flags);
 
 		const videos = document.querySelectorAll('[data-o-component="o-video"]');
 		Array.from(videos).forEach(video => {
