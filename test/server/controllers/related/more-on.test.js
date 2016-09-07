@@ -1,8 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
-require('chai').should();
 const expect = require('chai').expect;
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');

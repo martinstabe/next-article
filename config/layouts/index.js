@@ -1,5 +1,5 @@
-import pyramidTrioLayout from './pyramid-trio';
+import onwardJourney from './onward-journey';
 
 export default {
-	'pyramid-trio': pyramidTrioLayout
+	'onward-journey': onwardJourney
 }

@@ -1,10 +1,12 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
+const articleModel = require('ft-n-content-model');
+const ReactServer = require('react-dom/server');
+const React = require('react');
+const getSection = require('../../../config/sections');
+const Section = require('@financial-times/n-section').Section;
 
 module.exports = function(req, res, next) {
 	res.unvaryAll('wrapper');
@@ -23,20 +25,26 @@ module.exports = function(req, res, next) {
 			if (!articles.length) {
 				throw new NoRelatedResultsException();
 			}
-
-			return articles.map(articlePodMapping);
+			if (articles.length % 2 === 0) articles.length --;
+			return articles.map(article => articleModel(article, {useCase: 'article-card'}));
 		})
-		.then(function(articles) {
-			articles.forEach((article, i) => {
-				if (article.mainImage && i > 0) {
-					article.mainImage = null;
-				}
-			});
+		.then(articles => {
 
-			return res.render('related/story-package', {
-				articles: articles,
-				headerText: 'Related stories'
-			});
+			const sectionProps = getSection(
+				'onward-journey',
+				{content: articles},
+				res.locals.flags,
+				{
+					trackScrollEvent: 'story-package',
+					name: {
+						title: 'Related stories'
+					}
+				}
+			);
+			const sectionHtml = ReactServer.renderToStaticMarkup(<Section {...sectionProps} />);
+
+			return res.send(sectionHtml);
+
 		})
 		.catch(function(err) {
 			logger.error(err);

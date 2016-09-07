@@ -1,18 +1,37 @@
-/*global describe, context, it, before */
-
-'use strict';
-
-require('chai').should();
+const expect = require('chai').expect;
 
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
-const stubs = {content: null};
+const stubs = {
+	api: {
+		content: sinon.stub()
+	},
+	articleModel: sinon.stub(),
+	ReactServer: {
+		renderToStaticMarkup: sinon.stub()
+	},
+	getSection: sinon.stub()
+};
+
 const subject = proxyquire('../../../../server/controllers/related/story-package', {
-	'next-ft-api-client': stubs,
-	'../../mappings/article-pod-mapping-v3': (article) => article
+	'next-ft-api-client': stubs.api,
+	'ft-n-content-model': stubs.articleModel,
+	'react-dom/server': stubs.ReactServer,
+	'../../../config/sections': stubs.getSection
 });
+
+stubs.articleModel.returnsArg(0);
+stubs.ReactServer.renderToStaticMarkup.returns('section');
+stubs.getSection.returns('sectionProps');
+
+const resetStubs = () => {
+	stubs.api.content.reset();
+	stubs.ReactServer.renderToStaticMarkup.reset();
+	stubs.articleModel.reset();
+	stubs.getSection.reset();
+};
 
 const articleIds = ['117bbe2c-9417-11e5-b190-291e94b77c8f',
 '79d6ce3a-93bd-11e5-bd82-c1fb87bef7af',
@@ -33,16 +52,16 @@ describe('Story Package', () => {
 
 	let request;
 	let response;
-	let result;
 	let options;
 
-	function createInstance(options) {
+	function createInstance(options, flags) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
 		response.cache = sinon.stub();
 		response.vary = sinon.stub();
 		response.unvary = sinon.stub();
 		response.unvaryAll = sinon.stub();
+		response.locals = { flags: flags || {} };
 		return subject(request, response);
 	}
 
@@ -50,8 +69,9 @@ describe('Story Package', () => {
 
 		before(() => {
 
+			resetStubs();
 
-			stubs.content = sinon.stub().returns(
+			stubs.api.content.returns(
 				Promise.resolve(articlesStoryPackage)
 			);
 			options = {
@@ -62,27 +82,24 @@ describe('Story Package', () => {
 				}
 			};
 
-			return createInstance(options).then(() => {
-				result = response._getRenderData()
-			});
+			return createInstance(options);
 
 		});
 
 		it('makes one call to ES', () => {
-			stubs.content.callCount.should.eql(1);
+			expect(stubs.api.content.callCount).to.equal(1);
+		});
+
+		it('maps the article model for each article returned', () => {
+			expect(stubs.articleModel.callCount).to.equal(5);
+		});
+
+		it('gets the section for the story package', () => {
+			expect(stubs.ReactServer.renderToStaticMarkup.callCount).to.equal(1);
 		});
 
 		it('should return an OK status code', () => {
-			response.statusCode.should.equal(200);
-		});
-
-		it('removes main image from all except the first article', () => {
-			result.articles[0].mainImage.should.be.true;
-			result.articles.filter(article => article.mainImage).should.have.length(1);
-		});
-
-		it('should add the header text of Related Stories', () => {
-			result.headerText.should.equal('Related stories');
+			expect(response.statusCode).to.equal(200);
 		});
 
 	});
@@ -90,6 +107,8 @@ describe('Story Package', () => {
 	describe('no article ids provided', () => {
 
 		before(() => {
+
+			resetStubs();
 
 			let options;
 
@@ -105,7 +124,7 @@ describe('Story Package', () => {
 		});
 
 		it('should return a 400 status code', () => {
-			response.statusCode.should.eql(400);
+			expect(response.statusCode).to.equal(400);
 		});
 
 	});
@@ -120,10 +139,12 @@ describe('Story Package', () => {
 
 		before(() => {
 
+			resetStubs();
+
 			let options;
 
 
-			stubs.content = sinon.stub().returns(
+			stubs.api.content.returns(
 				Promise.resolve(articlesStoryPackage)
 			);
 
@@ -140,7 +161,38 @@ describe('Story Package', () => {
 		});
 
 		it('it sends the right number of articles to ES', () => {
-			stubs.content.calledWithExactly(expectedContentArgs).should.be.true;
+			expect(stubs.api.content.calledWithExactly(expectedContentArgs)).to.be.true;
+		});
+
+	});
+
+	describe('converting an even number of articles to odd for display', () => {
+
+		before(() => {
+
+			resetStubs();
+
+			let options;
+
+
+			stubs.api.content.returns(
+				Promise.resolve(articlesStoryPackage.slice(0,4))
+			);
+
+			options = {
+				params: {id: '64492528-91d2-11e5-94e6-c5413829caa5'},
+				query: {
+					articleIds: articleIds,
+					count: '4'
+				}
+			};
+
+			return createInstance(options);
+
+		});
+
+		it('it sends the right number of articles to ES', () => {
+			expect(stubs.articleModel.callCount).to.equal(3);
 		});
 
 	});
