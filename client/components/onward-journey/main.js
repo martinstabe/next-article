@@ -5,16 +5,6 @@ var oDate = require('n-ui/date');
 const lazyLoadImages = require('n-image').lazyLoad;
 import * as serviceWorker from 'n-service-worker';
 
-// Sort of like Promise.all but will be called whether they fail or succeed
-function allSettled(promises) {
-	var resolveWhenSettled = function(promise) {
-		return new Promise(res => {
-			promise.then(res, () => res());
-		});
-	};
-	return Promise.all(promises.map(resolveWhenSettled));
-}
-
 var $ = selector => [].slice.call(document.querySelectorAll(selector));
 
 function createPromise(el, url) {
@@ -54,7 +44,7 @@ module.exports.init = () => {
 		let url = `/article/${articleId}/story-package?articleIds=${storyIds.join()}&count=5`;
 
 		fetchPromises = fetchPromises.concat(
-			$('.js-story-package').map(el => createPromise(el, `${url}`))
+			$('.js-story-package').map(el => createPromise(el, url))
 		);
 	}
 
@@ -85,7 +75,9 @@ module.exports.init = () => {
 		);
 	}
 
-	return allSettled(fetchPromises)
+	return Promise.all(
+		fetchPromises.map(p => p.catch(() => null))
+	)
 		.then(() => {
 			lazyLoadImages();
 			serviceWorker
