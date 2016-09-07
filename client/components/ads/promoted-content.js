@@ -11,7 +11,32 @@ function correlator(len) {
 		return parseInt(Math.random() * Math.pow(10, sig), 10);
 	}
 
-	return (new Date().getTime() + genRand(6)).toString().substr(0, len);
+
+	return (new Date().getTime() + "" + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
+}
+
+const getSmartmatchData = (adUnit) => {
+	const uuid = document.documentElement.getAttribute('data-content-id');
+	const contentUrl = encodeURIComponent(encodeURIComponent(`ft.com/content/${uuid}`));
+	const splitAdUnit = adUnit.split('/');
+	const section = splitAdUnit[splitAdUnit.length - 1];
+	const url = `https://c.smartonomi.net/static/creative/604/key/i0t0hprwvhc5/pcid/${contentUrl}/sct=${encodeURIComponent(section)};encode=false;?cacheBuster=${correlator(64)}`
+	return crossDomainFetch(url, {
+		timeout: 4000,
+		mode: 'cors'
+	})
+	.then(response => {
+		if(response.ok) {
+			return response.json();
+		}
+	})
+	.then(data => {
+		if(data && data.type && data.title) {
+			return data;
+		} else {
+			throw 'No smartmatch results';
+		}
+	});
 }
 
 
@@ -46,12 +71,14 @@ const handleResponse = (el, response, flags, ads) => {
 		return;
 	}
 
+	document.querySelector('.promoted-content').classList.add('promoted-content--loaded');
+
 	const props = {
 		data: {
 			content: [ response ]
 		},
 		itemIndex: 0,
-		image: {
+		image: response.image && response.image.url ? {
 			position: {
 				default: 'embedded'
 			},
@@ -60,7 +87,7 @@ const handleResponse = (el, response, flags, ads) => {
 				default: '166px',
 				M: '281px'
 			}
-		},
+		} : null,
 		size: 'small',
 		standfirst: { show: { default: true } }
 	};
@@ -69,12 +96,16 @@ const handleResponse = (el, response, flags, ads) => {
 	oDate.init(el);
 };
 
-function initPaidPost(el, flags, ads) {
+function initPaidPost(el, flags, ads, skipSmartmatch) {
 	const slotParams = `pos=native`;
 	const adTargeting = ads.targeting.get();
 	const custParams = Object.keys(adTargeting).map(k => k + '=' + encodeURIComponent(adTargeting[k])).join('&');
 	const adUnit = window.oAds.config('gpt').unitName || '5887/ft.com/home/UK';
-	const url = `https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&correlator=${correlator()}&output=json_html&impl=fif&sc=1&sfv=1-0-4&iu=%2F5887%2F${adUnit.replace(/\/?5887\//, '')}&sz=320x50&fluid=height&scp=${encodeURIComponent(slotParams)}&ga_sid=1469788770&cust_params=${encodeURIComponent(custParams)}`;
+	let url = `https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&correlator=${correlator()}&output=json_html&impl=fif&sc=1&sfv=1-0-4&iu=%2F5887%2F${adUnit.replace(/\/?5887\//, '')}&sz=320x50&fluid=height&scp=${encodeURIComponent(slotParams)}&ga_sid=1469788770&cust_params=${encodeURIComponent(custParams)}`;
+
+	if(skipSmartmatch) {
+		url += encodeURIComponent('&ftpb=1');
+	}
 
 	return crossDomainFetch(url, {
 		timeout: 4000,
@@ -88,16 +119,25 @@ function initPaidPost(el, flags, ads) {
 	.then(getAdJson)
 	.then(data => {
 		if(data && data.type && data.title) {
+			const secondEl = document.querySelector('.promoted-content__second');
+
 			handleResponse(el, data, flags);
 
-			document.querySelector('.promoted-content').classList.add('promoted-content--loaded');
 
-			if(data.type === 'special-report') {
-				const secondEl = document.querySelector('.promoted-content__second');
+			if(data.type === 'special-report' && !secondEl.textContent) {
 				el.setAttribute('data-o-grid-colspan', '12 M6');
 				secondEl.setAttribute('data-o-grid-colspan', '12 M6');
 				initPaidPost(secondEl, flags, ads);
 			}
+		} else if (data && data.type === 'smartmatch') {
+			getSmartmatchData(adUnit)
+			.then(smartmatchResponse => {
+				handleResponse(el, smartmatchResponse, flags);
+			})
+			.catch(() => {
+				//no smartmatch results - make another ad call
+				initPaidPost(el, flags, ads, true);
+			});
 		}
 	});
 };
