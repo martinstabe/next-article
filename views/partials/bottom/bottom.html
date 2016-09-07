@@ -10,9 +10,17 @@
 				{{#if @root.flags.articleRelatedContent}}
 					<div class="js-story-package" data-trackable="story-package"></div>
 					{{#if moreOns}}
+						{{#slice moreOns limit=1}}
+							{{> related/more-ons index=0}}
+						{{/slice}}
 						{{> ads/promoted-content }}
-						{{> related/more-ons}}
+						{{#slice moreOns offset=1}}
+							{{> related/more-ons index=1}}
+						{{/slice}}
+					{{else}}
+						{{> ads/promoted-content }}
 					{{/if}}
+
 				{{/if}}
 			</div>
 			{{#ifAll @root.flags.myFtApi tags}}

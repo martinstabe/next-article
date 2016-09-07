@@ -11,7 +11,6 @@ function correlator(len) {
 		return parseInt(Math.random() * Math.pow(10, sig), 10);
 	}
 
-
 	return (new Date().getTime() + "" + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
 }
 
