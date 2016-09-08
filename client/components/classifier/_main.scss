@@ -1,0 +1,17 @@
+.article-classifier__gap:after {
+	content: ' ';
+	margin-right: 0.11em;
+}
+
+.article-classifier {
+	@include oTypographySansBold('s', $load-progressively: true);
+
+	vertical-align: middle;
+	padding: 0.1em 0.4em 0.14em;
+	background-color: getColor(cold-2);
+	color: #ffffff;
+
+	.article-classifier__gap ~ & { // overrides oTypographySansBold's setting
+		font-size: 0.45em;
+	}
+}
