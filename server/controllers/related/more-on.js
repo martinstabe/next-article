@@ -1,5 +1,3 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
@@ -78,7 +76,7 @@ module.exports = function (req, res, next) {
 				.map(article => articleModel(article, {useCase: 'article-card'}));
 
 				const sectionProps = getSection(
-					'pyramid-trio',
+					'onward-journey',
 					{content: moreOnArticlesArray[moreOnIndex]},
 					res.locals.flags,
 					{trackScrollEvent: `more-on-${moreOnIndex}`}

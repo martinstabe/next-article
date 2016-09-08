@@ -1,9 +1,9 @@
-import pyramidTrioSection from './pyramid-trio';
+import onwardJourney from './onward-journey';
 
 import layouts from '../layouts';
 
 const sections = {
-	'pyramid-trio': pyramidTrioSection,
+	'onward-journey': onwardJourney,
 };
 
 export default (sectionId, data, flags, opts = {}) => {

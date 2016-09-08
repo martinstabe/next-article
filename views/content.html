@@ -8,11 +8,12 @@
 {{/defineBlock}}
 {{#if sampleArticles}}
 	<header class="sample-articles__ribbon" data-trackable="sample-articles-ribbon">
-		<div class="sample-articles__ribbon__wrapper">
-			<h2 class="sample-articles__ribbon__banner__heading">You're sampling the Financial Times</h2>
-			<div class="sample-articles__ribbon__link__banner__wrapper">
-				<a class="sample-articles__ribbon__text_link" href="#more-sample-articles" data-trackable="more">More sample articles</a>
-				<i class="sample-articles__ribbon__text_link__icon"></i>
+		<div class="sample-articles__ribbon__wrapper o-grid-container">
+			<div class="o-grid-row">
+				<h2 class="sample-articles__ribbon__banner__heading" data-o-grid-colspan="12 M7 XL5 XLoffset1">You're sampling the Financial Times</h2>
+				<div class="sample-articles__ribbon__link__banner__wrapper" data-o-grid-colspan="12 M5 XL6">
+					<a class="sample-articles__ribbon__text_link" href="#more-sample-articles" data-trackable="more">More sample articles</a>
+				</div>
 			</div>
 		</div>
 	</header>
@@ -51,7 +52,7 @@
 						{{/if}}
 						{{> body-article bodyHTML=bodyHTML}}
 						{{#if lightSignup.show}}
-							{{> light-signup tag=primarySection articleUuid=id isInferred=lightSignup.isInferred}}
+							{{> light-signup tag=primaryTag articleUuid=id isInferred=lightSignup.isInferred}}
 						{{/if}}
 					{{/ifEquals}}
 					{{#ifEquals contentType 'podcast'}}

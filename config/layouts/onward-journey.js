@@ -50,6 +50,32 @@ export default () => ([
 						}
 					}
 				]
+			},
+			{
+				type: 'Column',
+				colspan: { default: 12, M: 6 },
+				components: [
+					{
+						type: 'Content',
+						size: 'small',
+						standfirst: {
+							show: { default: true}
+						}
+					}
+				]
+			},
+			{
+				type: 'Column',
+				colspan: { default: 12, M: 6 },
+				components: [
+					{
+						type: 'Content',
+						size: 'small',
+						standfirst: {
+							show: { default: true}
+						}
+					}
+				]
 			}
 		]
 	}
