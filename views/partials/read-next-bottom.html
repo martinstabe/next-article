@@ -4,7 +4,14 @@
 			<h3 class="next-up__intro">Read latest:</h3>
 			{{#with article}}
 			<article>
-				<a href="{{url}}" class="next-up__headline" data-trackable="headline">{{title}}</a>
+				<a href="{{url}}" class="next-up__headline" data-trackable="headline">
+					<span class="card__classification-gap">
+						<span class="next-up__headline-text">{{title}}</span>
+					</span>
+					{{#ifAll @root.flags.articlePremiumLabel premiumArticle}}
+						<span class="article-classifier">Premium</span>
+					{{/ifAll}}
+				</a>
 				<time class="next-up__timestamp {{#if moreRecent}}next-up__timestamp__more-recent{{/if}} o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
 					{{#dateformat "dddd, d mmmm, yyyy"}}{{publishedDate}}{{/dateformat}}
 				</time>

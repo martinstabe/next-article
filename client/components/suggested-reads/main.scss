@@ -39,10 +39,20 @@
 
 .suggested-reads__list-item__headline {
 	@include oTypographySerifDisplay('m', $load-progressively: true);
-	margin: 0 0 4px;
 
-	a {
-		@include nLinksHeadline();
+	display: block;
+	border-bottom: 0;
+	margin: 0 0 4px;
+}
+
+.suggested-reads__list-item__headline-text {
+	display: inline;
+	color: oColorsGetPaletteColor('cold-2');
+	font-size: inherit; // nullify H3's override
+	font-weight: inherit; // nullify H3's override
+
+	.suggested-reads__list-item__headline:hover & {
+		border-bottom: 1px dotted;
 	}
 }
 

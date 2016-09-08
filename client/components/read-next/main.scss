@@ -54,8 +54,9 @@
 }
 
 .next-up__headline {
-	@include nLinksHeadline;
 	@include oTypographySerifDisplay(l, $load-progressively: true);
+
+	border-bottom: 0;
 
 	.next-up__header & {
 		line-height: 29px; // FIXME: revist upon type scale revisions
@@ -65,6 +66,14 @@
 		font-size: 30px;
 	}
 
+}
+
+.next-up__headline-text {
+	color: oColorsGetPaletteColor('cold-2');
+
+	.next-up__headline:hover & {
+		border-bottom: 1px dotted;
+	}
 }
 
 .next-up__timestamp {
