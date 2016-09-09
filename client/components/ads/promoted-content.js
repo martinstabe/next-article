@@ -119,7 +119,7 @@ function initPaidPost(el, flags, ads, skipSmartmatch) {
 	})
 	.then(getAdJson)
 	.then(data => {
-		if(data && data.type && data.title) {
+		if(data && data.type && data.title && data.type !== 'smartmatch') {
 			const secondEl = document.querySelector('.promoted-content__second');
 
 			handleResponse(el, data);
