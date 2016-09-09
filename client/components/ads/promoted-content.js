@@ -16,6 +16,8 @@ function correlator(len) {
 
 const getSmartmatchData = (adUnit) => {
 	const uuid = document.documentElement.getAttribute('data-content-id');
+
+	//Smartmatch explicitly require this to be double encoded
 	const contentUrl = encodeURIComponent(encodeURIComponent(`ft.com/content/${uuid}`));
 	const splitAdUnit = adUnit.split('/');
 	const section = splitAdUnit[splitAdUnit.length - 1];
@@ -142,7 +144,7 @@ function initPaidPost(el, flags, ads, skipSmartmatch) {
 };
 
 export default (flags) => {
-	if(flags.get('nativeAds') && flags.get('nativeAdsArticle')) {
+	if(true || flags.get('nativeAds') && flags.get('nativeAdsArticle')) {
 
 		const el = document.querySelector('.promoted-content__first');
 
