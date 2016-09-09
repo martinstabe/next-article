@@ -131,4 +131,21 @@ describe('Suggested reads', () => {
 
 	});
 
+	describe('article\'s premium status', () => {
+
+		before(() => {
+			stubs.content.returns(Promise.resolve([{
+				id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
+				webUrl: 'http://www.ft.com/cms/s/3/123456'
+			}]));
+		});
+
+		it('should be true', function() {
+			return subject(articleId, []).then(results => {
+				expect(results[0].premium).to.be.true;
+			});
+		});
+
+	});
+
 });

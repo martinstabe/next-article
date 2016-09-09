@@ -46,7 +46,6 @@ describe('Read next', function() {
 
 		it('read next should be based on topic as more recent', function() {
 			results.id.should.equal('41129eec-5b9d-11e5-a28b-50226830d644');
-			results.source.should.equal('topic');
 		});
 
 		it('should flag the read next article as more recent than the parent', function() {
@@ -81,7 +80,6 @@ describe('Read next', function() {
 
 		it('read next should be based on story package as topic not more recent than parent', function() {
 			results.id.should.equal('a581b44e-5acb-11e5-a28b-50226830d644');
-			results.source.should.equal('package');
 		});
 
 		it('should not flag the read next article as more recent than the parent', function() {
@@ -110,7 +108,6 @@ describe('Read next', function() {
 
 		it('read next should be based on topic as no story package', function() {
 			results.id.should.equal('eaa2adf0-5bb4-11e5-9846-de406ccb37f2');
-			results.source.should.equal('topic');
 		});
 
 		it('should flag the read next article as more recent than the parent', function() {
@@ -140,11 +137,29 @@ describe('Read next', function() {
 
 		it('read next should be based on topic as no story package', function() {
 			results.id.should.equal('921d8c8e-5c47-11e5-a28b-50226830d644');
-			results.source.should.equal('topic');
 		});
 
 		it('should not flag the read next article as more recent than the parent', function() {
 			results.should.not.have.property('moreRecent');
+		});
+
+	});
+
+	describe('article\'s premium status', () => {
+
+		before(() => {
+			stubs.content = sinon.stub().returns(
+				Promise.resolve({
+					id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
+					webUrl: 'http://www.ft.com/cms/s/3/123456'
+				})
+			);
+		});
+
+		it('should be true', () => {
+			return subject('', [ '' ], {}, '2015-09-10T18:32:34.000Z').then(result => {
+				result.premium.should.be.true;
+			});
 		});
 
 	});

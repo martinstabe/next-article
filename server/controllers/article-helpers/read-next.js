@@ -1,10 +1,9 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const logger = require('@financial-times/n-logger').default;
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
+const contentModel = require('ft-n-content-model');
 
-module.exports = function(articleId, storyPackageIds, primaryTag, publishedDate) {
+module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate) {
 
 	let packageArticleFetch;
 	let topicArticleFetch;
@@ -28,7 +27,8 @@ module.exports = function(articleId, storyPackageIds, primaryTag, publishedDate)
 				'metadata',
 				'summaries',
 				'mainImage',
-				'publishedDate'
+				'publishedDate',
+				'webUrl'
 			]
 		})
 			.then(articles => {
@@ -46,25 +46,18 @@ module.exports = function(articleId, storyPackageIds, primaryTag, publishedDate)
 				return;
 			}
 
-			if (packageArticle) {
-				packageArticle.source = 'package';
-			}
-
-			if (topicArticle) {
-				topicArticle.source = 'topic';
-			}
-
 			// hierarchy of compellingness governing which read next article to return
 			if (topicArticle && new Date(topicArticle.publishedDate) > new Date(publishedDate)) {
 				// 1. return article with same topic as parent if more recent
-				topicArticle.moreRecent = true;
-				return topicArticle;
+				const content = contentModel(topicArticle, { useCase: 'article-card', excludeTaxonomies: true });
+				content.moreRecent = true;
+				return content;
 			} else if (packageArticle) {
 				// 2. otherwise if story package return the first one
-				return packageArticle;
+				return contentModel(packageArticle, { useCase: 'article-card', excludeTaxonomies: true });
 			} else {
 				// 3. failing that return the article on the same topic
-				return topicArticle;
+				return contentModel(topicArticle, { useCase: 'article-card', excludeTaxonomies: true });
 			}
 		})
 		.catch(error => {

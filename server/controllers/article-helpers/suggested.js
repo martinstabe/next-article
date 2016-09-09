@@ -1,10 +1,9 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const logger = require('@financial-times/n-logger').default;
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
+const contentModel = require('ft-n-content-model');
 
-module.exports = function(articleId, storyPackageIds, primaryTag) {
+module.exports = function (articleId, storyPackageIds, primaryTag) {
 	let suggestedArticleFetch;
 
 	if (primaryTag && storyPackageIds.length < 5) {
@@ -32,6 +31,9 @@ module.exports = function(articleId, storyPackageIds, primaryTag) {
 				index: 'v3_api_v2'
 			})
 		)
+		.then(items => items.map(item => {
+			return contentModel(item, { useCase: 'article-card', excludeTaxonomies: true });
+		}))
 		.then(
 			articles => articles.map(articlePodMapping)
 		)
