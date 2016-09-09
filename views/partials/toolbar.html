@@ -1,5 +1,5 @@
 <div>
-	<div class="article__share article__share--{{location}} article__share--{{#ifAll signedIn @root.flags.giftArticle @root.flags.articleGiftBanner}}{{#unless freeArticle}}banner{{/unless}}{{/ifAll}} n-util-clearfix" data-trackable="share | {{location}}">
+	<div class="article__share article__share--{{location}} n-util-clearfix" data-trackable="share | {{location}}">
 		{{#if shared}}
 			<div class="article__share-share-message">
 				This article has been gifted to you by an FT Subscriber.
@@ -26,14 +26,9 @@
 								data-n-article-email-clickable
 								data-n-article-email-container="{{location}}"
 								data-n-article-email-free-article="{{freeArticle}}"
-								data-trackable="email"><i>Email</i></button>
-							{{#if @root.flags.articleGiftBanner}}
-								{{#unless freeArticle}}
-									<p class="gift-banner">
-										{{> gift-banner}}
-									</p>
-								{{/unless}}
-							{{/if}}
+								data-trackable="email">
+								<i>Email</i>
+							</button>
 						</li>
 					{{/ifAll}}
 				</ul>

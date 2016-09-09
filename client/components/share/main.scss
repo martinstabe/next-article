@@ -96,15 +96,6 @@ $o-icons-image-service-base-url: 'https://next-geebee.ft.com/image';
 
 	}
 
-	// flags.articleGiftBanner
-	.article__share--banner {
-		margin-bottom: 40px;
-
-		@include oGridRespondTo('M') {
-			margin-bottom: 0;
-		}
-	}
-
 	.article__main .email-article .email-article__border {
 		border-top: 0;
 	}
