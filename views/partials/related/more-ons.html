@@ -1,12 +1,12 @@
-{{#each moreOns}}
 <div
 	role="region"
-	data-trackable="more-on | {{@index}}"
-	aria-labelledby="more-on-{{@index}}-title">
+	data-trackable="more-on | {{index}}"
+	aria-labelledby="more-on-{{index}}-title">
+
 
 	<div class="header">
 		<span class="header__title">
-			<h3 id="more-on-{{@index}}-title" class="header__name">
+			<h3 id="more-on-{{index}}-title" class="header__name">
 				Latest {{title}} {{name}}
 			</h3>
 			{{#if @root.flags.myFtApi }}
@@ -22,4 +22,3 @@
 		<a class="header__link--bottom" href={{url}} data-trackable="topic">See all {{title}} {{name}}</a>
 	</div>
 </div>
-{{/each}}
