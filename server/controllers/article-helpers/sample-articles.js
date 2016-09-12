@@ -56,6 +56,7 @@ const sampleArticles = [
 			'7bd05b02-4344-11e6-9b66-0712b3873ae1',
 			'4fd7dd18-5523-11e6-befd-2fc0c26b3c60',
 			'2e4c61f2-4ec8-11e6-8172-e39ecd3b86fc',
+			'5f9f7dc0-759c-11e6-bf48-b372cdb1043a',
 		],
 	},
 	{
