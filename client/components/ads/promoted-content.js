@@ -144,7 +144,7 @@ function initPaidPost(el, flags, ads, skipSmartmatch) {
 };
 
 export default (flags) => {
-	if(true || flags.get('nativeAds') && flags.get('nativeAdsArticle')) {
+	if(flags.get('nativeAds') && flags.get('nativeAdsArticle')) {
 
 		const el = document.querySelector('.promoted-content__first');
 
