@@ -43,6 +43,14 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
+function getCanonicalUrl (webUrl, id) {
+	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
+		return `https://www.ft.com/content/${id}`;
+	} else {
+		return webUrl;
+	}
+}
+
 const isAudDev = req => req.header('ft-is-aud-dev') === 'true';
 
 const showGcs = (req, res, isFreeArticle) => {
@@ -159,6 +167,8 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		show: (res.locals.anon && res.locals.anon.userIsAnonymous) && res.locals.flags.lightSignupInArticle,
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
+
+	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
