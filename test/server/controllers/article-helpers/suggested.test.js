@@ -142,7 +142,7 @@ describe('Suggested reads', () => {
 
 		it('should be true', function() {
 			return subject(articleId, []).then(results => {
-				expect(results[0].premium).to.be.true;
+				expect(results[0].isPremium).to.be.true;
 			});
 		});
 

@@ -158,7 +158,7 @@ describe('Read next', function() {
 
 		it('should be true', () => {
 			return subject('', [ '' ], {}, '2015-09-10T18:32:34.000Z').then(result => {
-				result.premium.should.be.true;
+				result.isPremium.should.be.true;
 			});
 		});
 
