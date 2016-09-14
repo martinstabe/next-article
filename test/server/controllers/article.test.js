@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const proxyquire = require('proxyquire');

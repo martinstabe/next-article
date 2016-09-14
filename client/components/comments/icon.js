@@ -1,14 +1,12 @@
-'use strict';
-
 const createIcon = {
-	init: function() {
+	init: function () {
 		const CommentCount = require('o-comment-count');
 		const uuid = document.querySelector('article[data-content-id]').getAttribute('data-content-id');
 		const articleShareList = document.querySelectorAll('.article__share');
 		const articleShareArray = Array.prototype.slice.call(articleShareList);
 
 		CommentCount.setConfig({
-			"template": "{count}"
+			'template': '{count}'
 		});
 		articleShareArray.forEach(function (articleShare) {
 			let commentLink = document.createElement('a');

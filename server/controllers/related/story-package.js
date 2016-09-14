@@ -8,7 +8,7 @@ const React = require('react');
 const getSection = require('../../../config/sections');
 const Section = require('@financial-times/n-section').Section;
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
 	res.unvaryAll('wrapper');
 
 	if (!req.query.articleIds) {
@@ -21,7 +21,7 @@ module.exports = function(req, res, next) {
 		index: 'v3_api_v2',
 		uuid: req.query.articleIds.split(',').slice(0, count)
 	})
-		.then(function(articles) {
+		.then(function (articles) {
 			if (!articles.length) {
 				throw new NoRelatedResultsException();
 			}
@@ -46,7 +46,7 @@ module.exports = function(req, res, next) {
 			return res.send(sectionHtml);
 
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			logger.error(err);
 
 			if(err.name === NoRelatedResultsException.NAME) {

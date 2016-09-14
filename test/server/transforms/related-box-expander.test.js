@@ -1,6 +1,3 @@
-/*global describe, it, context*/
-'use strict';
-
 const cheerio = require('cheerio');
 const relatedBoxExpanderTransform = require('../../../server/transforms/related-box-expander');
 require('chai').should();

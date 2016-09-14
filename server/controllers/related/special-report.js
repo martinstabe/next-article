@@ -1,5 +1,3 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
@@ -20,7 +18,7 @@ function getArticles (tagId, count, parentId) {
 			'publishedDate'
 		]
 	})
-		.then(function(articles) {
+		.then(function (articles) {
 			if (!articles.length || articles.length <= 1) {
 				throw new NoRelatedResultsException();
 			}
@@ -31,7 +29,7 @@ function getArticles (tagId, count, parentId) {
 		});
 }
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
 
 	res.unvaryAll('wrapper');
 
@@ -53,7 +51,7 @@ module.exports = function(req, res, next) {
 				articles: specialReportArticles
 			});
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			logger.error(err);
 
 			if (err.name === NoRelatedResultsException.NAME) {

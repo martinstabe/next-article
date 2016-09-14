@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = function(article) {
+module.exports = function (article) {
 	article.og = {
 		title: article.title,
 		description: article.summaries ? article.summaries[0] : '',

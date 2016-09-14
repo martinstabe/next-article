@@ -1,5 +1,3 @@
-"use strict"
-
 const cheerio = require('cheerio');
 
 const expanderWordImage = 55;
@@ -41,12 +39,12 @@ module.exports = function ($) {
 		if ((contentParas > expanderParaBreak &&
 			((hasImage && wordCount > expanderWordImage) ||
 			(!hasImage && wordCount > expanderWordNoImage)))) {
-				const expanderContentClass = "n-content-related-box__content--extension";
+				const expanderContentClass = 'n-content-related-box__content--extension';
 				contentEl.addClass('o-expander__content');
 				$el.attr({
-					"data-o-component": "o-expander",
-					"data-o-expander-shrink-to": "0",
-					"data-o-expander-count-selector": `.${expanderContentClass}`
+					'data-o-component': 'o-expander',
+					'data-o-expander-shrink-to': '0',
+					'data-o-expander-count-selector': `.${expanderContentClass}`
 				});
 				contentParasEl.eq(expanderParaBreak).before(`<div class="${expanderContentClass}"></div>`);
 				$el.find(`.${expanderContentClass}`).append(contentParasEl.slice(expanderParaBreak));

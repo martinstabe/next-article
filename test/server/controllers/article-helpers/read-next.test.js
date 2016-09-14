@@ -1,7 +1,3 @@
-/*global describe, it, before*/
-
-'use strict';
-
 require('chai').should();
 
 const sinon = require('sinon');
@@ -17,13 +13,13 @@ const subject = proxyquire('../../../../server/controllers/article-helpers/read-
 	'../../mappings/article-pod-mapping-v3': (article) => article
 });
 
-describe('Read next', function() {
+describe('Read next', function () {
 
 	let results;
 
-	describe('Parent has a story package, but Topic article more recent than parent', function() {
+	describe('Parent has a story package, but Topic article more recent than parent', function () {
 
-		before(function() {
+		before(function () {
 			stubs.content = sinon.stub().returns(
 				Promise.resolve({
 					id: '9a2b7608-5746-11e5-9846-de406ccb37f2',
@@ -44,20 +40,20 @@ describe('Read next', function() {
 				.then(result => results = result);
 		});
 
-		it('read next should be based on topic as more recent', function() {
+		it('read next should be based on topic as more recent', function () {
 			results.id.should.equal('41129eec-5b9d-11e5-a28b-50226830d644');
 		});
 
-		it('should flag the read next article as more recent than the parent', function() {
+		it('should flag the read next article as more recent than the parent', function () {
 			results.should.have.property('moreRecent');
 			results.moreRecent.should.be.true;
 		});
 
 	});
 
-	describe('Parent has a story package, Topic articles older than parent', function() {
+	describe('Parent has a story package, Topic articles older than parent', function () {
 
-		before(function() {
+		before(function () {
 			stubs.content = sinon.stub().returns(
 				Promise.resolve({
 					id: 'a581b44e-5acb-11e5-a28b-50226830d644',
@@ -78,19 +74,19 @@ describe('Read next', function() {
 				.then(result => results = result);
 		});
 
-		it('read next should be based on story package as topic not more recent than parent', function() {
+		it('read next should be based on story package as topic not more recent than parent', function () {
 			results.id.should.equal('a581b44e-5acb-11e5-a28b-50226830d644');
 		});
 
-		it('should not flag the read next article as more recent than the parent', function() {
+		it('should not flag the read next article as more recent than the parent', function () {
 			results.should.not.have.property('moreRecent');
 		});
 
 	});
 
-	describe('Parent has no story package, Topic article more recent than parent', function() {
+	describe('Parent has no story package, Topic article more recent than parent', function () {
 
-		before(function() {
+		before(function () {
 			stubs.content = sinon.stub();
 
 			stubs.search = sinon.stub().returns(
@@ -106,20 +102,20 @@ describe('Read next', function() {
 				.then(result => results = result);
 		});
 
-		it('read next should be based on topic as no story package', function() {
+		it('read next should be based on topic as no story package', function () {
 			results.id.should.equal('eaa2adf0-5bb4-11e5-9846-de406ccb37f2');
 		});
 
-		it('should flag the read next article as more recent than the parent', function() {
+		it('should flag the read next article as more recent than the parent', function () {
 			results.should.have.property('moreRecent');
 			results.moreRecent.should.be.true;
 		});
 
 	});
 
-	describe('Parent has no story package, Topic articles older than parent', function() {
+	describe('Parent has no story package, Topic articles older than parent', function () {
 
-		before(function() {
+		before(function () {
 			stubs.content = sinon.stub();
 
 			stubs.search = sinon.stub().returns(
@@ -135,11 +131,11 @@ describe('Read next', function() {
 				.then(result => results = result);
 		});
 
-		it('read next should be based on topic as no story package', function() {
+		it('read next should be based on topic as no story package', function () {
 			results.id.should.equal('921d8c8e-5c47-11e5-a28b-50226830d644');
 		});
 
-		it('should not flag the read next article as more recent than the parent', function() {
+		it('should not flag the read next article as more recent than the parent', function () {
 			results.should.not.have.property('moreRecent');
 		});
 

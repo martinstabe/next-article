@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function (req, res, next, payload) {
 	if (payload.displaytype === 'embed') {
 		res.render('interactive', {

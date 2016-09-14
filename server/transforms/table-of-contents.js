@@ -1,8 +1,6 @@
-"use strict"
-
 const cheerio = require('cheerio');
 
-module.exports = function($, flags) {
+module.exports = function ($, flags) {
 
 	if (!flags || !flags.articleTOC) return $;
 

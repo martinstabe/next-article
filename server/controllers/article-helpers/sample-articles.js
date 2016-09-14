@@ -1,4 +1,3 @@
-'use strict';
 const api = require('next-ft-api-client');
 const get = require('lodash/fp/get');
 const map = require('lodash/fp/map');
@@ -82,7 +81,7 @@ function topicIndexOf (contentId) {
 	);
 }
 
-function withoutIndex(index) {
+function withoutIndex (index) {
 	return (array) => array.slice(0, index).concat(array.slice(index + 1));
 }
 

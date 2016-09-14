@@ -1,7 +1,3 @@
-/*global describe, it*/
-
-'use strict';
-
 const expect = require('chai').expect;
 const _ = require('lodash');
 const subject = require('../../../server/mappings/article-pod-mapping-v3');

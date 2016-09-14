@@ -1,7 +1,3 @@
-/*global describe, context, beforeEach, afterEach, it*/
-
-'use strict';
-
 const nock = require('nock');
 const sinon = require('sinon');
 const expect = require('chai').expect;
@@ -29,13 +25,13 @@ const subject = proxyquire('../../../server/controllers/negotiation', {
 	'shellpromise': dependencyStubs.shellpromise
 });
 
-describe('Negotiation Controller', function() {
+describe('Negotiation Controller', function () {
 
 	let request;
 	let response;
 	let next;
 
-	function createInstance(params, flags) {
+	function createInstance (params, flags) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();
@@ -43,8 +39,8 @@ describe('Negotiation Controller', function() {
 		return subject(request, response, next);
 	}
 
-	describe('when the requested ID maps to an interactive', function() {
-		beforeEach(function() {
+	describe('when the requested ID maps to an interactive', function () {
+		beforeEach(function () {
 			return createInstance({
 				params: {
 					id: '012f81d6-2e2b-11e5-8873-775ba7c2ea3d'
@@ -52,18 +48,18 @@ describe('Negotiation Controller', function() {
 			});
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			dependencyStubs.interactive.reset();
 		});
 
-		it('defers to the interactive controller', function() {
+		it('defers to the interactive controller', function () {
 			expect(dependencyStubs.interactive.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
 	});
 
-	describe('when the requested article is a podcast', function() {
-		beforeEach(function() {
+	describe('when the requested article is a podcast', function () {
+		beforeEach(function () {
 
 			nock('https://next-elastic.ft.com')
 				.post('/v3_api_v2/item/_mget')
@@ -77,19 +73,19 @@ describe('Negotiation Controller', function() {
 
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			dependencyStubs.podcast.reset();
 		});
 
-		it('defers to the podcast controller', function() {
+		it('defers to the podcast controller', function () {
 			expect(dependencyStubs.podcast.callCount).to.equal(1);
 			expect(response.statusCode).to.not.equal(404);
 		});
 	});
 
-	describe('when dealing with an article', function() {
-		context('and it is found', function() {
-			beforeEach(function() {
+	describe('when dealing with an article', function () {
+		context('and it is found', function () {
+			beforeEach(function () {
 
 				nock('https://next-elastic.ft.com')
 					.post('/v3_api_v2/item/_mget')
@@ -103,18 +99,18 @@ describe('Negotiation Controller', function() {
 
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				dependencyStubs.article.reset();
 			});
 
-			it('defers to the article controller', function() {
+			it('defers to the article controller', function () {
 				expect(dependencyStubs.article.callCount).to.equal(1);
 				expect(response.statusCode).to.not.equal(404);
 			});
 		});
 
-		context('when it exists on ft.com', function() {
-			beforeEach(function() {
+		context('when it exists on ft.com', function () {
+			beforeEach(function () {
 
 				nock('https://next-elastic.ft.com')
 					.post('/v3_api_v2/item/_mget')
@@ -132,19 +128,19 @@ describe('Negotiation Controller', function() {
 
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				dependencyStubs.shellpromise.returns(undefined);
 				dependencyStubs.article.reset();
 			});
 
-			it('redirects to ft.com', function() {
+			it('redirects to ft.com', function () {
 				expect(dependencyStubs.article.callCount).to.equal(0);
 				expect(response.statusCode).to.equal(302);
 			});
 		});
 
-		context('when it does not exist', function() {
-			beforeEach(function() {
+		context('when it does not exist', function () {
+			beforeEach(function () {
 
 				nock('https://next-elastic.ft.com')
 					.post('/v3_api_v2/item/_mget')
@@ -162,12 +158,12 @@ describe('Negotiation Controller', function() {
 
 			});
 
-			afterEach(function() {
+			afterEach(function () {
 				dependencyStubs.shellpromise.returns(undefined);
 				dependencyStubs.article.reset();
 			});
 
-			it('responds with a 404', function() {
+			it('responds with a 404', function () {
 				expect(dependencyStubs.article.callCount).to.equal(0);
 				expect(response.statusCode).to.equal(404);
 			});

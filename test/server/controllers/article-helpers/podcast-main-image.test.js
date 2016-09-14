@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const expect = require('chai').expect;
 const podcastMainImageHtml = require('../../../../server/controllers/article-helpers/podcast-main-image');
 const mainImage = {

@@ -1,7 +1,5 @@
-'use strict';
-
 const createSkeleton = {
-	init: function() {
+	init: function () {
 		const skeleton = document.createElement('div');
 		const skeletonInner = document.createElement('div');
 		const skeletonAvatar = document.createElement('div');

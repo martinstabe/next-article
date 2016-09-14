@@ -1,6 +1,3 @@
-/*global describe, it*/
-'use strict';
-
 require('chai').should();
 const expect = require('chai').expect;
 const mainImage = require('../../../server/transforms/extract-main-image');

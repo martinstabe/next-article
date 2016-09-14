@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
@@ -22,7 +18,7 @@ describe('myFT metadata', () => {
 	let next;
 	let result;
 
-	function createInstance(params, flags) {
+	function createInstance (params, flags) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();

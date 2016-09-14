@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function ($, flags, options) {
 	if (!flags || !flags.lightSignupInArticle || (options && options.fragment)) return $;
 

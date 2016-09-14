@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const httpMocks = require('node-mocks-http');
@@ -12,7 +8,7 @@ describe('Interactive Controller', () => {
 	let response;
 	let next;
 
-	function createInstance(payload) {
+	function createInstance (payload) {
 		next = sinon.stub();
 		request = httpMocks.createRequest();
 		response = httpMocks.createResponse();

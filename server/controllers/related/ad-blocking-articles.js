@@ -1,12 +1,10 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 const adBlockingArticlesTemplate = require('../../mappings/ad-blocking-articles-template');
 
-module.exports = function(req, res) {
+module.exports = function (req, res) {
 
 	const count = parseInt(req.query.count, 10);
 
@@ -16,12 +14,12 @@ module.exports = function(req, res) {
 	const body = {
 		queryString: searchTerm,
 		queryContext: {
-			curations: ["ARTICLES", "BLOGS"]
+			curations: ['ARTICLES', 'BLOGS']
 		},
 		resultContext: {
 			maxResults: count,
-			sortOrder: "DESC",
-			sortField: "lastPublishDateTime"
+			sortOrder: 'DESC',
+			sortField: 'lastPublishDateTime'
 		}
 	};
 
@@ -34,7 +32,7 @@ module.exports = function(req, res) {
 				'X-Api-Key': process.env.api2key
 			}
 		})
-			.then(function(response) {
+			.then(function (response) {
 				if (!response.ok) {
 					logger.warn('Failed getting SAPIv1 content', {
 						query: searchTerm,
@@ -45,7 +43,7 @@ module.exports = function(req, res) {
 				return response;
 			})
 			.then(fetchres.json)
-			.then(function(result) {
+			.then(function (result) {
 				const indexCount = result.results[0].indexCount;
 				if (indexCount === 0) {
 					return [];
@@ -54,12 +52,12 @@ module.exports = function(req, res) {
 					.map(article => article.id)
 					.filter(article => article);
 			})
-			.then(function(articles) {
+			.then(function (articles) {
 				return api.content({
 						uuid: articles,
 						index: 'v3_api_v2'
 					})
-					.then(function(articles) {
+					.then(function (articles) {
 						articles = articles
 							.map(articlePodMapping)
 							.map(article => adBlockingArticlesTemplate(article));

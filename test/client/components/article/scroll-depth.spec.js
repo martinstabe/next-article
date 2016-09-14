@@ -1,12 +1,9 @@
-/* global describe, it, before, after */
-'use strict';
-
-var scrollDepth = require('../../../../client/components/article/scroll-depth.js');
+const scrollDepth = require('../../../../client/components/article/scroll-depth.js');
 
 describe('Scroll Depth', function () {
 
-	var bigPageEl;
-	var articleEl;
+	let bigPageEl;
+	let articleEl;
 
 	before(function () {
 		bigPageEl = document.createElement('div');
@@ -49,7 +46,7 @@ describe('Scroll Depth', function () {
 		});
 		scrollDepth.percentagesViewed.should.eql([25, 50]);
 		window.scrollTo(0, 500);
-		var scrollEvent = new CustomEvent('scroll');
+		const scrollEvent = new CustomEvent('scroll');
 		window.dispatchEvent(scrollEvent);
 		scrollDepth.percentagesViewed.should.eql([25, 50, 75, 100]);
 	});

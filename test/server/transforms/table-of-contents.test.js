@@ -1,6 +1,3 @@
-/*global describe, it*/
-'use strict';
-
 const cheerio = require('cheerio');
 const tableOfContentsTransform = require('../../../server/transforms/table-of-contents');
 require('chai').should();

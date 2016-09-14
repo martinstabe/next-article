@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const nock = require('nock');
 const sinon = require('sinon');
 const expect = require('chai').expect;
@@ -16,7 +12,7 @@ describe('Slideshow Controller', () => {
 	let next;
 	let result;
 
-	function createInstance(params) {
+	function createInstance (params) {
 		next = sinon.stub();
 		request = httpMocks.createRequest(params);
 		response = httpMocks.createResponse();

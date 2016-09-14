@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 require('chai').should();
 
 const sinon = require('sinon');
@@ -30,7 +26,7 @@ let result;
 
 describe('Special Report', () => {
 
-	function createInstance(options) {
+	function createInstance (options) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
 		response.cache = sinon.stub();

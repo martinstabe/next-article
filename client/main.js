@@ -1,5 +1,3 @@
-'use strict';
-
 const oViewport = require('n-ui/viewport');
 const OVideo = require('o-video');
 const lightSignup = require('o-email-only-signup');

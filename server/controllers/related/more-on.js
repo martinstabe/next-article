@@ -26,7 +26,7 @@ const getArticles = (tagId, count, parentId) => {
 };
 
 const allSettled = (promises) => {
-	let resolveWhenSettled = function(promise) {
+	let resolveWhenSettled = function (promise) {
 		return new Promise(res => {
 			promise.then(res, () => res());
 		});
@@ -51,13 +51,13 @@ module.exports = function (req, res, next) {
 	let getArticlesPromises = [];
 	let precedingMoreOnIds = [];
 
-	const dedupe = function(articlesToDedupe) {
+	const dedupe = function (articlesToDedupe) {
 		return !articlesToDedupe
 			? []
 			: articlesToDedupe.filter(article => isNotADupe(article.id)).slice(0, count);
 	};
 
-	const isNotADupe = function(articleId) {
+	const isNotADupe = function (articleId) {
 		return precedingMoreOnIds.indexOf(articleId) === -1;
 	};
 
@@ -86,7 +86,7 @@ module.exports = function (req, res, next) {
 			return res.send(sectionHtml);
 
 		})
-		.catch(function(err) {
+		.catch(function (err) {
 			logger.error(err);
 
 			if(err.name === NoRelatedResultsException.NAME) {

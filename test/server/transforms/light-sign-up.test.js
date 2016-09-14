@@ -1,5 +1,3 @@
-/*global describe, it*/
-'use strict';
 const cheerio = require('cheerio');
 const expect = require('chai').expect;
 const lightSignupTransform = require('../../../server/transforms/light-sign-up');

@@ -1,5 +1,3 @@
-'use strict';
-
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const api = require('next-ft-api-client');
@@ -10,25 +8,25 @@ const controllerInteractive = require('./interactive');
 const controllerPodcast = require('./podcast');
 const controllerArticle = require('./article');
 
-function isArticlePodcast(article) {
+function isArticlePodcast (article) {
 	return article.provenance.find(
 		source => source.includes('http://rss.acast.com/')
 	);
 }
 
-function getInteractive(contentId) {
+function getInteractive (contentId) {
 	return interactivePoller.getData().find(
 		mapping => mapping.articleuuid === contentId
 	);
 }
 
-function getArticle(contentId) {
+function getArticle (contentId) {
 	return api.content({
 		uuid: contentId,
 		index: 'v3_api_v2'
 	})
 		// Some things aren't in CAPI v3 (e.g. Syndicated content)
-		.catch(function(error) {
+		.catch(function (error) {
 			if (fetchres.originatedError(error)) {
 				return;
 			} else {
@@ -37,7 +35,7 @@ function getArticle(contentId) {
 		});
 }
 
-module.exports = function negotiationController(req, res, next) {
+module.exports = function negotiationController (req, res, next) {
 	let interactive = getInteractive(req.params.id);
 
 	if (interactive) {
@@ -89,7 +87,7 @@ module.exports = function negotiationController(req, res, next) {
 				});
 		})
 		.catch(error => {
-			logger.error({ event: "CONTENT_FETCH_FAILED", err: error.toString(), uuid: req.params.id });
+			logger.error({ event: 'CONTENT_FETCH_FAILED', err: error.toString(), uuid: req.params.id });
 			next(error);
 		});
 };

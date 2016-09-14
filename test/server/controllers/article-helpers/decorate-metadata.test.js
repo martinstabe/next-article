@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const expect = require('chai').expect;
 const fixtureEsFound = require('../../../fixtures/v3-elastic-article-found').docs[0]._source;
 const subject = require('../../../../server/controllers/article-helpers/decorate-metadata');

@@ -1,6 +1,3 @@
-/*global describe, it*/
-'use strict';
-
 require('chai').should();
 const extractToc = require('../../../server/transforms/extract-toc');
 

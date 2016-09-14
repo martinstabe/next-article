@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = function ($, flags) {
 	const pars = $('p');
 	const midAd = (adIndex) =>
