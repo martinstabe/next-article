@@ -13,12 +13,16 @@
 						{{#slice moreOns limit=1}}
 							{{> related/more-ons index=0}}
 						{{/slice}}
-						{{> ads/promoted-content }}
+						{{#if @root.flags.nativeAdsArticle}}
+							{{> ads/promoted-content }}
+						{{/if}}
 						{{#slice moreOns offset=1}}
 							{{> related/more-ons index=1}}
 						{{/slice}}
 					{{else}}
-						{{> ads/promoted-content }}
+						{{#if @root.flags.nativeAdsArticle}}
+							{{> ads/promoted-content }}
+						{{/if}}
 					{{/if}}
 
 				{{/if}}
