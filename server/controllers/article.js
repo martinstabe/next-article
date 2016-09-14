@@ -168,14 +168,13 @@ module.exports = function articleV3Controller(req, res, next, content) {
 		isInferred: res.locals.flags.lsuInferredTopic
 	};
 
-	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
-
 	return Promise.all(asyncWorkToDo)
 		.then(() => {
 			content.contentType = 'article';
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
+				content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 				content.layout = 'wrapper';
 				res.render('content', content);
 			}
