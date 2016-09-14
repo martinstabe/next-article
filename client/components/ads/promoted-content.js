@@ -149,7 +149,7 @@ export default (flags) => {
 	if(flags.get('nativeAds') && flags.get('nativeAdsArticle')) {
 
 		const el = document.querySelector('.promoted-content__first');
-		
+
 		if(!el) {
 			return;
 		}
