@@ -8,6 +8,8 @@ const proxyquire = require('proxyquire');
 const httpMocks = require('node-mocks-http');
 
 const fixture = require('../../fixtures/v3-elastic-article-found').docs[0]._source;
+const fixtureBlog = require('../../fixtures/v3-elastic-article-found-blog').docs[0]._source;
+const fixtureFastFT = require('../../fixtures/v3-elastic-article-found-fastft').docs[0]._source;
 const fixturePremium = require('../../fixtures/v3-elastic-article-found-premium').docs[0]._source;
 const fixtureSampleExcluded = require('../../fixtures/sample-article-excluded').docs[0]._source;
 const fixtureSampleIncluded = require('../../fixtures/sample-article-included').docs[0]._source;
@@ -91,6 +93,24 @@ describe('Article Controller', () => {
 			return createInstance(null, { openGraph: true }, fixturePremium).then(() => {
 				let result = response._getRenderData()
 				expect(result.premiumArticle).to.equal(true);
+			});
+		});
+
+		it('has the correct canonical URL for an article', () => {
+			expect(result.canonicalUrl).to.equal('https://www.ft.com/content/352210c4-7b17-11e5-a1fe-567b37f80b64');
+		});
+
+		it('has the correct canonical URL for a blog', () => {
+			return createInstance(null, { openGraph: true }, fixtureBlog).then(() => {
+				let result = response._getRenderData()
+				expect(result.canonicalUrl).to.equal('http://blogs.ft.com/gavyndavies/2016/09/11/what-investors-should-know-about-r-star/');
+			});
+		});
+
+		it('has the correct canonical URL for FastFT', () => {
+			return createInstance(null, { openGraph: true }, fixtureFastFT).then(() => {
+				let result = response._getRenderData()
+				expect(result.canonicalUrl).to.equal('http://www.ft.com/fastft/2016/09/13/linde-cfo-denoke-out-a-day-after-praxair-deal-talks-end/');
 			});
 		});
 
