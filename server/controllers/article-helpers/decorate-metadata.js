@@ -1,8 +1,6 @@
-'use strict';
-
 const addTagTitlePrefix = require('./tag-title-prefix');
 
-function fillProperties(article) {
+function fillProperties (article) {
 	article.metadata = article.metadata.map(tag => {
 		let v1 = {
 			id: tag.idV1,
@@ -14,19 +12,19 @@ function fillProperties(article) {
 	});
 }
 
-function selectPrimaryTheme(article) {
+function selectPrimaryTheme (article) {
 	article.primaryTheme = article.metadata.find(tag => tag.primary === 'theme');
 }
 
-function selectPrimarySection(article) {
+function selectPrimarySection (article) {
 	article.primarySection = article.metadata.find(tag => tag.primary === 'section');
 }
 
-function selectPrimaryBrand(article) {
+function selectPrimaryBrand (article) {
 	article.primaryBrand = article.metadata.find(tag => tag.primary === 'brand');
 }
 
-function selectPrimaryTag(article) {
+function selectPrimaryTag (article) {
 	let precedence = [ 'specialReports' ];
 	let primaryTag;
 
@@ -39,11 +37,11 @@ function selectPrimaryTag(article) {
 	article.primaryTag = primaryTag;
 }
 
-function isPrimaryTag(article) {
+function isPrimaryTag (article) {
 	return (tag) => (!article.primaryTag || article.primaryTag.id !== tag.id);
 }
 
-function selectTagsMyftTagsForDisplay(article) {
+function selectTagsMyftTagsForDisplay (article) {
 	let myftTopics = article.myftTopics || [];
 
 	return article.metadata
@@ -52,7 +50,7 @@ function selectTagsMyftTagsForDisplay(article) {
 		.filter(tag => tag.taxonomy !== 'authors');
 }
 
-function selectTagsForDisplay(article) {
+function selectTagsForDisplay (article) {
 	let ignore = [ 'genre', 'mediaType', 'iptc', 'icb', 'authors' ];
 	let myftTopics = selectTagsMyftTagsForDisplay(article);
 	let defaultTopics = article.metadata
@@ -63,11 +61,11 @@ function selectTagsForDisplay(article) {
 	article.tags = myftTopics.concat(defaultTopics).slice(0,5);
 }
 
-function selectAuthorsForDisplay(article) {
+function selectAuthorsForDisplay (article) {
 	article.authors = article.metadata.filter(tag => tag.taxonomy === 'authors');
 }
 
-function selectTagToFollow(article) {
+function selectTagToFollow (article) {
 	if(!article.tagToFollow) {
 		return;
 	}
@@ -78,7 +76,7 @@ function selectTagToFollow(article) {
 	addTagTitlePrefix(article.tagToFollow);
 }
 
-module.exports = function(article) {
+module.exports = function (article) {
 	fillProperties(article);
 	selectPrimaryTheme(article);
 	selectPrimarySection(article);

@@ -1,13 +1,11 @@
-'use strict';
-
-var fetchres = require('fetchres');
-var oDate = require('n-ui/date');
+const fetchres = require('fetchres');
+const oDate = require('n-ui/date');
 const lazyLoadImages = require('n-image').lazyLoad;
 import * as serviceWorker from 'n-service-worker';
 
-var $ = selector => [].slice.call(document.querySelectorAll(selector));
+const $ = selector => [].slice.call(document.querySelectorAll(selector));
 
-function createPromise(el, url) {
+function createPromise (el, url) {
 	return fetch(url, { credentials: 'same-origin' })
 		.then(fetchres.text)
 		.then(resp => {
@@ -22,22 +20,22 @@ function createPromise(el, url) {
 
 module.exports.init = () => {
 
-	var articleEl = document.querySelector('.article');
-	var dehydratedMetadata = document.getElementById('dehydrated-metadata');
+	const articleEl = document.querySelector('.article');
+	const dehydratedMetadata = document.getElementById('dehydrated-metadata');
 
 	if (!articleEl || !dehydratedMetadata) {
 		return;
 	}
 
-	var articleId = articleEl.getAttribute('data-content-id');
+	const articleId = articleEl.getAttribute('data-content-id');
 
 	// If there is no articleId don't try to load related content
 	if (!articleId) {
 		return;
 	}
 
-	var fetchPromises = [];
-	var hydratedMetadata = JSON.parse(dehydratedMetadata.innerHTML);
+	let fetchPromises = [];
+	const hydratedMetadata = JSON.parse(dehydratedMetadata.innerHTML);
 
 	if (hydratedMetadata.package && hydratedMetadata.package.length) {
 		let storyIds = hydratedMetadata.package.map(article => article.id);
@@ -58,7 +56,7 @@ module.exports.init = () => {
 		);
 	}
 
-	var moreOns = $('.js-more-on');
+	const moreOns = $('.js-more-on');
 
 	if (moreOns.length) {
 		let url = `/article/${articleId}/more-on?count=3`;

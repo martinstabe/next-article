@@ -54,7 +54,7 @@ describe('Story Package', () => {
 	let response;
 	let options;
 
-	function createInstance(options, flags) {
+	function createInstance (options, flags) {
 		request = httpMocks.createRequest(options);
 		response = httpMocks.createResponse();
 		response.cache = sinon.stub();

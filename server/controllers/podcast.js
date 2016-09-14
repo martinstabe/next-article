@@ -1,5 +1,3 @@
-'use strict';
-
 const logger = require('@financial-times/n-logger').default;
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
@@ -10,7 +8,7 @@ const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
 const podcastMainImageHTML = require('./article-helpers/podcast-main-image');
 
-module.exports = function podcastLegacyController(req, res, next, payload) {
+module.exports = function podcastLegacyController (req, res, next, payload) {
 	let asyncWorkToDo = [];
 
 	// Decorate article with primary tags and tags for display

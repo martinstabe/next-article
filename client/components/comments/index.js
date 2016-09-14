@@ -1,5 +1,3 @@
-'use strict';
-
 import oGrid from 'n-ui/grid';
 import tracking from './tracking';
 

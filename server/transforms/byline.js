@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (byline, authors) => {
 	if (byline && authors) {
 		authors.forEach(author => {

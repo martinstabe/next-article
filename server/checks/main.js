@@ -1,5 +1,3 @@
-'use strict';
-
 const api = require('next-ft-api-client');
 const nHealth = require('n-health');
 
@@ -20,7 +18,7 @@ const statuses = {
  * in the parent scope.
  * @method pingServices
  */
-function pingServices() {
+function pingServices () {
 
 	api.content({
 		uuid: ARTICLE_ID
@@ -39,7 +37,7 @@ function pingServices() {
  * @param  {String}    version The CAPI version; ['v1', 'v2']
  * @return {Object}
  */
-function buildStatus(version) {
+function buildStatus (version) {
 	return {
 		getStatus: () => ({
 			name: `elastic:${version} responded successfully.`,
@@ -51,7 +49,7 @@ function buildStatus(version) {
 	};
 }
 
-function livefyreStatus() {
+function livefyreStatus () {
 	return {
 		getStatus: () => ({
 			name: 'session-user-data.webservices.ft.com (livefyre) responded successfully.',
@@ -65,7 +63,7 @@ function livefyreStatus() {
 
 
 module.exports = {
-	init: function() {
+	init: function () {
 		pingServices();
 		setInterval(pingServices, INTERVAL);
 	},

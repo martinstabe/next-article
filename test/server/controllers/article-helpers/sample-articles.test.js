@@ -1,5 +1,3 @@
-/*global describe, it, before*/
-'use strict';
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
@@ -34,7 +32,7 @@ describe('Sample Articles', () => {
 
 	describe('main function', () => {
 
-		before(function() {
+		before(function () {
 			stubs.content = sinon.stub().returns(
 				Promise.resolve([
 					{

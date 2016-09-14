@@ -1,5 +1,3 @@
-"use strict";
-
 const cheerio = require('cheerio');
 
 const relatedBoxExpander = require('./related-box-expander');
@@ -10,7 +8,7 @@ const extractToc = require('./extract-toc');
 const extractMainImage = require('./extract-main-image');
 const gcsConflicts = require('./gcs-conflicts');
 
-function transform($, flags, options) {
+function transform ($, flags, options) {
 	const proto = {
 		'with': function (transform) {
 			transform($, flags, options);

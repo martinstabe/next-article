@@ -1,12 +1,10 @@
-'use strict';
-
 const createSrcset = (url, width) =>
 	`https://next-geebee.ft.com/image/v1/images/raw/${encodeURIComponent(url)}?source=next&fit=scale-down&compression=best&width=${width} ${width}w`;
 
 const createSize = (sizes, breakpoint) =>
 	breakpoint !== 'default' ? `(min-width: ${breakpoint}) ${sizes[breakpoint]}px` : `${sizes[breakpoint]}px`;
 
-module.exports = function articlePodMapping(article) {
+module.exports = function articlePodMapping (article) {
 	let decoration = {
 		url: `/content/${article.id}`,
 		subheading: Array.isArray(article.summaries) ? article.summaries[0] : null

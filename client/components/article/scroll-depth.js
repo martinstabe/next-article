@@ -1,7 +1,7 @@
 import {broadcast} from 'n-ui/utils';
 
 const fireBeacon = percentage => {
-	var data = {
+	const data = {
 		action: 'scrolldepth',
 		category: 'page',
 		meta: {

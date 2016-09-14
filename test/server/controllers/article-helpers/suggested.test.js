@@ -1,7 +1,3 @@
-/*global describe, it, before*/
-
-'use strict';
-
 const sinon = require('sinon');
 const expect = require('chai').expect;
 const proxyquire = require('proxyquire');
@@ -140,9 +136,9 @@ describe('Suggested reads', () => {
 			}]));
 		});
 
-		it('should be true', function() {
+		it('should be true', function () {
 			return subject(articleId, []).then(results => {
-				expect(results[0].premium).to.be.true;
+				expect(results[0].isPremium).to.be.true;
 			});
 		});
 

@@ -5,13 +5,13 @@ import crossDomainFetch from 'o-fetch-jsonp';
 
 import * as components from '@financial-times/n-section';
 
-function correlator(len) {
+function correlator (len) {
 	len = len || 16;
-	function genRand(sig) {
+	function genRand (sig) {
 		return parseInt(Math.random() * Math.pow(10, sig), 10);
 	}
 
-	return (new Date().getTime() + "" + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
+	return (new Date().getTime() + '' + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
 }
 
 const getSmartmatchData = (adUnit, dfpResponse) => {
@@ -99,8 +99,8 @@ const handleResponse = (el, response) => {
 	oDate.init(el);
 };
 
-function initPaidPost(el, flags, ads, skipSmartmatch) {
-	const slotParams = `pos=native`;
+function initPaidPost (el, flags, ads, skipSmartmatch) {
+	const slotParams = 'pos=native';
 	const adTargeting = ads.targeting.get();
 	const custParams = Object.keys(adTargeting).map(k => k + '=' + encodeURIComponent(adTargeting[k])).join('&');
 	const adUnit = window.oAds.config('gpt').unitName || '5887/ft.com/home/UK';

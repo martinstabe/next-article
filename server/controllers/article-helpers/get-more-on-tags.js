@@ -1,5 +1,3 @@
-'use strict';
-
 const addTagTitlePrefix = require('./tag-title-prefix');
 
 module.exports = function (primaryTheme, primarySection, primaryBrand) {

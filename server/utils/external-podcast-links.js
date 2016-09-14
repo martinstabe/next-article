@@ -1,8 +1,6 @@
-'use strict';
+const podcastMapping = require('n-podcast-mapping');
 
-var podcastMapping = require('n-podcast-mapping');
-
-function source(url) {
+function source (url) {
 	if (url.includes('apple.com')) {
 		return 'itunes';
 	}
@@ -23,12 +21,12 @@ function source(url) {
 	}
 }
 
-module.exports = function externalPodcastLinks(showUrl) {
-	var showSlug = showUrl.replace('http://rss.acast.com/', '');
-	var links = podcastMapping.linksFor(showSlug).concat(showUrl);
+module.exports = function externalPodcastLinks (showUrl) {
+	const showSlug = showUrl.replace('http://rss.acast.com/', '');
+	const links = podcastMapping.linksFor(showSlug).concat(showUrl);
 
-	return links.reduce(function(map, value) {
-		var key = source(value);
+	return links.reduce(function (map, value) {
+		const key = source(value);
 		key && (map[key] = value);
 		return map;
 	}, {});

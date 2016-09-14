@@ -1,4 +1,3 @@
-'use strict';
 import {broadcast} from 'n-ui/utils';
 const superstore = require('superstore-sync');
 
@@ -74,7 +73,7 @@ module.exports = {
 				logCommentEngagement('passive')
 				rumObserver.unobserve(rumIndicatorEl);
 			},
-			{ rootMargin: `0px` }
+			{ rootMargin: '0px' }
 		);
 		rumObserver.observe(rumIndicatorEl);
 

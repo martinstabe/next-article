@@ -1,6 +1,4 @@
-"use strict";
-
-function NoRelatedResultsException() {
+function NoRelatedResultsException () {
 	this.name = NoRelatedResultsException.NAME;
 }
 

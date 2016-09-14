@@ -1,5 +1,3 @@
-'use strict';
-
 const logger = require('@financial-times/n-logger').default;
 const genericContentTransform = require('ft-n-content-transform').transformAll;
 const applicationContentTransform = require('../transforms/body');
@@ -14,24 +12,24 @@ const bylineTransform = require('../transforms/byline');
 const getMoreOnTags = require('./article-helpers/get-more-on-tags');
 const getAdsLayout = require('../utils/get-ads-layout');
 
-function isCapiV1(article) {
+function isCapiV1 (article) {
 	return article.provenance.find(
 			source => source.includes('http://api.ft.com/content/items/v1/')
 	);
 }
 
-function isCapiV2(article) {
+function isCapiV2 (article) {
 	return article.provenance.find(
 		source => source.includes('http://api.ft.com/enrichedcontent/')
 	);
 }
 
-function transformArticleBody(body, flags, options) {
+function transformArticleBody (body, flags, options) {
 	const articleBody = genericContentTransform(body, flags);
 	return applicationContentTransform(articleBody, flags, options);
 }
 
-function isUserSignedIn(req) {
+function isUserSignedIn (req) {
 	return req.header('ft-session-token') && req.header('ft-session-token') !== '-'
 }
 
@@ -41,6 +39,14 @@ function isFreeArticle (webUrl) {
 
 function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
+}
+
+function getCanonicalUrl (webUrl, id) {
+	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
+		return `https://www.ft.com/content/${id}`;
+	} else {
+		return webUrl;
+	}
 }
 
 const isAudDev = req => req.header('ft-is-aud-dev') === 'true';
@@ -55,7 +61,7 @@ const showGcs = (req, res, isFreeArticle) => {
 	}
 };
 
-module.exports = function articleV3Controller(req, res, next, content) {
+module.exports = function articleV3Controller (req, res, next, content) {
 	let asyncWorkToDo = [];
 
 	res.vary('ft-is-aud-dev');
@@ -85,6 +91,9 @@ module.exports = function articleV3Controller(req, res, next, content) {
 	// Decorate article with primary tags and tags for display
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
+
+	// Set the canonical URL, it's needed by Open Graph'
+	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 
 	// If no bodyHTML, revert to using bodyXML
 	const contentToTransform = content.bodyHTML || content.bodyXML;

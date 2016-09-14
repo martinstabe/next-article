@@ -1,4 +1,3 @@
-'use strict';
 import OComments from 'o-comments';
 
 const uuid = document.querySelector('article[data-content-id]').getAttribute('data-content-id');

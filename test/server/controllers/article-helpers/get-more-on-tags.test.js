@@ -1,7 +1,3 @@
-/*global describe, context, it, beforeEach */
-
-'use strict';
-
 const getMoreOnTags = require('../../../../server/controllers/article-helpers/get-more-on-tags');
 
 const authorTag = {taxonomy: 'authors'};

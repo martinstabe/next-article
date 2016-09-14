@@ -1,5 +1,3 @@
-'use strict';
-
 const Poller = require('ft-poller');
 
 const poller = new Poller({

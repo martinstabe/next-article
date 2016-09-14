@@ -1,5 +1,3 @@
-'use strict';
-
 const transformImages = require('ft-n-content-transform').transformImages;
 
 module.exports = (mainImage) => {

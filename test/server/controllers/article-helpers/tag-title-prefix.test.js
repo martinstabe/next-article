@@ -1,7 +1,3 @@
-/*global describe, it, before*/
-
-'use strict';
-
 const expect = require('chai').expect;
 const tagTitlePrefix = require('../../../../server/controllers/article-helpers/tag-title-prefix');
 
