@@ -92,6 +92,9 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
+	// Set the canonical URL, it's needed by Open Graph'
+	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
+
 	// If no bodyHTML, revert to using bodyXML
 	const contentToTransform = content.bodyHTML || content.bodyXML;
 
@@ -172,7 +175,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 			if (req.query.fragment) {
 				res.render('fragment', content);
 			} else {
-				content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 				content.layout = 'wrapper';
 				res.render('content', content);
 			}

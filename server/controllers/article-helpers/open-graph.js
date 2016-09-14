@@ -3,7 +3,7 @@ module.exports = function (article) {
 		title: article.title,
 		description: article.summaries ? article.summaries[0] : '',
 		image: article.mainImage && article.mainImage.url,
-		url: article.webUrl,
+		url: article.canonicalUrl,
 	};
 
 	article.twitterCard = Object.assign({
