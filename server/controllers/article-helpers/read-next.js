@@ -22,6 +22,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 			count: 2,
 			fields: [
 				'id',
+				'url',
 				'title',
 				'metadata',
 				'summaries',
