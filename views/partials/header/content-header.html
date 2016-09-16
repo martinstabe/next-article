@@ -17,7 +17,7 @@
 						{{/if}}
 						<h1 class="article-headline">
 							<span class="article-classifier__gap">{{title}}</span>
-							{{#ifAll @root.flags.articlePremiumLabel premiumArticle}}
+							{{#ifAll @root.flags.premiumContentIndicator premiumArticle}}
 								<span class="article-classifier">Premium</span>
 							{{/ifAll}}
 						</h1>
