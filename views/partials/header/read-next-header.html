@@ -7,7 +7,7 @@
 					<span class="card__classifier-gap">
 						<span class="next-up__headline-text">{{title}}</span>
 					</span>
-					{{#ifAll @root.flags.articlePremiumLabel premiumArticle}}
+					{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 						<span class="article-classifier">Premium</span>
 					{{/ifAll}}
 				</a>

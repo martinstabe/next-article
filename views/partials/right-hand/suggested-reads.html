@@ -18,7 +18,7 @@
 						<span class="card__classifier-gap">
 							<h4 class="suggested-reads__list-item__headline-text">{{title}}</h4>
 						</span>
-						{{#ifAll @root.flags.articlePremiumLabel premiumArticle}}
+						{{#ifAll @root.flags.premiumContentIndicator isPremium}}
 							<span class="article-classifier">Premium</span>
 						{{/ifAll}}
 					</a>
