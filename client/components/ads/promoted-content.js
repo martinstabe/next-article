@@ -154,7 +154,7 @@ export default (flags) => {
 			return;
 		}
 
-		if(window.oAds && window.oAds.config('dfp_targeting')) {
+		if(window.oAds && window.oAds.isInitialised) {
 			initPaidPost(el, flags, window.oAds);
 		} else {
 			document.addEventListener('oAds.initialised', e => {
