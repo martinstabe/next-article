@@ -7,6 +7,7 @@ const path = require('path');
 checks.init();
 
 const app = module.exports = express({
+	systemCode: 'next-article',
 	name: 'article',
 	withFlags: true,
 	withHandlebars: true,
