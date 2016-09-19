@@ -26,7 +26,7 @@ $ad-medium-breakpoint: 760px;
 	@include oGridRespondTo(L) {
 		display: block;
 	}
-	&[data-o-ads-master-loaded="Responsive"] {
+	&.sidebar-advert--no-responsive[data-o-ads-master-loaded="Responsive"] {
 		display: none;
 	}
 }
@@ -44,6 +44,7 @@ $ad-medium-breakpoint: 760px;
 	}
 
 	@include oGridRespondTo($until: L) {
+		@include oAdsReserve250();
 		visibility: visible;
 		height: auto;
 		width: auto;
