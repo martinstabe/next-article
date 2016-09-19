@@ -11,8 +11,8 @@
 						<span class="article-classifier">Premium</span>
 					{{/ifAll}}
 				</a>
-				<time class="next-up__timestamp {{#if moreRecent}}next-up__timestamp__more-recent{{/if}} o-date" data-o-component="o-date" datetime="{{#dateformat}}{{publishedDate}}{{/dateformat}}" data-o-date-js>
-					{{#dateformat "dddd, d mmmm, yyyy"}}{{publishedDate}}{{/dateformat}}
+				<time class="next-up__timestamp {{#if moreRecent}}next-up__timestamp__more-recent{{/if}} o-date" data-o-component="o-date" datetime="{{#dateformat}}{{lastPublished}}{{/dateformat}}" data-o-date-js>
+					{{#dateformat "dddd, d mmmm, yyyy"}}{{lastPublished}}{{/dateformat}}
 				</time>
 			</article>
 		</div>

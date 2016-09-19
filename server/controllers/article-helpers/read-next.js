@@ -1,6 +1,5 @@
 const api = require('next-ft-api-client');
 const logger = require('@financial-times/n-logger').default;
-const articlePodMapping = require('../../mappings/article-pod-mapping-v3');
 const contentModel = require('ft-n-content-model');
 
 module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate) {
@@ -13,7 +12,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 			uuid: storyPackageIds[0],
 			index: 'v3_api_v2'
 		})
-			.then(articlePodMapping);
+			.then(article => contentModel(article, {useCase: 'article-card'}));
 	}
 
 	if (primaryTag) {
@@ -23,6 +22,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 			count: 2,
 			fields: [
 				'id',
+				'url',
 				'title',
 				'metadata',
 				'summaries',
@@ -33,7 +33,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 		})
 			.then(articles => {
 				articles = articles.filter(article => article.id !== articleId);
-				return articles.length ? articlePodMapping(articles[0]) : null;
+				return articles.length ? contentModel(articles[0], { useCase: 'article-card'}) : null;
 			});
 	}
 
@@ -47,17 +47,16 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 			}
 
 			// hierarchy of compellingness governing which read next article to return
-			if (topicArticle && new Date(topicArticle.publishedDate) > new Date(publishedDate)) {
+			if (topicArticle && new Date(topicArticle.lastPublished) > new Date(publishedDate)) {
 				// 1. return article with same topic as parent if more recent
-				const content = contentModel(topicArticle, { useCase: 'article-card', excludeTaxonomies: true });
-				content.moreRecent = true;
-				return content;
+				topicArticle.moreRecent = true;
+				return topicArticle;
 			} else if (packageArticle) {
 				// 2. otherwise if story package return the first one
-				return contentModel(packageArticle, { useCase: 'article-card', excludeTaxonomies: true });
+				return packageArticle;
 			} else {
 				// 3. failing that return the article on the same topic
-				return contentModel(topicArticle, { useCase: 'article-card', excludeTaxonomies: true });
+				return topicArticle;
 			}
 		})
 		.catch(error => {
