@@ -1,5 +1,19 @@
+{{#if @root.flags.threeAdProposition}}
 <div
-	class="sidebar-advert o-ads advert"
+	class="sidebar-advert responsive o-ads advert"
+	data-o-ads-name="halfpage-desktop"
+	data-o-ads-targeting="pos=mid;"
+	data-o-ads-formats-default="false"
+	data-o-ads-formats-small="false"
+	data-o-ads-formats-medium="false"
+	data-o-ads-formats-large="HalfPage,MediumRectangle,Responsive"
+	data-o-ads-formats-extra="HalfPage,MediumRectangle,Responsive"
+	data-o-ads-collapse-empty="true"
+	aria-hidden="true">
+</div>
+{{else}}
+<div
+	class="sidebar-advert sidebar-advert--no-responsive o-ads advert"
 	data-o-ads-name="halfpage-desktop"
 	data-o-ads-targeting="pos=mid;"
 	data-o-ads-formats-default="false"
@@ -10,3 +24,4 @@
 	data-o-ads-collapse-empty="true"
 	aria-hidden="true">
 </div>
+{{/if}}

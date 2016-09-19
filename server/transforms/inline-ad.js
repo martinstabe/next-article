@@ -10,8 +10,9 @@ module.exports = function ($, flags) {
 				data-o-ads-formats-default="MediumRectangle,Responsive"
 				data-o-ads-formats-small="MediumRectangle,Responsive"
 				data-o-ads-formats-medium="MediumRectangle,Responsive"
-				data-o-ads-formats-large="Responsive"
-				data-o-ads-formats-extra="Responsive"
+				data-o-ads-formats-large="${flags.threeAdProposition ? 'false' : 'Responsive'}"
+				data-o-ads-formats-extra="${flags.threeAdProposition ? 'false' : 'Responsive'}"
+				data-o-ads-collapse-empty="true"
 				aria-hidden="true"></div>` :
 		`<div class="o-ads in-article-advert advert"
 				data-o-ads-name="second-mpu"
@@ -23,11 +24,12 @@ module.exports = function ($, flags) {
 				data-o-ads-formats-medium="false"
 				data-o-ads-formats-large="false"
 				data-o-ads-formats-extra="false"
+				data-o-ads-collapse-empty="true"
 				aria-hidden="true"></div>`;
 	;
 
 
-	if(flags.adsMoreArticleMPUs && pars.length <= 3) {
+	if(flags.threeAdProposition && pars.length <= 3) {
 		//If article shorter than three pars, insert an ad right at the end
 		$('*').last().after(midAd);
 	} else {
@@ -43,7 +45,7 @@ module.exports = function ($, flags) {
 			if(index > nextAvailableIndex && isBetweenParagraphs && adsRendered < maxAdsToRender) {
 				$(par).after(midAd(adsRendered++));
 
-				if(flags.adsMoreArticleMPUs) {
+				if(flags.threeAdProposition) {
 					nextAvailableIndex = index + 5; //insert an Ad after another 6 paragraphs
 				} else {
 					break; // no more ads to render
