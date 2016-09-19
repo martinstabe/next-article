@@ -2,7 +2,7 @@ const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const articleModel = require('ft-n-content-model');
+const contentDecorator = require('@financial-times/n-content-decorator');
 const ReactServer = require('react-dom/server');
 const React = require('react');
 const getSection = require('../../../config/sections');
@@ -26,7 +26,7 @@ module.exports = function (req, res, next) {
 				throw new NoRelatedResultsException();
 			}
 			if (articles.length % 2 === 0) articles.length --;
-			return articles.map(article => articleModel(article, {useCase: 'article-card'}));
+			return articles.map(article => Object.assign(article, contentDecorator(article)));
 		})
 		.then(articles => {
 

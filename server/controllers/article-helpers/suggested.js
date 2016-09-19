@@ -1,6 +1,6 @@
 const api = require('next-ft-api-client');
 const logger = require('@financial-times/n-logger').default;
-const contentModel = require('ft-n-content-model');
+const contentDecorator = require('@financial-times/n-content-decorator');
 
 module.exports = function (articleId, storyPackageIds, primaryTag) {
 	let suggestedArticleFetch;
@@ -31,7 +31,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag) {
 			})
 		)
 		.then(items => items.map(item => {
-			return contentModel(item, { useCase: 'article-card', excludeTaxonomies: true });
+			return Object.assign(item, contentDecorator(item, { excludeTaxonomies: true }));
 		}))
 		.catch(
 			error => logger.warn('Fetching suggested reads failed.', error.toString())

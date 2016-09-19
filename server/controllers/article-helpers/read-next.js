@@ -1,6 +1,6 @@
 const api = require('next-ft-api-client');
 const logger = require('@financial-times/n-logger').default;
-const contentModel = require('ft-n-content-model');
+const contentDecorator = require('@financial-times/n-content-decorator');
 
 module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate) {
 
@@ -12,7 +12,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 			uuid: storyPackageIds[0],
 			index: 'v3_api_v2'
 		})
-			.then(article => contentModel(article, {useCase: 'article-card'}));
+			.then(article => Object.assign(article, contentDecorator(article)));
 	}
 
 	if (primaryTag) {
@@ -33,7 +33,7 @@ module.exports = function (articleId, storyPackageIds, primaryTag, publishedDate
 		})
 			.then(articles => {
 				articles = articles.filter(article => article.id !== articleId);
-				return articles.length ? contentModel(articles[0], { useCase: 'article-card'}) : null;
+				return articles.length ? Object.assign(articles[0], contentDecorator(articles[0])) : null;
 			});
 	}
 
