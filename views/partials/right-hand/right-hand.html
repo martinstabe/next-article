@@ -1,10 +1,20 @@
 <div class="article__aside o-grid-remove-gutters--XL" data-o-grid-colspan="0 L4 XL3 XLoffset1">
+	{{#if @root.flags.stickyRightAd}}
 
-	{{> ads/mid}}
+		{{#if @root.flags.articleSuggestedRead}}
+			{{> right-hand/suggested-reads articles=readNextArticles topic=readNextTopic }}
+		{{/if}}
+		{{{tocHTML}}}
+		{{> ads/mid}}
 
-	{{{tocHTML}}}
+	{{else}}
 
-	{{#if @root.flags.articleSuggestedRead}}
-		{{> right-hand/suggested-reads articles=readNextArticles topic=readNextTopic }}
+		{{> ads/mid}}
+		{{{tocHTML}}}
+
+		{{#if @root.flags.articleSuggestedRead}}
+			{{> right-hand/suggested-reads articles=readNextArticles topic=readNextTopic }}
+		{{/if}}
+
 	{{/if}}
 </div>
