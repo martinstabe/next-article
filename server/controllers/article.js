@@ -41,8 +41,15 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-function getCanonicalUrl (webUrl, id) {
+function isMethodeArticle (webUrl) {
 	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
+		return true;
+	}
+	return false;
+}
+
+function getCanonicalUrl (webUrl, id) {
+	if (isMethodeArticle(webUrl)) {
 		return `https://www.ft.com/content/${id}`;
 	} else {
 		return webUrl;
@@ -94,6 +101,11 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
+
+	// If the article is not a Methode article (i.e. it is Blogs, Fast FT or Videos, tell search engines not to index it)
+	if (!isMethodeArticle(content.webUrl)) {
+		res.set('X-Robots-Tag', 'noindex');
+	}
 
 	// If no bodyHTML, revert to using bodyXML
 	const contentToTransform = content.bodyHTML || content.bodyXML;
