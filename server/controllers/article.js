@@ -98,7 +98,7 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	// Decorate article with primary tags and tags for display
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
-	
+
 	// Setup the description field
 	content.description = '';
 	if (content.summaries) {

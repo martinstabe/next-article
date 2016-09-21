@@ -98,6 +98,10 @@ describe('Article Controller', () => {
 			});
 		});
 
+		it('has the correct description field', () => {
+			expect(result.description).to.equal('Almost half of the world’s biggest financial groups have no board members with any tech experience');
+		});
+
 		it('has the correct canonical URL for an article', () => {
 			expect(result.canonicalUrl).to.equal('https://www.ft.com/content/352210c4-7b17-11e5-a1fe-567b37f80b64');
 		});
