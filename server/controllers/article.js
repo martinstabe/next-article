@@ -99,6 +99,14 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
+	// Setup the description field
+	content.description = '';
+	if (content.standfirst) {
+		content.description = content.standfirst;
+	} else if (content.summaries) {
+		content.description = content.summaries[0];
+	}
+
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
 
