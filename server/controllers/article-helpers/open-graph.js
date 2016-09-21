@@ -1,7 +1,7 @@
 module.exports = function (article) {
 	article.og = {
 		title: article.title,
-		description: article.summaries ? article.summaries[0] : '',
+		description: article.description,
 		image: article.mainImage && article.mainImage.url,
 		url: article.canonicalUrl,
 	};
