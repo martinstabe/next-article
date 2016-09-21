@@ -101,10 +101,10 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 	// Setup the description field
 	content.description = '';
-	if (content.summaries) {
-		content.description = content.summaries[0];
-	} else if (content.standfirst) {
+	if (content.standfirst) {
 		content.description = content.standfirst;
+	} else if (content.summaries) {
+		content.description = content.summaries[0];
 	}
 
 	// Set the canonical URL, it's needed by Open Graph'
