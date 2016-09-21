@@ -44,7 +44,8 @@ function buildStatus (version) {
 			ok: statuses.elastic[version],
 			businessImpact: 'Users may not see article content.',
 			severity: 2,
-			technicalSummary: 'Fetches an article to determine whether the service is running.'
+			technicalSummary: 'Fetches an article to determine whether the service is running.',
+			panicGuide: 'Follow the runbooks, do usual diagnosis and escalate as appropriate'
 		})
 	};
 }
@@ -56,7 +57,8 @@ function livefyreStatus () {
 			ok: statuses.livefyre,
 			businessImpact: 'Users may not see comments at bottom of article',
 			severity: 3,
-			technicalSummary: 'Fetches the session-user-data call used on the client side to initialise comments'
+			technicalSummary: 'Fetches the session-user-data call used on the client side to initialise comments',
+			panicGuide: 'Follow the runbooks, do usual diagnosis and escalate as appropriate'
 		})
 	};
 }
