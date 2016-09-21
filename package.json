@@ -58,7 +58,7 @@
     "imports-loader": "^0.6.5",
     "isomorphic-fetch": "^2.0.2",
     "istanbul": "^0.4.2",
-    "lintspaces-cli": "^0.1.1",
+    "lintspaces-cli": "^0.4.0",
     "mitm": "^1.1.0",
     "mocha": "^2.0.0",
     "nightwatch": "^0.9.5",
