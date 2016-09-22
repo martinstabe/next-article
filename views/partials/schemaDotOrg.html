@@ -1,0 +1,37 @@
+<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "NewsArticle",
+		"mainEntityofPage": "{{canonicalUrl}}",
+		"headline": "{{title}}",
+		"datePublished": "{{initialPublishedDate}}",
+		"dateModified": "{{publishedDate}}",
+		"description": "{{description}}",
+		{{#if mainImage}}
+		"image": {
+			"@type": "ImageObject",
+			"url": "{{mainImage.url}}",
+			"width": {{mainImage.width}},
+			"height": {{mainImage.height}}
+		},
+		{{/if}}
+		{{#if authors}}
+			{{#authors}}
+			"author": {
+				"@type": "Person",
+				"name": "{{name}}"
+			},
+			{{/authors}}
+		{{/if}}
+		"publisher": {
+			"@type": "Organization",
+			"name": "The Financial Times",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "http://im.ft-static.com/m/img/masthead_main.jpg",
+				"width": 435,
+				"height": 36
+			}
+		}
+	}
+</script>
