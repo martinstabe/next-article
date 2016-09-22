@@ -1,6 +1,4 @@
-import Tearsheet from './tearsheet';
 import intent from './intent';
-import oErrors from 'o-errors';
 
 function formatVolume (value) {
 	if (value > 100000000) {
@@ -52,10 +50,6 @@ Link.prototype.handleEnter = function () {
 
 Link.prototype.handleLeave = function () {
 	this.close();
-};
-
-Link.prototype.fetch = function () {
-	return this.tearsheet.fetch(security);
 };
 
 Link.prototype.open = function (item) {
