@@ -1,5 +1,6 @@
 import Tearsheet from './tearsheet';
 import intent from './intent';
+import oErrors from 'o-errors';
 
 function formatVolume (value) {
 	if (value > 100000000) {
@@ -36,9 +37,17 @@ Link.prototype.init = function () {
 };
 
 Link.prototype.handleEnter = function () {
-	this.fetch()
-		.then(this.open.bind(this))
-		.catch((e) => { console.error(e) });
+	const security = this.target.getAttribute('data-symbol');
+
+	this.tearsheet.fetch(security)
+		.then((item) => {
+			if (!item) {
+				throw new Error(`Tearsheet returned empty for ${security}`);
+			}
+
+			this.open(item)
+		})
+		.catch(() => { /* do nothing */ });
 };
 
 Link.prototype.handleLeave = function () {
@@ -46,13 +55,10 @@ Link.prototype.handleLeave = function () {
 };
 
 Link.prototype.fetch = function () {
-	const security = this.target.getAttribute('data-symbol');
 	return this.tearsheet.fetch(security);
 };
 
 Link.prototype.open = function (item) {
-	if (!item) return;
-
 	const values = {
 		title: item.basic.name,
 		symbol: item.basic.symbol,

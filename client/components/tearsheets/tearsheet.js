@@ -78,9 +78,9 @@ Tearsheet.prototype.init = function () {
 	const body3 = bodyRow.insertCell();
 	body3.appendChild(this.volumeTradedEl);
 
-	// if you're unsure: console.log(this.containerEl.outerHTML)
+	this.containerEl.insertBefore(tableEl, captionEl);
 
-	this.containerEl.insertBefore(tableEl, this.captionEl);
+	// if you're unsure: console.log(this.containerEl.outerHTML)
 };
 
 Tearsheet.prototype.fetch = function (security) {
@@ -90,7 +90,7 @@ Tearsheet.prototype.fetch = function (security) {
 			if (response.ok) {
 				return response.json();
 			} else {
-				throw Error(`Could not fetch markets data, ${response.code}`);
+				throw Error(`Tearsheet could not be fetched for ${security}, error ${response.status}`);
 			}
 		})
 		.then((json) => {
