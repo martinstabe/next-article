@@ -11,7 +11,12 @@
 			"datePublished": "{{publishedDate}}",
 		{{/initialPublishedDate}}
 		"dateModified": "{{publishedDate}}",
-		"description": "{{description}}",
+		{{#if initialPublishedDate}}
+			"description": "{{description}}",
+		{{/if}}
+		{{^initialPublishedDate}}
+			"description": "{{title}}",
+		{{/initialPublishedDate}}
 		{{#if mainImage}}
 		"image": {
 			"@type": "ImageObject",
