@@ -4,7 +4,12 @@
 		"@type": "NewsArticle",
 		"mainEntityofPage": "{{canonicalUrl}}",
 		"headline": "{{title}}",
-		"datePublished": "{{initialPublishedDate}}",
+		{{#if initialPublishedDate}}
+			"datePublished": "{{initialPublishedDate}}",
+		{{/if}}
+		{{^initialPublishedDate}}
+			"datePublished": "{{publishedDate}}",
+		{{/initialPublishedDate}}
 		"dateModified": "{{publishedDate}}",
 		"description": "{{description}}",
 		{{#if mainImage}}
