@@ -14,9 +14,9 @@
 		{{#if initialPublishedDate}}
 			"description": "{{description}}",
 		{{/if}}
-		{{^initialPublishedDate}}
+		{{^description}}
 			"description": "{{title}}",
-		{{/initialPublishedDate}}
+		{{/description}}
 		{{#if mainImage}}
 		"image": {
 			"@type": "ImageObject",
