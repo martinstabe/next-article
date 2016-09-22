@@ -27,6 +27,9 @@ function Link (target, tearsheet) {
 	this.onEnter = this.handleEnter.bind(this);
 	this.onLeave = this.handleLeave.bind(this);
 
+	this.isOpen = false;
+	this.isFetching = false;
+
 	this.init();
 }
 
@@ -35,15 +38,22 @@ Link.prototype.init = function () {
 };
 
 Link.prototype.handleEnter = function () {
-	if (this.isOpen) return;
+	if (this.isOpen || this.isFetching) return;
 
 	const security = this.target.getAttribute('data-symbol');
+
+	this.isFetching = true;
 
 	this.tearsheet.fetch(security)
 		.then((item) => {
 			item && this.open(item);
 		})
-		.catch(() => { /* do nothing */ });
+		.catch(() => {
+			/* do nothing */
+		})
+		.then(() => {
+			this.isFetching = false;
+		});
 };
 
 Link.prototype.handleLeave = function () {
