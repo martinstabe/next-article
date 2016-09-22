@@ -1,5 +1,3 @@
-import jsonp from 'o-fetch-jsonp';
-
 const API_URL = 'https://next-markets-proxy.ft.com/securities/v1/quotes?source=hover&symbols=';
 
 function Tearsheet () {

@@ -35,20 +35,19 @@ Link.prototype.init = function () {
 };
 
 Link.prototype.handleEnter = function () {
+	if (this.isOpen) return;
+
 	const security = this.target.getAttribute('data-symbol');
 
 	this.tearsheet.fetch(security)
 		.then((item) => {
-			if (!item) {
-				throw new Error(`Tearsheet returned empty for ${security}`);
-			}
-
-			this.open(item)
+			item && this.open(item);
 		})
 		.catch(() => { /* do nothing */ });
 };
 
 Link.prototype.handleLeave = function () {
+	if (!this.isOpen) return;
 	this.close();
 };
 
