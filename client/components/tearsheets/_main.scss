@@ -1,0 +1,32 @@
+// Markets Data Company Links
+[data-symbol] {
+	position: relative;
+	background: getColor('pink-tint1');
+}
+
+.tearsheet {
+	border: 2px solid;
+	padding: 10px;
+}
+
+.tearsheet__heading {}
+
+.tearsheet__heading-title {}
+
+.tearsheet__heading-symbol {}
+
+.tearsheet__quote {}
+
+.tearsheet__quote-last-price {}
+
+.tearsheet__quote-change-value {}
+
+.tearsheet__quote-change-percent {}
+
+.tearsheet__quote-change-direction {}
+
+.tearsheet__quote-volume-traded {}
+
+.tearsheet__caption {}
+
+.tearsheet__caption-timestamp {}

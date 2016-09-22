@@ -13,6 +13,9 @@ bootstrap(nUiConfig, ({flags, mainCss}) => {
 	const readingHistory = require('./components/reading-history');
 	const scrollDepth = require('./components/article/scroll-depth');
 
+	const tearsheets = require('./components/tearsheets');
+
+	tearsheets.init();
 
 	const onwardJourney = require('./components/onward-journey/main');
 	const toc = require('./components/toc/main');
