@@ -1,4 +1,5 @@
 import Tearsheet from './tearsheet';
+import intent from './intent';
 
 function formatVolume (value) {
 	if (value > 100000000) {
@@ -31,8 +32,7 @@ function Link (target, tearsheet) {
 }
 
 Link.prototype.init = function () {
-	this.target.addEventListener('mouseenter', this.onEnter);
-	this.target.addEventListener('mouseleave', this.onLeave);
+	intent(this.target, this.onEnter, this.onLeave);
 };
 
 Link.prototype.handleEnter = function () {
