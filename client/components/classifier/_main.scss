@@ -6,12 +6,17 @@
 .article-classifier {
 	@include oTypographySansBold('s', $load-progressively: true);
 
-	vertical-align: middle;
+	vertical-align: 5%;
 	padding: 0.1em 0.4em 0.14em;
 	background-color: getColor(cold-2);
 	color: #ffffff;
 
+	.article-headline & {
+		vertical-align: 30%;
+	}
+
 	.article-classifier__gap ~ & { // overrides oTypographySansBold's setting
-		font-size: 0.45em;
+		line-height: 15px;
+		font-size: 15px;
 	}
 }
