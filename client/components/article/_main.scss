@@ -69,16 +69,6 @@
 	@include oTypographySans('xs', $load-progressively: true);
 	color: oColorsGetColorFor(timestamp, text);
 	text-transform: uppercase;
-	@media print {
-		text-indent: -9999px;
-		display: block;
-		&:after {
-			content: attr(title);
-			position: absolute;
-			left: 20px;
-			text-indent: 0;
-		}
-	}
 }
 
 .article__body {

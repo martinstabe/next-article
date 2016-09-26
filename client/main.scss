@@ -84,13 +84,32 @@ $o-video-is-silent: false;
 	.article__actions,
 	.js-special-report,
 	.next-up__bottom__wrapper,
-	.more-on__topic--link,
+	.more-on,
 	.table-of-contents,
-	.pod {
+	.pod,
+	.n-content-related-box__image-link,
+	.core .o-header__search,
+	.o-header__nav,
+	.o-header__top-column--left,
+	.o-header__top-column--right,
+	.o-header__drawer {
 		display: none;
 	}
+
 	.o-grid-row {
 		display: inherit;
+	}
+
+	.o-header__top-logo:after {
+		content: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
+	}
+
+	.n-content-image {
+		margin: 0 auto 1em;
+	}
+
+	.n-image {
+		width: 100%;
 	}
 
 	.more-ons-tags--qr-code {
@@ -120,5 +139,4 @@ $o-video-is-silent: false;
 			clear: both;
 		}
 	}
-
 }
