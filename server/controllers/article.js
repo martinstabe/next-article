@@ -122,7 +122,8 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	if (contentToTransform) {
 		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
 				fragment: req.query.fragment,
-				adsLayout: content.adsLayout
+				adsLayout: content.adsLayout,
+				userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
 			}
 		));
 	}

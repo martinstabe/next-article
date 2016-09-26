@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 const api = require('next-ft-api-client');
 const nHealth = require('n-health');
 
