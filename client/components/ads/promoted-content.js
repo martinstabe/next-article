@@ -14,6 +14,10 @@ function correlator (len) {
 	return (new Date().getTime() + '' + genRand(16) + Math.random().toString(34).slice(2)).toString().substr(0, len);
 }
 
+const pageCorrelator = correlator(); // get correlator once for the page ad calls
+const MAX_ATTEMPTS = 5; //stop after five total ad calls. This will prevent accidental infinite loops with trying to get a smartmatch ad that doesn't exist.
+let attempts = 0;
+
 const getSmartmatchData = (adUnit, dfpResponse) => {
 	const uuid = document.documentElement.getAttribute('data-content-id');
 
@@ -100,11 +104,15 @@ const handleResponse = (el, response) => {
 };
 
 function initPaidPost (el, flags, ads, skipSmartmatch) {
+
+	if(attempts++ >= MAX_ATTEMPTS) {
+		return;
+	};
 	const slotParams = 'pos=native';
 	const adTargeting = ads.targeting.get();
 	const custParams = Object.keys(adTargeting).map(k => k + '=' + encodeURIComponent(adTargeting[k])).join('&');
 	const adUnit = window.oAds.config('gpt').site ? `${window.oAds.config('gpt').network}/${window.oAds.config('gpt').site}/${window.oAds.config('gpt').zone}` : '5887/ft.com/home/UK';
-	let url = `https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&correlator=${correlator()}&output=json_html&impl=fif&sc=1&sfv=1-0-4&iu=%2F5887%2F${adUnit.replace(/\/?5887\//, '')}&sz=320x50&fluid=height&scp=${encodeURIComponent(slotParams)}&d_imp=1&ga_sid=${new Date().getTime()}&cust_params=${encodeURIComponent(custParams)}`;
+	let url = `https://securepubads.g.doubleclick.net/gampad/ads?gdfp_req=1&correlator=${pageCorrelator}&output=json_html&impl=fif&sc=1&sfv=1-0-4&iu=%2F5887%2F${adUnit.replace(/\/?5887\//, '')}&sz=320x50&fluid=height&scp=${encodeURIComponent(slotParams)}&d_imp=1&ga_sid=${new Date().getTime()}&cust_params=${encodeURIComponent(custParams)}`;
 
 	if(skipSmartmatch) {
 		url += encodeURIComponent('&ftpb=1');
