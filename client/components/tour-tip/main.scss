@@ -1,0 +1,15 @@
+
+// avoid flash of unstyled tour tip
+@include nUiCriticalStart();
+	.tour-tip--article-page {
+		display: none;
+	}
+@include nUiCriticalEnd();
+
+
+.tour-tip--article-page {
+	@include nContentBoxInline();
+	margin-bottom: $spacing-unit;
+	border: 1px solid getColorFor(card, border);
+	display: block;
+}

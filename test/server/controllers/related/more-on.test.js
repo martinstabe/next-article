@@ -10,24 +10,24 @@ const stubs = {
 	ReactServer: {
 		renderToStaticMarkup: sinon.stub()
 	},
-	articleModel: sinon.stub(),
+	contentDecorator: sinon.stub(),
 	getSection: sinon.stub()
 };
 const subject = proxyquire('../../../../server/controllers/related/more-on', {
 	'next-ft-api-client': stubs.api,
-	'ft-n-content-model': stubs.articleModel,
+	'@financial-times/n-content-decorator': stubs.contentDecorator,
 	'react-dom/server': stubs.ReactServer,
 	'../../../config/sections': stubs.getSection
 });
 
-stubs.articleModel.returnsArg(0);
+stubs.contentDecorator.returnsArg(0);
 stubs.ReactServer.renderToStaticMarkup.returns('section');
 stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
 	stubs.api.search.reset();
 	stubs.ReactServer.renderToStaticMarkup.reset();
-	stubs.articleModel.reset();
+	stubs.contentDecorator.reset();
 	stubs.getSection.reset();
 };
 
@@ -116,12 +116,12 @@ describe('More Ons', () => {
 		});
 
 		it('return 5 articles per more-on', () => {
-			expect(stubs.articleModel.callCount).to.equal(5);
+			expect(stubs.contentDecorator.callCount).to.equal(5);
 		});
 
 		it('should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.parent).to.not.exist;
 			}
 		});
@@ -165,26 +165,26 @@ describe('More Ons', () => {
 		});
 
 		it('return 5 articles per more-on', () => {
-			expect(stubs.articleModel.callCount).to.equal(5);
+			expect(stubs.contentDecorator.callCount).to.equal(5);
 		});
 
 		it('it should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.parent).to.not.exist;
 			}
 		});
 
 		it('it should dedupe articles between more-ons', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.dupe).to.not.exist;
 			}
 		});
 
 		it('it should only return articles appropriate to the tag ID', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.moreOnTwo).to.be.true;
 			}
 		});
@@ -221,26 +221,26 @@ describe('More Ons', () => {
 		});
 
 		it('return 5 articles per more-on', () => {
-			expect(stubs.articleModel.callCount).to.equal(5);
+			expect(stubs.contentDecorator.callCount).to.equal(5);
 		});
 
 		it('should not contain the parent article', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.parent).to.not.exist;
 			}
 		});
 
 		it('should dedupe articles between more-ons', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.dupe).to.not.exist;
 			}
 		});
 
 		it('should only return articles appropriate to the tag ID', () => {
-			for (let articleCount = 1; articleCount < stubs.articleModel.callCount; articleCount++) {
-				const article = stubs.articleModel.getCall(articleCount).args[0];
+			for (let articleCount = 1; articleCount < stubs.contentDecorator.callCount; articleCount++) {
+				const article = stubs.contentDecorator.getCall(articleCount).args[0];
 				expect(article.moreOnThree).to.be.true;
 			}
 		});

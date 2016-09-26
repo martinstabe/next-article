@@ -8,7 +8,7 @@ const stubs = {
 	api: {
 		content: sinon.stub()
 	},
-	articleModel: sinon.stub(),
+	contentDecorator: sinon.stub(),
 	ReactServer: {
 		renderToStaticMarkup: sinon.stub()
 	},
@@ -17,19 +17,19 @@ const stubs = {
 
 const subject = proxyquire('../../../../server/controllers/related/story-package', {
 	'next-ft-api-client': stubs.api,
-	'ft-n-content-model': stubs.articleModel,
+	'@financial-times/n-content-decorator': stubs.contentDecorator,
 	'react-dom/server': stubs.ReactServer,
 	'../../../config/sections': stubs.getSection
 });
 
-stubs.articleModel.returnsArg(0);
+stubs.contentDecorator.returnsArg(0);
 stubs.ReactServer.renderToStaticMarkup.returns('section');
 stubs.getSection.returns('sectionProps');
 
 const resetStubs = () => {
 	stubs.api.content.reset();
 	stubs.ReactServer.renderToStaticMarkup.reset();
-	stubs.articleModel.reset();
+	stubs.contentDecorator.reset();
 	stubs.getSection.reset();
 };
 
@@ -91,7 +91,7 @@ describe('Story Package', () => {
 		});
 
 		it('maps the article model for each article returned', () => {
-			expect(stubs.articleModel.callCount).to.equal(5);
+			expect(stubs.contentDecorator.callCount).to.equal(5);
 		});
 
 		it('gets the section for the story package', () => {
@@ -192,7 +192,7 @@ describe('Story Package', () => {
 		});
 
 		it('it sends the right number of articles to ES', () => {
-			expect(stubs.articleModel.callCount).to.equal(3);
+			expect(stubs.contentDecorator.callCount).to.equal(3);
 		});
 
 	});

@@ -47,7 +47,12 @@ provision:
 	nht deploy-hashed-assets
 	nht float -md --testapp ${TEST_APP}
 	make smoke
+	@export TEST_URL=http://${TEST_APP}.herokuapp.com/; pa11y-ci -T 100 # remove the threshold after all a11y errors in this project are fixed
 
 smoke:
 	nht test-urls ${TEST_APP} --throttle 1;
 	export TEST_APP=${TEST_APP}; nht nightwatch test/browser/tests/*
+
+# Test a11y locally
+a11y:
+	@export TEST_APP="localhost:3002/"; pa11y-ci

@@ -41,8 +41,15 @@ function isPremiumArticle (webUrl) {
 	return webUrl.search('/cms/s/3') !== -1
 }
 
-function getCanonicalUrl (webUrl, id) {
+function isMethodeArticle (webUrl) {
 	if (webUrl.indexOf('http://www.ft.com/cms/s') === 0) {
+		return true;
+	}
+	return false;
+}
+
+function getCanonicalUrl (webUrl, id) {
+	if (isMethodeArticle(webUrl)) {
 		return `https://www.ft.com/content/${id}`;
 	} else {
 		return webUrl;
@@ -92,8 +99,21 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	decorateMetadataHelper(content);
 	content.isSpecialReport = content.primaryTag && content.primaryTag.taxonomy === 'specialReports';
 
+	// Setup the description field
+	content.description = '';
+	if (content.standfirst) {
+		content.description = content.standfirst;
+	} else if (content.summaries) {
+		content.description = content.summaries[0];
+	}
+
 	// Set the canonical URL, it's needed by Open Graph'
 	content.canonicalUrl = getCanonicalUrl(content.webUrl, content.id);
+
+	// If the article is not a Methode article (i.e. it is Blogs, Fast FT or Videos, tell search engines not to index it)
+	if (!isMethodeArticle(content.webUrl)) {
+		res.set('X-Robots-Tag', 'noindex');
+	}
 
 	// If no bodyHTML, revert to using bodyXML
 	const contentToTransform = content.bodyHTML || content.bodyXML;
@@ -102,7 +122,8 @@ module.exports = function articleV3Controller (req, res, next, content) {
 	if (contentToTransform) {
 		Object.assign(content, transformArticleBody(contentToTransform, res.locals.flags, {
 				fragment: req.query.fragment,
-				adsLayout: content.adsLayout
+				adsLayout: content.adsLayout,
+				userIsAnonymous: res.locals.anon && res.locals.anon.userIsAnonymous
 			}
 		));
 	}

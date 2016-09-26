@@ -2,7 +2,7 @@ const api = require('next-ft-api-client');
 const fetchres = require('fetchres');
 const logger = require('@financial-times/n-logger').default;
 const NoRelatedResultsException = require('../../lib/no-related-results-exception');
-const articleModel = require('ft-n-content-model');
+const contentDecorator = require('@financial-times/n-content-decorator');
 const ReactServer = require('react-dom/server');
 const React = require('react');
 const getSection = require('../../../config/sections');
@@ -73,7 +73,7 @@ module.exports = function (req, res, next) {
 				.concat(dedupe(moreOnArticlesArray[i]).map(article => article.id));
 			}
 			moreOnArticlesArray[moreOnIndex] = dedupe(moreOnArticlesArray[moreOnIndex])
-				.map(article => articleModel(article, {useCase: 'article-card'}));
+				.map(article => Object.assign(article, contentDecorator(article)));
 
 				const sectionProps = getSection(
 					'onward-journey',
