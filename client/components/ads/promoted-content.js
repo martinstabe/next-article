@@ -17,6 +17,7 @@ function correlator (len) {
 const pageCorrelator = correlator(); // get correlator once for the page ad calls
 const MAX_ATTEMPTS = 5; //stop after five total ad calls. This will prevent accidental infinite loops with trying to get a smartmatch ad that doesn't exist.
 let attempts = 0;
+let skipSmartmatch = false;
 
 const getSmartmatchData = (adUnit, dfpResponse) => {
 	const uuid = document.documentElement.getAttribute('data-content-id');
@@ -78,6 +79,10 @@ const handleResponse = (el, response) => {
 		return;
 	}
 
+	if(response.url) {
+		response.url = decodeURIComponent(response.url);
+	}
+
 	document.querySelector('.promoted-content').classList.add('promoted-content--loaded');
 
 	const props = {
@@ -103,7 +108,7 @@ const handleResponse = (el, response) => {
 	oDate.init(el);
 };
 
-function initPaidPost (el, flags, ads, skipSmartmatch) {
+function initPaidPost (el, flags, ads) {
 
 	if(attempts++ >= MAX_ATTEMPTS) {
 		return;
@@ -147,7 +152,8 @@ function initPaidPost (el, flags, ads, skipSmartmatch) {
 			})
 			.catch(() => {
 				//no smartmatch results - make another ad call
-				initPaidPost(el, flags, ads, true);
+				skipSmartmatch = true;
+				initPaidPost(el, flags, ads);
 			});
 		}
 	});
