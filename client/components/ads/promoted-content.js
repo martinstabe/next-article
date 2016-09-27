@@ -40,6 +40,9 @@ const getSmartmatchData = (adUnit, dfpResponse) => {
 		if(data && data.type && data.title) {
 			//add the DFP impression URL to smartmatch impression URLS
 			data.impressionURL = [].concat(data.impressionURL, dfpResponse.impressionURL);
+			if(dfpResponse.clickTrackingPrefix) {
+				data.url = dfpResponse.clickTrackingPrefix + data.url;
+			}
 			return data;
 		} else {
 			throw 'No smartmatch results';
@@ -77,10 +80,6 @@ const handleResponse = (el, response) => {
 
 	if(!(el && response && response.title)) {
 		return;
-	}
-
-	if(response.url) {
-		response.url = decodeURIComponent(response.url);
 	}
 
 	document.querySelector('.promoted-content').classList.add('promoted-content--loaded');
