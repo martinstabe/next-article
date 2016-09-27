@@ -4,8 +4,6 @@ const applicationContentTransform = require('../transforms/body');
 const articleBranding = require('ft-n-article-branding');
 const suggestedHelper = require('./article-helpers/suggested');
 const readNextHelper = require('./article-helpers/read-next');
-const sampleArticlesHelper = require('./article-helpers/sample-articles');
-const isSampleArticle = require('./article-helpers/sample-articles').isSampleArticle;
 const decorateMetadataHelper = require('./article-helpers/decorate-metadata');
 const openGraphHelper = require('./article-helpers/open-graph');
 const bylineTransform = require('../transforms/byline');
@@ -55,8 +53,6 @@ function getCanonicalUrl (webUrl, id) {
 		return webUrl;
 	}
 }
-
-const isAudDev = req => req.header('ft-is-aud-dev') === 'true';
 
 const showGcs = (req, res, isFreeArticle) => {
 	if (res.locals.flags.googleConsumerSurvey && res.locals.anon && res.locals.anon.userIsAnonymous) {
@@ -167,14 +163,6 @@ module.exports = function articleV3Controller (req, res, next, content) {
 
 		content.readNextTopic = content.primaryTag;
 	}
-
-	if (!isUserSignedIn(req) && isAudDev(req, res) && res.locals.flags.anonSampleArticles && isSampleArticle(content.id)) {
-		asyncWorkToDo.push(
-			sampleArticlesHelper(content.id)
-			.then((sampleArticles) => content.sampleArticles = sampleArticles)
-		)
-	}
-
 
 	if (req.get('FT-Labs-Gift') === 'GRANTED') {
 		content.shared = true;
