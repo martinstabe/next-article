@@ -8,18 +8,6 @@
 	<link rel="amphtml" href="https://amp.ft.com/content/{{id}}" />
 	<meta name="description" content="{{description}}"/>
 {{/defineBlock}}
-{{#if sampleArticles}}
-	<header class="sample-articles__ribbon" data-trackable="sample-articles-ribbon">
-		<div class="sample-articles__ribbon__wrapper o-grid-container">
-			<div class="o-grid-row">
-				<h2 class="sample-articles__ribbon__banner__heading" data-o-grid-colspan="12 M7 XL5 XLoffset1">You're sampling the Financial Times</h2>
-				<div class="sample-articles__ribbon__link__banner__wrapper" data-o-grid-colspan="12 M5 XL6">
-					<a class="sample-articles__ribbon__text_link" href="#more-sample-articles" data-trackable="more">More sample articles</a>
-				</div>
-			</div>
-		</div>
-	</header>
-{{/if}}
 <article id="site-content" role="main" class="article{{#if designGenre}} article--brand {{#if designGenre.headshot}}article--brand--headshot{{/if}}{{/if}}" data-content-id="{{id}}" data-content-sources="{{#if articleV1}}v1{{/if}} {{#if articleV2}}v2{{/if}}">
 
 	{{#defineBlock 'above-header'}}
@@ -89,10 +77,6 @@
 </article>
 
 {{>propensity-messaging-promo-unit}}
-
-{{#if sampleArticles}}
-	{{> related/sample-articles}}
-{{/if}}
 
 {{#ifAll readNextArticle readNextArticle.moreRecent}}
 	{{>read-next-bottom article=readNextArticle}}
