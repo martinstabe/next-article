@@ -87,6 +87,8 @@ $o-video-is-silent: false;
 	.next-up,
 	.next-up__bottom__wrapper,
 	.o-footer,
+	.o-footer__container,
+	.o-header__container,
 	.o-header__drawer,
 	.o-header__nav,
 	.o-header--sticky,
@@ -103,8 +105,13 @@ $o-video-is-silent: false;
 		display: inherit;
 	}
 
-	.o-header__top-logo:after {
-		content: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
+	.o-header__top-logo {
+		background-image: none;
+
+		&:after {
+			content: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
+			display: block;
+		}
 	}
 
 	.n-content-image {
@@ -113,6 +120,15 @@ $o-video-is-silent: false;
 
 	.n-image {
 		width: 100%;
+	}
+
+	// NOTE - horrible! removes the article body's offset, otherwise IE8 leaves it in when printing
+	.article__header-inner,
+	.article__main {
+		> *:first-child {
+			margin-left: 0;
+			padding-left: 0;
+		}
 	}
 
 	.more-ons-tags--qr-code {
