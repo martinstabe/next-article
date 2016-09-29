@@ -95,6 +95,7 @@ $o-video-is-silent: false;
 	.o-header__top-column--left,
 	.o-header__top-column--right,
 	.pod,
+	.section--onward-journey,
 	.skeleton,
 	.story-package,
 	.table-of-contents {
@@ -112,6 +113,10 @@ $o-video-is-silent: false;
 			content: url('https://next-geebee.ft.com/image/v1/images/raw/ftlogo:brand-ft-masthead?source=o-header&tint=%23505050,%23505050&format=svg');
 			display: block;
 		}
+	}
+
+	.n-layout {
+		min-height: 0;
 	}
 
 	.n-content-image {
