@@ -12,7 +12,10 @@ $ad-medium-breakpoint: 760px;
 		line-height: 0;
 		text-align: center;
 	}
+}
 
+.above-header-advert,
+.bottom-advert-mobile {
 	&.o-ads--empty,
 	&[data-o-ads-loaded="false"] {
 		height: 0;
@@ -20,6 +23,7 @@ $ad-medium-breakpoint: 760px;
 		padding: 0;
 	}
 }
+
 
 /*! end:head.css */
 .sidebar-advert {
